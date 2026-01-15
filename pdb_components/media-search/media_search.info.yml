@@ -1,0 +1,12 @@
+name: STVP Media Search
+machine_name: media-search
+type: pdb
+description: 'Filterable list of media using Algolia'
+package: React
+core_version_requirement: ^11.2
+module_status: active
+presentation: react
+path: /jsonapi/node/stanford_event
+add_js:
+  footer:
+    'dist/islands/media-search.island.js': {minified: true}
