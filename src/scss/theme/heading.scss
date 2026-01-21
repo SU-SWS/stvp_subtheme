@@ -1,0 +1,12 @@
+/* which paragraph types to use */
+.su-wysiwyg-text {
+  h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 5px;
+    margin-top: 16px;
+    margin-bottom: 30px;
+    background: linear-gradient(to right, #f83535, #820000);
+  }
+}
