@@ -9,18 +9,26 @@
 
 
 /* --- Color Variables --- */
-$svtp-color-red-bright: #f83535;
+$su-color-digital-red-xlight: #f83535;
+$su-digital-red-light: #E50808;
+$su-digital-red: #B1040E;
+$su-digital-red-dark: #820000;
+
+$su-color-digital-red-dark: #7A0000;
+
+/* --- STVP Color Variables --- */
 $svtp-color-red: #CD0E0E;
 $svtp-color-red-medium: #AD030D;
 
-$svtp-color-red-dark: #820000;
 
 
-$svtp-color-palo-verde-light: #59B3A9;
+/* --- Palo Verde Teal Colors -- */
+$su-color-palo-alto-light: #59B3A9;
 $svtp-color-palo-verde-dark: #00908E;
 
 
 /* --- Color Gradients --- */
-$gradient-red-bright: linear-gradient(to right, $svtp-color-red-bright, $svtp-color-red-dark); 
+$gradient-red-bright: linear-gradient(to right, $su-color-digital-red-xlight, $su-digital-red-dark); 
 $gradient-red-medium: linear-gradient(to right, $svtp-color-red, $svtp-color-red-medium); 
-$gradient-palo-verde-bright: linear-gradient(to right, $svtp-color-palo-verde-light, $svtp-color-palo-verde-dark);
+
+$gradient-palo-verde-bright: linear-gradient(to right, $su-color-palo-alto-light, $svtp-color-palo-verde-dark);
