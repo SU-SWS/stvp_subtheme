@@ -1,13 +1,41 @@
-/* @TODO: update later: which paragraph types to use */
+@import "../utilities/variables/index.scss";
+
+/* @TODO: update later: which paragraph types to use: 
+This would be on all h2s in the WYSIWIG, h2s in Teasers and Lists headlines. */
 .su-wysiwyg-text {
-  h2::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 5px;
-    margin-top: 16px;
-    margin-bottom: 30px;
-    background: linear-gradient(to right, #f83535, #820000); /* need to add color variants*/
-    border-radius: 99px;
+  h2 {
+    // left-aligned default
+    // Decorative underline for h2 headings
+    &:after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 5px;
+      margin-top: 16px;
+      margin-bottom: 30px;
+      background: $gradient-red-bright; 
+      border-radius: 99px;
+    }
+
+    &.text-align-center {
+      &:after {
+      content: "";
+        display: flex;
+        justify-content: center;
+        // change to center
+      }
+    }
+  }
+}
+
+/* need to add color variants - this section is not complete until we know how we are applying color variants. */
+.teal-color-variant-placeholder {
+  .su-wysiwyg-text { // add other classes here too
+      h2 {
+
+        &:after {
+          background: $gradient-teal-bright;
+        }
+      }
   }
 }
