@@ -29,12 +29,12 @@ This would be on all h2s in the WYSIWIG, h2s in Teasers and Lists headlines. */
 }
 
 /* need to add color variants - this section is not complete until we know how we are applying color variants. */
-.teal-color-variant-placeholder {
+.palo-verde-color-variant-placeholder {
   .su-wysiwyg-text { // add other classes here too
       h2 {
 
         &:after {
-          background: $gradient-teal-bright;
+          background: $gradient-palo-verde-bright;
         }
       }
   }

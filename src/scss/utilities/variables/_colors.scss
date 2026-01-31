@@ -16,11 +16,11 @@ $svtp-color-red-medium: #AD030D;
 $svtp-color-red-dark: #820000;
 
 
-$svtp-color-teal-light: #59B3A9;
-$svtp-color-teal-dark: #00908E;
+$svtp-color-palo-verde-light: #59B3A9;
+$svtp-color-palo-verde-dark: #00908E;
 
 
 /* --- Color Gradients --- */
 $gradient-red-bright: linear-gradient(to right, $svtp-color-red-bright, $svtp-color-red-dark); 
 $gradient-red-medium: linear-gradient(to right, $svtp-color-red, $svtp-color-red-medium); 
-$gradient-teal-bright: linear-gradient(to right, $svtp-color-teal-light, $svtp-color-teal-dark);
+$gradient-palo-verde-bright: linear-gradient(to right, $svtp-color-palo-verde-light, $svtp-color-palo-verde-dark);
