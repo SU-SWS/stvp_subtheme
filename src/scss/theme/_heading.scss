@@ -1,8 +1,34 @@
 @import "../utilities/variables/index.scss";
 
-/* @TODO: update later: which paragraph types to use: 
-This would be on all h2s in the WYSIWIG, h2s in Teasers and Lists headlines. */
-.su-wysiwyg-text {  // or maybe use ptype-stanford-wysiwyg
+@mixin centered-border() {
+  &:after {
+  content: "";
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    // change to center
+  }
+}
+
+/* -- Heading mixin where we pass in which color theme we are using -- */
+@mixin h2-decoration--colored($mediumColor, $darkColor) {
+  h2 {
+  // override default red to another color theme
+    &:after {
+      background: linear-gradient(to right, $mediumColor, $darkColor); 
+    }
+  }
+}
+
+
+
+
+/* This would be on all h2s in the WYSIWIG, h2s in Teasers and Lists headlines. */
+  // 3 Sections/Paragraph Types this is allowed on: wysiwyg, list headlines, teasers which use list headlines
+
+.su-wysiwyg-text,   // make sure to test in the body AND the text paragraph inside the layout
+.su-entity-headline, 
+.su-list-headline {  
   h2 {
     // left-aligned default
     // Decorative underline for h2 headings
@@ -18,24 +44,40 @@ This would be on all h2s in the WYSIWIG, h2s in Teasers and Lists headlines. */
     }
 
     &.text-align-center {
-      &:after {
-      content: "";
-        display: flex;
-        justify-content: center;
-        // change to center
-      }
+      @include centered-border();
     }
   }
 }
 
-/* need to add color variants - this section is not complete until we know how we are applying color variants. */
-.palo-verde-color-variant-placeholder {
-  .su-wysiwyg-text { // add other classes here too
-      h2 {
+.su-entity-headline,
+.su-list-headline {
+  h2 {
+    @include centered-border();
+  }
+}
 
-        &:after {
-          background: $gradient-palo-verde-bright;
-        }
-      }
+/* need to add color variants - this section is not complete until we know how we are applying color variants. */
+.page-theme--palo-verde {
+  // 3 Sections/Paragraph Types this is allowed on: wysiwyg, list headlines, teasers which use list headlines
+
+
+  // move these 2 lines into the mixin
+  .su-list-headline,
+  .su-wysiwyg-text { // add other classes here too
+    @include h2-decoration--colored($su-color-palo-alto-light, $svtp-color-palo-verde-dark);
+    // h2 {
+    //     &:after {
+    //       background: $gradient-palo-verde-bright;
+    //     }
+    //   }
+  }
+
+}
+
+// Then each color variant would have a section like this:
+.page-theme--plum {
+  .su-list-headline,
+  .su-wysiwyg-text { // add other classes here too
+    @include h2-decoration--colored($svtp-color-plum-light, $svtp-color-plum-dark);
   }
 }
