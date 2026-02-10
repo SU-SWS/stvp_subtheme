@@ -1,0 +1,242 @@
+@charset "UTF-8";
+
+.su-local-footer  {
+  background-color: #53565A;
+  color: $su-color-white;
+
+  a {
+      color: $su-color-white;
+      text-decoration: none;
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: $su-color-cardinal-red-dark;
+        text-decoration: underline;
+        background-color: transparent; // override for general links.
+      }
+    }
+
+  // Footer header - lockup and email sign up
+  .su-local-footer__header {
+    @include modular-spacing('padding-bottom', 1);
+
+    display: grid;
+    grid-template-columns: 35% 1fr;
+    grid-gap: 0;
+    align-items: flex-start;
+    border: 2px solid black;
+
+    @include grid-media-max('md') {
+      grid-template-columns: 95%;
+    }
+
+    a {
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: transparent; // override for general links.
+      }
+    }
+  }
+
+  .su-signup-form {
+    display: flex;
+
+    @include grid-media-max('md') {
+      display: block;
+    }
+
+    .su-intro-text {
+      font-size: 2.5rem;
+      font-weight: $su-font-bold;
+      line-height: 112%;
+      letter-spacing: -0.02em;
+      margin-right: 0.4em;
+    }
+
+    form {
+      width: 100%;
+
+      input {
+        display: inline;
+      }
+
+      input[type="email"] {
+        border-radius: 6px;
+        background-color: $su-color-fog;
+        box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.12);
+        height: 5.9rem;
+        margin-right: 1.5rem;
+        width: 65%;
+      }
+
+      .signup--button {
+        background-color: orange;
+      }
+    }
+  }
+
+  .su-lockup__wordmark {
+    color: #000;
+  }
+
+  .su-lockup__line1,
+  .su-lockup__line2,
+  .su-lockup__line3,
+  .su-lockup__line4,
+  .su-lockup__line5 {
+    color: #000;
+  }
+
+  // Link column setup
+  // .su-local-footer__columns {
+  //   display: grid;
+  //   grid-template-columns: repeat(6, 1fr);
+  //   grid-template-areas: "A B C D E F";
+
+  //   .su-local-footer__cell1 {
+  //     grid-area: A;
+  //   }
+
+  //   .su-local-footer__cell2 {
+  //     grid-area: B;
+
+  //     @include grid-media-max('md') {
+  //       padding-top: 0;
+  //     }
+  //   }
+
+  //   .su-local-footer__cell3 {
+  //     grid-area: C;
+  //   }
+
+  //   .su-local-footer__cell4 {
+  //     grid-area: D;
+  //   }
+
+  //   .su-local-footer__cell5 {
+  //     grid-area: E;
+  //   }
+
+  //   .su-local-footer__cell6 {
+  //     grid-area: F;
+  //   }
+
+  //   @include grid-media-max('lg') {
+  //     grid-template-columns: repeat(4, 1fr);
+  //     grid-template-areas: "A B C D"
+  //     "E F .";
+  //   }
+
+  //   @include grid-media-max('md') {
+  //     grid-template-columns: repeat(3, 1fr);
+  //     grid-template-areas: "A B C"
+  //     "D E F";
+  //   }
+
+  //   @include grid-media-max('sm') {
+  //     grid-template-columns: repeat(2, 1fr);
+  //     grid-template-areas: "A B"
+  //     "C D"
+  //     "E F";
+  //   }
+  // }
+
+  // Web login button.
+  .su-local-footer__cell7 {
+    border-top: 2px solid $su-color-fog;
+    padding: 2.8rem 4.8rem 3.6rem 0;
+    margin: 0 10rem 0;
+
+    @include grid-media-max('sm') {
+      padding: 3.2rem 0;
+      margin: 0 2rem;
+    }
+
+    @include grid-media('md') {
+      margin: 0 5rem;
+    }
+
+    @include grid-media('lg') {
+      margin: 0 8rem;
+    }
+
+    .su-button--login {
+
+      background: pink;
+      color: $su-color-black;
+      display: flex;
+      width: fit-content;
+      gap: 5px;
+
+      &::after {
+        content: none;
+      }
+
+      span.material-symbols-outlined {
+        text-decoration: none;
+      }
+    }
+  }
+
+  // Social links
+  .su-local-footer__social-links {
+    display: flex;
+    flex-direction: row;
+
+    li {
+      float: unset;
+    }
+
+    i {
+      &:before {
+        color: $su-color-white;
+      }
+    }
+
+    .su-local-footer__social-x,
+    .su-local-footer__social-twitter {
+      i {
+        &::before {
+          content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#ffffff' height='20' width='20' viewBox='0 0 512 512'%3E%3C!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--%3E%3Cpath d='M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z'/%3E%3C/svg%3E");
+        }
+      }
+
+      &:hover,
+      &:focus {
+        i {
+          &::before {
+            content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#ffffff' height='20' width='20' viewBox='0 0 512 512'%3E%3C!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--%3E%3Cpath d='M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z'/%3E%3C/svg%3E");
+          }
+        }
+      }
+    }
+  }
+
+
+  .su-local-footer__address {
+    font-weight: $su-font-regular
+  }
+
+  .su-button {
+    &.ext {
+      &.su-link--external {
+        color: $su-color-black;
+        font-weight: 600;
+        text-decoration: none;
+
+        &:hover,
+        &:focus,
+        &:active {
+          color: $su-color-white;
+
+          &:after {
+            background-color: $su-color-white;
+          }
+        }
+      }
+    }
+  }
+}
+

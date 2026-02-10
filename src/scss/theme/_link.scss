@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+// override default link styles here.
+// This is to override the stanford_profile_styles
+
+// Local Footer links.
+.su-local-footer {
+
+  nav[aria-label^='footer'],
+  .su-local-footer__action-links {
+    a,
+    a.su-link--external,
+    a.su-link {
+      @include type-e;
+
+      color: $su-color-white;
+      font-weight: $su-font-regular;
+      text-decoration: none;
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: $su-color-cardinal-red-dark;
+        text-decoration: underline;
+
+        &:after {
+          background-color: $su-color-cardinal-red-dark;
+        }
+      }
+
+      &:after {
+        background-color: $su-color-white;
+      }
+    }
+  }
+}

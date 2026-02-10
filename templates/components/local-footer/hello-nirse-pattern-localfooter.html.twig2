@@ -1,0 +1,321 @@
+{#
+/**
+ * @file
+ * Local Footer Component.
+ *
+ * Figma source: https://www.figma.com/file/Kmd4utmJFPRMVeCFEEBQhLtx/Stanford-Design-Library?node-id=2384%3A1177
+ *
+ * This local footer template is to support the global footer and provide
+ * site contextual links.
+ *
+ * Available variables:
+ * - attributes:          For additional HTML attributes not already provided.
+ * - modifier_class:      Additional css classes to change look and behaviour.
+ * - template_path_lockup: The relative file path to the lockup twig template.
+ * - template_path_link:  The relative file path to the link twig template.
+ * - template_path_macro: The relative file path to the macro twig template.
+ * - template_path_signup_form: The relative file path to the signup-form template.
+ * - lockup_options:      Options to pass through to the lockup twig template.
+ *                        See the lockup template variables for more information.
+ * - lockup_title:        The text to use as line1 in the lockup unless
+ *                        lockup_options is overridden.
+ * - contentcell1:        Twig block area so you can override just this section
+ *                        when extending.
+ * - contentcell2:        Twig block area so you can override just this section
+ *                        when extending.
+ * - contentcell3:        Twig block area so you can override just this section
+ *                        when extending.
+ * - headercontent:       Optional open variable for placing arbitrary content
+ *                        in the header portion of the template.
+ * - cell1:               Optional open variable for placing arbitrary content
+ *                        in cell 1 of the template.
+ * - cell2:               Optional open variable for placing arbitrary content
+ *                        in cell 1 of the template.
+ * - cell3:               Optional open variable for placing arbitrary content
+ *                        in cell 1 of the template.
+ * - address:             Optional open variable for address content.
+ * - action_links:        Either a structured array of links that get rendered
+ *                        by a common macro or arbitrary html markup. The Links
+ *                        in this field get padding and arrows applied.
+ * - social_links:        Either a structured array of links that get rendered
+ *                        by a common macro or arbitrary html markup.
+ * - primary_links:       Either a structured array of links that get rendered
+ *                        by a common macro or arbitrary html markup.
+ * - secondary_links:     Either a structured array of links that get rendered
+ *                        by a common macro or arbitrary html markup.
+ * - signup_form_content: An open variable for placing content above the form.
+ * - signup_form_action:  The url that the form should submit to.
+ * - signup_form_method:  The http method in which the form should use (get|post)
+ * - signup_form_field_email: The name and id of the email field.
+ * - signup_form_field_email_placeholder: The placeholder text for the field.
+ * - signup_form_field_submit: The name and id of the submit button.
+ * - signup_form_field_submit_value: The value of the submit button.
+ * - signup_form_fields:  Option variable that allows you to put any additional
+ *                        markup in to the signup form. This could be content or
+ *                        additional fields.
+ * - weblogin_url:        Optional - The url in which a user goes to login with.
+ * - weblogin_text:       The text to display for the weblogin button link.
+ */
+#}
+
+{#
+  Glue code for Decanter's component
+#}
+{# Macros for processing link fields into lists. #}
+{% import "@jumpstart_ui/macros/field-links-to-list.twig" as linklist %}
+{% import "@jumpstart_ui/macros/field-links-to-social-list.twig" as sociallist %}
+
+{# Sanitize the weblogin text. #}
+{%- set weblogin_text = weblogin_text|render_clean-%}
+{%- if weblogin_text is empty -%}
+  {%- set weblogin_url = '' -%}
+{%- endif -%}
+
+{# Work with Drupal and format it for this template. #}
+{%- set signup_form_method = signup_form_method|render_clean -%}
+{%- set signup_form_action = signup_form_action|render_clean -%}
+{%- set signup_form_field_submit_value = signup_form_field_submit_value|render_clean -%}
+{%- set action_links = linklist.create_list(action_links) -%}
+{%- set social_links = sociallist.create_list(social_links) -%}
+{%- set primary_links = linklist.create_list(primary_links) -%}
+{%- set secondary_links = linklist.create_list(secondary_links) -%}
+{%- set primary_links_header = primary_links_header|render_clean -%}
+{%- set secondary_links_header = secondary_links_header|render_clean -%}
+
+{% if action_links|render_clean('<ul> <li> <a>') is empty %}
+  {% set action_links = null %}
+{% endif %}
+{% if social_links|render_clean('<ul> <li> <a>') is empty %}
+  {% set social_links = null %}
+{% endif %}
+{% if primary_links|render_clean('<ul> <li> <a>') is empty %}
+  {% set primary_links = null %}
+{% endif %}
+{% if secondary_links|render_clean('<ul> <li> <a>') is empty %}
+  {% set secondary_links = null %}
+{% endif %}
+
+{# Ensure attributes is not empty and remove extra css classes if it does #}
+{% if attributes is empty %}
+  {% set attributes = create_attribute() %}
+{% endif %}
+
+{# Pull the attribute classes out. #}
+{% set attributes = attributes|without('class') %}
+
+{# Pass through custom lockup settings #}
+{%- set lockup_title = lockup_title|render_clean -%}
+{% if line1|render_clean is empty %}
+  {% set line1 = lockup_title %}
+{% endif %}
+
+{% if lockup_link|render_clean is empty %}
+  {% set lockup_link = url('<front>') %}
+{% endif %}
+
+{# Pass through the custom lockup settings. #}
+{%- if custom_lockup -%}
+  {%- set lockup_options =
+    {
+      "modifier_class": lockup_option,
+      "line1": line1,
+      "line2": line2,
+      "line3": line3,
+      "line4": line4,
+      "line5": line5,
+      "link": lockup_link,
+    }
+  -%}
+{%- endif -%}
+
+{%- if template_path_lockup is empty -%}
+  {%- set template_path_lockup = "@decanter/components/lockup/lockup.twig" -%}
+{%- endif %}
+
+{%- if lockup_options is empty -%}
+ {%- set lockup_options = { "modifier_class": 'su-lockup--option-a', "line1": lockup_title, "attributes": attributes|without('id') } -%}
+{%- endif -%}
+
+{%- if template_path_link is empty -%}
+  {%- set template_path_link = "@decanter/components/link/link.twig" -%}
+{%- endif %}
+
+{%- if template_path_signup_form is empty -%}
+  {%- set template_path_signup_form = "@stvp_subtheme/components/signup-form/signup-form.html.twig" -%}
+{%- endif %}
+
+{%- if template_path_macro is empty -%}
+  {%- set template_path_macro = "@decanter/utilities/macros/link-list.twig" -%}
+{%- endif -%}
+
+{%- import template_path_macro as list_macro -%}
+
+<div {{ attributes }} class="su-local-footer {{ modifier_class }}">
+  {# The header is completely optional and won't render if there isn't any content #}
+  {% if lockup_title is not empty or weblogin_url is not empty or headercontent is not empty %}
+  <div class="su-local-footer__header">
+    {# Lockup template. Set usually to option-a #}
+    {# Use custom logo for the footer. #}
+    {% block block_lockup %}
+      {% if use_logo == "0" %}
+        {% embed "@decanter/components/lockup/lockup.twig" with lockup_options %}
+
+          {% set image_alt = line1 %}
+          {# if the option was set to logo only. Remove the lines. #}
+          {% if 'su-lockup--option-none' in lockup_option %}
+            {% set line1 = '' %}
+            {% set line2 = '' %}
+            {% set line3 = '' %}
+            {% set line4 = '' %}
+            {% set line5 = '' %}
+          {% endif %}
+
+          {# Override cell 1 with the logo. #}
+          {% block cell1 %}
+            <div class="su-lockup__logo-wrapper">
+              <img src="{{ site_logo }}" alt="{{ image_alt }}" class="su-lockup__custom-logo" />
+              {% if line4 is not empty %}
+                <span class="su-lockup__line4">{{ line4 }}</span>
+              {% endif %}
+            </div>
+          {% endblock %}
+
+        {% endembed %}
+      {% else %}
+        {% include "@decanter/components/lockup/lockup.twig" with lockup_options only %}
+      {% endif %}
+    {% endblock %}
+
+    {# Twig block for you to extend with #}
+      {% block contentcell3 %}
+      {#
+        The signup form is optional. If it doesn't meet your content needs
+        use the cell3 variable instead.
+      #}
+      {% if signup_form_action is not empty %}
+        {# The template path is included with the `with` keyword on purpose.
+           See the template for what variables are expected and how they are named.
+        #}
+        {% include template_path_signup_form with { "attributes" : attributes|without('id') } %}
+      {% endif %}
+      {% endblock %}
+    {# Optional content area for the header. #}
+    {{ headercontent }}
+  </div>
+  {% endif %}
+  {#
+    Container for the content cells. These cells have a specific and rigid
+    responsive behaviour so they are not optional. Empty cells will still
+    render and create whitespace.
+  #}
+  <div class="su-local-footer__columns">
+    {# Content Cell 1 - For action and social media links. #}
+    <div class="su-local-footer__cell1">
+      {# Twig block for you to extend with #}
+      {% block contentcell1 %}
+      {#
+        The address is optional so don't put non-address content in it.
+        Use the `cell1` variable instead.
+      #}
+      {% if address|render|striptags|trim is not empty %}
+      <address class="su-local-footer__address">
+        {{ address }}
+      </address>
+      {% endif %}
+      {% endblock %}
+      {# Use this var if you would like to place your own content in to this cell. #}
+    </div>
+
+    {# Action Links #}
+    <div class="su-local-footer__cell5">
+      {% if action_links is not empty %}
+      <ul class="su-local-footer__action-links">
+        {% if action_links is iterable %}
+          {{ list_macro.link_list(action_links) }}
+        {% else %}
+          {{ action_links }}
+        {% endif %}
+      </ul>
+      {% endif %}
+    </div>
+
+    {# Content Cell 2 - For primary and secondary link lists. #}
+    <div class="su-local-footer__cell2">
+      {# Stylized links. See local-footer.json for structure for macro. #}
+      {% if social_links is not empty %}
+        <ul class="su-local-footer__social-links">
+          {% if social_links is iterable %}
+            {{ list_macro.link_list(social_links) }}
+          {% else %}
+            {{ social_links }}
+          {% endif %}
+        </ul>
+      {% endif %}
+    </div>
+    {# Content Cell 3 - For primary and secondary link lists. #}
+    <div class="su-local-footer__cell3">
+      {% block contentcell2 %}
+      {#
+        Primary Links - left or top list.
+      #}
+      {% if primary_links is not empty%}
+      <nav aria-label="footer primary nav">
+        <ul class="su-local-footer__primary-links">
+          {# Stylized links. See local-footer.json for structure for macro. #}
+          {% if primary_links is iterable %}
+            {{ list_macro.link_list(primary_links) }}
+          {% else %}
+            {{ primary_links }}
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+
+      {% endblock %}
+
+    </div>
+    {# Content Cell 4 - For primary and secondary link lists. #}
+    <div class="su-local-footer__cell4">
+      {#
+        Secondary Links - Right or bottom list.
+      #}
+      {% if secondary_links is not empty%}
+      <nav aria-label="footer secondary nav">
+        {% if secondary_links_header is not empty %}
+        {% endif %}
+        <ul class="su-local-footer__secondary-links">
+          {# Stylized links. See local-footer.json for structure for macro. #}
+          {% if secondary_links is iterable %}
+            {{ list_macro.link_list(secondary_links) }}
+          {% else %}
+            {{ secondary_links }}
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+
+    </div>
+    {#
+      Cell 5 - For link lists.
+    #}
+
+
+    {#
+      Cell 6 - Make a donation.
+    #}
+    <div class="su-local-footer__cell6">
+      {{ cell3 }}
+      {# Comes from Content block 4 #}
+    </div>
+  </div>
+
+  {% if weblogin_url is not empty %}
+    <div class="su-local-footer__cell7">
+      {# Web login button #}
+      <a {{ attributes }} href="{{ weblogin_url }}" class="su-link su-link--internal su-button--login">
+      <span class="material-symbols-outlined"  aria-hidden="true">lock</span>
+      <span class="su-button--login-text">{{ weblogin_text|default(' Web Login') }}</span>
+      </a>
+    </div>
+  {% endif %}
+</div>
