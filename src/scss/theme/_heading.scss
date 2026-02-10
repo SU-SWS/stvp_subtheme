@@ -64,12 +64,7 @@
   // move these 2 lines into the mixin
   .su-list-headline,
   .su-wysiwyg-text { // add other classes here too
-    @include h2-decoration--colored($su-color-palo-alto-light, $svtp-color-palo-verde-dark);
-    // h2 {
-    //     &:after {
-    //       background: $gradient-palo-verde-bright;
-    //     }
-    //   }
+    @include h2-decoration--colored($su-color-palo-alto-light, $su-color-palo-verde-dark);
   }
 
 }
@@ -78,6 +73,6 @@
 .page-theme--plum {
   .su-list-headline,
   .su-wysiwyg-text { // add other classes here too
-    @include h2-decoration--colored($svtp-color-plum-light, $svtp-color-plum-dark);
+    @include h2-decoration--colored($su-color-plum-light, $su-color-plum-dark);
   }
 }

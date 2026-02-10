@@ -80,11 +80,11 @@
   .su-button {
         background: $gradient-illuminating;
         border-color: $gradient-illuminating-bright;
-        color: $svtp-color-brown;
+        color: $stvp-color-brown;
         // @TODO: set the icon color to be brown as well
         
         &.secondary {
-            @include secondary-button-style($svtp-color-brown);
+            @include secondary-button-style($stvp-color-brown);
         }
     }
 }

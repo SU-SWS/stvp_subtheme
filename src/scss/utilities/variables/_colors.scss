@@ -38,7 +38,6 @@ $gradient-red-medium: linear-gradient(to right, $stvp-color-red, $stvp-color-red
 /* --- Palo Verde Teal Colors -- */
 // Shades of the Main color:
 $su-color-palo-alto-20: #DCEFEC;
-$stvp-color-palo-verde-xxlight: $su-color-palo-alto-20; // maybe we keep this palo verde name or maybe not.
 $stvp-color-palo-verde-xlight: #CEE1DE;
 $su-color-palo-verde-light: #59B3A9;
 $stvp-color-palo-verde-medium: #00908E;
@@ -85,8 +84,8 @@ $stvp-color-brown: #5C3200;
 $stvp-color-illuminating-bright: #FEC51D;
 
 // note that the 2 gradients are used in several places. 
-$gradient-illuminating-bright: linear-gradient(to right, $stvp-color-illuminating-light, $stvp-color-illuminating-xxdark);
-$gradient-illuminating: linear-gradient(to right, $stvp-color-illuminating-dark, $stvp-color-illuminating-xdark);
+$gradient-illuminating-bright: linear-gradient(to right, $su-color-illuminating-light, $stvp-color-illuminating-xxdark);
+$gradient-illuminating: linear-gradient(to right, $su-color-illuminating-dark, $stvp-color-illuminating-xdark);
 
 /* --- Lagunita Colors -- */
 // Shades of the Main color:
