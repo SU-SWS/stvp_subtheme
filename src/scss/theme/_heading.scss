@@ -79,7 +79,7 @@
 
 .bg-f2e8f1, // we are overridding this color, but this is the pink/purple background option.
 .page-theme--plum {  
-  @include h2-decoration--colored($gradient-plum);
+  @include h2-decoration--colored($gradient-plum-bright);
 }
 
 .bg-dcecef,
@@ -87,8 +87,9 @@
   @include h2-decoration--colored($gradient-lagunita);
 }
 
+.bg-f7ecde, // we are overridding this color, but this is the light yellow background option.
 .page-theme--illuminating { 
-  @include h2-decoration--colored($gradient-illuminating);
+  @include h2-decoration--colored($gradient-illuminating-bright);
 }
 
 /* --- Make sure the footer h2 is ALWAYS red, even when theming a page --- */
