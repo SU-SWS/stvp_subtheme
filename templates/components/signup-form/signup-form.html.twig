@@ -25,7 +25,6 @@
   {{ signup_form_content }}
   <form {{ form_attributes }} action="{{ signup_form_action|default("/") }}" method="{{ signup_form_method|default('post') }}">
     {# Add any additional fields or markup to this form using this variable. #}
-    {{ signup_form_fields }}
       <input type="submit" class="signup--button" id="{{ signup_form_field_submit_id|default('signup-submit') }}" name="{{ signup_form_field_submit_name|default('submit') }}" value ="{{ signup_form_field_submit_value|default('Sign-up') }}" />
   </form>
 </div>

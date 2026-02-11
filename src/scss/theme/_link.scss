@@ -20,11 +20,11 @@
       &:hover,
       &:focus,
       &:active {
-        color: $su-color-cardinal-red-dark;
+        color: $su-color-black-20;
         text-decoration: underline;
 
         &:after {
-          background-color: $su-color-cardinal-red-dark;
+          background-color: $su-color-black-20;
         }
       }
 
