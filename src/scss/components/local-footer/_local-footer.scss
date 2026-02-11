@@ -18,6 +18,26 @@
     }
   }
 
+  //Action link style change.
+    .su-local-footer__action-links {
+      font-size: unset; // Override.
+
+      a {
+        font-size: 1.8rem;
+
+        &:after {
+          content: none;
+        }
+      }
+    }
+
+  // Link lists
+  ul {
+    >li {
+      @include responsive-spacing('margin-bottom', 0);
+    }
+  }
+
   // Footer header - lockup and email sign up
   .su-local-footer__header {
     @include modular-spacing('padding-bottom', 1);
@@ -53,81 +73,43 @@
       display: block;
     }
 
-    .su-intro-text {
-      font-size: 2.5rem;
-      font-weight: $su-font-bold;
-      line-height: 112%;
-      letter-spacing: -0.02em;
-      margin-right: 0.4em;
-    }
-
     form {
       width: 100%;
-
-      input {
-        display: inline;
-      }
-
-      input[type="email"] {
-        border-radius: 6px;
-        background-color: $su-color-fog;
-        box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.12);
-        height: 5.9rem;
-        margin-right: 1.5rem;
-        width: 65%;
-      }
 
       .signup--button {
         //custom color here.
       }
     }
-  }
 
-  .su-lockup__wordmark {
-    color: #000;
-  }
+  .su-local-foot-f-intro {
+      @include responsive-spacing('margin-bottom', 0);
 
-  .su-lockup__line1,
-  .su-lockup__line2,
-  .su-lockup__line3,
-  .su-lockup__line4,
-  .su-lockup__line5 {
-    color: #000;
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.8rem;
+      line-height: 130%;
+    }
+  }
   }
 
   // Link column setup
+  .su-local-footer__columns {
+    @include responsive-spacing('padding-bottom', 5);
 
-  // Web login button.
-  .su-local-footer__cell7 {
-    border-top: 2px solid $su-color-fog;
-    padding: 2.8rem 4.8rem 3.6rem 0;
-    margin: 0 10rem 0;
+    .su-local-footer__cell2 {
+      nav {
+        display: block;
 
-    @include grid-media-max('sm') {
-      padding: 3.2rem 0;
-      margin: 0 2rem;
-    }
+        &:first-of-type {
+          padding-bottom: 0;
+        }
 
-    @include grid-media('md') {
-      margin: 0 5rem;
-    }
-
-    @include grid-media('lg') {
-      margin: 0 8rem;
-    }
-
-    .su-button--login {
-      color: $su-color-black;
-      display: flex;
-      width: fit-content;
-      gap: 5px;
-
-      &::after {
-        content: none;
-      }
-
-      span.material-symbols-outlined {
-        text-decoration: none;
+        &:last-of-type {
+          margin-left: 0;
+        }
       }
     }
   }
@@ -173,32 +155,11 @@
     }
   }
 
-
   .su-local-footer__address {
     @include type-e;
     @include responsive-spacing('padding-bottom', 0);
 
     font-weight: $su-font-regular
-  }
-
-  .su-button {
-    &.ext {
-      &.su-link--external {
-        color: $su-color-black;
-        font-weight: 600;
-        text-decoration: none;
-
-        &:hover,
-        &:focus,
-        &:active {
-          color: $su-color-white;
-
-          &:after {
-            background-color: $su-color-white;
-          }
-        }
-      }
-    }
   }
 }
 
