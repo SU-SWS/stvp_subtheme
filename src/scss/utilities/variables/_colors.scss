@@ -39,17 +39,16 @@ $gradient-red-medium: linear-gradient(to right, $stvp-color-red, $stvp-color-red
 // Shades of the Main color:
 $su-color-palo-alto-20: #DCEFEC; // used in variables 
 $stvp-color-palo-verde-xlight: #CEE1DE;  // used in variables
-$stvp-color-palo-verde-medium2: #19A596;  // used in button
-// $su-color-palo-verde-dark: #017E7C; // not used
-$stvp-color-palo-verde-xdark: #279989; // used in variables
-$stvp-color-palo-verde-xdark2: #007B7A; // used in button
+$stvp-color-palo-verde-medium: #19A596;  // used in button
+$su-color-palo-verde-dark: #017E7C; // used in primary button icon + text
+$stvp-color-palo-verde-xdark: #007B7A; // used in button
 $stvp-color-palo-verde-xxdark: #028771; // used in variables
-$stvp-color-palo-verde-xxxdark: #006463;  // used in button
+$stvp-color-palo-verde-darkest: #006463;  // used in button
 
-$stvp-palo-verde-bright: #3DD3C3; // used in button
+$stvp-color-palo-verde-bright: #3DD3C3; // used in button
 
-$gradient-palo-verde: linear-gradient(to right, $stvp-color-palo-verde-medium2, $stvp-color-palo-verde-xdark2);
-$gradient-palo-verde-bright: linear-gradient(to right, $su-color-palo-alto-bright, $stvp-color-palo-verde-xxxdark);
+$gradient-palo-verde: linear-gradient(to right, $stvp-color-palo-verde-medium, $stvp-color-palo-verde-xdark);
+$gradient-palo-verde-bright: linear-gradient(to right, $stvp-color-palo-verde-bright, $stvp-color-palo-verde-darkest);
 
 /* --- Plum Colors -- */
 // Shades of the Main color:
