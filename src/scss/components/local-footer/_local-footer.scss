@@ -20,17 +20,21 @@
 
   // Footer header - lockup and email sign up
   .su-local-footer__header {
+    @include modular-spacing('padding-bottom', 1);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 50px;
+
+    @include grid-media('lg') {
+      flex-direction: row;
+    }
 
     .su-lockup__custom-logo {
       max-width: 350px;
     }
-
-    @include modular-spacing('padding-bottom', 1);
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
 
     a {
       &:hover,
