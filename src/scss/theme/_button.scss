@@ -1,19 +1,90 @@
 @charset "UTF-8";
 @import "../utilities/variables/index.scss";
 
+@mixin secondary-button-style($textcolor){
+    color: $textcolor;
+    //@TODO: set arrow icon color as well
 
-// override default button styles here and add additional button classes as needed.
-.su-button {
+    // @TODO: include handling the external link icon as well
+    // @TODO: include handling the mailto link icon as well
+    // Jen has a nice testing page for remembering use cases. :)
 
-    &.red-gradient {
-    //    include button mixins here
-    // should reference the gradient variables from _colors.scss.
-        background: $gradient-red-medium;
-        border-color: $gradient-red-bright;
-
+    //@TODO: set hover styles as well
 
     //  &:hover, &:focus {
     //    include button mixins here
     //  }
+    
+} 
+
+
+// override default button styles here and add additional button classes as needed.
+.su-button {
+    background: $gradient-red-medium;
+    border-color: $gradient-red-bright;
+    
+    // check external link icon & mailto icon (although they might be fine inheriting regular button styles??)
+
+    //  &:hover, &:focus {
+    //    include button mixins here
+    //  }
+    
+
+    &.secondary {
+        background: white; // consistent across all page themes.
+        color: $su-digital-red;
+         // set default arrow icon color a different brighter red as well
+
+             //  &:hover, &:focus {
+    //    include button mixins here
+    //  }
+    }
+}
+
+/* --- Page Theme Button Overrides --- */
+
+.page-theme--palo-verde {
+  .su-button {
+        background: $gradient-palo-verde;
+        border-color: $gradient-palo-verde-bright;
+
+        &.secondary {
+            @include secondary-button-style($su-color-palo-verde-dark);
+        }
+    }
+}
+
+.page-theme--plum {
+  .su-button {
+        background: $gradient-plum;
+        border-color: $gradient-plum-bright;
+        
+        &.secondary {
+            @include secondary-button-style($su-color-plum);
+        }
+    }
+}
+
+.page-theme--lagunita {
+  .su-button {
+        background: $gradient-lagunita;
+        border-color: $gradient-lagunita-bright;
+        
+        &.secondary {
+            @include secondary-button-style($su-color-lagunita-dark);
+        }
+    }
+}
+
+.page-theme--illuminating {
+  .su-button {
+        background: $gradient-illuminating;
+        border-color: $gradient-illuminating-bright;
+        color: $stvp-color-brown;
+        // @TODO: set the icon color to be brown as well
+        
+        &.secondary {
+            @include secondary-button-style($stvp-color-brown);
+        }
     }
 }
