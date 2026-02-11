@@ -37,20 +37,19 @@ $gradient-red-medium: linear-gradient(to right, $stvp-color-red, $stvp-color-red
 
 /* --- Palo Verde Teal Colors -- */
 // Shades of the Main color:
-$su-color-palo-alto-20: #DCEFEC;
-$stvp-color-palo-verde-xlight: #CEE1DE;
-$su-color-palo-verde-light: #59B3A9;
-$stvp-color-palo-verde-medium: #00908E;
-$stvp-color-palo-verde-medium2: #19A596;  // maybe these 2 mediums can be combined?
-$su-color-palo-verde-dark: #017E7C;
-$stvp-color-palo-verde-xdark: #279989;
-$stvp-color-palo-verde-xdark2: #007B7A; // maybe these 2 darks can be combined?
-$stvp-color-palo-verde-xxdark: #028771;
+$su-color-palo-alto-20: #DCEFEC; // used in variables 
+$stvp-color-palo-verde-xlight: #CEE1DE;  // used in variables
+$stvp-color-palo-verde-medium2: #19A596;  // used in button
+// $su-color-palo-verde-dark: #017E7C; // not used
+$stvp-color-palo-verde-xdark: #279989; // used in variables
+$stvp-color-palo-verde-xdark2: #007B7A; // used in button
+$stvp-color-palo-verde-xxdark: #028771; // used in variables
+$stvp-color-palo-verde-xxxdark: #006463;  // used in button
 
-//2 bright shades of the Main Color, used for buttons?
+$stvp-palo-verde-bright: #3DD3C3; // used in button
 
 $gradient-palo-verde: linear-gradient(to right, $stvp-color-palo-verde-medium2, $stvp-color-palo-verde-xdark2);
-$gradient-palo-verde-bright: linear-gradient(to right, $su-color-palo-alto-light, $stvp-color-palo-verde-medium);
+$gradient-palo-verde-bright: linear-gradient(to right, $su-color-palo-alto-bright, $stvp-color-palo-verde-xxxdark);
 
 /* --- Plum Colors -- */
 // Shades of the Main color:
