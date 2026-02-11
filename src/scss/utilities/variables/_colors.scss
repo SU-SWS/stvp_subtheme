@@ -83,6 +83,8 @@ $stvp-color-brown: #5C3200;
 //bright shades of the Main Color, used for buttons?
 $stvp-color-illuminating-bright: #FEC51D;
 
+$su-color-poppy-xxlight: #F7EFD5; // this is used for the background section 
+
 // note that the 2 gradients are used in several places. 
 $gradient-illuminating-bright: linear-gradient(to right, $su-color-illuminating-light, $stvp-color-illuminating-xxdark);
 $gradient-illuminating: linear-gradient(to right, $su-color-illuminating-dark, $stvp-color-illuminating-xdark);
