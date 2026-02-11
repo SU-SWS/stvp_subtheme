@@ -41,63 +41,55 @@
 /* This would be on all h2s in the WYSIWIG, h2s in Teasers and Lists headlines. */
   // 3 Sections/Paragraph Types this is allowed on: wysiwyg, list headlines, teasers which use list headlines
 
-.su-wysiwyg-text,   // make sure to test in the body AND the text paragraph inside the layout
-.su-entity-headline, 
-.su-list-headline {  
-  h2 {
-    // left-aligned default
-    // Decorative underline for h2 headings
-    @include decoration-underline-basic();
+.node-page--stanford-page {  //limit to only page content area; there is an h2 in the footer that we don't want to affect.
+  .su-wysiwyg-text,   // make sure to test in the body AND the text paragraph inside the layout
+  .su-entity-headline, 
+  .su-list-headline {  
+    h2 {
+      // left-aligned default
+      // Decorative underline for h2 headings
+      @include decoration-underline-basic();
 
-    &.text-align-center {
+      &.text-align-center {
+        @include centered-border();
+      }
+
+      // hide the anchor icon link after headings?
+      .anchorjs-link  {
+        display: none;
+      }
+    }
+  }
+
+  // These paragraph types should always have a centered headline.
+  .su-entity-headline,
+  .su-list-headline {
+    h2 {
       @include centered-border();
     }
-
-    // hide the anchor icon link after headings?
-    .anchorjs-link  {
-      display: none;
-    }
   }
-}
 
-// These paragraph types should always have a centered headline.
-.su-entity-headline,
-.su-list-headline {
-  h2 {
-    @include centered-border();
+  /* --- color variants --- */
+  // Should I also enforce and make sure that if they select a light teal background, that the underline is also teal, etc.
+  // just so they don't make it mis-match.
+  .bg-dcefec,
+  .page-theme--palo-verde {
+    // 3 Sections/Paragraph Types this is allowed on: wysiwyg, list headlines, teasers which use list headlines
+    @include h2-decoration--colored($gradient-palo-verde);
   }
-}
 
-/* --- color variants --- */
-// Should I also enforce and make sure that if they select a light teal background, that the underline is also teal, etc.
-// just so they don't make it mis-match.
-.bg-dcefec,
-.page-theme--palo-verde {
-  // 3 Sections/Paragraph Types this is allowed on: wysiwyg, list headlines, teasers which use list headlines
-  @include h2-decoration--colored($gradient-palo-verde);
-}
+  .bg-f2e8f1, // we are overridding this color, but this is the pink/purple background option.
+  .page-theme--plum {  
+    @include h2-decoration--colored($gradient-plum-bright);
+  }
 
-.bg-f2e8f1, // we are overridding this color, but this is the pink/purple background option.
-.page-theme--plum {  
-  @include h2-decoration--colored($gradient-plum-bright);
-}
+  .bg-dcecef,
+  .page-theme--lagunita { 
+    @include h2-decoration--colored($gradient-lagunita);
+  }
 
-.bg-dcecef,
-.page-theme--lagunita { 
-  @include h2-decoration--colored($gradient-lagunita);
-}
-
-.bg-f7ecde, // we are overridding this color, but this is the light yellow background option.
-.page-theme--illuminating { 
-  @include h2-decoration--colored($gradient-illuminating-bright);
-}
-
-/* --- Make sure the footer h2 is ALWAYS red, even when theming a page --- */
-.page-theme--illuminating,
-.page-theme--lagunita,
-.page-theme--palo-verde,
-.page-theme--plum {
-  .su-wysiwyg-text.stanford-local-footer {
-    @include h2-decoration--colored($gradient-red-bright);
+  .bg-f7ecde, // we are overridding this color, but this is the light yellow background option.
+  .page-theme--illuminating { 
+    @include h2-decoration--colored($gradient-illuminating-bright);
   }
 }
