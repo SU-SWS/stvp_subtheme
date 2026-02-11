@@ -1,5 +1,18 @@
 @import "../utilities/variables/index.scss";
 
+@mixin decoration-underline-basic($gradient: $gradient-red-bright) {
+  &:after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 5px;
+    margin-top: 16px;
+    margin-bottom: 30px;
+    background: $gradient; 
+    border-radius: 99px;
+  }
+}
+
 @mixin centered-border() {
   &:after {
   content: "";
@@ -11,16 +24,18 @@
 }
 
 /* -- Heading mixin where we pass in which color theme we are using -- */
-@mixin h2-decoration--colored($mediumColor, $darkColor) {
-  h2 {
-  // override default red to another color theme
-    &:after {
-      background: linear-gradient(to right, $mediumColor, $darkColor); 
+@mixin h2-decoration--colored($gradient) {
+  .su-list-headline,
+  .su-entity-headline,
+  .su-wysiwyg-text {
+    h2 {
+    // override default red to another color theme
+      &:after {
+        background: $gradient; 
+      }
     }
   }
 }
-
-
 
 
 /* This would be on all h2s in the WYSIWIG, h2s in Teasers and Lists headlines. */
@@ -32,23 +47,20 @@
   h2 {
     // left-aligned default
     // Decorative underline for h2 headings
-    &:after {
-      content: "";
-      display: block;
-      width: 60px;
-      height: 5px;
-      margin-top: 16px;
-      margin-bottom: 30px;
-      background: $gradient-red-bright; 
-      border-radius: 99px;
-    }
+    @include decoration-underline-basic();
 
     &.text-align-center {
       @include centered-border();
     }
+
+    // hide the anchor icon link after headings?
+    .anchorjs-link  {
+      display: none;
+    }
   }
 }
 
+// These paragraph types should always have a centered headline.
 .su-entity-headline,
 .su-list-headline {
   h2 {
@@ -56,23 +68,34 @@
   }
 }
 
-/* need to add color variants - this section is not complete until we know how we are applying color variants. */
+/* --- color variants --- */
+// Should I also enforce and make sure that if they select a light teal background, that the underline is also teal, etc.
+// just so they don't make it mis-match.
+.bg-dcefec,
 .page-theme--palo-verde {
   // 3 Sections/Paragraph Types this is allowed on: wysiwyg, list headlines, teasers which use list headlines
-
-
-  // move these 2 lines into the mixin
-  .su-list-headline,
-  .su-wysiwyg-text { // add other classes here too
-    @include h2-decoration--colored($su-color-palo-alto-light, $su-color-palo-verde-dark);
-  }
-
+  @include h2-decoration--colored($gradient-palo-verde);
 }
 
-// Then each color variant would have a section like this:
+.bg-f2e8f1, // we are overridding this color, but this is the pink/purple background option.
+.page-theme--plum {  
+  @include h2-decoration--colored($gradient-plum);
+}
+
+.page-theme--lagunita { 
+  @include h2-decoration--colored($gradient-lagunita);
+}
+
+.page-theme--illuminating { 
+  @include h2-decoration--colored($gradient-illuminating);
+}
+
+/* --- Make sure the footer h2 is ALWAYS red, even when theming a page --- */
+.page-theme--illuminating,
+.page-theme--lagunita,
+.page-theme--palo-verde,
 .page-theme--plum {
-  .su-list-headline,
-  .su-wysiwyg-text { // add other classes here too
-    @include h2-decoration--colored($su-color-plum-light, $su-color-plum-dark);
+  .su-wysiwyg-text.stanford-local-footer {
+    @include h2-decoration--colored($gradient-red-bright);
   }
 }
