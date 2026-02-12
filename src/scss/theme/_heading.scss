@@ -68,28 +68,28 @@
       @include centered-border();
     }
   }
+}
 
   /* --- color variants --- */
   // Should I also enforce and make sure that if they select a light teal background, that the underline is also teal, etc.
   // just so they don't make it mis-match.
-  .bg-dcefec,
-  .page-theme--palo-verde {
+  .node-page--stanford-page .bg-dcefec,
+  .page-theme--palo-verde .node-page--stanford-page {
     // 3 Sections/Paragraph Types this is allowed on: wysiwyg, list headlines, teasers which use list headlines
     @include h2-decoration--colored($gradient-palo-verde);
   }
 
-  .bg-f2e8f1, // we are overridding this color, but this is the pink/purple background option.
-  .page-theme--plum {  
+  .node-page--stanford-page .bg-f2e8f1, // we are overridding this color, but this is the pink/purple background option.
+  .page-theme--plum .node-page--stanford-page {  
     @include h2-decoration--colored($gradient-plum-bright);
   }
 
-  .bg-dcecef,
-  .page-theme--lagunita { 
+  .node-page--stanford-page .bg-dcecef,
+  .page-theme--lagunita .node-page--stanford-page { 
     @include h2-decoration--colored($gradient-lagunita);
   }
 
-  .bg-f7ecde, // we are overridding this color, but this is the light yellow background option.
-  .page-theme--illuminating { 
+  .node-page--stanford-page .bg-f7ecde, // we are overridding this color, but this is the light yellow background option.
+  .page-theme--illuminating .node-page--stanford-page { 
     @include h2-decoration--colored($gradient-illuminating-bright);
   }
-}
