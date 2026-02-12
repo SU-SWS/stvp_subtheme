@@ -22,5 +22,13 @@
 // Components.
 // @import 'component-name/index';
 
-@import 'banner/index.scss';
-@import 'local-footer/index.scss';
+@import 'banner--default';
+@import 'banner--palo-verde';
+@import 'banner--lagunita';
+@import 'banner--plum';
+@import 'banner--illuminating';
+@import 'banner--grey';
+
+@import 'banner--wave-1';
+@import 'banner--wave-2';
+@import 'banner--wave-3';
