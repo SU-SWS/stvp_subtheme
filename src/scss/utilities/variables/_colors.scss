@@ -106,7 +106,7 @@ $stvp-color-lagunita-bright: #3EBFD5;
 // background: linear-gradient(270deg, #006071 0%, #3EBFD5 100%);
 $gradient-lagunita-bright: linear-gradient(270deg, $stvp-color-lagunita-xdark 0%, $stvp-color-lagunita-bright 100%);
 // $gradient-lagunita: linear-gradient(to right, $stvp-color-lagunita-light, $su-color-lagunita);
-$gradient-lagunita: linear-gradient(270deg, $stvp-color-lagunita-light 0%, $su-color-lagunita 100%);
+$gradient-lagunita: linear-gradient(270deg, $su-color-lagunita 0%, $stvp-color-lagunita-light 100%);
 
 
 
