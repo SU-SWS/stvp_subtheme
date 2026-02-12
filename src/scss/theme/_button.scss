@@ -20,8 +20,22 @@
 
 // override default button styles here and add additional button classes as needed.
 .su-button {
+    display: inline-flex;
+    padding: 15px 30px 18px 30px;
+    align-items: center;
+    border-radius: 53px;
+    // border: 2px solid var(--Button---border-gradient, #820000);
+    // background: var(--Button---fill-gradient, linear-gradient(90deg, #CD0E0E 0%, #B1040E 100%));
+
+    /* Shallow */
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.10);
     background: $gradient-red-medium;
-    border-color: $gradient-red-bright;
+    border: 2px solid $gradient-red-bright;
+
+
+
+
+    // add other styles from figma
     
     // check external link icon & mailto icon (although they might be fine inheriting regular button styles??)
 
@@ -32,7 +46,7 @@
 
     &.secondary {
         background: white; // consistent across all page themes.
-        color: $su-digital-red;
+        color: $su-color-digital-red;
          // set default arrow icon color a different brighter red as well
 
              //  &:hover, &:focus {
@@ -42,9 +56,9 @@
 }
 
 /* --- Page Theme Button Overrides --- */
-
-.page-theme--palo-verde {
-  .su-button {
+ // so it doesn't affect the footer or other areas with buttons.
+.page-theme--palo-verde .page-content {
+    .su-button {
         background: $gradient-palo-verde;
         border-color: $gradient-palo-verde-bright;
 
@@ -54,8 +68,8 @@
     }
 }
 
-.page-theme--plum {
-  .su-button {
+.page-theme--plum .page-content {
+    .su-button {
         background: $gradient-plum;
         border-color: $gradient-plum-bright;
         
@@ -65,8 +79,8 @@
     }
 }
 
-.page-theme--lagunita {
-  .su-button {
+.page-theme--lagunita .page-content {
+    .su-button {
         background: $gradient-lagunita;
         border-color: $gradient-lagunita-bright;
         
@@ -76,8 +90,8 @@
     }
 }
 
-.page-theme--illuminating {
-  .su-button {
+.page-theme--illuminating .page-content {
+    .su-button {
         background: $gradient-illuminating;
         border-color: $gradient-illuminating-bright;
         color: $stvp-color-brown;
