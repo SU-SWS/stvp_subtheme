@@ -31,6 +31,10 @@
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.10);
     background: $gradient-red-medium;
     border: 2px solid $gradient-red-bright;
+
+
+
+
     // add other styles from figma
     
     // check external link icon & mailto icon (although they might be fine inheriting regular button styles??)
@@ -52,9 +56,9 @@
 }
 
 /* --- Page Theme Button Overrides --- */
-
-.page-theme--palo-verde {
-  .su-button {
+ // so it doesn't affect the footer or other areas with buttons.
+.page-theme--palo-verde .page-content {
+    .su-button {
         background: $gradient-palo-verde;
         border-color: $gradient-palo-verde-bright;
 
@@ -64,8 +68,8 @@
     }
 }
 
-.page-theme--plum {
-  .su-button {
+.page-theme--plum .page-content {
+    .su-button {
         background: $gradient-plum;
         border-color: $gradient-plum-bright;
         
@@ -75,8 +79,8 @@
     }
 }
 
-.page-theme--lagunita {
-  .su-button {
+.page-theme--lagunita .page-content {
+    .su-button {
         background: $gradient-lagunita;
         border-color: $gradient-lagunita-bright;
         
@@ -86,8 +90,8 @@
     }
 }
 
-.page-theme--illuminating {
-  .su-button {
+.page-theme--illuminating .page-content {
+    .su-button {
         background: $gradient-illuminating;
         border-color: $gradient-illuminating-bright;
         color: $stvp-color-brown;
