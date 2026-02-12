@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 .su-local-footer  {
-  background-color: #53565A;
+  background-color: $su-color-cool-gray;
   color: $su-color-white;
-  background: #53565A url("../assets/svg/STVP_footer_waves.svg") no-repeat bottom right 100%/100%;
+  background: $su-color-cool-gray url("../assets/svg/STVP_footer_waves.svg") no-repeat bottom right 100%/100%;
 
   a {
     color: $su-color-white;
@@ -12,9 +12,21 @@
     &:hover,
     &:focus,
     &:active {
-      color: $su-color-cardinal-red-dark;
+      color: $su-color-black-20;
       text-decoration: underline;
       background-color: transparent; // override for general links.
+    }
+
+    &.mailto {
+      svg {
+        fill: $su-color-white;
+
+        &:hover,
+        &:focus,
+        &:active {
+          fill: $su-color-black-20;
+        }
+      }
     }
   }
 
