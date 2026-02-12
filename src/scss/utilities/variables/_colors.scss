@@ -9,8 +9,7 @@
 
 // All variable names should be prefaced with your abbreviation (saa, soe, ood, etc)
 // define colors here in the format of:
-//$abbreviation-color-pink: #ff0099; // like $saa-color-pink
-
+//$abbreviation-color-pink: #ff0099; // like $stvp-color-pink
 
 
 /* --- Color Variables --- */
@@ -27,9 +26,6 @@ $stvp-color-red-medium: #AD030D;
 
 
 // note that the 2 gradients are used in several places. 
-
-// $gradient-red-bright: linear-gradient(to right, $su-color-digital-red-xlight, $su-color-digital-red-dark); 
-// $gradient-red-medium: linear-gradient(to right, $stvp-color-red, $stvp-color-red-medium); 
 $gradient-red-bright: linear-gradient(270deg, $su-color-digital-red-dark 0%, $su-color-digital-red-xlight 100%); 
 $gradient-red-medium: linear-gradient(90deg, $stvp-color-red 0%, $su-color-digital-red 100%); 
 
@@ -50,7 +46,6 @@ $stvp-color-palo-verde-darkest: #006463;  // used in button
 $stvp-color-palo-verde-bright: #3DD3C3; // used in button
 
 $gradient-palo-verde: linear-gradient(270deg, $stvp-color-palo-verde-xdark 0%, $stvp-color-palo-verde-medium 100%);
-// $gradient-palo-verde: linear-gradient(to right, $stvp-color-palo-verde-medium, $stvp-color-palo-verde-xdark);
 $gradient-palo-verde-bright: linear-gradient(270deg, $stvp-color-palo-verde-darkest 0%, $stvp-color-palo-verde-bright 100%);
 
 /* --- Plum Colors -- */
@@ -81,13 +76,12 @@ $stvp-color-illuminating-xdark: #DB9A47;
 $stvp-color-illuminating-xxdark: #D58B2D;
 $stvp-color-brown: #5C3200;
 
-//bright shades of the Main Color, used for buttons?
+//bright shade of the Main Color, used for buttons?
 $stvp-color-illuminating-bright: #FEC51D;
 
 $su-color-poppy-xxlight: #F7EFD5; // this is used for the background section 
 
 // note that the 2 gradients are used in several places. 
-// background: linear-gradient(90deg, #FEDD5C 0%, #D58B2D 100%);
 $gradient-illuminating-bright: linear-gradient(90deg, $su-color-illuminating 0%, $stvp-color-illuminating-xxdark 100%);
 $gradient-illuminating: linear-gradient(90deg, $su-color-illuminating-dark 0%, $stvp-color-illuminating-xdark 100%);
 
@@ -100,12 +94,10 @@ $su-color-lagunita: #007C92;
 $su-color-lagunita-dark: #006B81;
 $stvp-color-lagunita-xdark: #006071;
 
-//bright shades of the Main Color, used for buttons?
+//bright shade of the Main Color, used for buttons?
 $stvp-color-lagunita-bright: #3EBFD5;
 // note that the 2 gradients are used in several places. 
-// background: linear-gradient(270deg, #006071 0%, #3EBFD5 100%);
 $gradient-lagunita-bright: linear-gradient(270deg, $stvp-color-lagunita-xdark 0%, $stvp-color-lagunita-bright 100%);
-// $gradient-lagunita: linear-gradient(to right, $stvp-color-lagunita-light, $su-color-lagunita);
 $gradient-lagunita: linear-gradient(270deg, $su-color-lagunita 0%, $stvp-color-lagunita-light 100%);
 
 
@@ -116,8 +108,6 @@ $stvp-color-archway-20: #DFDBD8;
 $su-color-archway-light: #766253;
 $su-color-archway: #5D4B3C;
 
-// these fog colors deviate from the Stanford palette so I'm defining them here.
-// check Jen's list to see if we update these.
 $su-color-foggy-light: #F4F4F4;
 $stvp-color-foggy-xlight: #EAEAEA;
 $stvp-color-foggy-light: #BAB5AD;
