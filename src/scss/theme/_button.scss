@@ -54,13 +54,50 @@
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.10); /* Shallow */
 
     // add the :after arrow icon here, for the horizontal arrow (default)
+    // this breaks the border
+    // &:after {
+    //     content: '';
+    //     display: inline-block;
+    //     width: 18px;
+    //     height: 10px;
+    //     margin-left: 8px;
+    //     background-repeat: no-repeat;
+    //     background-size: contain;
+    //     /* encoded SVG to use in pseudo-element */
+    //     background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http://www.w3.org/2000/svg%27%20width%3D%2718%27%20height%3D%2710%27%20viewBox%3D%270%200%2018%2010%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M17.7062%205.70859C18.0969%205.31797%2018.0969%204.68359%2017.7062%204.29297L13.7063%200.292969C13.3156%20-0.0976562%2012.6812%20-0.0976562%2012.2906%200.292969C11.9%200.683594%2011.9%201.31797%2012.2906%201.70859L14.5844%204.00234H1C0.446875%204.00234%200%204.44922%200%205.00234C0%205.55547%200.446875%206.00234%201%206.00234H14.5844L12.2906%208.29609C11.9%208.68672%2011.9%209.32109%2012.2906%209.71172C12.6812%2010.1023%2013.3156%2010.1023%2013.7063%209.71172L17.7062%205.71172V5.70859Z%27%20fill%3D%27%23FFF%27/%3E%3C/svg%3E");
+    // }
+
+    // frmo chem h to try next::after
     &:after {
-        content: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="10" viewBox="0 0 18 10" fill="none">
-  <path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="white"/></svg>';
-        margin-left: 8px;
-        fill: #FFF;
-        // color: $iconColor; // @TODO come back to finish this. and test with all icon types.
+        content: '';
+        // black arrow
+        // background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHdpZHRoPSIyNCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIvPjxwYXRoIGQ9Im0xNSA1LTEuNDEgMS40MUwxOC4xNyAxMUgydjJoMTYuMTdsLTQuNTkgNC41OUwxNSAxOWw3LTctNy03eiIvPjwvc3ZnPg==) no-repeat 0 0;
+        // white arrow
+        // background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHdpZHRoPSIyNCIgZmlsbD0iI0ZGRiI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIvPjxwYXRoIGQ9Im0xNSA1LTEuNDEgMS40MUwxOC4xNyAxMUgydjJoMTYuMTdsLTQuNTkgNC41OUwxNSAxOWw3LTctNy03eiIvPjwvc3ZnPg==) no-repeat 0 0;
+        
+        // from figma:
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="10" viewBox="0 0 18 10" fill="none"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="white"/></svg>') no-repeat;
+        background-size: 17px 11px;
+        display: inline-block;
+        height: 18px;
+        margin-left: 4px;
+        position: relative;
+        width: 19px;
+        background-position: center;
     }
+
+
+
+    // background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHdpZHRoPSIyNCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIvPjxwYXRoIGQ9Im0xNSA1LTEuNDEgMS40MUwxOC4xNyAxMUgydjJoMTYuMTdsLTQuNTkgNC41OUwxNSAxOWw3LTctNy03eiIvPjwvc3ZnPg==) no-repeat 0 0;
+    // background-size: 23px 23px;
+    // -webkit-box-shadow: none;
+    // box-shadow: none;
+    // content: "";
+    // display: inline-block;
+    // height: 18px;
+    // margin-left: 1.8rem;
+    // position: relative;
+    // width: 23px;
 
     // Button Icon variations
     &.su-link--external {
