@@ -17,3 +17,8 @@ regions:
   content: Content
   footer: Footer
   page_bottom: 'Page bottom'
+
+libraries-override:
+  stanford_basic/decoupled_menu:
+    js:
+      decoupled-menu/dist/islands/main-menu.island.js: decoupled-menu/dist/islands/main-menu.island.umd.js
