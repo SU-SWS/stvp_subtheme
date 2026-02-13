@@ -1,6 +1,20 @@
 @charset "UTF-8";
 
-// override default link styles here.
+// Override default link styles here.
+.su-link,
+.su-link--action,
+a {
+  color: $su-color-digital-red;
+
+  &:after {
+      background-color: $su-color-digital-red;
+  }
+
+  &.mailto svg {
+    fill: $su-color-digital-red;
+  }
+}
+
 // This is to override the stanford_profile_styles
 
 // Local Footer links.
