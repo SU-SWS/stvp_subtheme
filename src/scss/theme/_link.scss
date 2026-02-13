@@ -7,11 +7,20 @@ a {
   color: $su-color-digital-red;
 
   &:after {
-      background-color: $su-color-digital-red;
+    background-color: $su-color-digital-red;
   }
 
   &.mailto svg {
     fill: $su-color-digital-red;
+  }
+}
+
+// Override for the icon on the secondary nav
+.su-secondary-nav {
+  a {
+    &:after {
+      background-color: transparent;
+    }
   }
 }
 
