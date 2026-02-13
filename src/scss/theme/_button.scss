@@ -17,6 +17,28 @@
     
 } 
 
+@mixin set-button-color($backgroundGradient, $borderGradient, $textColor: white, $iconColor: white) {
+    background: $backgroundGradient;
+    background-clip: padding-box; /* !importanté */
+    border: solid 2px transparent; /* !importanté */
+    // color: $textColor;
+
+
+    &:hover, &:focus {
+        background: $su-color-black;
+    }
+    //gradient border
+    &:before {
+        background: $borderGradient;
+        margin: -2px; /* !importanté */
+        border-radius: inherit; /* !importanté */
+    }
+
+    // icon
+    // &:after {
+    //     color: $iconColor; // @TODO come back to finish this. and test with all icon types.
+    // }
+}
 
 // override default button styles here and add additional button classes as needed.
 .su-button {
@@ -24,16 +46,51 @@
     padding: 15px 30px 18px 30px;
     align-items: center;
     border-radius: 53px;
-    // border: 2px solid var(--Button---border-gradient, #820000);
-    // background: var(--Button---fill-gradient, linear-gradient(90deg, #CD0E0E 0%, #B1040E 100%));
 
     /* Shallow */
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.10);
-    background: $gradient-red-medium;
-    border: 2px solid $gradient-red-bright;
+
+// @TODO: need to limit this to only :not('.secondary')
+// &:not(.secondary) {
+        // From Example:
+        align-items: center;
+        margin: auto;
+
+        position: relative;
+        box-sizing: border-box;
+
+        $border: 2px;
+        color: #FFF;
+        background: #E50808;
+        background: linear-gradient(90deg, #CD0E0E 0%, #B1040E 100%); 
+        background-clip: padding-box; /* important */
+        border: solid $border transparent; /* important */
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1;
+            margin: -$border; /* important */
+            border-radius: inherit; /* important */
+            background: linear-gradient(to right, #f83535, #820000);
+        }
+
+    // }
+
+        //@TODO: the border gradient is breaking inside a teaser with a background - go back and see why it breaks in just that case.
 
 
+    &:hover, &:focus {
+        background: $su-color-black;
+        border-color: $su-color-black;
+        background-image: none;
 
+        &:before {
+            background: $su-color-black;
+        }
+    }
+    
 
     // add other styles from figma
     
@@ -59,9 +116,8 @@
  // so it doesn't affect the footer or other areas with buttons.
 .page-theme--palo-verde .page-content {
     .su-button {
-        background: $gradient-palo-verde;
-        border-color: $gradient-palo-verde-bright;
-
+        @include set-button-color($gradient-palo-verde, $gradient-palo-verde-bright);
+        
         &.secondary {
             @include secondary-button-style($su-color-palo-verde-dark);
         }
@@ -70,8 +126,7 @@
 
 .page-theme--plum .page-content {
     .su-button {
-        background: $gradient-plum;
-        border-color: $gradient-plum-bright;
+        @include set-button-color($gradient-plum, $gradient-plum-bright);
         
         &.secondary {
             @include secondary-button-style($su-color-plum);
@@ -81,8 +136,7 @@
 
 .page-theme--lagunita .page-content {
     .su-button {
-        background: $gradient-lagunita;
-        border-color: $gradient-lagunita-bright;
+        @include set-button-color($gradient-lagunita, $gradient-lagunita-bright);
         
         &.secondary {
             @include secondary-button-style($su-color-lagunita-dark);
@@ -92,11 +146,18 @@
 
 .page-theme--illuminating .page-content {
     .su-button {
-        background: $gradient-illuminating;
-        border-color: $gradient-illuminating-bright;
+        @include set-button-color($gradient-illuminating, $gradient-illuminating-bright);
         color: $stvp-color-brown;
-        // @TODO: set the icon color to be brown as well
         
+        &:hover, &:focus {
+            color: white;
+        }
+
+        // @TODO: set the icon color to be brown as well
+        &:after {
+            color: $stvp-color-brown; // @TODO come back to test with all icon types.
+        }
+
         &.secondary {
             @include secondary-button-style($stvp-color-brown);
         }

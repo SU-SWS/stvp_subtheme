@@ -16,7 +16,7 @@
 $su-color-digital-red-xlight: #f83535;
 $su-color-digital-red-light: #E50808;
 $su-color-digital-red: #B1040E;
-$su-color-digital-red-dark: #820000;
+$su-color-digital-red-xdark: #820000;
 
 $su-color-digital-red-dark: #7A0000;
 
@@ -26,7 +26,7 @@ $stvp-color-red-medium: #AD030D;
 
 
 // note that the 2 gradients are used in several places. 
-$gradient-red-bright: linear-gradient(270deg, $su-color-digital-red-dark 0%, $su-color-digital-red-xlight 100%); 
+$gradient-red-bright: linear-gradient(270deg, $su-color-digital-red-xdark 0%, $su-color-digital-red-xlight 100%); 
 $gradient-red-medium: linear-gradient(90deg, $stvp-color-red 0%, $su-color-digital-red 100%); 
 
 
@@ -117,3 +117,4 @@ $su-color-foggy-dark: #B6B1A9;
 
 // Grays
 $su-color-cool-gray: #53565A;
+$su-color-black: #2E2D29;
