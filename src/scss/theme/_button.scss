@@ -159,6 +159,10 @@
         &:before {
             background: $su-color-black;
         }
+        
+        &:after {
+            background: none;
+        }
     }
     
 
