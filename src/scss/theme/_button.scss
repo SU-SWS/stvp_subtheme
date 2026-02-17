@@ -118,7 +118,7 @@ a.su-button {
             display: inline-block;
             width: 16px;
             height: 12px;
-            margin-top: 4px;
+            margin-top: 2px;
             margin-right: 0;
             background-color: white;
             -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
@@ -128,7 +128,7 @@ a.su-button {
         // external link on hover 
         &:hover, &:focus {
             &:after {
-                margin-top: 10px;
+                margin-top: 8px;
                 margin-left: 6px;
             }
         }
@@ -172,8 +172,8 @@ a.su-button {
         &.su-link--external {
             &:after {
                 display: inline-block;
-                width: 24px;
-                height: 20px;
+                width: 22px;
+                height: 18px;
                 margin-left: 8px;
                 background-color: white;
                 -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
@@ -181,6 +181,12 @@ a.su-button {
             }
         }
 
+        &.secondary {
+            //just for the red default
+            &:after {
+                background-color: $su-color-digital-red;
+            }
+        }
         //@TOOD check what else?
     }
 
@@ -308,8 +314,10 @@ a.su-button {
             
             &:after {
                 // should be straight brown arrow (mask-based)
-                @include arrow-icon($stvp-color-brown);
-                margin-top: 1px;
+                &:not(.su-link--external) {
+                    @include arrow-icon($stvp-color-brown);
+                    margin-top: 1px;
+                }
             }
 
             &.su-button--big {
