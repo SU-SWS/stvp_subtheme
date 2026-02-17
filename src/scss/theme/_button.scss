@@ -34,34 +34,13 @@
         }
     }
 
-    //@TODO: set arrow icon color as well
-
-    // &:after {
-    //     // background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="10" viewBox="0 0 18 10" fill="none"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="white"/></svg>') no-repeat;
-    //     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M18.7062 10.7063C19.0969 10.3156 19.0969 9.68127 18.7062 9.29065L14.7063 5.29065C14.3156 4.90002 13.6812 4.90002 13.2906 5.29065C12.9 5.68127 12.9 6.31565 13.2906 6.70627L15.5844 9.00002H2C1.44687 9.00002 1 9.4469 1 10C1 10.5531 1.44687 11 2 11H15.5844L13.2906 13.2938C12.9 13.6844 12.9 14.3188 13.2906 14.7094C13.6812 15.1 14.3156 15.1 14.7063 14.7094L18.7062 10.7094V10.7063Z" fill="currentColor"/></svg>');
-    //     // background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M18.7062 10.7063C19.0969 10.3156 19.0969 9.68127 18.7062 9.29065L14.7063 5.29065C14.3156 4.90002 13.6812 4.90002 13.2906 5.29065C12.9 5.68127 12.9 6.31565 13.2906 6.70627L15.5844 9.00002H2C1.44687 9.00002 1 9.4469 1 10C1 10.5531 1.44687 11 2 11H15.5844L13.2906 13.2938C12.9 13.6844 12.9 14.3188 13.2906 14.7094C13.6812 15.1 14.3156 15.1 14.7063 14.7094L18.7062 10.7094V10.7063Z" fill="%23f83535"/></svg>');
-    // }// %23f83535
-
-    
-    // @TODO: include handling the external link icon as well
-    // @TODO: include handling the mailto link icon as well
-    // Jen has a nice testing page for remembering use cases. :)
-
-    //@TODO: set hover styles as well
-
-    //  &:hover, &:focus {
-    //    include button mixins here
-    //  }
-    
+    // @TODO: include handling the mailto link icon as well 
 } 
 
 @mixin set-button-color($backgroundGradient, $borderGradient, $textColor: white, $iconColor: white) {
     background: $backgroundGradient;
     background-clip: padding-box; /* !importanté */
     border: solid 2px transparent; /* !importanté */
-    // color: $textColor;
-
-
 
     //gradient border
     &:before {
@@ -129,12 +108,11 @@ a.su-button {
         &:hover, &:focus {
             &:after {
                 margin-top: 8px;
-                margin-left: 6px;
             }
         }
 
 
-        &.su-link--small {
+        &.su-button--small {
             &:after {
                 display: inline-block;
                 width: 14px;
@@ -152,7 +130,7 @@ a.su-button {
 
     // Button Size Variations
     &.su-button--small {
-        @include type-d;
+        @include type-e;
     }
 
     &.su-button--big {
@@ -332,14 +310,16 @@ a.su-button {
 
             &.su-link--external {
                 &:after {
-                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M15.3962 2.38539C15.5111 1.84503 15.1656 1.313 14.6252 1.19814L9.09197 0.0220179C8.55161 -0.0928381 8.01958 0.252668 7.90472 0.793023C7.78987 1.33338 8.13537 1.86541 8.67573 1.98027L11.8487 2.6547L0.455881 10.0533C-0.0080088 10.3545 -0.139404 10.9727 0.161849 11.4366C0.463103 11.9005 1.08127 12.0319 1.54516 11.7306L12.938 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069//  8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="%235C3200"/></svg>') no-repeat;
-                    // margin-top: 5px; 
+                    display: inline-block;
+                    width: 16px;
+                    height: 12px;
+                    @include arrow-external-icon($stvp-color-brown);
                 }
 
                 &.su-button--big {
                     // make brown external icon bigger
                     &:after {
-                        @include arrow-icon($stvp-color-brown);
+                        // @include arrow-external-icon($stvp-color-brown);
                         width: 22px;
                         height: 20px;
                         margin-top: 0px;
