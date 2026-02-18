@@ -270,16 +270,8 @@ a.su-button {
 .page-theme--illuminating .page-content {
     .su-button {
         @include set-button-color($gradient-illuminating, $gradient-illuminating-bright);
-        
-        &:not(.secondary) {
-            &:hover, &:focus {
-                color: white; // is this even needed?
-            }
-        }
 
-        // @TODO: set the icon color to be brown as well
-       /* Styles when it is NOT hovered AND NOT focused */
-        &:not(:hover):not(:focus) { // only set brown override when it's not hovered or focused, so that it can change to white on hover/focus.
+        &:not(:hover):not(:focus) { // only set brown override when it's not hovered or focused, so we don't override hover styles.
             color: $stvp-color-brown;
 
             &.mailto svg {
