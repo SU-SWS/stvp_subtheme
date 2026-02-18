@@ -64,8 +64,11 @@ var webpackConfig = {
       },
       {
         test: /\.(png|jpg|gif|svg)$/i,
-        type: "asset"
-      }
+        type: "asset",
+        generator: {
+          filename: '../assets/images/[name][ext][query]'
+        }
+      },
     ]
   },
   plugins: [

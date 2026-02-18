@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+// Override default link styles here.
+.su-link,
+.su-link--action,
+a {
+  color: $su-color-digital-red;
+
+  &:after {
+    background-color: $su-color-digital-red;
+  }
+
+  &.mailto svg {
+    fill: $su-color-digital-red;
+  }
+}
+
+// Override for the icon on the secondary nav
+.su-secondary-nav {
+  a {
+    &:after {
+      background-color: transparent;
+    }
+  }
+}
+
+// This is to override the stanford_profile_styles
+
+// Local Footer links.
+.su-local-footer {
+
+  nav[aria-label^='footer'],
+  .su-local-footer__action-links {
+    a,
+    a.su-link--external,
+    a.su-link {
+      @include type-e;
+
+      color: $su-color-white;
+      font-weight: $su-font-regular;
+      text-decoration: none;
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: $su-color-black-20;
+        text-decoration: underline;
+
+        &:after {
+          background-color: $su-color-black-20;
+        }
+      }
+
+      &:after {
+        background-color: $su-color-white;
+      }
+    }
+  }
+}
