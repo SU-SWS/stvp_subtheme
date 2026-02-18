@@ -306,7 +306,6 @@ a.su-button {
                 
                 // should be straight brown arrow (mask-based)
                 &:not(.su-link--external)  {
-                    // @include arrow-icon($stvp-color-brown); // is this necessary or did we just need to set the backgroun color on line 305?
                     margin-top: 1px;
                 }
             }
@@ -314,7 +313,6 @@ a.su-button {
             &.su-button--big {
                 // make brown regular arrow icon bigger
                 &:after:not(.mailto) { 
-                    // @include arrow-icon($stvp-color-brown);
                     width: 25px;
                     height: 20px;
                     margin-top: 0px;
@@ -332,7 +330,6 @@ a.su-button {
                 &.su-button--big {
                     // make brown external icon bigger
                     &:after {
-                        // @include arrow-external-icon($stvp-color-brown);
                         width: 22px;
                         height: 20px;
                         margin-top: 0px;
@@ -344,10 +341,6 @@ a.su-button {
 
         &.secondary {
             @include secondary-button-style($stvp-color-brown, $stvp-color-brown);
-
-            // &:after {
-            //     @include arrow-icon($stvp-color-brown);
-            // }
         }
     }
 }
