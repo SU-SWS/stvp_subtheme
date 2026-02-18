@@ -26,8 +26,12 @@
     background-clip: padding-box;
     border: 2px solid transparent;
     
-    &:not(:hover):not(:focus) { // only set brown override when it's not hovered or focused, so that it can change to white on hover/focus.
+    &:not(:hover):not(:focus) { // only set brown override when it's not hovered or focused, so that it inherit white on hover/focus.
         color: $textColor;
+        
+        &.mailto svg {
+            fill: $iconColor;
+        }
 
         &:after {
             background-color: $iconColor;
@@ -39,8 +43,8 @@
 
 @mixin set-button-color($backgroundGradient, $borderGradient, $textColor: white, $iconColor: white) {
     background: $backgroundGradient;
-    background-clip: padding-box; /* !importanté */
-    border: solid 2px transparent; /* !importanté */
+    background-clip: padding-box; /* important */
+    border: solid 2px transparent; /* important */
 
     //gradient border
     &:before {
@@ -56,10 +60,6 @@
             background: linear-gradient(45deg, $su-color-black, $su-color-black); /* !importanté */
         }
     }
-    // icon
-    // &:after {
-    //     color: $iconColor; // @TODO come back to finish this. and test with all icon types.
-    // }
 }
 
 // override default button styles here and add additional button classes as needed.
@@ -75,7 +75,7 @@ a.su-button {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.10); /* Shallow */
     transition: none;
 
-    // buttons have an arrow by default.
+    // for any button icon
     &:after {
         content: '';
         display: inline-block;
@@ -84,48 +84,71 @@ a.su-button {
         margin-left: 8px;
         position: relative;
         background-color: white;
-        -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 10"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="black"/></svg>') no-repeat center/contain;
-        mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 10"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="black"/></svg>') no-repeat center/contain;
-        background-size: 17px 11px;
     }
 
-    // Button Icon variations
-    &.su-link--external {
-        text-decoration: none;
-        // add the :after diagonal arrow icon here, for the horizontal arrow (default)
+    // buttons have an arrow by default.
+    // &:not(.mailto) {
         &:after {
-            display: inline-block;
-            width: 16px;
-            height: 12px;
-            margin-top: 2px;
-            margin-right: 0;
-            background-color: white;
-            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
-            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
+            // content: '';
+            // display: inline-block;
+            // height: 18px;
+            // width: 19px;
+            // margin-left: 8px;
+            // position: relative;
+            // background-color: white;
+            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 10"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="black"/></svg>') no-repeat center/contain;
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 10"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="black"/></svg>') no-repeat center/contain;
+            background-size: 17px 11px;
         }
 
-        // external link on hover 
-        &:hover, &:focus {
-            &:after {
-                margin-top: 8px;
-            }
-        }
-
-
-        &.su-button--small {
+        // Button Icon variations
+        &.su-link--external {
+            text-decoration: none;
+            // add the :after diagonal arrow icon here, for the horizontal arrow (default)
             &:after {
                 display: inline-block;
-                width: 14px;
-                height: 10px;
+                width: 16px;
+                height: 12px;
+                margin-top: 2px;
+                margin-right: 0;
                 background-color: white;
                 -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
                 mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
             }
+
+            // external link on hover 
+            &:hover, &:focus {
+                &:after {
+                    margin-top: 8px;
+                }
+            }
+
+            &.su-button--small {
+                &:after {
+                    display: inline-block;
+                    width: 14px;
+                    height: 10px;
+                    background-color: white;
+                    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
+                    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
+                }
+            }
         }
-    }
+    // }
+    
     //@TODO: work on this still
     &.mailto { // this class doesn't seem to do anything yet but I saw it in chem h - is it a different class for this project?
         text-decoration: none;
+
+        svg {
+            margin-top: -9px;
+            width: 28px;
+            height: 22px;
+        }
+
+        &:after { // hide arrow icon
+            display: none;
+        }
     }
 
     // Button Size Variations
@@ -137,41 +160,40 @@ a.su-button {
         padding: 15px 30px 18px;
         @include type-c;
 
-        &:after {
-            display: inline-block;
-            width: 25px;
-            height: 18px;
-            margin-left: 10px;
-            background-color: white;
-            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 10"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="black"/></svg>') no-repeat center/contain;
-            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 10"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="black"/></svg>') no-repeat center/contain;
-        }
-
-        &.su-link--external {
+        // &:not(.mailto) {
             &:after {
                 display: inline-block;
-                width: 22px;
+                width: 25px;
                 height: 18px;
-                margin-left: 8px;
+                margin-left: 10px;
                 background-color: white;
-                -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
-                mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
+                -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 10"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="black"/></svg>') no-repeat center/contain;
+                mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 10"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="black"/></svg>') no-repeat center/contain;
             }
-        }
 
-        &.secondary {
-            //just for the red default
-            &:after {
-                background-color: $su-color-digital-red;
+            &.su-link--external {
+                &:after {
+                    display: inline-block;
+                    width: 22px;
+                    height: 18px;
+                    margin-left: 8px;
+                    background-color: white;
+                    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
+                    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
+                }
             }
-        }
-        //@TOOD check what else?
+        
+
+            &.secondary {
+                //just for the red default
+                &:after {
+                    background-color: $su-color-digital-red;
+                }
+            }
+        // }
     }
-
-    /* --- Styles for Only Primary Buttons --- */
-
-    // @TODO: need to limit this to only :not('.secondary')
-    // &:not(.secondary) {
+   
+    /* --- Styles for Only Primary & Secondary Buttons --- */
     // Special Gradient Border for Primary Buttons & Secondary Buttons
     align-items: center;
     margin: auto;
@@ -195,8 +217,6 @@ a.su-button {
         background: linear-gradient(to right, #f83535, #820000);
     }
 
-    // }
-
     // Hover styles for primary buttons
     &:hover, &:focus {
         background: $su-color-black;
@@ -212,24 +232,12 @@ a.su-button {
             background-color: white;
         }
     }
-    
-
-    // add other styles from figma
-    
-    // check external link icon & mailto icon (although they might be fine inheriting regular button styles??)
-
-    //  &:hover, &:focus {
-    //    include button mixins here
-    //  }
-
 
     /* --- Styles for Only Secondary Buttons --- */
-
     &.secondary {
         background: white; // consistent across all page themes.
         color: $su-color-digital-red;
         @include secondary-button-style($su-color-digital-red, $su-color-digital-red-xlight);
-         // set default arrow icon color a different brighter red as well
 
         &:hover, &:focus {
             color: $su-color-black;
@@ -280,28 +288,33 @@ a.su-button {
         
         &:not(.secondary) {
             &:hover, &:focus {
-                color: white;
+                color: white; // is this even needed?
             }
         }
 
         // @TODO: set the icon color to be brown as well
        /* Styles when it is NOT hovered AND NOT focused */
         &:not(:hover):not(:focus) { // only set brown override when it's not hovered or focused, so that it can change to white on hover/focus.
-            
             color: $stvp-color-brown;
-            
+
+            &.mailto svg {
+                fill: $stvp-color-brown;
+            }
+
             &:after {
+                background-color: $stvp-color-brown;
+                
                 // should be straight brown arrow (mask-based)
-                &:not(.su-link--external) {
-                    @include arrow-icon($stvp-color-brown);
+                &:not(.su-link--external)  {
+                    // @include arrow-icon($stvp-color-brown); // is this necessary or did we just need to set the backgroun color on line 305?
                     margin-top: 1px;
                 }
             }
 
             &.su-button--big {
                 // make brown regular arrow icon bigger
-                &:after {
-                    @include arrow-icon($stvp-color-brown);
+                &:after:not(.mailto) { 
+                    // @include arrow-icon($stvp-color-brown);
                     width: 25px;
                     height: 20px;
                     margin-top: 0px;
