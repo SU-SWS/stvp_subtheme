@@ -7,15 +7,22 @@ $wave3: url("../../assets/images/wave3.svg") no-repeat;
 
 @mixin set-card-color($backgroundColor, $waveColor, $waveOption: $wave1) {
   .su-card {
-    background-color: $background;
+    background-color: $backgroundColor;
 
     // set wave image in a way that we can override the color of the svg, css mask?
+    // if wave1...
+
+    // if wave2...
+
+    // ifwave3...
   }
 }
 
 // Banner default variant
 .ptype-stanford-banner {
   .stvp-wrapper--banner-default { // red default
+    @include set-card-color($su-color-digital-red, $su-color-cardinal-red, $wave1);
+
     // check these default initial styles:
     max-width: 1600px;
     margin: 0 auto;
@@ -23,24 +30,23 @@ $wave3: url("../../assets/images/wave3.svg") no-repeat;
   }
 
   .stvp-wrapper--banner-grey {
-    @include set-card-color($su-color-digital-red, $su-color-cardinal-red, $wave1);
+    @include set-card-color($su-color-foggy-light, $stvp-color-foggy-xlight, $wave1);
   }
 
   .stvp-wrapper--banner-plum {
-    @include set-card-color($su-color-digital-red, $su-color-cardinal-red, $wave1);
+    @include set-card-color($stvp-color-plum-medium, $su-color-plum, $wave1);
 
   }
   .stvp-wrapper--banner-lagunita {
-    @include set-card-color($su-color-digital-red, $su-color-cardinal-red, $wave1);
+    @include set-card-color($su-color-lagunita, $su-color-lagunita-dark, $wave1);
 
   }
 
   .stvp-wrapper--banner-palo-verde {
-    @include set-card-color($su-color-digital-red, $su-color-cardinal-red, $wave1);
-
+    @include set-card-color($stvp-color-palo-verde, $stvp-color-palo-verde-xdark, $wave1);
   }
   .stvp-wrapper--banner-illuminating {
-    @include set-card-color($su-color-digital-red, $su-color-cardinal-red, $wave1);
+    @include set-card-color($su-color-illuminating, $su-color-illuminating-dark, $wave1);
 
   }
 }
