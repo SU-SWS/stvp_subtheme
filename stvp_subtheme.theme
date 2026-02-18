@@ -10,6 +10,25 @@
  */
 function stvp_subtheme_preprocess_html(&$variables) {
   $variables['stanford_basic_path'] = \Drupal::service('extension.list.theme')->getPath('stanford_basic');
+
+  // Add page theme class to body if page title banner present
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (!$node || !$node->hasField('su_page_banner')) {
+    return;
+  }
+
+  $paragraphs = $node->get('su_page_banner')->referencedEntities();
+
+  foreach ($paragraphs as $paragraph) {
+    if ($paragraph && $paragraph->bundle() == 'stanford_page_title_banner') {
+      $title_class = $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_style');
+      if($title_class) {
+        $existing_classes = $variables['attributes']['class'] ?? [];
+        $variables['attributes']['class'] = array_merge($existing_classes, [$title_class]);
+        break;
+      }
+    }
+  }
 }
 
 /**
