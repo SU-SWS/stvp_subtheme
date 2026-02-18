@@ -8,16 +8,16 @@ banner_variant_info:  # part of the key after the :
   config:
     banner_style:
       type: select
-      title: 'Banner style'
+      title: 'Banner Style'
       description: Select the background color for displaying this banner.
       default_value: stvp-wrapper--banner-default
       options:
-        stvp-wrapper--banner-default: Default (Red) variant
-        stvp-wrapper--banner-palo-verde: Palo Verde variant
-        stvp-wrapper--banner-lagunita: Lagunita variant
-        stvp-wrapper--banner-plum: Plum variant
-        stvp-wrapper--banner-illuminating: Illuminating variant
-        stvp-wrapper--banner-grey: Grey variant
+        stvp-wrapper--banner-default: Default (Red)
+        stvp-wrapper--banner-palo-verde: Palo Verde
+        stvp-wrapper--banner-lagunita: Lagunita
+        stvp-wrapper--banner-plum: Plum
+        stvp-wrapper--banner-illuminating: Illuminating
+        stvp-wrapper--banner-grey: Light Grey
     banner_wave:
       type: select
       title: Banner Wave Decoration
