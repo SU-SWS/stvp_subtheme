@@ -68,9 +68,11 @@ function stvp_subtheme_preprocess_title_banner(&$variables) {
   $existing_classes = $variables['attributes']['class'] ?? [];
   $extra_classes = [
     $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_style'),
-    $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_wave'),
-    $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'ecorner_option')
+    $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_wave')
   ];
+  if($paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'ecorner_option')) {
+    array_push($extra_classes, 'ecorner');
+  }
   // Add variant classes to banner
   $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
 }

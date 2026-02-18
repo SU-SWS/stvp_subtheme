@@ -45,8 +45,8 @@ $wave3: url("../../assets/images/wave3.svg") no-repeat;
     
   }
   
-  // eCorner styles, the react behaviors module adds the class '1' for the ecorner checkbox
-  .ds-entity--stanford-page-title-banner.\31 {
+  // eCorner styles
+  .ecorner {
     // @include set-card-color($su-color-foggy-light, $stvp-color-foggy-xlight, $wave1);
   }
 
