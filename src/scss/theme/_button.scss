@@ -79,6 +79,27 @@
     }
 }
 
+
+
+@mixin set-button-border-color($borderGradient) {
+    background-clip: padding-box; /* important */
+    border: solid 2px transparent; /* important */
+
+    //gradient border
+    &:before {
+        background: $borderGradient;
+        margin: -2px; /* !important */
+        border-radius: inherit; /* !important */
+    }
+
+    &:hover, &:focus {
+        
+        &:before {
+            background: linear-gradient(45deg, $su-color-black, $su-color-black); /* !importanté */
+        }
+    }
+}
+
 @mixin rounded-button-general {
     display: inline-flex;
     line-height: 130% ; /* 2.4375rem */
@@ -268,7 +289,8 @@ a.su-button--big {
 /* --- Styles for Only Secondary Buttons --- */
 .su-button--secondary {
     @include rounded-button-general();
-    @include set-button-color($gradient-red-medium, $gradient-red-bright); // do we need this?
+    // @include set-button-color($gradient-red-medium, $gradient-red-bright); // do we need this?
+    @include set-button-border-color($gradient-red-bright);
     @include secondary-button-base();
 }
 
