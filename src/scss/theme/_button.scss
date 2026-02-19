@@ -27,10 +27,6 @@
         background: white; // consistent across all page themes.
         text-underline-offset: 5px;
 
-        &:before {
-            // margin: 0; // not perfect yet; it jumps slightly smaller on hover.
-        }
-
         &:after {
             background-color: $su-color-black;
         }
@@ -81,7 +77,6 @@
 }
 
 @mixin set-button-border-color($borderGradient) {
-    // background: linear-gradient(45deg, white, white);
     background-clip: padding-box; /* important */
     border: solid 2px transparent; /* important */
 
