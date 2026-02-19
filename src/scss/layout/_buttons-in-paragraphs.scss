@@ -1,0 +1,20 @@
+@charset "UTF-8";
+// Import Decanter Library:
+@import 'decanter/core/src/scss/decanter-no-markup'; // This might not be where it goes - come back to this.
+
+// set font sizes differently for inside these paragraphs.
+
+.ptype-stanford-lists,
+.su-entity-button {
+    a.su-button--small {
+        @include type-e;
+    }
+
+    a.su-button {
+        @include type-d;
+    }
+    
+    .su-button--big {
+        @include type-c;
+    }
+}

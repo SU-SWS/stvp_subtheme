@@ -1,104 +1,352 @@
 @charset "UTF-8";
 @import "../utilities/variables/index.scss";
 
-@mixin secondary-button-style($textcolor){
-    color: $textcolor;
-    //@TODO: set arrow icon color as well
 
-    // @TODO: include handling the external link icon as well
-    // @TODO: include handling the mailto link icon as well
-    // Jen has a nice testing page for remembering use cases. :)
+@mixin arrow-icon() {
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 10"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="black"/></svg>') no-repeat center/contain;
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 10"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="black"/></svg>') no-repeat center/contain;    
+}
 
-    //@TODO: set hover styles as well
+@mixin arrow-external-icon() {
+   -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
+}
+@mixin secondary-button-base {
+    background: white; // consistent across all page themes.
+    color: $su-color-digital-red;
+    text-decoration: none;
+    @include secondary-button-style($su-color-digital-red, $su-color-digital-red-xlight);
 
-    //  &:hover, &:focus {
-    //    include button mixins here
-    //  }
-    
-} 
+    &.su-link--external:not(:hover):not(:focus) {
+        text-decoration: none;
+    }
 
-
-// override default button styles here and add additional button classes as needed.
-.su-button {
-    display: inline-flex;
-    padding: 15px 30px 18px 30px;
-    align-items: center;
-    border-radius: 53px;
-    // border: 2px solid var(--Button---border-gradient, #820000);
-    // background: var(--Button---fill-gradient, linear-gradient(90deg, #CD0E0E 0%, #B1040E 100%));
-
-    /* Shallow */
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.10);
-    background: $gradient-red-medium;
-    border: 2px solid $gradient-red-bright;
-
-
-
-
-    // add other styles from figma
-    
-    // check external link icon & mailto icon (although they might be fine inheriting regular button styles??)
-
-    //  &:hover, &:focus {
-    //    include button mixins here
-    //  }
-    
-
-    &.secondary {
+    &:hover, &:focus {
+        color: $su-color-black;
         background: white; // consistent across all page themes.
-        color: $su-color-digital-red;
-         // set default arrow icon color a different brighter red as well
+        text-underline-offset: 5px;
 
-             //  &:hover, &:focus {
-    //    include button mixins here
-    //  }
+        &:before {
+            margin: 0; // not perfect yet; it jumps slightly smaller on hover.
+        }
+
+        &:after {
+            background-color: $su-color-black;
+        }
     }
 }
+
+@mixin secondary-button-style($textColor, $iconColor) {
+    // we don't need to set the border color because it has already been set for both primary & secondary buttons.
+    background-color: white;
+    background: linear-gradient(45deg, white, white);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    
+    &:not(:hover):not(:focus) { // only set brown override when it's not hovered or focused, so that it inherit white on hover/focus.
+        color: $textColor;
+        
+        &.mailto svg {
+            fill: $iconColor;
+        }
+
+        &:after {
+            background-color: $iconColor;
+        }
+    }
+} 
+
+@mixin set-button-color($backgroundGradient, $borderGradient, $textColor: white, $iconColor: white) {
+    background: $backgroundGradient;
+    background-clip: padding-box; /* important */
+    border: solid 2px transparent; /* important */
+
+    //gradient border
+    &:before {
+        background: $borderGradient;
+        margin: -2px; /* !important */
+        border-radius: inherit; /* !important */
+    }
+
+    &:hover, &:focus {
+        &:not(.su-button--secondary) {
+            background: $su-color-black;
+        }
+        
+        &:before {
+            background: linear-gradient(45deg, $su-color-black, $su-color-black); /* !importanté */
+        }
+    }
+}
+
+@mixin rounded-button-general {
+    display: inline-flex;
+    line-height: 130% ; /* 2.4375rem */
+    padding: 11px 20px 10px 22px; // changed left padding to 20px because with the icons it looks off centered.
+    align-items: center;
+    border-radius: 53px; // works for all 3 button sizes.
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.10); /* Shallow */
+    transition: none;
+    
+    /* --- Styles for Only Primary & Secondary Buttons --- */
+    // Special Gradient Border for Primary Buttons & Secondary Buttons
+    margin: auto;
+    position: relative;
+    box-sizing: border-box;
+    $border: 2px; /* sets the negative margin below, in the b:before section */
+    color: #FFF;
+    background: #E50808;
+    background: linear-gradient(90deg, #CD0E0E 0%, #B1040E 100%); 
+    background-clip: padding-box; /* important */
+    border: solid $border transparent; /* important */
+
+    // buttons have an arrow by default.
+    &:after {
+        @include arrow-icon();
+        content: '';
+        display: inline-block;
+        height: 18px;
+        width: 19px;
+        margin-left: 8px;
+        position: relative;
+        background-color: white;
+        background-size: 17px 11px;
+    }
+
+    //border background for the gradient border effect.
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        z-index: -1;
+        margin: -$border; /* important */
+        border-radius: inherit; /* important */
+        background: linear-gradient(to right, #f83535, #820000);
+    }
+}
+
+@mixin primary-button-hover {
+    // Hover styles for primary buttons
+    &:hover, &:focus {
+        background: $su-color-black;
+        border-color: $su-color-black;
+        background-image: none;
+        text-underline-offset: 5px;
+
+        &:before {
+            background: $su-color-black;
+        }
+
+        &:after {
+            background-color: white;
+        }
+    }
+}
+
+// override default button styles here and add additional button classes as needed.
+a.su-button {
+    /* --- Styles for Both Primary and Secondary Buttons --- */
+    @include type-e;
+    @include rounded-button-general();
+    @include primary-button-hover();
+
+    // Button Icon variations
+    &.su-link--external {
+        text-decoration: none;
+        // add the :after diagonal arrow icon here, for the horizontal arrow (default)
+        &:after {
+            @include arrow-external-icon();
+            width: 16px;
+            height: 12px;
+            margin-top: 2px;
+            margin-right: 0;
+        }
+
+        // external link on hover 
+        &:hover, &:focus {
+            &:after {
+                margin-top: 8px;
+            }
+        }
+    }
+    
+    &.mailto { 
+
+        svg { // size it larger than the default from Stanford Basic
+            margin-top: -9px;
+        }
+
+        &:not(.su-button--small) { // regular size
+            svg { // size it larger than the default from Stanford Basic
+                width: 28px;
+                height: 22px;
+            }
+        }
+        
+
+        &:after { // hide arrow icon
+            display: none;
+        }
+        
+        &:hover, &:focus {
+            &.su-button--secondary {
+                svg {
+                    fill: $su-color-black;
+                }
+            }
+            svg {
+                fill: white;
+            }
+        }
+    }
+
+    // Button Size Variations
+    &.su-button--small {
+        @include type-f;
+
+        &:after { // straight default arrow
+            width: 12px;
+            height: 9px;
+        }
+        &:hover, &:focus {
+            &:after { // straight default arrow
+                width: 12px;
+                height: 9px;
+            }
+        }
+    }    
+}
+
+// Big Buttons
+
+a.su-button--big {
+    @include rounded-button-general();
+    @include primary-button-hover();
+
+
+    padding: 17px 30px 18px; // figma says 17px on top, but it has spacing around the text so this is more visually accurate.
+    @include type-d;
+
+    &:after {
+        width: 25px;
+        height: 20px;
+        margin-left: 10px;
+        margin-top: 0px;
+    }
+
+    &.su-link--external {
+        
+        &:not(:hover):not(:focus) {
+            text-decoration: none;
+        }
+
+        &:after {
+            width: 22px;
+            height: 18px;
+            margin-left: 8px;
+        }
+    }
+
+    &.su-button--secondary {
+        :not(:hover):not(:focus) {
+            &:after,
+            &.su-link--external:after {
+                background-color: $su-color-digital-red;
+            }
+        }
+    }
+
+    &.mailto { // regular size
+        svg { // size it larger than the default from Stanford Basic
+            width: 31px;
+            height: 35px;
+        }
+    }
+    
+}
+
+/* --- Styles for Only Secondary Buttons --- */
+.su-button--secondary {
+    @include rounded-button-general();
+    @include set-button-color($gradient-red-medium, $gradient-red-bright); // do we need this?
+    @include secondary-button-base();
+}
+
+
 
 /* --- Page Theme Button Overrides --- */
  // so it doesn't affect the footer or other areas with buttons.
 .page-theme--palo-verde .page-content {
+    .su-button--big,
+    .su-button--secondary,
     .su-button {
-        background: $gradient-palo-verde;
-        border-color: $gradient-palo-verde-bright;
+        @include set-button-color($gradient-palo-verde, $gradient-palo-verde-bright);
+    }
 
-        &.secondary {
-            @include secondary-button-style($su-color-palo-verde-dark);
-        }
+    .su-button--secondary {
+        @include secondary-button-style($su-color-palo-verde-dark, $su-color-palo-verde-dark);
+
     }
 }
 
 .page-theme--plum .page-content {
+    .su-button--big,
+    .su-button--secondary,
     .su-button {
-        background: $gradient-plum;
-        border-color: $gradient-plum-bright;
-        
-        &.secondary {
-            @include secondary-button-style($su-color-plum);
-        }
+        @include set-button-color($gradient-plum, $gradient-plum-bright);
+    }
+    
+    .su-button--secondary {
+        @include secondary-button-style($su-color-plum,$su-color-plum);
     }
 }
 
 .page-theme--lagunita .page-content {
+    .su-button--big,
+    .su-button--secondary,
     .su-button {
-        background: $gradient-lagunita;
-        border-color: $gradient-lagunita-bright;
-        
-        &.secondary {
-            @include secondary-button-style($su-color-lagunita-dark);
-        }
+        @include set-button-color($gradient-lagunita, $gradient-lagunita-bright);
+    }
+
+    .su-button--secondary {
+        @include secondary-button-style($su-color-lagunita-dark,$su-color-lagunita-dark);        
     }
 }
 
 .page-theme--illuminating .page-content {
+    .su-button--big,
+    .su-button--secondary,
     .su-button {
-        background: $gradient-illuminating;
-        border-color: $gradient-illuminating-bright;
-        color: $stvp-color-brown;
-        // @TODO: set the icon color to be brown as well
-        
-        &.secondary {
-            @include secondary-button-style($stvp-color-brown);
+        @include set-button-color($gradient-illuminating, $gradient-illuminating-bright);
+
+        &:not(:hover):not(:focus) { // only set brown override when it's not hovered or focused, so we don't override hover styles.
+            color: $stvp-color-brown;
+
+            &.mailto svg {
+                fill: $stvp-color-brown;
+            }
+
+            &:after {
+                background-color: $stvp-color-brown;
+                
+                // should be straight brown arrow (mask-based)
+                &:not(.su-link--external)  {
+                    margin-top: 1px;
+                }
+            }
+
+            &.su-link--external {
+                &:not(.su-button--small){
+                    &:after {
+                        width: 16px;
+                        height: 12px;
+                    }
+                }
+            }
         }
+    }
+
+    .su-button--secondary {
+        @include secondary-button-style($stvp-color-brown, $stvp-color-brown);
     }
 }
