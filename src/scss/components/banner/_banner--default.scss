@@ -15,8 +15,8 @@ $wave3: url("../../assets/images/wave3.svg") no-repeat;
         position: absolute;
         mask-repeat: no-repeat!important;
         -webkit-mask-repeat: no-repeat!important;
-        mask-position: bottom;
-        -webkit-mask-position: bottom;
+        mask-position: bottom!important;
+        -webkit-mask-position: bottom!important;
         z-index: -1;
         background-color: $waveColor; //test
         // background-size: 100% 100%;
