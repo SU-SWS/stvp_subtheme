@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import "../utilities/variables/index.scss";
+@import 'decanter/core/src/scss/decanter-no-markup';
 
 
 @mixin arrow-icon() {
@@ -72,6 +73,26 @@
         &:not(.su-button--secondary) {
             background: $su-color-black;
         }
+        
+        &:before {
+            background: linear-gradient(45deg, $su-color-black, $su-color-black); /* !importanté */
+        }
+    }
+}
+
+@mixin set-button-border-color($borderGradient) {
+    // background: linear-gradient(45deg, white, white);
+    background-clip: padding-box; /* important */
+    border: solid 2px transparent; /* important */
+
+    //gradient border
+    &:before {
+        background: $borderGradient;
+        margin: -2px; /* !important */
+        border-radius: inherit; /* !important */
+    }
+
+    &:hover, &:focus {
         
         &:before {
             background: linear-gradient(45deg, $su-color-black, $su-color-black); /* !importanté */
