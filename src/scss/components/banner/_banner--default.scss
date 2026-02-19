@@ -81,10 +81,17 @@
 .ptype-stanford-banner {
     .su-button {
         @include secondary-button-base;
+        display: inline-flex;
     }
 
-    .stvp-wrapper--banner-default {
+    .ds-entity--stanford-banner:not(.stvp-wrapper--banner-grey) {
+        .su-button {
+            transition: none;
 
+            &:hover, &:focus {
+                background: white!important; // because they don't ahve the secondary button class, button styles will override
+            }
+        } 
     }
     
     .su-card {
@@ -212,10 +219,17 @@
         }
 
         .su-button {
+            @include set-button-color($gradient-red-medium, $gradient-red-bright, white, white);
+            color: white!important; // if this is in the components folder it gets overridden
+
+            &:after {
+                background-color: white!important; // if this is in the components folder it gets overridden
+            }
             // @include set-button-border-color($gradient-red-bright);
             // @include secondary-button-style($su-color-digital-red, $su-color-digital-red-xlight);
         }
     }
+    
 }
 
 // Button Styles with color themes - all secondary styles.
@@ -271,6 +285,12 @@
     .ptype-stanford-banner {
         .stvp-wrapper--banner-grey {
             .su-button {
+                @include set-button-color($gradient-red-medium, $gradient-red-bright, white, white);
+                color: white!important; // if this is in the components folder it gets overridden
+
+                &:after {
+                    background-color: white!important; // if this is in the components folder it gets overridden
+                }
                 // @include set-button-border-color($gradient-red-bright);
                 // @include secondary-button-style($su-color-digital-red, $su-color-digital-red-xlight);
             }
