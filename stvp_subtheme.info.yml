@@ -18,6 +18,11 @@ regions:
   footer: Footer
   page_bottom: 'Page bottom'
 
+components:
+  namespaces:
+    stvp: templates
+    stvp_subtheme: templates/components
+
 libraries-override:
   stanford_basic/decoupled_menu:
     js:
