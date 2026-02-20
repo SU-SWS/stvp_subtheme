@@ -71,6 +71,7 @@
     .su-button {
         @include secondary-button-base;
         display: inline-flex;
+
     }
 
     .ds-entity--stanford-banner:not(.stvp-wrapper--banner-grey) {
@@ -78,7 +79,8 @@
             transition: none;
 
             &:hover, &:focus {
-                background: white!important; // because they don't ahve the secondary button class, button styles will override
+                background: white!important; // because they don't have the secondary button class, button styles will override
+                border: 2px solid $su-color-black;
             }
         } 
     }
