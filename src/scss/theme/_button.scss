@@ -45,6 +45,7 @@
     
     &:not(:hover):not(:focus) { // only set brown override when it's not hovered or focused, so that it inherit white on hover/focus.
         color: $textColor;
+        text-decoration: none;
         
         &.mailto svg {
             fill: $iconColor;
@@ -52,6 +53,12 @@
 
         &:after {
             background-color: $iconColor;
+        }
+    }
+
+    &:hover, &:focus {
+        &:before {
+            padding: 12px 22px 13px 24px; // adding 2px padding because on hover the border
         }
     }
 } 
@@ -100,7 +107,7 @@
     }
 }
 
-@mixin rounded-button-general {
+@mixin rounded-button-only {
     display: inline-flex;
     line-height: 130% ; /* 2.4375rem */
     padding: 11px 20px 10px 22px; // changed left padding to 20px because with the icons it looks off centered.
@@ -110,16 +117,7 @@
     transition: none;
     
     /* --- Styles for Only Primary & Secondary Buttons --- */
-    // Special Gradient Border for Primary Buttons & Secondary Buttons
-    margin: auto;
-    position: relative;
-    box-sizing: border-box;
-    $border: 2px; /* sets the negative margin below, in the b:before section */
-    color: #FFF;
-    background: #E50808;
-    background: linear-gradient(90deg, #CD0E0E 0%, #B1040E 100%); 
-    background-clip: padding-box; /* important */
-    border: solid $border transparent; /* important */
+   
 
     // buttons have an arrow by default.
     &:after {
@@ -133,8 +131,21 @@
         background-color: white;
         background-size: 17px 11px;
     }
+}
 
-    //border background for the gradient border effect.
+@mixin gradient-border($border) {
+        //border background for the gradient border effect.
+    // Special Gradient Border for Primary Buttons & Secondary Buttons
+    margin: auto;
+    position: relative;
+    box-sizing: border-box;
+    $border: 2px; /* sets the negative margin below, in the b:before section */
+    color: #FFF;
+    background: #E50808;
+    background: linear-gradient(90deg, #CD0E0E 0%, #B1040E 100%); 
+    background-clip: padding-box; /* important */
+    border: solid $border transparent; /* important */
+
     &:before {
         content: '';
         position: absolute;
@@ -144,6 +155,11 @@
         border-radius: inherit; /* important */
         background: linear-gradient(to right, #f83535, #820000);
     }
+}
+@mixin rounded-button-general {
+    @include rounded-button-only();
+
+    @include gradient-border(2px);
 }
 
 @mixin primary-button-hover {
@@ -289,9 +305,13 @@ a.su-button--big {
 /* --- Styles for Only Secondary Buttons --- */
 .su-button--secondary {
     @include rounded-button-general();
-    // @include set-button-color($gradient-red-medium, $gradient-red-bright); // do we need this?
-    @include set-button-border-color($gradient-red-bright);
-    @include secondary-button-base();
+    @include secondary-button-style($su-color-digital-red, $su-color-digital-red-xlight);
+    box-shadow: none;
+    
+    &:hover, &:focus {
+        box-shadow: none;
+    }
+    
 }
 
 
