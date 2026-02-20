@@ -20,7 +20,6 @@ regions:
 
 components:
   namespaces:
-    stvp: templates
     stvp_subtheme: templates/components
 
 libraries-override:
