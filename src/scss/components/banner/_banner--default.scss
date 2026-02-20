@@ -79,8 +79,8 @@
             transition: none;
 
             &:hover, &:focus {
+                // note that these buttons use a white border on hover, different than other secondary buttons.
                 background: white!important; // because they don't have the secondary button class, button styles will override
-                border: 2px solid $su-color-black;
             }
         } 
     }
