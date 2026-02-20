@@ -1,5 +1,9 @@
 @import "../utilities/variables/index.scss";
 
+.layout-background {
+    position: relative;
+    z-index: 1; // this is required for the buttons; :before background element to not fall behind the section's colored background.
+}
 
 // We will override a few section backgrounds.
 

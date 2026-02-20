@@ -14,3 +14,183 @@
   // Include the correct icon color mixin inside your mixins here
   //@include example--black-icons
 //}
+
+
+
+@mixin arrow-icon() {
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 10"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="black"/></svg>') no-repeat center/contain;
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 10"><path d="M17.7062 5.70859C18.0969 5.31797 18.0969 4.68359 17.7062 4.29297L13.7063 0.292969C13.3156 -0.0976562 12.6812 -0.0976562 12.2906 0.292969C11.9 0.683594 11.9 1.31797 12.2906 1.70859L14.5844 4.00234H1C0.446875 4.00234 0 4.44922 0 5.00234C0 5.55547 0.446875 6.00234 1 6.00234H14.5844L12.2906 8.29609C11.9 8.68672 11.9 9.32109 12.2906 9.71172C12.6812 10.1023 13.3156 10.1023 13.7063 9.71172L17.7062 5.71172V5.70859Z" fill="black"/></svg>') no-repeat center/contain;    
+}
+
+@mixin arrow-external-icon() {
+   -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M15.3962 2.38539C15.511 1.84503 15.1655 1.313 14.6252 1.19814L9.09194 0.0220179C8.55158 -0.0928381 8.01955 0.252668 7.90469 0.793023C7.78984 1.33338 8.13534 1.86541 8.6757 1.98027L11.8487 2.6547L0.45585 10.0533C-0.00803932 10.3545 -0.139435 10.9727 0.161819 11.4366C0.463072 11.9005 1.08124 12.0319 1.54513 11.7306L12.9379 4.33204L12.2635 7.50501C12.1487 8.04536 12.4942 8.5774 13.0345 8.69225C13.5749 8.80711 14.1069 8.4616 14.2218 7.92125L15.3979 2.38801L15.3962 2.38539Z" fill="black"/></svg>') no-repeat center/contain;
+}
+@mixin secondary-button-base {
+    background: white; // consistent across all page themes.
+    color: $su-color-digital-red;
+    text-decoration: none;
+    @include secondary-button-style($su-color-digital-red, $su-color-digital-red-xlight);
+
+    &.su-link--external:not(:hover):not(:focus) {
+        text-decoration: none;
+    }
+
+    &:hover, &:focus {
+        color: $su-color-black;
+        background: white; // consistent across all page themes.
+        text-underline-offset: 5px;
+
+        &:before {
+            margin: 0; // not perfect yet; it jumps slightly smaller on hover.
+        }
+
+        &:after {
+            background-color: $su-color-black;
+        }
+    }
+}
+
+@mixin secondary-button-style($textColor, $iconColor) {
+    // we don't need to set the border color because it has already been set for both primary & secondary buttons.
+    background-color: white;
+    background: linear-gradient(45deg, white, white);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    
+    &:not(:hover):not(:focus) { // only set brown override when it's not hovered or focused, so that it inherit white on hover/focus.
+        color: $textColor;
+        text-decoration: none;
+        
+        &.mailto svg {
+            fill: $iconColor;
+        }
+
+        &:after {
+            background-color: $iconColor;
+        }
+    }
+
+    &:hover, &:focus {
+        &:before {
+            padding: 12px 22px 13px 24px; // adding 2px padding because on hover the border
+        }
+    }
+} 
+
+@mixin set-button-color($backgroundGradient, $borderGradient, $textColor: white, $iconColor: white) {
+    background: $backgroundGradient;
+    background-clip: padding-box; /* important */
+    border: solid 2px transparent; /* important */
+
+    //gradient border
+    &:before {
+        background: $borderGradient;
+        margin: -2px; /* !important */
+        border-radius: inherit; /* !important */
+    }
+
+    &:hover, &:focus {
+        &:not(.su-button--secondary) {
+            background: $su-color-black;
+        }
+        
+        &:before {
+            background: linear-gradient(45deg, $su-color-black, $su-color-black); /* !importanté */
+        }
+    }
+}
+
+
+
+@mixin set-button-border-color($borderGradient) {
+    background-clip: padding-box; /* important */
+    border: solid 2px transparent; /* important */
+
+    //gradient border
+    &:before {
+        background: $borderGradient;
+        margin: -2px; /* !important */
+        border-radius: inherit; /* !important */
+    }
+
+    &:hover, &:focus {
+        
+        &:before {
+            background: linear-gradient(45deg, $su-color-black, $su-color-black); /* !importanté */
+        }
+    }
+}
+
+@mixin rounded-button-only {
+    display: inline-flex;
+    line-height: 130% ; /* 2.4375rem */
+    padding: 11px 20px 10px 22px; // changed left padding to 20px because with the icons it looks off centered.
+    align-items: center;
+    border-radius: 53px; // works for all 3 button sizes.
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.10); /* Shallow */
+    transition: none;
+    
+    /* --- Styles for Only Primary & Secondary Buttons --- */
+   
+
+    // buttons have an arrow by default.
+    &:after {
+        @include arrow-icon();
+        content: '';
+        display: inline-block;
+        height: 18px;
+        width: 19px;
+        margin-left: 8px;
+        position: relative;
+        background-color: white;
+        background-size: 17px 11px;
+    }
+}
+
+@mixin gradient-border($border) {
+        //border background for the gradient border effect.
+    // Special Gradient Border for Primary Buttons & Secondary Buttons
+    margin: auto;
+    position: relative;
+    box-sizing: border-box;
+    $border: 2px; /* sets the negative margin below, in the b:before section */
+    color: #FFF;
+    background: #E50808;
+    background: linear-gradient(90deg, #CD0E0E 0%, #B1040E 100%); 
+    background-clip: padding-box; /* important */
+    border: solid $border transparent; /* important */
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        z-index: -1;
+        margin: -$border; /* important */
+        border-radius: inherit; /* important */
+        background: linear-gradient(to right, #f83535, #820000);
+    }
+}
+@mixin rounded-button-general {
+    @include rounded-button-only();
+
+    @include gradient-border(2px);
+}
+
+@mixin primary-button-hover {
+    // Hover styles for primary buttons
+    &:hover, &:focus {
+        background: $su-color-black;
+        border-color: $su-color-black;
+        background-image: none;
+        text-underline-offset: 5px;
+
+        &:before {
+            background: $su-color-black;
+        }
+
+        &:after {
+            background-color: white;
+        }
+    }
+}

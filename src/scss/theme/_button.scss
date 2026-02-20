@@ -1,104 +1,217 @@
 @charset "UTF-8";
 @import "../utilities/variables/index.scss";
-
-@mixin secondary-button-style($textcolor){
-    color: $textcolor;
-    //@TODO: set arrow icon color as well
-
-    // @TODO: include handling the external link icon as well
-    // @TODO: include handling the mailto link icon as well
-    // Jen has a nice testing page for remembering use cases. :)
-
-    //@TODO: set hover styles as well
-
-    //  &:hover, &:focus {
-    //    include button mixins here
-    //  }
-    
-} 
+@import "../utilities/mixins/index.scss";
 
 
 // override default button styles here and add additional button classes as needed.
-.su-button {
-    display: inline-flex;
-    padding: 15px 30px 18px 30px;
-    align-items: center;
-    border-radius: 53px;
-    // border: 2px solid var(--Button---border-gradient, #820000);
-    // background: var(--Button---fill-gradient, linear-gradient(90deg, #CD0E0E 0%, #B1040E 100%));
+a.su-button {
+    /* --- Styles for Both Primary and Secondary Buttons --- */
+    @include type-e;
+    @include rounded-button-general();
+    @include primary-button-hover();
 
-    /* Shallow */
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.10);
-    background: $gradient-red-medium;
-    border: 2px solid $gradient-red-bright;
+    // Button Icon variations
+    &.su-link--external {
+        text-decoration: none;
+        // add the :after diagonal arrow icon here, for the horizontal arrow (default)
+        &:after {
+            @include arrow-external-icon();
+            width: 16px;
+            height: 12px;
+            margin-top: 2px;
+            margin-right: 0;
+        }
 
-
-
-
-    // add other styles from figma
-    
-    // check external link icon & mailto icon (although they might be fine inheriting regular button styles??)
-
-    //  &:hover, &:focus {
-    //    include button mixins here
-    //  }
-    
-
-    &.secondary {
-        background: white; // consistent across all page themes.
-        color: $su-color-digital-red;
-         // set default arrow icon color a different brighter red as well
-
-             //  &:hover, &:focus {
-    //    include button mixins here
-    //  }
+        // external link on hover 
+        &:hover, &:focus {
+            &:after {
+                margin-top: 8px;
+            }
+        }
     }
+    
+    &.mailto { 
+
+        svg { // size it larger than the default from Stanford Basic
+            margin-top: -9px;
+        }
+
+        &:not(.su-button--small) { // regular size
+            svg { // size it larger than the default from Stanford Basic
+                width: 28px;
+                height: 22px;
+            }
+        }
+        
+
+        &:after { // hide arrow icon
+            display: none;
+        }
+        
+        &:hover, &:focus {
+            &.su-button--secondary {
+                svg {
+                    fill: $su-color-black;
+                }
+            }
+            svg {
+                fill: white;
+            }
+        }
+    }
+
+    // Button Size Variations
+    &.su-button--small {
+        @include type-f;
+
+        &:after { // straight default arrow
+            width: 12px;
+            height: 9px;
+        }
+        &:hover, &:focus {
+            &:after { // straight default arrow
+                width: 12px;
+                height: 9px;
+            }
+        }
+    }    
 }
+
+// Big Buttons
+
+a.su-button--big {
+    @include rounded-button-general();
+    @include primary-button-hover();
+
+
+    padding: 17px 30px 18px; // figma says 17px on top, but it has spacing around the text so this is more visually accurate.
+    @include type-d;
+
+    &:after {
+        width: 25px;
+        height: 20px;
+        margin-left: 10px;
+        margin-top: 0px;
+    }
+
+    &.su-link--external {
+        
+        &:not(:hover):not(:focus) {
+            text-decoration: none;
+        }
+
+        &:after {
+            width: 22px;
+            height: 18px;
+            margin-left: 8px;
+        }
+    }
+
+    &.su-button--secondary {
+        :not(:hover):not(:focus) {
+            &:after,
+            &.su-link--external:after {
+                background-color: $su-color-digital-red;
+            }
+        }
+    }
+
+    &.mailto { // regular size
+        svg { // size it larger than the default from Stanford Basic
+            width: 31px;
+            height: 35px;
+        }
+    }
+    
+}
+
+/* --- Styles for Only Secondary Buttons --- */
+.su-button--secondary {
+    @include rounded-button-general();
+    @include secondary-button-style($su-color-digital-red, $su-color-digital-red-xlight);
+    box-shadow: none;
+    
+    &:hover, &:focus {
+        box-shadow: none;
+    }
+    
+}
+
+
 
 /* --- Page Theme Button Overrides --- */
  // so it doesn't affect the footer or other areas with buttons.
 .page-theme--palo-verde .page-content {
+    .su-button--big,
+    .su-button--secondary,
     .su-button {
-        background: $gradient-palo-verde;
-        border-color: $gradient-palo-verde-bright;
+        @include set-button-color($gradient-palo-verde, $gradient-palo-verde-bright);
+    }
 
-        &.secondary {
-            @include secondary-button-style($su-color-palo-verde-dark);
-        }
+    .su-button--secondary {
+        @include secondary-button-style($su-color-palo-verde-dark, $su-color-palo-verde-dark);
+
     }
 }
 
 .page-theme--plum .page-content {
+    .su-button--big,
+    .su-button--secondary,
     .su-button {
-        background: $gradient-plum;
-        border-color: $gradient-plum-bright;
-        
-        &.secondary {
-            @include secondary-button-style($su-color-plum);
-        }
+        @include set-button-color($gradient-plum, $gradient-plum-bright);
+    }
+    
+    .su-button--secondary {
+        @include secondary-button-style($su-color-plum,$su-color-plum);
     }
 }
 
 .page-theme--lagunita .page-content {
+    .su-button--big,
+    .su-button--secondary,
     .su-button {
-        background: $gradient-lagunita;
-        border-color: $gradient-lagunita-bright;
-        
-        &.secondary {
-            @include secondary-button-style($su-color-lagunita-dark);
-        }
+        @include set-button-color($gradient-lagunita, $gradient-lagunita-bright);
+    }
+
+    .su-button--secondary {
+        @include secondary-button-style($su-color-lagunita-dark,$su-color-lagunita-dark);        
     }
 }
 
 .page-theme--illuminating .page-content {
+    .su-button--big,
+    .su-button--secondary,
     .su-button {
-        background: $gradient-illuminating;
-        border-color: $gradient-illuminating-bright;
-        color: $stvp-color-brown;
-        // @TODO: set the icon color to be brown as well
-        
-        &.secondary {
-            @include secondary-button-style($stvp-color-brown);
+        @include set-button-color($gradient-illuminating, $gradient-illuminating-bright);
+
+        &:not(:hover):not(:focus) { // only set brown override when it's not hovered or focused, so we don't override hover styles.
+            color: $stvp-color-brown;
+
+            &.mailto svg {
+                fill: $stvp-color-brown;
+            }
+
+            &:after {
+                background-color: $stvp-color-brown;
+                
+                // should be straight brown arrow (mask-based)
+                &:not(.su-link--external)  {
+                    margin-top: 1px;
+                }
+            }
+
+            &.su-link--external {
+                &:not(.su-button--small){
+                    &:after {
+                        width: 16px;
+                        height: 12px;
+                    }
+                }
+            }
         }
+    }
+
+    .su-button--secondary {
+        @include secondary-button-style($stvp-color-brown, $stvp-color-brown);
     }
 }
