@@ -25,6 +25,13 @@ function stvp_subtheme_preprocess_html(&$variables) {
       if($title_class) {
         $existing_classes = $variables['attributes']['class'] ?? [];
         $variables['attributes']['class'] = array_merge($existing_classes, [$title_class]);
+
+        // If the title style contains 'ecorner', hide the page h1 visually.
+        if (str_contains($title_class, 'ecorner')) {
+
+          $variables['#attached']['library'][] = 'stvp_subtheme/ecorner';
+        }
+
         break;
       }
     }
