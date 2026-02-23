@@ -1,8 +1,18 @@
 @charset "UTF-8";
 
-.su-masthead>section:last-of-type {
-  flex-wrap: nowrap;
-  justify-content: right;
+.su-masthead {
+  >section {
+    &:last-of-type {
+      flex-wrap: nowrap;
+      justify-content: right;
+      gap: 40px;
+    }
+  }
+
+  // Main menu
+  .region-menu {
+    width: 60%;
+  }
 }
 
 .su-masthead--inner {
@@ -18,14 +28,29 @@
       max-width: fit-content;
     }
 
-  // Main menu
-  .su-masthead .region-menu {
-    width: 60%;
-  }
 
+
+  //Drupal main nav tweaks
   // Mobile hamburger toggle
-  .su-multi-menu .su-multi-menu__nav-toggle {
-    top: 0;
+  .su-multi-menu {
+    .su-multi-menu__nav-toggle {
+      top: 0;
+      @include grid-media('lg') {
+        top: inherit;
+      }
+    }
+
+    &.su-multi-menu--dropdowns {
+      .su-multi-menu__menu-lv1 {
+        >.su-multi-menu__item--parent {
+          >.su-multi-menu__link {
+            &:after {
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
   }
 
   // Search
