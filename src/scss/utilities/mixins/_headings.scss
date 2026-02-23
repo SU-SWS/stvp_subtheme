@@ -1,0 +1,39 @@
+@charset "UTF-8";
+@import "../variables/index.scss";
+
+@mixin decoration-underline-basic($gradient: $gradient-red-bright) {
+  &:after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 5px;
+    margin-top: 16px;
+    margin-bottom: 30px;
+    background: $gradient; 
+    border-radius: 99px;
+  }
+}
+
+@mixin centered-border() {
+  &:after {
+  content: "";
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    // change to center
+  }
+}
+
+/* -- Heading mixin where we pass in which color theme we are using -- */
+@mixin h2-decoration--colored($gradient) {
+  .su-list-headline,
+  .su-entity-headline,
+  .su-wysiwyg-text {
+    h2 {
+    // override default red to another color theme
+      &:after {
+        background: $gradient; 
+      }
+    }
+  }
+}
