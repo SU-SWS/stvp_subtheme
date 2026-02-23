@@ -28,8 +28,6 @@
       max-width: fit-content;
     }
 
-
-
   //Drupal main nav tweaks
   // Mobile hamburger toggle
   .su-multi-menu {
@@ -61,17 +59,26 @@
       @include grid-media('lg') {
         order: 3;
 
+        #search-results-key,
         .su-site-search__input {
           display: none;
         }
 
-        button.su-site-search__submit.su-sr-only-text {
+        .su-site-search__submit {
           border: 1px solid $su-color-black-30;
           border-radius: 30px;
+          background-position-x: center;
+          background-position-y: center;
+        }
+
+        .su-sr-only-text {
+          overflow: hidden;
+          text-indent: 20px;
+          white-space: nowrap;
         }
 
         .su-site-search__submit {
-          padding: 17px;
+          padding: 20px;
         }
       }
     }
