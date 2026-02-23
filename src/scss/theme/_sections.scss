@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 @import "../utilities/variables/index.scss";
 
 .layout-background {
@@ -16,3 +18,43 @@
 .bg-f7ecde {
     background: $su-color-poppy-xxlight;
 }
+
+/* --- Wave Backgrounds --- */
+.stvp-section-wave-1 {
+
+
+
+
+    .layout-background {
+        &:before{
+            content:'';
+            position: absolute;
+            -webkit-mask-image: $wave1-background-large;
+            mask-image: $wave1-background-large;
+            -webkit-mask-position: 100% 100%;
+            mask-position: 100% 100%;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            background-color: currentColor;
+            width: 100%;
+            height: 100%;
+            left: 0;
+        }
+        // Palo verde
+        &.bg-dcefec:before {
+            background-color: $stvp-color-palo-verde;
+        }
+
+        // Plum 
+        &.bg-f2e8f1:before {
+
+        }
+
+        // Poppy background for Illuminating?
+        &.bg-f7ecde {
+            background-color: $su-color-poppy-xxlight;
+        }
+
+    }
+
+} 
