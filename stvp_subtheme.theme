@@ -68,16 +68,18 @@ function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
   // Process Banners
   if ($paragraph->bundle() == 'stanford_page_title_banner') {
     stvp_subtheme_preprocess_title_banner($variables);
-  // Debug: log title_class to browser console.
-        $variables['#attached']['html_head'][] = [
-          [
-            '#tag' => 'script',
-            '#value' => 'console.log("[stvp] title_class:", ' . json_encode($variables) . ');',
-          ],
-          // 'debug-title-class',
-        ];
+    // Debug: loop through attributes classes and log if 'ecorner' is present.
+    $attrs = isset($variables['attributes']) ? $variables['attributes'] : [];
+    $classes = isset($attrs['class']) ? (array) $attrs['class'] : [];
+
+    foreach ($classes as $class) {
+      if ($class === 'ecorner') {
+        $variables['#attached']['library'][] = 'stvp_subtheme/ecorner';
+      }
+    }
 
   }
+  
   if ($paragraph->bundle() == 'stanford_banner') {
     stvp_subtheme_preprocess_banner($variables);
   }
