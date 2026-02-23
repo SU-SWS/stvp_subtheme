@@ -14,17 +14,13 @@
 }
 
 
-// orange but we want to set it more poppy
+// usually a tint of orange but we want to set it more poppy
 .bg-f7ecde {
     background: $su-color-poppy-xxlight;
 }
 
 /* --- Wave Backgrounds --- */
 .stvp-section-wave-1 {
-
-
-
-
     .layout-background {
         &:before{
             content:'';
@@ -35,26 +31,44 @@
             mask-position: 100% 100%;
             -webkit-mask-repeat: no-repeat;
             mask-repeat: no-repeat;
+            mask-size: 100%;
+            -webkit-mask-size: 100%;
             background-color: currentColor;
             width: 100%;
             height: 100%;
             left: 0;
+            bottom: 0;
+            background-color: $su-color-foggy-light; // default light gray
         }
+
         // Palo verde
         &.bg-dcefec:before {
-            background-color: $stvp-color-palo-verde;
+            background-color: $stvp-color-palo-verde-xlight;
         }
 
         // Plum 
         &.bg-f2e8f1:before {
-
+            background-color: $su-color-plum-xlight;
         }
 
         // Poppy background for Illuminating?
-        &.bg-f7ecde {
-            background-color: $su-color-poppy-xxlight;
+        &.bg-f7ecde:before {
+            background-color: $stvp-color-illuminating-xlight;
         }
 
-    }
+        // Lagunita
+        &.bg-dcecef:before {
+            background-color: $stvp-color-lagunita-xlight;
+        }
 
+        // Light Gray Background
+        &.bg-ebeae5:before {
+            background-color: $stvp-color-archway-20;
+        }
+
+        // Off-White background
+        &.bg-f4f4f4:before {
+            background-color: $stvp-color-foggy-xlight;
+        }
+    }
 } 
