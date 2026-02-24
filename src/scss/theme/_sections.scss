@@ -25,6 +25,11 @@
     &.bg-f7ecde {
         background: $stvp-color-illuminating-xxlight;
     }
+    &:not(.bg-f2e8f1):not(.bg-f7ecde):not(.bg-dcecef):not(.bg-ebeae5):not(.bg-f4f4f4):not(.bg-dcefec) {
+        margin-top: 76px; // change to using their mixin.
+        // @include (margin)
+        @include responsive-spacing('margin-top', 5);
+    }
 }
 
 /* --- Wave Backgrounds --- */
@@ -33,7 +38,10 @@
 .stvp-section-wave-3,
 .stvp-section-wave-4 {
     .layout-background {
-        &:before{
+        // remove awkward bottom margin below wave sections.
+        margin-bottom: 0;
+
+        &:before {
             // @include set-wave-background($wave1-background-large);
             -webkit-mask-image: $wave1-background-large;
             mask-image: $wave1-background-large;
@@ -86,7 +94,9 @@
             background-color: $stvp-color-foggy-xlight;
         }
     }
-} 
+}
+
+ 
 
 // .stvp-section-wave-2,
 // .stvp-section-wave-3,
