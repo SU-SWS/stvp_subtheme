@@ -80,6 +80,12 @@ function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
 
   }
   
+  // Process Cards
+  // if ($paragraph->bundle() == 'stanford_card') {
+  //   stvp_subtheme_preprocess_card($variables);
+  // }
+
+  // Process Banners
   if ($paragraph->bundle() == 'stanford_banner') {
     stvp_subtheme_preprocess_banner($variables);
   }
@@ -132,4 +138,5 @@ function stvp_subtheme_preprocess_paragraph__stanford_layout(array &$variables):
     $paragraph->getBehaviorSetting('react_paragraphs:layout_variant_info', 'section_wave'),
   ];
   $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
+
 }

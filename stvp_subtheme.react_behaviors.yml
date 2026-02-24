@@ -2,7 +2,7 @@
 # Plugin property $defaults are defined in ReactBehaviorsPluginManager.
 banner_variant_info:  # part of the key after the :
   id: banner_type
-  label: Banner Paragraphs Type
+  label: 'Banner Paragraphs Type'
   bundles:
     - paragraphs_type|stanford_banner
   config:
@@ -17,7 +17,7 @@ banner_variant_info:  # part of the key after the :
         stvp-wrapper--banner-lagunita: Lagunita
         stvp-wrapper--banner-plum: Plum
         stvp-wrapper--banner-illuminating: Illuminating
-        stvp-wrapper--banner-grey: Grey
+        stvp-wrapper--banner-grey: Light Grey
     banner_wave:
       type: select
       title: Banner Wave Decoration
