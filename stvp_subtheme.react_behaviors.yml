@@ -57,3 +57,20 @@ page_title_banner_info:
       title: eCorner Style
       description: Whether to use the eCorner styles.
       default_value: false
+layout_variant_info:
+  id: layout_style
+  label: 'Layout Paragraph Type'
+  bundles:
+    - paragraphs_type|stanford_layout
+  config:
+    section_wave:
+      type: select
+      title: Section Wave
+      description: Choose the section background wave.
+      empty_option: Default
+      options:
+        stvp-section-wave-none: None
+        stvp-section-wave-1: Wave 1
+        stvp-section-wave-2: Wave 2
+        stvp-section-wave-3: Wave 3
+        stvp-section-wave-4: Wave 4

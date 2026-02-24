@@ -1,18 +1,148 @@
+@charset "UTF-8";
+
 @import "../utilities/variables/index.scss";
+
+@mixin set-wave-background($waveOption) {
+    &:before{
+        -webkit-mask-image: $waveOption;
+        mask-image: $waveOption;
+    }
+}
 
 .layout-background {
     position: relative;
     z-index: 1; // this is required for the buttons; :before background element to not fall behind the section's colored background.
+
+
+    // We will override a few section backgrounds.
+
+    &.bg-f2e8f1 {
+        background: $su-color-plum-xxlight;
+    }
+
+
+    // usually a tint of orange but we want to set it for illuminating.
+    &.bg-f7ecde {
+        background: $stvp-color-illuminating-xxlight;
+    }
+    &:not(.bg-f2e8f1):not(.bg-f7ecde):not(.bg-dcecef):not(.bg-ebeae5):not(.bg-f4f4f4):not(.bg-dcefec) {
+        margin-top: 76px; // change to using their mixin.
+        // @include (margin)
+        @include responsive-spacing('margin-top', 5);
+    }
 }
 
-// We will override a few section backgrounds.
+/* --- Wave Backgrounds --- */
+.stvp-section-wave-1,
+.stvp-section-wave-2,
+.stvp-section-wave-3,
+.stvp-section-wave-4 {
+    .layout-background {
+        // remove awkward bottom margin below wave sections.
+        margin-bottom: 0;
 
-.bg-f2e8f1 {
-    background: $su-color-plum-xxlight;
+        &:before {
+            // @include set-wave-background($wave1-background-large);
+            -webkit-mask-image: $wave1-background-large;
+            mask-image: $wave1-background-large;
+            content:'';
+            position: absolute;
+            -webkit-mask-image: $wave1-background-large;
+            mask-image: $wave1-background-large;
+            -webkit-mask-position: 100% 100%;
+            mask-position: 100% 100%;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            mask-size: 100%;
+            -webkit-mask-size: 100%;
+            // background-color: currentColor;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            bottom: 0;
+            background-color: $su-color-foggy-light; // default light gray
+        }
+    
+
+        // Palo verde
+        &.bg-dcefec:before {
+            background-color: $stvp-color-palo-verde-xlight;
+        }
+
+        // Plum 
+        &.bg-f2e8f1:before {
+            background-color: $su-color-plum-xlight;
+        }
+
+        // Poppy background for Illuminating?
+        &.bg-f7ecde:before {
+            background-color: $stvp-color-illuminating-xlight;
+        }
+
+        // Lagunita
+        &.bg-dcecef:before {
+            background-color: $stvp-color-lagunita-xlight;
+        }
+
+        // Light Gray Background
+        &.bg-ebeae5:before {
+            background-color: $stvp-color-archway-20;
+        }
+
+        // Off-White background
+        &.bg-f4f4f4:before {
+            background-color: $stvp-color-foggy-xlight;
+        }
+    }
 }
 
+ 
 
-// orange but we want to set it more poppy
-.bg-f7ecde {
-    background: $su-color-poppy-xxlight;
+// .stvp-section-wave-2,
+// .stvp-section-wave-3,
+// .stvp-section-wave-4 {
+//     .layout-background {
+//         &:before {
+//             content: '';
+//             position: absolute;
+//             -webkit-mask-position: 100% 100%;
+//             mask-position: 100% 100%;
+//             -webkit-mask-repeat: no-repeat;
+//             mask-repeat: no-repeat;
+//             -webkit-mask-size: 100%;
+//             mask-size: 100%;
+//             width: 100%;
+//             height: 100%;
+//             left: 0;
+//             bottom: 0;
+//             background-color: $su-color-foggy-light;
+//         }
+//     }
+// }
+
+.stvp-section-wave-2 {
+    .layout-background {
+        &:before {
+            -webkit-mask-image: $wave2-background-large;
+            mask-image: $wave2-background-large;
+        }
+    }
+}
+
+.stvp-section-wave-3 {
+    .layout-background {
+        &:before {
+            -webkit-mask-image: $wave3-background-large;
+            mask-image: $wave3-background-large;
+        }
+    }
+}
+
+.stvp-section-wave-4 {
+    .layout-background {
+        &:before {
+            -webkit-mask-image: $wave4-background-large;
+            mask-image: $wave4-background-large;
+        }
+    }
 }

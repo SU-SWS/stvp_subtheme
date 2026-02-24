@@ -138,4 +138,5 @@ function stvp_subtheme_preprocess_paragraph__stanford_layout(array &$variables):
     $paragraph->getBehaviorSetting('react_paragraphs:layout_variant_info', 'section_wave'),
   ];
   $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
+
 }
