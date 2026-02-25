@@ -79,11 +79,16 @@ function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
     }
 
   } 
-  // else if ($paragraph->bundle() == 'stanford_wysiwyg') {
-  //   $card_info['text_background'] = $paragraph->getBehaviorSetting('react_paragraphs:text_area_background', 'text_background', 'stvp-text-background--none');
-  //   $variables['attributes']['class'][] = $card_info['text_background'];
+  else if ($paragraph->bundle() == 'stanford_wysiwyg') {
+
+    $tinted_text_section = [];
+    $tinted_text_section['text_background'] = $paragraph->getBehaviorSetting('react_paragraphs:text_area_background', 'text_background', 'stvp-text-background--none');
+    dpm($tinted_text_section, 'tinted_text_section');
+    $variables['attributes']['class'][] = $tinted_text_section['text_background'];
+
+
   
-  // }
+  }
   
   // Process Cards
   // if ($paragraph->bundle() == 'stanford_card') {

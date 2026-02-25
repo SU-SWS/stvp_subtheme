@@ -75,7 +75,7 @@ layout_variant_info:
         stvp-section-wave-3: Wave 3
         stvp-section-wave-4: Wave 4
 
-tinted_background: 
+tinted_background:
   id: tinted_background
   label: 'Text Area Background'
   bundles:
