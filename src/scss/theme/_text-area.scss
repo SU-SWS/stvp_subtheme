@@ -13,41 +13,35 @@
         padding: 25px;
         margin-left: auto; 
         margin-right: auto; 
-        @media (max-width: 767px) {
+        @media (max-width: 900px) {
             max-width: 80%;
         }
     }
 }
 
-
 // Color Settings
 
 .stvp-text-background--lagunita {
     background-color: $stvp-color-lagunita-xlight;
-  
+
 }
+
 .stvp-text-background--palo-verde {
     background-color: $stvp-color-palo-verde-xlight;
-
 }
+
 .stvp-text-background--plum {
     background-color: $su-color-plum-xlight;
-
 }
+
 .stvp-text-background--illuminating {
     background-color: $stvp-color-illuminating-xlight;
-
 }
+
 .stvp-text-background--grey {
     background-color: $stvp-color-archway-20;
-
 }
 
 .stvp-text-background--light-grey {
     background-color: $stvp-color-foggy-xlight;
-
 }
-
-
-
-
