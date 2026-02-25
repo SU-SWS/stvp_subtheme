@@ -136,7 +136,7 @@ function stvp_subtheme_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
   if ($paragraph->bundle() == 'stanford_wysiwyg') {
     // your logic here
-    $variables['attributes']['class'][] = 'katria-test';
+    // $variables['attributes']['class'][] = 'katria-test';
     // $variables['#attached']['html_head'][] = [['#type' => 'html_tag', '#tag' => 'script', '#value' => 'console.log(' . 'it is a text area' . ');'], 'debug_tinted_text_section'];
 
     $tinted_text_section = [];
