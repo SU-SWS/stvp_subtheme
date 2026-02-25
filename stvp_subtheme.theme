@@ -10,6 +10,41 @@
  */
 function stvp_subtheme_preprocess_html(&$variables) {
   $variables['stanford_basic_path'] = \Drupal::service('extension.list.theme')->getPath('stanford_basic');
+
+  // Add page theme class to body if page title banner present
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (!$node || !$node->hasField('su_page_banner')) {
+    return;
+  }
+
+  $paragraphs = $node->get('su_page_banner')->referencedEntities();
+
+  foreach ($paragraphs as $paragraph) {
+    if ($paragraph && $paragraph->bundle() == 'stanford_page_title_banner') {
+      $title_class = $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_style');
+      if($title_class) {
+        $existing_classes = $variables['attributes']['class'] ?? [];
+        $variables['attributes']['class'] = array_merge($existing_classes, [$title_class]);
+
+        // // Debug: log title_class to browser console.
+        // $variables['#attached']['html_head'][] = [
+        //   [
+        //     '#tag' => 'script',
+        //     '#value' => 'console.log("[stvp] title_class:", ' . json_encode($title_class) . ');',
+        //   ],
+        //   'debug-title-class',
+        // ];
+
+        // If the title style contains 'ecorner', hide the page h1 visually.
+        if (str_contains($title_class, 'ecorner')) {
+          // Attach the ecorner library to add the JS for hiding the h1.
+          $variables['#attached']['library'][] = 'stvp_subtheme/ecorner';
+        }
+
+        break;
+      }
+    }
+  }
 }
 
 /**
@@ -30,6 +65,21 @@ function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
 
   $paragraph = $variables['content']['#paragraph'];
 
+  // Process Banners
+  if ($paragraph->bundle() == 'stanford_page_title_banner') {
+    stvp_subtheme_preprocess_title_banner($variables);
+    // Debug: loop through attributes classes and log if 'ecorner' is present.
+    $attrs = isset($variables['attributes']) ? $variables['attributes'] : [];
+    $classes = isset($attrs['class']) ? (array) $attrs['class'] : [];
+
+    foreach ($classes as $class) {
+      if ($class === 'ecorner') {
+        $variables['#attached']['library'][] = 'stvp_subtheme/ecorner';
+      }
+    }
+
+  }
+  
   // Process Cards
   // if ($paragraph->bundle() == 'stanford_card') {
   //   stvp_subtheme_preprocess_card($variables);
@@ -48,14 +98,45 @@ function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
  */
 function stvp_subtheme_preprocess_banner(&$variables) {
 
-
   $paragraph = $variables['content']['#paragraph'];
 
   $existing_classes = $variables['attributes']['class'] ?? [];
   $extra_classes = [
     $paragraph->getBehaviorSetting('react_paragraphs:banner_variant_info', 'banner_style'),
-    $paragraph->getBehaviorSetting('react_paragraphs:banner_variant_info', 'banner_wave'),
+    $paragraph->getBehaviorSetting('react_paragraphs:banner_variant_info', 'banner_wave')
   ];
   // Add variant classes to banner
   $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
+}
+
+
+/**
+ * Implements hook_preprocess_title_banner().
+ */
+function stvp_subtheme_preprocess_title_banner(&$variables) {
+
+  $paragraph = $variables['content']['#paragraph'];
+
+  $existing_classes = $variables['attributes']['class'] ?? [];
+  $extra_classes = [
+    $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_style'),
+    $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_wave')
+  ];
+  if($paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'ecorner_option')) {
+    array_push($extra_classes, 'ecorner');
+  }
+  // Add variant classes to banner
+  $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
+}
+
+
+function stvp_subtheme_preprocess_paragraph__stanford_layout(array &$variables): void {
+  /** @var \Drupal\paragraphs\Layout\Paragraph $paragraph */
+  $paragraph = &$variables['paragraph'];
+  $existing_classes = $variables['attributes']['class'] ?? [];
+  $extra_classes = [
+    $paragraph->getBehaviorSetting('react_paragraphs:layout_variant_info', 'section_wave'),
+  ];
+  $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
+
 }

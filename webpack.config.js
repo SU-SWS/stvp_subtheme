@@ -3,6 +3,7 @@ const path = require("path");
 const Webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const autoprefixer = require('autoprefixer')({ grid: true });
 const FileManagerPlugin = require('filemanager-webpack-plugin');
@@ -10,19 +11,20 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 const config = {
   isProd: process.env.NODE_ENV === "production",
   hmrEnabled: process.env.NODE_ENV !== "production" && !process.env.NO_HMR,
-  distFolder: path.resolve(__dirname, "./dist/css"),
+  distFolder: path.resolve(__dirname, "./dist"),
   wdsPort: 3001,
 };
 
 var webpackConfig = {
   entry: {
     "main": ["./src/scss/main.scss"],
-    "ckeditor5": ["./src/scss/ckeditor5.scss"]
+    "ckeditor5": ["./src/scss/ckeditor5.scss"],
+    "ecorner": ["./src/js/ecorner.js"]
   },
   output: {
     path: config.distFolder,
-    filename: '[name].js',
-    assetModuleFilename: '../assets/[name][ext][query]'
+    filename: 'js/[name].js',
+    assetModuleFilename: 'assets/[name][ext][query]'
   },
   mode: config.isProd ? "production" : "development",
   resolve: {
@@ -74,7 +76,7 @@ var webpackConfig = {
   plugins: [
     new FixStyleOnlyEntriesPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: 'css/[name].css',
     }),
     new FileManagerPlugin({
       events: {
@@ -86,6 +88,10 @@ var webpackConfig = {
   ],
   optimization: {
     minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        extractComments: false,
+      }),
       new OptimizeCSSAssetsPlugin(),
     ]
   }

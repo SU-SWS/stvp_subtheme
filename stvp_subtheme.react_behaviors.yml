@@ -8,11 +8,11 @@ banner_variant_info:  # part of the key after the :
   config:
     banner_style:
       type: select
-      title: 'Banner Style'
+      title: Banner Style
       description: Select the background color for displaying this banner.
       default_value: stvp-wrapper--banner-default
       options:
-        stvp-wrapper--banner-default: Default (Red)
+        stvp-wrapper--banner-default: Red (Default)
         stvp-wrapper--banner-palo-verde: Palo Verde
         stvp-wrapper--banner-lagunita: Lagunita
         stvp-wrapper--banner-plum: Plum
@@ -27,3 +27,50 @@ banner_variant_info:  # part of the key after the :
         stvp-banner-wave-1: Wave 1
         stvp-banner-wave-2: Wave 2
         stvp-banner-wave-3: Wave 3
+
+page_title_banner_info:
+  id: page_title_banner_type
+  label: Page Title Banner Theme
+  bundles:
+    - paragraphs_type|stanford_page_title_banner
+  config:
+    title_style:
+      type: select
+      title: Page Title Color Theme
+      description: Select the color theme for displaying the page title.
+      default_value: page-theme--red
+      options:
+        page-theme--red: Red (Default)
+        page-theme--palo-verde: Palo Verde
+        page-theme--lagunita: Lagunita
+        page-theme--plum: Plum
+        page-theme--illuminating: Illuminating
+    title_wave:
+      type: select
+      title: Title Wave Decoration
+      description: Choose the wave decoration for the page title.
+      empty_option: None
+      options:
+        page-theme--wave-grey: Grey Wave
+    ecorner_option:
+      type: checkbox
+      title: eCorner Style
+      description: Whether to use the eCorner styles.
+      default_value: false
+layout_variant_info:
+  id: layout_style
+  label: 'Layout Paragraph Type'
+  bundles:
+    - paragraphs_type|stanford_layout
+  config:
+    section_wave:
+      type: select
+      title: Section Wave
+      description: Choose the section background wave.
+      empty_option: Default
+      options:
+        stvp-section-wave-none: None
+        stvp-section-wave-1: Wave 1
+        stvp-section-wave-2: Wave 2
+        stvp-section-wave-3: Wave 3
+        stvp-section-wave-4: Wave 4
