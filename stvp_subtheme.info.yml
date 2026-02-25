@@ -18,3 +18,9 @@ regions:
   content: Content
   footer: Footer
   page_bottom: 'Page bottom'
+
+components:
+  namespaces:
+    stvp_subtheme: templates/components
+
+
