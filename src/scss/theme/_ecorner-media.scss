@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.node--stanford-media {
+    .jumpstart-ui--media-content .right-region>div:first-of-type {
+        border-top: 1px solid none;
+    }
+
+    .ecorner-media-related-series {
+        margin-bottom: 0;
+        position: relative;
+        border-bottom: 1px solid none;
+        padding: 0 22px;
+        border-bottom-style: solid !important;
+        border-bottom-color: $stvp-color-light-gray !important;
+
+        &:before {
+            content: '';
+            background-image: url('../assets/images/eCorner-by-STVP-Horizontal.png');
+            width: 256px;
+            height: 86px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: block;
+            background-origin: padding-box;
+        }
+    }
+}
