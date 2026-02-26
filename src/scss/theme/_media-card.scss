@@ -1,0 +1,9 @@
+@charset "UTF-8";
+// Hide the dek from card/h3 card display modes
+.ds-entity--stanford-media {
+    .stanford-simple-card {
+        .stanford-media.su-media-dek {
+            display: none;
+        }
+    }
+}
