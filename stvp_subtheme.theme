@@ -26,15 +26,6 @@ function stvp_subtheme_preprocess_html(&$variables) {
         $existing_classes = $variables['attributes']['class'] ?? [];
         $variables['attributes']['class'] = array_merge($existing_classes, [$title_class]);
 
-        // // Debug: log title_class to browser console.
-        // $variables['#attached']['html_head'][] = [
-        //   [
-        //     '#tag' => 'script',
-        //     '#value' => 'console.log("[stvp] title_class:", ' . json_encode($title_class) . ');',
-        //   ],
-        //   'debug-title-class',
-        // ];
-
         // If the title style contains 'ecorner', hide the page h1 visually.
         if (str_contains($title_class, 'ecorner')) {
           // Attach the ecorner library to add the JS for hiding the h1.
@@ -78,7 +69,7 @@ function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
       }
     }
 
-  }
+  } 
   
   // Process Cards
   // if ($paragraph->bundle() == 'stanford_card') {
@@ -139,4 +130,20 @@ function stvp_subtheme_preprocess_paragraph__stanford_layout(array &$variables):
   ];
   $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
 
+}
+
+function stvp_subtheme_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['paragraph'];
+  if ($paragraph->bundle() == 'stanford_wysiwyg') {
+    // your logic here
+    // $variables['attributes']['class'][] = 'katria-test';
+    // $variables['#attached']['html_head'][] = [['#type' => 'html_tag', '#tag' => 'script', '#value' => 'console.log(' . 'it is a text area' . ');'], 'debug_tinted_text_section'];
+
+    $tinted_text_section = [];
+    $tinted_text_section['text_background'] = $paragraph->getBehaviorSetting('react_paragraphs:tinted_background', 'tinted_background', 'stvp-text-background--none');
+    // $variables['#attached']['html_head'][] = [['#type' => 'html_tag', '#tag' => 'script', '#value' => 'console.log(' . json_encode($tinted_text_section) . ');'], 'debug_tinted_text_section'];
+    $variables['attributes']['class'][] = $tinted_text_section['text_background'];
+
+
+  }
 }

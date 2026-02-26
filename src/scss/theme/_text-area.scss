@@ -1,0 +1,47 @@
+@charset "UTF-8";
+@import "../utilities/variables/index.scss";
+
+// for any background options:
+.ptype-stanford-wysiwyg {
+    &.stvp-text-background--lagunita,
+    &.stvp-text-background--palo-verde,
+    &.stvp-text-background--plum,
+    &.stvp-text-background--illuminating,
+    &.stvp-text-background--grey,
+    &.stvp-text-background--light-grey {
+        max-width: 748px;
+        padding: 25px;
+        margin-left: auto; 
+        margin-right: auto; 
+        @media (max-width: 900px) {
+            max-width: 80%;
+        }
+    }
+}
+
+// Color Settings
+
+.stvp-text-background--lagunita {
+    background-color: $stvp-color-lagunita-xlight;
+
+}
+
+.stvp-text-background--palo-verde {
+    background-color: $stvp-color-palo-verde-xlight;
+}
+
+.stvp-text-background--plum {
+    background-color: $su-color-plum-xlight;
+}
+
+.stvp-text-background--illuminating {
+    background-color: $stvp-color-illuminating-xlight;
+}
+
+.stvp-text-background--grey {
+    background-color: $stvp-color-archway-20;
+}
+
+.stvp-text-background--light-grey {
+    background-color: $stvp-color-foggy-xlight;
+}

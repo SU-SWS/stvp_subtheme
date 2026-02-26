@@ -12,9 +12,11 @@
 // not break the component’s functionality or basic usability.
 
 // Config and supporting scss.
+@import 'blockquote';
 @import 'button';
 @import 'ecorner-media';
 @import 'heading';
 @import 'sections';
 @import 'cta';
 @import 'link';
+@import 'text-area';
