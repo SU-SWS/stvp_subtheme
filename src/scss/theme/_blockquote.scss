@@ -1,0 +1,23 @@
+@charset "UTF-8";
+@import "../utilities/variables/index.scss";
+
+.page-theme--lagunita {
+    p.su-quote-text {
+        border-color: $su-color-lagunita;
+    }
+}
+.page-theme--palo-verde {
+    p.su-quote-text {
+        border-color: $stvp-color-palo-verde;
+    }
+}
+.page-theme--illuminating {
+    p.su-quote-text {
+        border-color: $su-color-illuminating-dark;
+    }
+}
+.page-theme--plum {
+    p.su-quote-text {
+        border-color: $su-color-plum;
+    }
+}
