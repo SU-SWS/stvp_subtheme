@@ -18,7 +18,7 @@ $page-title-banner-height: 214px; // this is the height of the banner image, we 
     }
 
 
-    // src\assets\svg\ecorner-large-banner.svg
+    // ../../assets/svg/ecorner-large-banner.svg
 
     // solid red background behind graphic:
     &:before {
@@ -35,7 +35,7 @@ $page-title-banner-height: 214px; // this is the height of the banner image, we 
 
     &:after {
         content: '';            
-        background-image: url('../assets/images/ecorner-banner-text-white.png');
+        background-image: url('../../assets/images/ecorner-banner-text-white.png');
         background-position: center;
         content: "";
         position: absolute;
