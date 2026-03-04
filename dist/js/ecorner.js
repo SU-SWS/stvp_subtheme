@@ -1,1 +1,1 @@
-!function(){"use strict";document.addEventListener("DOMContentLoaded",function(){var e=document.querySelector("h1");e&&e.classList.add("visually-hidden")})}();
+!function(){"use strict";document.addEventListener("DOMContentLoaded",(function(){var e=document.querySelector("h1");e&&e.classList.add("visually-hidden")}))}();
