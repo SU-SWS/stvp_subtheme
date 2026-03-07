@@ -121,6 +121,7 @@ const MediaFilters = () => {
   useEffect(() => {
     if (trayOpen) lockScroll()
     if (!trayOpen) unlockScroll()
+    return () => unlockScroll()
   }, [trayOpen])
 
   const {width = 0} = useWindowSize()

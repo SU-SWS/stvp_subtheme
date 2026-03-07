@@ -40,6 +40,18 @@ export const UnstyledList = styled.ul`
                 font-size: 13px;
             }
         }
+
+        @media (max-width: 768px) {
+            .media-search__card {
+                width: calc((100% - 48px) / 2);
+            }
+        }
+
+        @media (max-width: 460px) {
+            .media-search__card {
+                width: 100%;
+            }
+        }
     }
 `
 export const PaginationList = styled.ul`
