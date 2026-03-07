@@ -14,6 +14,31 @@ export const UnstyledList = styled.ul`
         .media-search__card {
             width: calc((100% - 96px) / 3);
             padding: 27px; /* add ms1 */
+            border: 1px solid var(--primary-black-20, #D5D5D4);
+            position: relative;
+
+            a {
+            color: var(--Primary-Black, #2E2D29);
+            /* Source Sans/Type 0 - bold */
+            font-family: var(--Family-Source-Sans, "Source Sans 3");
+            font-size: var(--Font-size-XXL-Type-0, 19px);
+            font-style: normal;
+            font-weight: 700;
+            line-height: 140%; /* 26.6px */}
+
+            .media-search__card-label {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                margin-top: 10px;
+                bottom: 0;
+                left: 0;
+                border-radius: 2px;
+                background: var(--Primary-SU-Cool-Grey, #53565A);
+                color: #FFF;
+                padding: 4px 10px;
+                font-size: 13px;
+            }
         }
     }
 `
@@ -24,7 +49,69 @@ export const AlgoliaSearchContainer = styled.div`
 
 `
 export const ComboBoxPortalStyle = styled.div`
+    .combo-positioner {
+        position: absolute;
+        left: 576.333px;
+        top: 50px;
+        z-index: 100;
+    }
 
+    .combo-popup {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        background: #FFF;
+        border: 1px solid #C0C0BF;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .combo-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .combo-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: var(--spacing-ms-1, 27px);
+        justify-content: space-between;
+        cursor: pointer;
+
+        &:hover {
+            background: #F4F4F4;
+        }
+
+        .combo-item-indicator {
+            display: flex;
+            align-items: center;
+        }
+
+        .combo-checkbox {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+            border: 1px solid #C0C0BF;
+            appearance: none;
+            -webkit-appearance: none;
+            background: #FFF;
+            cursor: pointer;
+            flex-shrink: 0;
+
+            &:checked {
+                background: #B1040E;
+                border-color: #B1040E;
+            }
+        }
+    }
+
+    .combo-empty {
+        padding: 12px var(--spacing-ms-1, 27px);
+        color: #8F8C89;
+    }
 `
 export const ComboBoxStyle = styled.div`
     input {
@@ -47,6 +134,7 @@ export const Filters = styled.div`
         display: flex;
         flex-direction: row;
         align-items: center;
+        width: 100%;
 
         input {
             border-radius: 40px;
@@ -64,6 +152,10 @@ export const Filters = styled.div`
         z-index: 1;
 
         > button {
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
             background: #FFF;
             border: none;
             padding: 8px 16px;

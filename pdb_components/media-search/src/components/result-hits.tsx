@@ -26,6 +26,12 @@ const ResultHits = ({...props}) => {
               <h3><a href={hit.url}>{hit.title}</a></h3>
               <Snippet hit={hit} attribute="html"/>
             </div>
+            <span className="media-search__card-label">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+                <path d="M3 3C2.17266 3 1.5 3.67266 1.5 4.5V10.5C1.5 11.3273 2.17266 12 3 12H9C9.82734 12 10.5 11.3273 10.5 10.5V4.5C10.5 3.67266 9.82734 3 9 3H3ZM11.625 9.375L13.3477 10.7531C13.4461 10.8328 13.568 10.875 13.6945 10.875C14.0016 10.875 14.25 10.6266 14.25 10.3195V4.68047C14.25 4.37344 14.0016 4.125 13.6945 4.125C13.568 4.125 13.4461 4.16719 13.3477 4.24687L11.625 5.625V9.375Z" fill="white"/>
+              </svg>
+              Video
+            </span>
           </li>
         )}
       </UnstyledList>

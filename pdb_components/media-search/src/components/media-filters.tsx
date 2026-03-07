@@ -81,7 +81,7 @@ const MediaFilters = () => {
       <div className="filters">
         <SearchBox/>
         {firstAttributes.length > 0 &&
-          <div>
+          <div className="primary-filters">
             {firstAttributes.map(attribute =>
               <Refinement key={attribute} attribute={attribute}/>
             )}
