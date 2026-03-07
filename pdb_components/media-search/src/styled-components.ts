@@ -121,7 +121,7 @@ export const ComboBoxPortalStyle = styled.div`
     }
 `
 export const ComboBoxStyle = styled.div`
-    .combo-trigger {
+    .input-wrapper {
         position: relative;
         display: inline-flex;
         align-items: center;
@@ -133,35 +133,32 @@ export const ComboBoxStyle = styled.div`
         cursor: pointer;
     }
 
-    .combo-trigger-label {
-        font-size: 14px;
-        color: #2E2D29;
-        white-space: nowrap;
-        pointer-events: none;
-    }
-
     .combo-input {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        width: 100%;
-        cursor: pointer;
         border: none;
         background: none;
+        outline: none;
+        font-size: 14px;
+        color: #2E2D29;
+        min-width: 80px;
+        cursor: pointer;
+
+        &::placeholder {
+            color: #2E2D29;
+        }
     }
 
-    .combo-trigger-icons {
-        display: flex;
+    .input-clear {
+        display: inline-flex;
         align-items: center;
         gap: 6px;
-        pointer-events: none;
     }
 
     .combo-clear {
         background: none;
         border: none;
         padding: 0;
-        pointer-events: all;
+        cursor: pointer;
+        color: #43423E;
     }
 
     .combo-chevron {
