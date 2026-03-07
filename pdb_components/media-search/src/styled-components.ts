@@ -55,10 +55,63 @@ export const UnstyledList = styled.ul`
     }
 `
 export const PaginationList = styled.ul`
+    list-style: none;
+    padding: 0;
+    margin: 24px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
 
+    li {
+        display: inline-flex;
+    }
+
+    button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        height: 36px;
+        padding: 0 10px;
+        border-radius: 4px;
+        border: 1px solid #C0C0BF;
+        background: #FFF;
+        color: #2E2D29;
+        font-size: 14px;
+        cursor: pointer;
+
+        &:hover {
+            background: #F4F4F4;
+        }
+    }
+
+    li[aria-current="true"] button {
+        background: #B1040E;
+        border-color: #B1040E;
+        color: #FFF;
+
+        &:hover {
+            background: #820000;
+        }
+    }
 `
 export const AlgoliaSearchContainer = styled.div`
+    padding: 0 50px;
 
+    @media (max-width: 991px) {
+        padding: 0 30px;
+    }
+
+    @media (max-width: 768px) {
+        padding: 0 20px;
+    }
+
+    @media (max-width: 460px) {
+        padding: 0 10px;
+    }
 `
 export const ComboBoxPortalStyle = styled.div`
     .combo-positioner {

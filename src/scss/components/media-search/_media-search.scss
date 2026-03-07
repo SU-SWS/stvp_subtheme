@@ -11,6 +11,13 @@
 }
 
 .media-search {
+    &__title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--Primary-Black, #2E2D29);
+        margin: 0 0 16px;
+    }
+
     &__container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);

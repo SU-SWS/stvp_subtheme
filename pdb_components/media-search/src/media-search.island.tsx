@@ -61,6 +61,7 @@ const Search = () => {
     >
       <Configure filters="type:Audio/Visual"/>
       <AlgoliaSearchContainer className="media-search--container-wrapper">
+        <h2 className="media-search__title">Video, Podcasts, and Rich Media</h2>
         <div className="media-filters-area">
           <MediaFilters/>
         </div>
@@ -72,6 +73,24 @@ const Search = () => {
 }
 
 const island = createIsland(Search)
-island.render({
-  selector: `${islandName}, #${islandName}`,
+
+// Drupal may place this block more than once in its layout config, which puts
+// multiple <media-search> elements on the page. Hide all but the first,
+// including their surrounding Drupal block wrapper so block labels/titles don't leak.
+const allEls = document.querySelectorAll(`${islandName}, #${islandName}`)
+Array.from(allEls).slice(1).forEach(el => {
+  // Walk up to the nearest .block wrapper; that contains the block label heading too
+  const blockWrapper = el.closest('.block') as HTMLElement | null
+  const target = blockWrapper ?? (el as HTMLElement)
+  target.style.display = 'none'
+  target.setAttribute('aria-hidden', 'true')
 })
+
+if (!(window as any).__mediaSearchIslandMounted) {
+  ;(window as any).__mediaSearchIslandMounted = true
+  // Use :first-of-type so preact-island only renders into the first element
+  // even if multiple <media-search> elements exist in the DOM.
+  island.render({
+    selector: `${islandName}:first-of-type`,
+  })
+}
