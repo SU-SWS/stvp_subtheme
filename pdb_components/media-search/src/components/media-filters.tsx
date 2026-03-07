@@ -129,8 +129,8 @@ const MediaFilters = () => {
 
   const {nbHits} = usePagination({padding: 2})
 
-  const firstAttributes = width > 768 ? attributesToRender.slice(0, 1) : []
-  const remainingAttributes = width > 768 ? attributesToRender.slice(1) : [...attributesToRender]
+  const firstAttributes = width > 768 ? attributesToRender.slice(0, 2) : []
+  const remainingAttributes = width > 768 ? attributesToRender.slice(2) : [...attributesToRender]
 
   return (
     <Filters className="media-filters-wrapper">
