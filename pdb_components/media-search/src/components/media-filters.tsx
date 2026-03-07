@@ -102,7 +102,7 @@ const TRAY_SECTIONS = [
 const MediaFilters = () => {
   const ref = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
-  const {lock: lockScroll, unlock: unlockScroll} = useScrollLock()
+  const {lock: lockScroll, unlock: unlockScroll} = useScrollLock({autoLock: false})
   const {refine: clearAll} = useClearRefinements()
 
   const {
