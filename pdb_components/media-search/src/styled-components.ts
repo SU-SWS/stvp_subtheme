@@ -212,6 +212,7 @@ export const Filters = styled.div`
             border-radius: 40px;
             white-space: nowrap;
             cursor: pointer;
+            color: #2E2D29;
 
             i {
                 color: #43423E;
@@ -308,36 +309,49 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
             gap: 12px;
         }
 
-        .tray-option-label {
+        .tray-option-btn {
             display: flex;
             align-items: center;
             gap: 10px;
             cursor: pointer;
             font-size: 15px;
             color: #2E2D29;
+            background: none;
+            border: none;
+            padding: 0;
+            width: 100%;
+            text-align: left;
+
+            &:hover .tray-checkbox {
+                border-color: #B1040E;
+            }
+        }
+
+        .tray-option-text {
+            flex: 1;
+        }
+
+        .tray-checkbox {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+            border: 1.5px solid #C0C0BF;
+            background: #FFF;
+        }
+
+        .tray-option-btn--checked .tray-checkbox {
+            background: #B1040E;
+            border-color: #B1040E;
         }
 
         .tray-option-empty {
             font-size: 14px;
             color: #8F8C89;
             padding-bottom: 8px;
-        }
-
-        .tray-checkbox {
-            width: 16px;
-            height: 16px;
-            border-radius: 2px;
-            border: 1px solid #C0C0BF;
-            appearance: none;
-            -webkit-appearance: none;
-            background: #FFF;
-            cursor: pointer;
-            flex-shrink: 0;
-
-            &:checked {
-                background: #B1040E;
-                border-color: #B1040E;
-            }
         }
     }
 

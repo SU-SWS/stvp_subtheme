@@ -47,7 +47,7 @@ const Refinement = ({attribute}: { attribute: string }) => {
 
 const TrayRefinement = ({attribute, labelOverride}: { attribute: string, labelOverride?: string }) => {
   const {items, refine} = useRefinementList({attribute, limit: 99})
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const label = labelOverride ?? attribute.replace("media_", "")
     .replace("_", " ")
     .replace(/\b\w/g, (char) => char.toUpperCase())
@@ -68,15 +68,21 @@ const TrayRefinement = ({attribute, labelOverride}: { attribute: string, labelOv
         <ul className="tray-option-list">
           {items.map(item => (
             <li key={item.value} className="tray-option-item">
-              <label className="tray-option-label">
-                <input
-                  type="checkbox"
-                  checked={item.isRefined}
-                  onChange={() => refine(item.value)}
-                  className="tray-checkbox"
-                />
-                {item.label}
-              </label>
+              <button
+                role="checkbox"
+                aria-checked={item.isRefined}
+                className={`tray-option-btn${item.isRefined ? ' tray-option-btn--checked' : ''}`}
+                onClick={() => refine(item.value)}
+              >
+                <span className="tray-checkbox" aria-hidden="true">
+                  {item.isRefined && (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none">
+                      <path d="M1 3.5L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  )}
+                </span>
+                <span className="tray-option-text">{item.label}</span>
+              </button>
             </li>
           ))}
           {items.length === 0 && (
