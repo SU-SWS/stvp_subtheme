@@ -77,7 +77,7 @@ const MediaFilters = () => {
 
   return (
     <Filters className="media-filters-wrapper">
-      <p aria-live="polite" aria-atomic>{nbHits} results</p>
+      <p className="results-counter" aria-live="polite" aria-atomic>{nbHits} results</p>
       <div className="filters">
         <SearchBox/>
         {firstAttributes.length > 0 &&

@@ -114,11 +114,51 @@ export const ComboBoxPortalStyle = styled.div`
     }
 `
 export const ComboBoxStyle = styled.div`
-    input {
+    .combo-trigger {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
         border-radius: 40px;
         border: 1px solid #C0C0BF;
         background: #FFF;
         padding: 10px 20px;
+        gap: 8px;
+        cursor: pointer;
+    }
+
+    .combo-trigger-label {
+        font-size: 14px;
+        color: #2E2D29;
+        white-space: nowrap;
+        pointer-events: none;
+    }
+
+    .combo-input {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        width: 100%;
+        cursor: pointer;
+        border: none;
+        background: none;
+    }
+
+    .combo-trigger-icons {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        pointer-events: none;
+    }
+
+    .combo-clear {
+        background: none;
+        border: none;
+        padding: 0;
+        pointer-events: all;
+    }
+
+    .combo-chevron {
+        flex-shrink: 0;
     }
 `
 export const Filters = styled.div`
@@ -127,6 +167,11 @@ export const Filters = styled.div`
         justify-content: flex-start;
         max-width: 1300px;
         margin: 38px 0 38px;
+    }
+
+    .results-counter {
+        white-space: nowrap;
+        min-width: 130px;
     }
 
     .filters {
@@ -184,6 +229,16 @@ export const SearchInput = styled.div`
         border: 1px solid #C0C0BF;
         background: #FFF;
         padding: 10px 160px 10px 20px;
+
+        &::placeholder {
+            color: var(--Form-element-Text-Secondary, #6D6C69);
+            text-align: center;
+            font-family: var(--Family-Source-Sans, "Source Sans 3");
+            font-size: var(--Font-size-All-breakpoints-16, 16px);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 130%;
+        }
     }
 
     .search-buttons {
