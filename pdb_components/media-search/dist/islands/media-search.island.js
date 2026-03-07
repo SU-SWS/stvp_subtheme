@@ -263,18 +263,20 @@
     transition: transform 0.3s ease;
 
     @media (max-width: 991px) {
-        display: flex;
-        width: 991px;
-        height: 997px;
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        right: 0;
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
     }
 
     @media (max-width: 360px) {
-        display: flex;
-        width: 360px;
-        height: 997px;
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        right: 0;
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
