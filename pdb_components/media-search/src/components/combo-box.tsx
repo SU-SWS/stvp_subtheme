@@ -26,6 +26,7 @@ const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
       value={value}
       open={open}
       onOpenChange={setOpen}
+      style={{display: 'inline-flex', alignItems: 'center'}}
     >
       <ComboBoxStyle data-open={open || undefined}>
         <label htmlFor={id} className={multiple ? "visually-hidden" : ""}>{label}</label>

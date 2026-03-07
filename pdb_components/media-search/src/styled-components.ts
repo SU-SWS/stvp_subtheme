@@ -131,19 +131,29 @@ export const ComboBoxStyle = styled.div`
         border-radius: 40px;
         border: 1px solid #C0C0BF;
         background: #FFF;
-        padding: 10px 20px;
-        gap: 8px;
+        padding: 3px 14px;
+        height: 40px;
+        gap: 6px;
         cursor: pointer;
+        box-sizing: border-box;
     }
 
     .combo-input {
+        -webkit-appearance: none;
+        appearance: none;
         border: none;
         background: none;
         outline: none;
+        box-shadow: none;
         font-size: 14px;
         color: #2E2D29;
-        min-width: 80px;
+        min-width: 60px;
+        width: auto;
+        field-sizing: content;
         cursor: pointer;
+        padding: 0;
+        height: auto;
+        line-height: 1;
 
         &::placeholder {
             color: #2E2D29;
@@ -467,6 +477,8 @@ export const SearchInput = styled.div`
         border: 1px solid #C0C0BF;
         background: #FFF;
         padding: 10px 160px 10px 20px;
+        line-height: 1;
+        vertical-align: middle;
 
         &::placeholder {
             color: var(--Form-element-Text-Secondary, #6D6C69);
@@ -491,9 +503,16 @@ export const SearchInput = styled.div`
 
     button {
         background: none;
+        border: none;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
 
         i {
             color: #B1040E;
+            line-height: 1;
         }
 
         &:hover i {
