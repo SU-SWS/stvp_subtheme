@@ -76,8 +76,8 @@ const MediaFilters = () => {
   const remainingAttributes = width > 768 ? attributesToRender.slice(1) : [...attributesToRender]
 
   return (
-    <Filters>
-      <p aria-live="polite" aria-atomic>{nbHits} Results</p>
+    <Filters className="media-filters-wrapper">
+      <p aria-live="polite" aria-atomic>{nbHits} results</p>
       <div className="filters">
         <SearchBox/>
         {firstAttributes.length > 0 &&

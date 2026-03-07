@@ -60,8 +60,10 @@ const Search = () => {
       }}
     >
       <Configure filters="type:Audio/Visual"/>
-      <AlgoliaSearchContainer>
-        <MediaFilters/>
+      <AlgoliaSearchContainer className="media-search--container-wrapper">
+        <div className="media-filters-area">
+          <MediaFilters/>
+        </div>
         <ResultHits/>
       </AlgoliaSearchContainer>
     </InstantSearch>

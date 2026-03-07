@@ -19,11 +19,13 @@ const ResultHits = ({...props}) => {
   return (
     <div>
       <h2 className="visually-hidden">Results</h2>
-      <UnstyledList>
+      <UnstyledList className="media-search__container">
         {hits.map(hit =>
-          <li key={hit.objectID}>
-            <h3><a href={hit.url}>{hit.title}</a></h3>
-            <Snippet hit={hit} attribute="html"/>
+          <li className="media-search__card" key={hit.objectID}>
+            <div className="media-search__card-inner">
+              <h3><a href={hit.url}>{hit.title}</a></h3>
+              <Snippet hit={hit} attribute="html"/>
+            </div>
           </li>
         )}
       </UnstyledList>
