@@ -78,11 +78,19 @@ export const ComboBoxPortalStyle = styled.div`
         align-items: center;
         gap: 10px;
         padding: var(--spacing-ms-1, 27px);
-        justify-content: space-between;
         cursor: pointer;
 
         &:hover {
             background: #F4F4F4;
+        }
+
+        &[data-selected] input[type="checkbox"]:after {
+            content: "✓";
+            position: absolute;
+            background: #B1040E;
+            border-color: #B1040E;
+            color: white;
+            line-height: 16px;
         }
 
         .combo-item-indicator {
@@ -91,15 +99,14 @@ export const ComboBoxPortalStyle = styled.div`
         }
 
         .combo-checkbox {
+            position: relative;
             width: 16px;
             height: 16px;
             border-radius: 2px;
             border: 1px solid #C0C0BF;
-            appearance: none;
-            -webkit-appearance: none;
             background: #FFF;
             cursor: pointer;
-            flex-shrink: 0;
+            clip-path: unset;
 
             &:checked {
                 background: #B1040E;
@@ -135,12 +142,43 @@ export const Filters = styled.div`
         flex-direction: row;
         align-items: center;
         width: 100%;
+        gap: 20px;
 
         input {
             border-radius: 40px;
             border: 1px solid #C0C0BF;
             background: #FFF;
             padding: 10px 20px;
+        }
+    }
+
+    .primary-filters {
+        display: flex;
+        gap: 20px;
+        height: 56px;
+
+        .input-wrapper {
+            display: flex;
+            gap: 5px;
+
+            .input-clear {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+
+                button {
+                    border-radius: 30px;
+                    padding: 1rem;
+                    border-radius: 30px;
+                    height: 35px;
+
+                    i {
+                        height: 15px;
+                        width: 15px;
+                        line-height: 15px;
+                    }
+                }
+            }
         }
     }
 

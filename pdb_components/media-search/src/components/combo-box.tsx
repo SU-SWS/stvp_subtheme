@@ -1,4 +1,4 @@
-import {Combobox} from '@base-ui/react/combobox';
+import {Combobox, ComboboxItemIndicatorState} from '@base-ui/react/combobox';
 import {ReactElement, useId} from "preact/compat";
 import {ComboBoxPortalStyle, ComboBoxStyle} from "../styled-components";
 
@@ -25,14 +25,14 @@ const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
       value={value}
     >
       <ComboBoxStyle>
-        <label htmlFor={id}>{label}</label>
-        <div>
+        <label htmlFor={id} className={multiple ? "visually-hidden" : ""}>{label}</label>
+        <div className="input-wrapper">
           <Combobox.Input
-            placeholder={placeholder} id={id}
+            placeholder={multiple ? label : placeholder} id={id}
             className="combo-input"
           />
-          <Combobox.Value/>
-          <div>
+          {/* <Combobox.Value/> */}
+          <div className="input-clear">
             <Combobox.Clear
               aria-label="Clear selection"
               className="combo-clear"
@@ -60,16 +60,17 @@ const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
                     key={item.value}
                     value={item}
                     className="combo-item"
-                  >
-                    <Combobox.ItemIndicator className="combo-item-indicator" render={<span/>}>
+                  >                    
+                    <div className="combo-item-indicator">
                       <input
                         type="checkbox"
                         tabIndex={-1}
                         aria-hidden="true"
                         readOnly
                         className="combo-checkbox"
+                        checked={false}
                       />
-                    </Combobox.ItemIndicator>
+                    </div>
                     <div className="combo-label">{item.label}</div>
                   </Combobox.Item>
                 )}
