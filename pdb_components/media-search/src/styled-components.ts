@@ -269,6 +269,13 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
     transform: translateX(${({$open}) => $open ? '0' : '100%'});
     transition: transform 0.3s ease;
 
+    button, [role="checkbox"], input {
+        &:focus, &:focus-visible {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+
     @media (max-width: 991px) {
         width: 100vw;
         height: 100vh;
