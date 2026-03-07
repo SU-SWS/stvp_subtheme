@@ -45,10 +45,10 @@ const Refinement = ({attribute}: { attribute: string }) => {
   )
 }
 
-const TrayRefinement = ({attribute}: { attribute: string }) => {
+const TrayRefinement = ({attribute, labelOverride}: { attribute: string, labelOverride?: string }) => {
   const {items, refine} = useRefinementList({attribute, limit: 99})
   const [open, setOpen] = useState(true)
-  const label = attribute.replace("media_", "")
+  const label = labelOverride ?? attribute.replace("media_", "")
     .replace("_", " ")
     .replace(/\b\w/g, (char) => char.toUpperCase())
 
@@ -87,6 +87,12 @@ const TrayRefinement = ({attribute}: { attribute: string }) => {
     </div>
   )
 }
+
+const TRAY_SECTIONS = [
+  {attribute: 'media_series', label: 'Series'},
+  {attribute: 'media_topics', label: 'Topics'},
+  {attribute: 'media_type',   label: 'Media'},
+]
 
 const MediaFilters = () => {
   const ref = useRef<HTMLDivElement>(null)
@@ -132,42 +138,38 @@ const MediaFilters = () => {
             )}
           </div>
         }
-        {remainingAttributes.length > 0 &&
-          <div className="additional-filters">
-            <button ref={buttonRef} onClick={toggleTray}>
-              All Filters
-              <i class="fa-solid fa-sliders"></i>
-            </button>
-          </div>
-        }
+        <div className="additional-filters">
+          <button ref={buttonRef} onClick={toggleTray} className="all-filters-btn">
+            All Filters
+            <i class="fa-solid fa-sliders"></i>
+          </button>
+        </div>
       </div>
 
-      {remainingAttributes.length > 0 &&
-        <FilterTray $open={trayOpen} ref={ref}>
-          <div className="tray-header">
-            <span className="tray-title">Filters</span>
-            <button className="tray-close" onClick={closeTray}>
-              <i class="fa-solid fa-close"></i>
-              <span className="visually-hidden">Close Filters</span>
-            </button>
-          </div>
+      <FilterTray $open={trayOpen} ref={ref}>
+        <div className="tray-header">
+          <span className="tray-title">Filters</span>
+          <button className="tray-close" onClick={closeTray}>
+            <i class="fa-solid fa-close"></i>
+            <span className="visually-hidden">Close Filters</span>
+          </button>
+        </div>
 
-          <div className="tray-body">
-            {remainingAttributes.map(attribute =>
-              <TrayRefinement key={attribute} attribute={attribute}/>
-            )}
-          </div>
+        <div className="tray-body">
+          {TRAY_SECTIONS.map(({attribute, label}) =>
+            <TrayRefinement key={attribute} attribute={attribute} labelOverride={label}/>
+          )}
+        </div>
 
-          <div className="tray-footer">
-            <button className="tray-clear" onClick={() => { clearAll(); closeTray(); }}>
-              Clear All
-            </button>
-            <button className="tray-view-results" onClick={closeTray}>
-              View Results
-            </button>
-          </div>
-        </FilterTray>
-      }
+        <div className="tray-footer">
+          <button className="tray-clear" onClick={() => { clearAll(); }}>
+            Clear All
+          </button>
+          <button className="tray-view-results" onClick={closeTray}>
+            View Results
+          </button>
+        </div>
+      </FilterTray>
     </Filters>
   )
 }

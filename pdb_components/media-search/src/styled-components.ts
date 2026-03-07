@@ -201,16 +201,17 @@ export const Filters = styled.div`
         transform: translateY(-50%);
         z-index: 1;
 
-        > button {
+        > button, > .all-filters-btn {
             display: inline-flex;
             flex-direction: row;
             align-items: center;
             gap: 8px;
             background: #FFF;
-            border: none;
+            border: 1px solid #C0C0BF;
             padding: 8px 16px;
             border-radius: 40px;
             white-space: nowrap;
+            cursor: pointer;
 
             i {
                 color: #43423E;
