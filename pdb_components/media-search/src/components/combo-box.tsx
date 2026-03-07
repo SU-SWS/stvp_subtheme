@@ -61,8 +61,14 @@ const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
                     value={item}
                     className="combo-item"
                   >
-                    <Combobox.ItemIndicator className="combo-item-indicator">
-                      <CheckIcon/>
+                    <Combobox.ItemIndicator className="combo-item-indicator" render={<span/>}>
+                      <input
+                        type="checkbox"
+                        tabIndex={-1}
+                        aria-hidden="true"
+                        readOnly
+                        className="combo-checkbox"
+                      />
                     </Combobox.ItemIndicator>
                     <div className="combo-label">{item.label}</div>
                   </Combobox.Item>
