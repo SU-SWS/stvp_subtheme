@@ -270,6 +270,19 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
+
+        .tray-header,
+        .tray-body,
+        .tray-footer {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .tray-section,
+        .tray-section-toggle {
+            width: 100%;
+            box-sizing: border-box;
+        }
     }
 
     @media (max-width: 360px) {
@@ -280,6 +293,19 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
+
+        .tray-header,
+        .tray-body,
+        .tray-footer {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .tray-section,
+        .tray-section-toggle {
+            width: 100%;
+            box-sizing: border-box;
+        }
     }
 
     .tray-header {
