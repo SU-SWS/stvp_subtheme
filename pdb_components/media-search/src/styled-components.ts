@@ -121,6 +121,9 @@ export const ComboBoxPortalStyle = styled.div`
     }
 `
 export const ComboBoxStyle = styled.div`
+    display: inline-flex;
+    align-items: center;
+
     .input-wrapper {
         position: relative;
         display: inline-flex;
@@ -190,43 +193,13 @@ export const Filters = styled.div`
         align-items: center;
         width: 100%;
         gap: 20px;
-
-        input {
-            border-radius: 40px;
-            border: 1px solid #C0C0BF;
-            background: #FFF;
-            padding: 10px 20px;
-        }
     }
 
     .primary-filters {
         display: flex;
         gap: 20px;
         height: 56px;
-
-        .input-wrapper {
-            display: flex;
-            gap: 5px;
-
-            .input-clear {
-                display: flex;
-                justify-content: center;
-                flex-direction: column;
-
-                button {
-                    border-radius: 30px;
-                    padding: 1rem;
-                    border-radius: 30px;
-                    height: 35px;
-
-                    i {
-                        height: 15px;
-                        width: 15px;
-                        line-height: 15px;
-                    }
-                }
-            }
-        }
+        align-items: center;
     }
 
     .additional-filters {

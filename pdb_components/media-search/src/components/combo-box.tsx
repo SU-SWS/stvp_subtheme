@@ -50,7 +50,7 @@ const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
 
       </ComboBoxStyle>
 
-      <Combobox.Portal className="combo-portal">
+      <Combobox.Portal>
         <ComboBoxPortalStyle>
           <Combobox.Positioner
             align="start"

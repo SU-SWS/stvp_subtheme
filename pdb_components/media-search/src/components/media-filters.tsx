@@ -1,7 +1,6 @@
 import SearchBox from "./search-box";
 import {
   useClearRefinements,
-  useDynamicWidgets,
   usePagination,
   useRefinementList
 } from "react-instantsearch";
@@ -124,13 +123,11 @@ const MediaFilters = () => {
     if (!trayOpen) unlockScroll()
   }, [trayOpen])
 
-  const {attributesToRender} = useDynamicWidgets()
   const {width = 0} = useWindowSize()
-
   const {nbHits} = usePagination({padding: 2})
 
-  const firstAttributes = width > 768 ? attributesToRender.slice(0, 2) : []
-  const remainingAttributes = width > 768 ? attributesToRender.slice(2) : [...attributesToRender]
+  const PRIMARY_ATTRIBUTES = ['media_series', 'media_topics']
+  const firstAttributes = width > 768 ? PRIMARY_ATTRIBUTES : []
 
   return (
     <Filters className="media-filters-wrapper">
