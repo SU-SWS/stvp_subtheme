@@ -146,8 +146,11 @@ const MediaFilters = () => {
         }
         <div className="additional-filters">
           <button ref={buttonRef} onClick={toggleTray} className="all-filters-btn">
-            All Filters
-            <i class="fa-solid fa-sliders"></i>
+            {width <= 991 ? (
+              <>Filters <span aria-hidden="true">›</span></>
+            ) : (
+              <>All Filters <i class="fa-solid fa-sliders"></i></>
+            )}
           </button>
         </div>
       </div>
