@@ -159,6 +159,11 @@ export const ComboBoxStyle = styled.div`
 
     .combo-chevron {
         flex-shrink: 0;
+        transition: transform 0.2s ease;
+    }
+
+    &[data-open] .combo-chevron {
+        transform: rotate(180deg);
     }
 `
 export const Filters = styled.div`

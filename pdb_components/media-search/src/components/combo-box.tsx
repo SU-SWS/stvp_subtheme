@@ -1,5 +1,5 @@
 import {Combobox} from '@base-ui/react/combobox';
-import {ReactElement, useId} from "preact/compat";
+import {ReactElement, useId, useState} from "preact/compat";
 import {ComboBoxPortalStyle, ComboBoxStyle} from "../styled-components";
 
 export type ComboBoxOption = {
@@ -16,6 +16,7 @@ const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
   placeholder?: string
 }) => {
   const id = useId();
+  const [open, setOpen] = useState(false);
 
   return (
     <Combobox.Root
@@ -23,8 +24,10 @@ const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
       multiple={multiple}
       onValueChange={onChange}
       value={value}
+      open={open}
+      onOpenChange={setOpen}
     >
-      <ComboBoxStyle>
+      <ComboBoxStyle data-open={open || undefined}>
         <label htmlFor={id} className="visually-hidden">{label}</label>
         <div className="combo-trigger">
           <span className="combo-trigger-label">{label}</span>
