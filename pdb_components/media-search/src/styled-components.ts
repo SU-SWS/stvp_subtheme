@@ -121,11 +121,36 @@ export const ComboBoxPortalStyle = styled.div`
     }
 `
 export const ComboBoxStyle = styled.div`
-    input {
+    input,
+    .combo-input {
         border-radius: 40px;
         border: 1px solid #C0C0BF;
         background: #FFF;
         padding: 10px 20px;
+    }
+
+    .combo-input {
+        display: inline-flex;
+        align-items: center;
+        min-width: 80px;
+        gap: 5px;
+        cursor: pointer;
+        color: var(--Primary-Black, #2E2D29);
+        text-decoration: none;
+        margin: .2em 0;
+        font-size: 16px;
+
+        &:focus {
+            box-shadow: 0 0 1px #53565a, 0 0 2px #53565a;
+        }
+    }
+
+    .combo-chevron {
+        transition: transform 0.2s ease;
+    }
+
+    .combo-chevron.is-open {
+        transform: rotate(180deg);
     }
 `
 export const Filters = styled.div`
@@ -155,7 +180,6 @@ export const Filters = styled.div`
     .primary-filters {
         display: flex;
         gap: 20px;
-        height: 56px;
 
         .input-wrapper {
             display: flex;
