@@ -79,9 +79,9 @@
         width: 33px;
         height: 34px;
         box-sizing: border-box;
-        background: none;
-        border: none;
-        border-bottom: 2px solid transparent;
+        background: none !important;
+        border: none !important;
+        border-bottom: 2px solid transparent !important;
         padding: 0 0 4px 0;
         cursor: pointer;
         color: var(--Interactive-Digital-Red, #B1040E);
@@ -91,27 +91,40 @@
         font-style: normal;
         font-weight: 700;
         line-height: 120%;
-        outline: none;
-        box-shadow: none;
+        outline: none !important;
+        box-shadow: none !important;
+        text-decoration: none !important;
 
-        &:focus, &:focus-visible {
-            outline: none;
-            box-shadow: none;
+        &:focus, &:focus-visible, &:active {
+            outline: none !important;
+            box-shadow: none !important;
+            text-decoration: none !important;
+            border-color: transparent !important;
         }
 
         &:hover {
-            border-bottom-color: var(--Interactive-Digital-Red, #B1040E);
+            border-bottom-color: var(--Interactive-Digital-Red, #B1040E) !important;
         }
     }
 
     /* Active / current page */
     && li[aria-current="true"] button.page-number {
         color: var(--Primary-Black, #2E2D29);
-        border-bottom-color: var(--Primary-Black, #2E2D29);
+        border-bottom-color: var(--Primary-Black, #2E2D29) !important;
         cursor: default;
+        outline: none !important;
+        box-shadow: none !important;
+        text-decoration: none !important;
+
+        &:focus, &:focus-visible, &:active {
+            outline: none !important;
+            box-shadow: none !important;
+            text-decoration: none !important;
+            border-bottom-color: var(--Primary-Black, #2E2D29) !important;
+        }
 
         &:hover {
-            border-bottom-color: var(--Primary-Black, #2E2D29);
+            border-bottom-color: var(--Primary-Black, #2E2D29) !important;
         }
     }
 
@@ -121,8 +134,11 @@
         align-items: center !important;
         justify-content: center !important;
         height: 30px;
-        background: none;
-        border: none;
+        background: none !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        text-decoration: none !important;
         padding: 0 8px;
         cursor: pointer;
         color: var(--Interactive-Digital-Red, #B1040E);
@@ -132,6 +148,13 @@
         font-style: normal;
         font-weight: 400;
         line-height: 1;
+
+        &:focus, &:focus-visible, &:active {
+            outline: none !important;
+            box-shadow: none !important;
+            text-decoration: none !important;
+            border: none !important;
+        }
     }
 `,Ni=ki.div`
     padding: 0 50px;

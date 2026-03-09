@@ -10,12 +10,30 @@
     }
 }
 
+// Hard reset for pagination and filter buttons — overrides any Drupal/decanter global button styles
+.media-search--container-wrapper {
+    nav button {
+        outline: none !important;
+        box-shadow: none !important;
+        text-decoration: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+
+        &:focus,
+        &:focus-visible,
+        &:active {
+            outline: none !important;
+            box-shadow: none !important;
+            text-decoration: none !important;
+        }
+    }
+}
+
 .media-search {
     &__title {
         font-size: 2rem;
         font-weight: 700;
         color: var(--Primary-Black, #2E2D29);
-        margin: 0 0 16px;
+        margin: 40px 0 16px;
     }
 
     &__container {
