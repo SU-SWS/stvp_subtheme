@@ -353,7 +353,8 @@
             gap: 8px;
             background: #FFF;
             border: 1px solid #C0C0BF;
-            padding: 8px 22px;
+            padding: 0 22px;
+            height: 40px;
             box-sizing: border-box;
             border-radius: 40px;
             white-space: nowrap;
@@ -602,7 +603,9 @@
         border-radius: 40px;
         border: 1px solid #C0C0BF;
         background: #FFF;
-        padding: 10px 166px 10px 26px;
+        padding: 0 166px 0 26px;
+        height: 40px;
+        box-sizing: border-box;
         line-height: 1;
         vertical-align: middle;
 
