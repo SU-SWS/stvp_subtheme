@@ -62,40 +62,54 @@ export const PaginationList = styled.ul`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 4px;
+    gap: 16px;
     flex-wrap: wrap;
 
     li {
         display: inline-flex;
+        align-items: center;
     }
 
-    button {
+    /* Page number buttons — default (not current) */
+    button.page-number {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-width: 36px;
-        height: 36px;
-        padding: 0 10px;
-        border-radius: 4px;
-        border: 1px solid #C0C0BF;
-        background: #FFF;
-        color: #2E2D29;
-        font-size: 14px;
+        background: none;
+        border: none;
+        padding: 0 5px;
         cursor: pointer;
-
-        &:hover {
-            background: #F4F4F4;
-        }
+        color: var(--Interactive-Digital-Red, #B1040E);
+        text-align: center;
+        font-family: "Source Sans 3", sans-serif;
+        font-size: 22.5px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
     }
 
-    li[aria-current="true"] button {
-        background: #B1040E;
-        border-color: #B1040E;
-        color: #FFF;
+    /* Active / current page */
+    li[aria-current="true"] button.page-number {
+        color: var(--Primary-Black, #2E2D29);
+        cursor: default;
+    }
 
-        &:hover {
-            background: #820000;
-        }
+    /* Previous / Next buttons */
+    button:not(.page-number) {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        padding: 0 5px;
+        cursor: pointer;
+        color: var(--Interactive-Digital-Red, #B1040E);
+        text-align: center;
+        font-family: "Source Sans 3", sans-serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
     }
 `
 export const AlgoliaSearchContainer = styled.div`
