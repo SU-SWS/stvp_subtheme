@@ -68,7 +68,7 @@ export const PaginationList = styled.ul`
     && li {
         display: inline-flex !important;
         align-items: center !important;
-        height: 36px;
+        height: 30px;
         margin: 0;
         padding: 0;
     }
@@ -78,24 +78,41 @@ export const PaginationList = styled.ul`
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
-        height: 36px;
+        width: 33px;
+        height: 30px;
         background: none;
         border: none;
-        padding: 0 8px;
+        padding: 0;
         cursor: pointer;
         color: var(--Interactive-Digital-Red, #B1040E);
         text-align: center;
-        font-family: "Source Sans 3", sans-serif;
+        font-family: "Source Sans 3";
         font-size: 22.5px;
         font-style: normal;
         font-weight: 700;
-        line-height: 1;
+        line-height: 120%;
+        text-decoration: none;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 5px;
+
+        &:hover {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 5px;
+        }
     }
 
     /* Active / current page */
     && li[aria-current="true"] button.page-number {
         color: var(--Primary-Black, #2E2D29);
         cursor: default;
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 5px;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     /* Previous / Next buttons */
@@ -103,7 +120,7 @@ export const PaginationList = styled.ul`
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
-        height: 36px;
+        height: 30px;
         background: none;
         border: none;
         padding: 0 8px;
