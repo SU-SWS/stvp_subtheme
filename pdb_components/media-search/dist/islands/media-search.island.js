@@ -40,7 +40,7 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 991px) {
             .media-search__card {
                 width: calc((100% - 48px) / 2);
             }
@@ -75,7 +75,7 @@
         justify-content: center;
         background: none;
         border: none;
-        padding: 0 5px;
+        padding: 0 8px;
         cursor: pointer;
         color: var(--Interactive-Digital-Red, #B1040E);
         text-align: center;
@@ -83,7 +83,7 @@
         font-size: 22.5px;
         font-style: normal;
         font-weight: 700;
-        line-height: 120%;
+        line-height: 1;
     }
 
     /* Active / current page */
@@ -97,9 +97,10 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
         background: none;
         border: none;
-        padding: 0 5px;
+        padding: 0 8px;
         cursor: pointer;
         color: var(--Interactive-Digital-Red, #B1040E);
         text-align: center;
@@ -107,7 +108,7 @@
         font-size: 18px;
         font-style: normal;
         font-weight: 400;
-        line-height: 120%;
+        line-height: 1;
     }
 `,Ni=ki.div`
     padding: 0 50px;

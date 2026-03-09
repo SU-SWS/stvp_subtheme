@@ -41,7 +41,7 @@ export const UnstyledList = styled.ul`
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 991px) {
             .media-search__card {
                 width: calc((100% - 48px) / 2);
             }
@@ -77,7 +77,7 @@ export const PaginationList = styled.ul`
         justify-content: center;
         background: none;
         border: none;
-        padding: 0 5px;
+        padding: 0 8px;
         cursor: pointer;
         color: var(--Interactive-Digital-Red, #B1040E);
         text-align: center;
@@ -85,7 +85,7 @@ export const PaginationList = styled.ul`
         font-size: 22.5px;
         font-style: normal;
         font-weight: 700;
-        line-height: 120%;
+        line-height: 1;
     }
 
     /* Active / current page */
@@ -99,9 +99,10 @@ export const PaginationList = styled.ul`
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
         background: none;
         border: none;
-        padding: 0 5px;
+        padding: 0 8px;
         cursor: pointer;
         color: var(--Interactive-Digital-Red, #B1040E);
         text-align: center;
@@ -109,7 +110,7 @@ export const PaginationList = styled.ul`
         font-size: 18px;
         font-style: normal;
         font-weight: 400;
-        line-height: 120%;
+        line-height: 1;
     }
 `
 export const AlgoliaSearchContainer = styled.div`
