@@ -11,11 +11,11 @@
 
 .layout-background {
     position: relative;
-    z-index: 1; // this is required for the buttons; :before background element to not fall behind the section's colored background.
-
+    // This is required for the buttons; :before background element to not fall behind the section's colored background.
+    // We also need it for the anchor menu to work over .layout-background.
+    z-index: 2;
 
     // We will override a few section backgrounds.
-
     &.bg-f2e8f1 {
         background: $su-color-plum-xxlight;
     }
@@ -24,6 +24,16 @@
     // usually a tint of orange but we want to set it for illuminating.
     &.bg-f7ecde {
         background: $stvp-color-illuminating-xxlight;
+    }
+}
+
+// Change to z-index for the anchor menu to work with the gradient buttons.
+// Unique to this subtheme.
+.anchor-link-nav {
+    &.orientation-horizontal {
+        .overflow-items {
+            z-index: 3;
+        }
     }
 }
 
@@ -54,14 +64,14 @@
             bottom: 0;
             background-color: $su-color-foggy-light; // default light gray
         }
-    
+
 
         // Palo verde
         &.bg-dcefec:before {
             background-color: $stvp-color-palo-verde-xlight;
         }
 
-        // Plum 
+        // Plum
         &.bg-f2e8f1:before {
             background-color: $su-color-plum-xlight;
         }
@@ -88,7 +98,7 @@
     }
 }
 
- 
+
 
 // .stvp-section-wave-2,
 // .stvp-section-wave-3,
