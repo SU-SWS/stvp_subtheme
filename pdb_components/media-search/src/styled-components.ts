@@ -615,8 +615,10 @@ export const SearchInput = styled.div`
         padding: 0 166px 0 26px;
         height: 40px;
         box-sizing: border-box;
-        line-height: 1;
+        line-height: normal;
         vertical-align: middle;
+        -webkit-appearance: none;
+        appearance: none;
 
         &::placeholder {
             color: var(--Form-element-Text-Secondary, #6D6C69);

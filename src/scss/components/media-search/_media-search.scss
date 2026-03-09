@@ -12,6 +12,15 @@
 
 // Hard reset for pagination and filter buttons — overrides any Drupal/decanter global button styles
 .media-search--container-wrapper {
+    // Kill WebKit UA padding on search input so text centres correctly
+    input[type="search"] {
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-top: 0 !important;
+    }
+
     nav button {
         outline: none !important;
         box-shadow: none !important;
