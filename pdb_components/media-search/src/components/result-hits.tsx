@@ -42,8 +42,7 @@ const ResultHits = ({...props}) => {
 
             {currentPage > 0 &&
               <li>
-                <button onClick={() => goToPage(currentPage - 1)}>
-                  <span className="visually-hidden">Go to previous page</span>
+                <button onClick={() => goToPage(currentPage - 1)} aria-label="Go to previous page">
                   Previous
                 </button>
               </li>
@@ -65,8 +64,7 @@ const ResultHits = ({...props}) => {
 
             {currentPage != nbPages - 1 &&
               <li>
-                <button onClick={() => goToPage(currentPage + 1)}>
-                  <span className="visually-hidden">Go to next page</span>
+                <button onClick={() => goToPage(currentPage + 1)} aria-label="Go to next page">
                   Next
                 </button>
               </li>

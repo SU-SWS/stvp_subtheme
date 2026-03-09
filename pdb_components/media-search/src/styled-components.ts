@@ -47,7 +47,7 @@ export const UnstyledList = styled.ul`
             }
         }
 
-        @media (max-width: 460px) {
+        @media (max-width: 550px) {
             .media-search__card {
                 width: 100%;
             }
@@ -58,23 +58,27 @@ export const PaginationList = styled.ul`
     list-style: none;
     padding: 0;
     margin: 24px 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
     gap: 16px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 
-    li {
-        display: inline-flex;
-        align-items: center;
+    && li {
+        display: inline-flex !important;
+        align-items: center !important;
+        height: 36px;
+        margin: 0;
+        padding: 0;
     }
 
     /* Page number buttons — default (not current) */
-    button.page-number {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+    && button.page-number {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 36px;
         background: none;
         border: none;
         padding: 0 8px;
@@ -89,17 +93,17 @@ export const PaginationList = styled.ul`
     }
 
     /* Active / current page */
-    li[aria-current="true"] button.page-number {
+    && li[aria-current="true"] button.page-number {
         color: var(--Primary-Black, #2E2D29);
         cursor: default;
     }
 
     /* Previous / Next buttons */
-    button:not(.page-number) {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
+    && button:not(.page-number) {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 36px;
         background: none;
         border: none;
         padding: 0 8px;
