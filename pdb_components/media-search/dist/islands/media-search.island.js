@@ -252,7 +252,7 @@
         border-radius: 40px;
         border: 1px solid #C0C0BF;
         background: #FFF;
-        padding: 3px 14px;
+        padding: 3px 20px;
         height: 40px;
         gap: 6px;
         cursor: pointer;
@@ -266,7 +266,7 @@
         background: none;
         outline: none;
         box-shadow: none;
-        font-size: 14px;
+        font-size: 16px;
         color: #2E2D29;
         min-width: 60px;
         width: auto;
@@ -316,6 +316,9 @@
         white-space: nowrap;
         min-width: 130px;
         flex-shrink: 0;
+        margin: 0;
+        align-self: center;
+        line-height: 1;
     }
 
     .filters {
@@ -350,11 +353,13 @@
             gap: 8px;
             background: #FFF;
             border: 1px solid #C0C0BF;
-            padding: 8px 16px;
+            padding: 8px 22px;
+            box-sizing: border-box;
             border-radius: 40px;
             white-space: nowrap;
             cursor: pointer;
             color: #2E2D29;
+            font-size: 16px;
 
             i {
                 color: #43423E;
@@ -597,7 +602,7 @@
         border-radius: 40px;
         border: 1px solid #C0C0BF;
         background: #FFF;
-        padding: 10px 160px 10px 20px;
+        padding: 10px 166px 10px 26px;
         line-height: 1;
         vertical-align: middle;
 

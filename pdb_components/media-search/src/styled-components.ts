@@ -257,7 +257,7 @@ export const ComboBoxStyle = styled.div`
         border-radius: 40px;
         border: 1px solid #C0C0BF;
         background: #FFF;
-        padding: 3px 14px;
+        padding: 3px 20px;
         height: 40px;
         gap: 6px;
         cursor: pointer;
@@ -271,7 +271,7 @@ export const ComboBoxStyle = styled.div`
         background: none;
         outline: none;
         box-shadow: none;
-        font-size: 14px;
+        font-size: 16px;
         color: #2E2D29;
         min-width: 60px;
         width: auto;
@@ -322,6 +322,9 @@ export const Filters = styled.div`
         white-space: nowrap;
         min-width: 130px;
         flex-shrink: 0;
+        margin: 0;
+        align-self: center;
+        line-height: 1;
     }
 
     .filters {
@@ -356,11 +359,14 @@ export const Filters = styled.div`
             gap: 8px;
             background: #FFF;
             border: 1px solid #C0C0BF;
-            padding: 8px 16px;
+            padding: 0 22px;
+            height: 40px;
+            box-sizing: border-box;
             border-radius: 40px;
             white-space: nowrap;
             cursor: pointer;
             color: #2E2D29;
+            font-size: 16px;
 
             i {
                 color: #43423E;
@@ -606,7 +612,9 @@ export const SearchInput = styled.div`
         border-radius: 40px;
         border: 1px solid #C0C0BF;
         background: #FFF;
-        padding: 10px 160px 10px 20px;
+        padding: 0 166px 0 26px;
+        height: 40px;
+        box-sizing: border-box;
         line-height: 1;
         vertical-align: middle;
 
