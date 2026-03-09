@@ -312,6 +312,7 @@ export const ComboBoxStyle = styled.div`
 export const Filters = styled.div`
     &.media-filters-wrapper {
         display: flex;
+        align-items: center;
         justify-content: flex-start;
         max-width: 1300px;
         margin: 38px 0 38px;
@@ -320,6 +321,7 @@ export const Filters = styled.div`
     .results-counter {
         white-space: nowrap;
         min-width: 130px;
+        flex-shrink: 0;
     }
 
     .filters {
@@ -328,12 +330,12 @@ export const Filters = styled.div`
         flex-direction: row;
         align-items: center;
         width: 100%;
-        gap: 20px;
+        gap: 17px;
     }
 
     .primary-filters {
         display: flex;
-        gap: 20px;
+        gap: 17px;
         height: 56px;
         align-items: center;
 
@@ -343,10 +345,8 @@ export const Filters = styled.div`
     }
 
     .additional-filters {
-        position: absolute;
-        right: 4px;
-        top: 50%;
-        transform: translateY(-50%);
+        display: inline-flex;
+        align-items: center;
         z-index: 1;
 
         > button, > .all-filters-btn {
