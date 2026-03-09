@@ -68,7 +68,7 @@ export const PaginationList = styled.ul`
     && li {
         display: inline-flex !important;
         align-items: center !important;
-        height: 30px;
+        height: 34px;
         margin: 0;
         padding: 0;
     }
@@ -79,10 +79,12 @@ export const PaginationList = styled.ul`
         align-items: center !important;
         justify-content: center !important;
         width: 33px;
-        height: 30px;
+        height: 34px;
+        box-sizing: border-box;
         background: none;
         border: none;
-        padding: 0;
+        border-bottom: 2px solid transparent;
+        padding: 0 0 4px 0;
         cursor: pointer;
         color: var(--Interactive-Digital-Red, #B1040E);
         text-align: center;
@@ -91,27 +93,27 @@ export const PaginationList = styled.ul`
         font-style: normal;
         font-weight: 700;
         line-height: 120%;
-        text-decoration: none;
-        text-decoration-thickness: 2px;
-        text-underline-offset: 5px;
+        outline: none;
+        box-shadow: none;
+
+        &:focus, &:focus-visible {
+            outline: none;
+            box-shadow: none;
+        }
 
         &:hover {
-            text-decoration: underline;
-            text-decoration-thickness: 2px;
-            text-underline-offset: 5px;
+            border-bottom-color: var(--Interactive-Digital-Red, #B1040E);
         }
     }
 
     /* Active / current page */
     && li[aria-current="true"] button.page-number {
         color: var(--Primary-Black, #2E2D29);
+        border-bottom-color: var(--Primary-Black, #2E2D29);
         cursor: default;
-        text-decoration: underline;
-        text-decoration-thickness: 2px;
-        text-underline-offset: 5px;
 
         &:hover {
-            text-decoration: underline;
+            border-bottom-color: var(--Primary-Black, #2E2D29);
         }
     }
 
@@ -311,6 +313,10 @@ export const Filters = styled.div`
         gap: 20px;
         height: 56px;
         align-items: center;
+
+        @media (max-width: 991px) {
+            display: none;
+        }
     }
 
     .additional-filters {
