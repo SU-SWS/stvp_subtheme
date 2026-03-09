@@ -1,15 +1,5 @@
 @charset "UTF-8";
 // Hide the dek from card/h3 card display modes
-// Teaser Paragraph
-.ds-entity--stanford-news {
-    .su-card {
-        .su-news-dek {
-            display: none;
-        }
-    }
-
-}
-
 .ds-entity--stanford-media {
     .stanford-simple-card {
         .su-media-dek {
