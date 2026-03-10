@@ -13,7 +13,7 @@
     position: relative;
     // This is required for the buttons; :before background element to not fall behind the section's colored background.
     // We also need it for the anchor menu to work over .layout-background.
-    z-index: 2;
+    z-index: 0;
 
     // We will override a few section backgrounds.
     &.bg-f2e8f1 {
@@ -25,12 +25,6 @@
     &.bg-f7ecde {
         background: $stvp-color-illuminating-xxlight;
     }
-}
-
-// Change to z-index for the anchor menu to work with the gradient buttons.
-// Unique to this subtheme.
-.anchor-link-nav.orientation-vertical ul.overflow-items {
-    z-index: 3;
 }
 
 /* --- Wave Backgrounds --- */
