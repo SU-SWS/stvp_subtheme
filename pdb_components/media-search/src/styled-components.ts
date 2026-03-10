@@ -267,10 +267,14 @@ export const ComboBoxStyle = styled.div`
     .combo-input {
         -webkit-appearance: none;
         appearance: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
         border: none;
         background: none;
         outline: none;
         box-shadow: none;
+        text-decoration: none;
         font-size: 16px;
         color: #2E2D29;
         min-width: 60px;
@@ -301,11 +305,13 @@ export const ComboBoxStyle = styled.div`
     }
 
     .combo-chevron {
+        display: block;
+        align-self: center;
         flex-shrink: 0;
         transition: transform 0.2s ease;
     }
 
-    &[data-open] .combo-chevron {
+    .combo-chevron.is-open {
         transform: rotate(180deg);
     }
 `
