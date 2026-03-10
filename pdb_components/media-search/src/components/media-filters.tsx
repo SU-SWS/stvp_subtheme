@@ -127,7 +127,7 @@ const MediaFilters = () => {
   const {width = 0} = useWindowSize()
   const {nbHits} = usePagination({padding: 2})
 
-  const PRIMARY_ATTRIBUTES = ['media_series', 'media_topics']
+  const PRIMARY_ATTRIBUTES = ['media_series', 'media_type']
   const firstAttributes = width > 768 ? PRIMARY_ATTRIBUTES : []
 
   return (
