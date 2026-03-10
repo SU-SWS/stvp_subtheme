@@ -29,12 +29,8 @@
 
 // Change to z-index for the anchor menu to work with the gradient buttons.
 // Unique to this subtheme.
-.anchor-link-nav {
-    &.orientation-horizontal {
-        .overflow-items {
-            z-index: 3;
-        }
-    }
+.anchor-link-nav.orientation-vertical ul.overflow-items {
+    z-index: 3;
 }
 
 /* --- Wave Backgrounds --- */
