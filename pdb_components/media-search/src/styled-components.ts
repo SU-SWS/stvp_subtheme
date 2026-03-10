@@ -41,13 +41,13 @@ export const UnstyledList = styled.ul`
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 991px) {
             .media-search__card {
                 width: calc((100% - 48px) / 2);
             }
         }
 
-        @media (max-width: 460px) {
+        @media (max-width: 550px) {
             .media-search__card {
                 width: 100%;
             }
@@ -58,50 +58,90 @@ export const PaginationList = styled.ul`
     list-style: none;
     padding: 0;
     margin: 24px 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
     gap: 16px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 
-    li {
-        display: inline-flex;
-        align-items: center;
+    && li {
+        display: inline-flex !important;
+        align-items: center !important;
+        height: 34px;
+        margin: 0;
+        padding: 0;
     }
 
     /* Page number buttons — default (not current) */
-    button.page-number {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: none;
-        border: none;
-        padding: 0 5px;
+    && button.page-number {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 33px;
+        height: 34px;
+        box-sizing: border-box;
+        background: none !important;
+        border: none !important;
+        border-bottom: 2px solid transparent !important;
+        padding: 0 0 4px 0;
         cursor: pointer;
         color: var(--Interactive-Digital-Red, #B1040E);
         text-align: center;
-        font-family: "Source Sans 3", sans-serif;
+        font-family: "Source Sans 3";
         font-size: 22.5px;
         font-style: normal;
         font-weight: 700;
         line-height: 120%;
+        outline: none !important;
+        box-shadow: none !important;
+        text-decoration: none !important;
+
+        &:focus, &:focus-visible, &:active {
+            outline: none !important;
+            box-shadow: none !important;
+            text-decoration: none !important;
+            border-color: transparent !important;
+        }
+
+        &:hover {
+            border-bottom-color: var(--Interactive-Digital-Red, #B1040E) !important;
+        }
     }
 
     /* Active / current page */
-    li[aria-current="true"] button.page-number {
+    && li[aria-current="true"] button.page-number {
         color: var(--Primary-Black, #2E2D29);
+        border-bottom-color: var(--Primary-Black, #2E2D29) !important;
         cursor: default;
+        outline: none !important;
+        box-shadow: none !important;
+        text-decoration: none !important;
+
+        &:focus, &:focus-visible, &:active {
+            outline: none !important;
+            box-shadow: none !important;
+            text-decoration: none !important;
+            border-bottom-color: var(--Primary-Black, #2E2D29) !important;
+        }
+
+        &:hover {
+            border-bottom-color: var(--Primary-Black, #2E2D29) !important;
+        }
     }
 
     /* Previous / Next buttons */
-    button:not(.page-number) {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: none;
-        border: none;
-        padding: 0 5px;
+    && button:not(.page-number) {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 30px;
+        background: none !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        text-decoration: none !important;
+        padding: 0 8px;
         cursor: pointer;
         color: var(--Interactive-Digital-Red, #B1040E);
         text-align: center;
@@ -109,7 +149,14 @@ export const PaginationList = styled.ul`
         font-size: 18px;
         font-style: normal;
         font-weight: 400;
-        line-height: 120%;
+        line-height: 1;
+
+        &:focus, &:focus-visible, &:active {
+            outline: none !important;
+            box-shadow: none !important;
+            text-decoration: none !important;
+            border: none !important;
+        }
     }
 `
 export const AlgoliaSearchContainer = styled.div`
@@ -210,7 +257,7 @@ export const ComboBoxStyle = styled.div`
         border-radius: 40px;
         border: 1px solid #C0C0BF;
         background: #FFF;
-        padding: 3px 14px;
+        padding: 3px 20px;
         height: 40px;
         gap: 6px;
         cursor: pointer;
@@ -220,11 +267,15 @@ export const ComboBoxStyle = styled.div`
     .combo-input {
         -webkit-appearance: none;
         appearance: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
         border: none;
         background: none;
         outline: none;
         box-shadow: none;
-        font-size: 14px;
+        text-decoration: none;
+        font-size: 16px;
         color: #2E2D29;
         min-width: 60px;
         width: auto;
@@ -254,17 +305,20 @@ export const ComboBoxStyle = styled.div`
     }
 
     .combo-chevron {
+        display: block;
+        align-self: center;
         flex-shrink: 0;
         transition: transform 0.2s ease;
     }
 
-    &[data-open] .combo-chevron {
+    .combo-chevron.is-open {
         transform: rotate(180deg);
     }
 `
 export const Filters = styled.div`
     &.media-filters-wrapper {
         display: flex;
+        align-items: center;
         justify-content: flex-start;
         max-width: 1300px;
         margin: 38px 0 38px;
@@ -273,6 +327,10 @@ export const Filters = styled.div`
     .results-counter {
         white-space: nowrap;
         min-width: 130px;
+        flex-shrink: 0;
+        margin: 0;
+        align-self: center;
+        line-height: 1;
     }
 
     .filters {
@@ -281,21 +339,23 @@ export const Filters = styled.div`
         flex-direction: row;
         align-items: center;
         width: 100%;
-        gap: 20px;
+        gap: 17px;
     }
 
     .primary-filters {
         display: flex;
-        gap: 20px;
+        gap: 17px;
         height: 56px;
         align-items: center;
+
+        @media (max-width: 991px) {
+            display: none;
+        }
     }
 
     .additional-filters {
-        position: absolute;
-        right: 4px;
-        top: 50%;
-        transform: translateY(-50%);
+        display: inline-flex;
+        align-items: center;
         z-index: 1;
 
         > button, > .all-filters-btn {
@@ -305,11 +365,14 @@ export const Filters = styled.div`
             gap: 8px;
             background: #FFF;
             border: 1px solid #C0C0BF;
-            padding: 8px 16px;
+            padding: 0 22px;
+            height: 40px;
+            box-sizing: border-box;
             border-radius: 40px;
             white-space: nowrap;
             cursor: pointer;
             color: #2E2D29;
+            font-size: 16px;
 
             i {
                 color: #43423E;
@@ -555,9 +618,13 @@ export const SearchInput = styled.div`
         border-radius: 40px;
         border: 1px solid #C0C0BF;
         background: #FFF;
-        padding: 10px 160px 10px 20px;
-        line-height: 1;
+        padding: 0 166px 0 26px;
+        height: 40px;
+        box-sizing: border-box;
+        line-height: normal;
         vertical-align: middle;
+        -webkit-appearance: none;
+        appearance: none;
 
         &::placeholder {
             color: var(--Form-element-Text-Secondary, #6D6C69);
