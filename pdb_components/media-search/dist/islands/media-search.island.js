@@ -619,7 +619,7 @@
 
         &::placeholder {
             color: var(--Form-element-Text-Secondary, #6D6C69);
-            text-align: center;
+            text-align: left;
             font-family: var(--Family-Source-Sans, "Source Sans 3");
             font-size: var(--Font-size-All-breakpoints-16, 16px);
             font-style: normal;
