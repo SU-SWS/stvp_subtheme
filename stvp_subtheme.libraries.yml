@@ -104,7 +104,3 @@ ecorner:
   js:
     dist/js/ecorner.js: { minified: true }
 
-media-search:
-  js:
-    js/media-search/dist/islands/media-search.island.js: {}
-
