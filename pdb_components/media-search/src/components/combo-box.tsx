@@ -17,36 +17,6 @@ const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
 }) => {
   const [open, setOpen] = useState(false);
 
-  return (
-    <Combobox.Root
-      items={items}
-      multiple={multiple}
-      onValueChange={onChange}
-      value={value}
-      open={open}
-      onOpenChange={setOpen}
-      style={{display: 'inline-flex', alignItems: 'center'}}
-    >
-      <ComboBoxStyle data-open={open || undefined}>
-        <label htmlFor={id} className={multiple ? "visually-hidden" : ""}>{label}</label>
-        <div className="input-wrapper">
-          <Combobox.Input
-            placeholder={multiple ? label : placeholder} id={id}
-            className="combo-input"
-          />
-          {/* <Combobox.Value/> */}
-          <div className="input-clear">
-            <Combobox.Clear
-              aria-label="Clear selection"
-              className="combo-clear"
-            >
-              <i class="fa-solid fa-close"></i>
-            </Combobox.Clear>
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none" aria-hidden="true" className="combo-chevron" style={{cursor:'pointer'}} onClick={() => setOpen(!open)}>
-              <path d="M5.98129 7.32316C6.35238 7.69426 6.95504 7.69426 7.32613 7.32316L13.0261 1.62316C13.3972 1.25207 13.3972 0.649414 13.0261 0.27832C12.655 -0.0927734 12.0524 -0.0927734 11.6813 0.27832L6.65223 5.30738L1.62316 0.281289C1.25207 -0.089805 0.649414 -0.089805 0.27832 0.281289C-0.0927734 0.652383 -0.0927734 1.25504 0.27832 1.62613L5.97832 7.32613L5.98129 7.32316Z" fill="#43423E"/>
-            </svg>
-          </div>
-        </div>
   const selectedValues = useMemo(() => {
     if (!value) return new Set<string>();
     if (Array.isArray(value)) return new Set(value.map((item) => item.value));

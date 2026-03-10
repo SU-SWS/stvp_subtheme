@@ -661,8 +661,12 @@ export const SearchInput = styled.div`
             line-height: 1;
         }
 
-        &:hover i {
-            color: #820000;
+        &:hover {
+            background: none;
+
+            i {
+                color: #820000;
+            }
         }
     }
 `
