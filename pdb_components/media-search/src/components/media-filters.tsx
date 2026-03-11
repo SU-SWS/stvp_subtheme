@@ -9,7 +9,7 @@ import {Filters, FilterTray} from "../styled-components";
 import useOutsideClick from "../hooks/useOutsideClick";
 import {useEffect, useRef, useState} from "preact/compat";
 import {useBoolean, useScrollLock, useWindowSize} from "usehooks-ts";
-import ComboBox, {ComboBoxOption} from "./combo-box";
+import DropDownList, {DropDownListOption} from "./dropdown-list";
 
 const Refinement = ({attribute}: { attribute: string }) => {
   const {items, refine} = useRefinementList({attribute, limit: 99})
@@ -19,13 +19,13 @@ const Refinement = ({attribute}: { attribute: string }) => {
     .replace(/\b\w/g, (char) => char.toUpperCase())
 
   return (
-    <ComboBox
+    <DropDownList
       items={items}
       label={label}
       multiple
       value={items.filter(item => item.isRefined)}
       // @ts-ignore
-      onChange={(values: ComboBoxOption[]) => {
+      onChange={(values: DropDownListOption[]) => {
         const selectedValues = values.map(value => value.value)
         const refinedItems = items.filter(item => item.isRefined).map(item => item.value)
 

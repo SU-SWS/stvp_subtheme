@@ -23,7 +23,10 @@ const ResultHits = ({...props}) => {
         {hits.map(hit =>
           <li className="media-search__card" key={hit.objectID}>
             <div className="media-search__card-image">
-              {(hit as any).image_url && <img src={(hit as any).image_url} alt="" aria-hidden="true" />}
+              {(hit as any).photo && <img src={(hit as any).photo} alt="" aria-hidden="true" />}
+              {/* TODO: Add placeholder image
+                {!(hit as any).photo && <img src="" alt="" aria-hidden="true" />}
+              */}
             </div>
             <div className="media-search__card-body">
               <div className="media-search__card-title-group">

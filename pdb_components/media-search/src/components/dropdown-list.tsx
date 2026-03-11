@@ -1,17 +1,17 @@
 import {Menu} from '@base-ui/react/menu';
 import {ReactElement, useMemo, useState} from "preact/compat";
-import {ComboBoxPortalStyle, ComboBoxStyle} from "../styled-components";
+import {DropDownListPortalStyle, DropDownListStyle} from "../styled-components";
 
-export type ComboBoxOption = {
+export type DropDownListOption = {
   label: string;
   value: string;
 }
 
-const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
-  items: Array<ComboBoxOption>,
+const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
+  items: Array<DropDownListOption>,
   label: string | ReactElement
-  value?: ComboBoxOption | Array<ComboBoxOption>
-  onChange?: (value: ComboBoxOption | Array<ComboBoxOption> | null) => void
+  value?: DropDownListOption | Array<DropDownListOption>
+  onChange?: (value: DropDownListOption | Array<DropDownListOption> | null) => void
   multiple?: boolean
   placeholder?: string
 }) => {
@@ -27,7 +27,7 @@ const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
     return items.filter((item) => selectedValues.has(item.value));
   }, [items, selectedValues]);
 
-  const handleToggle = (item: ComboBoxOption, checked: boolean) => {
+  const handleToggle = (item: DropDownListOption, checked: boolean) => {
     if (!onChange) return;
 
     if (multiple) {
@@ -44,37 +44,37 @@ const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
 
   return (
     <Menu.Root open={open} onOpenChange={setOpen} modal={false}>
-      <ComboBoxStyle>
+      <DropDownListStyle>
         <label className={multiple ? "visually-hidden" : ""}>{label}</label>
         <div className="input-wrapper">
-          <Menu.Trigger className="combo-input">
-            <span className="combo-input-label">
+          <Menu.Trigger className="dropdown-input">
+            <span className="dropdown-input-label">
               {multiple
                 ? `${label}${selectedItems.length ? ` (${selectedItems.length})` : ''}`
                 : (selectedItems[0]?.label || placeholder || label)}
             </span>
-            <ChevronIcon className={`combo-chevron ${open ? "is-open" : ""}`} />
+            <ChevronIcon className={`dropdown-chevron ${open ? "is-open" : ""}`} />
           </Menu.Trigger>
         </div>
-      </ComboBoxStyle>
+      </DropDownListStyle>
 
-      <Menu.Portal className="combo-portal">
-        <ComboBoxPortalStyle>
-          <Menu.Positioner align="start" className="combo-positioner">
-            <Menu.Popup className="combo-popup">
-              <ul className="combo-list">
+      <Menu.Portal className="dropdown-portal">
+        <DropDownListPortalStyle>
+          <Menu.Positioner align="start" className="dropdown-positioner">
+            <Menu.Popup className="dropdown-popup">
+              <ul className="dropdown-list">
                 {items.length === 0 && (
-                  <li className="combo-empty">No options found.</li>
+                  <li className="dropdown-empty">No options found.</li>
                 )}
-                {items.map((item: ComboBoxOption) => (
+                {items.map((item: DropDownListOption) => (
                   <li key={item.value}>
                     <Menu.CheckboxItem
                       checked={selectedValues.has(item.value)}
                       onCheckedChange={(checked: boolean) => handleToggle(item, checked)}
-                      className="combo-item"
+                      className="dropdown-item"
                     >
-                      <div className="combo-item-indicator">
-                        <span className="combo-checkbox" aria-hidden="true">
+                      <div className="dropdown-item-indicator">
+                        <span className="dropdown-checkbox" aria-hidden="true">
                           {selectedValues.has(item.value) && (
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none">
                               <path d="M1 3.5L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -82,14 +82,14 @@ const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
                           )}
                         </span>
                       </div>
-                      <div className="combo-label">{item.label}</div>
+                      <div className="dropdown-label">{item.label}</div>
                     </Menu.CheckboxItem>
                   </li>
                 ))}
               </ul>
             </Menu.Popup>
           </Menu.Positioner>
-        </ComboBoxPortalStyle>
+        </DropDownListPortalStyle>
       </Menu.Portal>
     </Menu.Root>
   );
@@ -104,6 +104,7 @@ const ChevronIcon = (props: React.ComponentProps<'svg'>) => {
   );
 }
 
+
 const CheckIcon = (props: React.ComponentProps<'svg'>) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none" {...props}>
@@ -113,4 +114,4 @@ const CheckIcon = (props: React.ComponentProps<'svg'>) => {
   );
 }
 
-export default ComboBox
+export default DropDownList
