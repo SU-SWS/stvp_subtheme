@@ -223,15 +223,15 @@ export const AlgoliaSearchContainer = styled.div`
         padding: 0 10px;
     }
 `
-export const ComboBoxPortalStyle = styled.div`
-    .combo-positioner {
+export const DropDownListPortalStyle = styled.div`
+    .dropdown-positioner {
         position: absolute;
         left: 576.333px;
         top: 50px;
         z-index: 100;
     }
 
-    .combo-popup {
+    .dropdown-popup {
         display: flex;
         flex-direction: column;
         width: 300px;
@@ -242,13 +242,13 @@ export const ComboBoxPortalStyle = styled.div`
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
 
-    .combo-list {
+    .dropdown-list {
         list-style: none;
         margin: 0;
         padding: 0;
     }
 
-    .combo-item {
+    .dropdown-item {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -259,12 +259,12 @@ export const ComboBoxPortalStyle = styled.div`
             background: #F4F4F4;
         }
 
-        .combo-item-indicator {
+        .dropdown-item-indicator {
             display: flex;
             align-items: center;
         }
 
-        .combo-checkbox {
+        .dropdown-checkbox {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -276,23 +276,23 @@ export const ComboBoxPortalStyle = styled.div`
             background: #FFF;
         }
 
-        &[data-checked] .combo-checkbox,
-        &[data-selected] .combo-checkbox {
+        &[data-checked] .dropdown-checkbox,
+        &[data-selected] .dropdown-checkbox {
             background: #B1040E;
             border-color: #B1040E;
         }
 
-        &:hover .combo-checkbox {
+        &:hover .dropdown-checkbox {
             border-color: #B1040E;
         }
     }
 
-    .combo-empty {
+    .dropdown-empty {
         padding: 12px var(--spacing-ms-1, 27px);
         color: #8F8C89;
     }
 `
-export const ComboBoxStyle = styled.div`
+export const DropDownListStyle = styled.div`
     display: inline-flex;
     align-items: center;
 
@@ -310,7 +310,7 @@ export const ComboBoxStyle = styled.div`
         box-sizing: border-box;
     }
 
-    .combo-input {
+    .dropdown-input {
         -webkit-appearance: none;
         appearance: none;
         display: inline-flex;
@@ -342,7 +342,7 @@ export const ComboBoxStyle = styled.div`
         gap: 6px;
     }
 
-    .combo-clear {
+    .dropdown-clear {
         background: none;
         border: none;
         padding: 0;
@@ -350,14 +350,14 @@ export const ComboBoxStyle = styled.div`
         color: #43423E;
     }
 
-    .combo-chevron {
+    .dropdown-chevron {
         display: block;
         align-self: center;
         flex-shrink: 0;
         transition: transform 0.2s ease;
     }
 
-    .combo-chevron.is-open {
+    .dropdown-chevron.is-open {
         transform: rotate(180deg);
     }
 `
