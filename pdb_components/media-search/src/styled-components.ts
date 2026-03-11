@@ -27,7 +27,7 @@ export const UnstyledList = styled.ul`
                 font-size: var(--Font-size-XXL-Type-0, 19px);
                 font-style: normal;
                 font-weight: 700;
-                line-height: 140%; /* 26.6px */
+                line-height: 120%;
             }
 
             .media-search__card-image {
@@ -55,12 +55,21 @@ export const UnstyledList = styled.ul`
                 gap: 8px;
             }
 
+            .media-search__card-title-group {
+                display: flex;
+                flex-direction: column;
+                gap: 3px;
+
+                h3 {
+                    margin: 0;
+                }
+            }
+
             .media-search__card-series {
                 display: inline-flex;
                 align-items: center;
                 font-size: 15px;
                 color: var(--Primary-Black, #2E2D29);
-                margin-top: -2px;
             }
 
             .media-search__card-label {
