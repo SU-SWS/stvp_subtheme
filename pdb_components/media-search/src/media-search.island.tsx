@@ -59,7 +59,7 @@ const Search = () => {
         },
       }}
     >
-      <Configure filters="type:Audio/Visual"/>
+      <Configure filters="type:Audio/Visual" hitsPerPage={18}/>
       <AlgoliaSearchContainer className="media-search--container-wrapper">
         <h2 className="media-search__title">Video, Podcasts, and Rich Media</h2>
         <div className="media-filters-area">

@@ -6,14 +6,13 @@ export const UnstyledList = styled.ul`
     margin: 0;
 
     &.media-search__container {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 48px;
         row-gap: 32px;
 
         .media-search__card {
-            width: calc((100% - 96px) / 3);
+            width: 100%;
             border: 1px solid var(--primary-black-20, #D5D5D4);
             position: relative;
             display: flex;
@@ -86,12 +85,18 @@ export const UnstyledList = styled.ul`
         }
 
         @media (max-width: 991px) {
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 24px;
+
             .media-search__card {
-                width: calc((100% - 48px) / 2);
+                width: 100%;
             }
         }
 
         @media (max-width: 550px) {
+            grid-template-columns: 1fr;
+            column-gap: 0;
+
             .media-search__card {
                 width: 100%;
             }
