@@ -392,7 +392,7 @@ export const Filters = styled.div`
         flex-wrap: wrap;
         gap: 8px;
         align-items: center;
-        padding-left: 130px;
+        padding-left: 0;
 
         @media (min-width: 1500px) {
             display: flex;
