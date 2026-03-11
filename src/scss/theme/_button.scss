@@ -153,6 +153,11 @@ a.su-button--big {
     .su-button--secondary {
         @include secondary-button-style($su-color-palo-verde-dark, $su-color-palo-verde-dark);
 
+        // Expand button fixup
+        &.expand-collapse-button:not(:hover):not(:focus):after {
+            background: linear-gradient(45deg, #fff, #fff);
+            color: $stvp-color-palo-verde;
+        }
     }
 }
 
@@ -165,6 +170,12 @@ a.su-button--big {
 
     .su-button--secondary {
         @include secondary-button-style($su-color-plum,$su-color-plum);
+
+        // Expand button fixup
+        &.expand-collapse-button:not(:hover):not(:focus):after {
+            background: linear-gradient(45deg, #fff, #fff);
+            color: $su-color-plum;
+        }
     }
 }
 
@@ -177,6 +188,12 @@ a.su-button--big {
 
     .su-button--secondary {
         @include secondary-button-style($su-color-lagunita-dark,$su-color-lagunita-dark);
+
+        // Expand button fixup
+            &.expand-collapse-button:not(:hover):not(:focus):after {
+                background: linear-gradient(45deg, #fff, #fff);
+                color: $su-color-lagunita;
+            }
     }
 }
 
@@ -217,3 +234,15 @@ a.su-button--big {
         @include secondary-button-style($stvp-color-brown, $stvp-color-brown);
     }
 }
+
+// Overide for accordion expand/collapse
+.expand-collapse-button {
+    span.expand-collapse {
+        padding-right: 5px;
+    }
+
+    &.su-button--secondary:after {
+        mask: none;
+    }
+}
+
