@@ -60,8 +60,8 @@ export const UnstyledList = styled.ul`
                 flex-direction: column;
                 gap: 3px;
 
-                h3 {
-                    margin: 0;
+                a {
+                    line-height: 120%;
                 }
             }
 
@@ -659,13 +659,16 @@ export const SearchInput = styled.div`
         border-radius: 40px;
         border: 1px solid #C0C0BF;
         background: #FFF;
-        padding: 0 166px 0 26px;
+        padding: 0 32px 0 26px;
         height: 40px;
+        width: 100%;
         box-sizing: border-box;
         line-height: normal;
         vertical-align: middle;
         -webkit-appearance: none;
         appearance: none;
+        position: relative;
+        z-index: 1;
 
         &::placeholder {
             color: var(--Form-element-Text-Secondary, #6D6C69);
@@ -686,6 +689,7 @@ export const SearchInput = styled.div`
         display: flex;
         align-items: center;
         gap: 4px;
+        z-index: 2;
     }
 
     button {

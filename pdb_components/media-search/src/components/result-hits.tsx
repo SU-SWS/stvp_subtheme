@@ -27,7 +27,7 @@ const ResultHits = ({...props}) => {
             </div>
             <div className="media-search__card-body">
               <div className="media-search__card-title-group">
-                <h3><a href={hit.url}>{hit.title}</a></h3>
+                <h3 style={{lineHeight: '120%', margin: 0}}><a href={hit.url}>{hit.title}</a></h3>
                 {(() => {
                   const series = (hit as any).media_series;
                   const type = (hit as any).media_type;
