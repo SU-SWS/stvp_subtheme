@@ -55,19 +55,6 @@ const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
             </span>
             <ChevronIcon className={`combo-chevron ${open ? "is-open" : ""}`} />
           </Menu.Trigger>
-
-          {selectedItems.length > 0 && (
-            <div className="input-clear">
-              <button
-                aria-label="Clear selection"
-                className="combo-clear"
-                onClick={() => onChange?.(multiple ? [] : null)}
-                type="button"
-              >
-                <i class="fa-solid fa-close"></i>
-              </button>
-            </div>
-          )}
         </div>
       </ComboBoxStyle>
 
