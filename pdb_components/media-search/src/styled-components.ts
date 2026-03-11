@@ -364,10 +364,18 @@ export const ComboBoxStyle = styled.div`
 export const Filters = styled.div`
     &.media-filters-wrapper {
         display: flex;
-        align-items: center;
-        justify-content: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
         max-width: 1300px;
         margin: 38px 0 38px;
+        gap: 12px;
+    }
+
+    .filter-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
     }
 
     .results-counter {
@@ -377,6 +385,46 @@ export const Filters = styled.div`
         margin: 0;
         align-self: center;
         line-height: 1;
+    }
+
+    .active-filters-bar {
+        display: none;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        padding-left: 130px;
+
+        @media (min-width: 1500px) {
+            display: flex;
+        }
+    }
+
+    .active-filter-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border: none;
+        background: none;
+        font-size: 15px;
+        color: #2E2D29;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover {
+            color: #B1040E;
+        }
+    }
+
+    .active-filters-clear {
+        background: none;
+        border: none;
+        padding: 4px 4px;
+        font-size: 14px;
+        color: #B1040E;
+        cursor: pointer;
+        text-decoration: underline;
+        white-space: nowrap;
     }
 
     .filters {

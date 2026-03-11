@@ -1,6 +1,7 @@
 import SearchBox from "./search-box";
 import {
   useClearRefinements,
+  useCurrentRefinements,
   usePagination,
   useRefinementList
 } from "react-instantsearch";
@@ -104,6 +105,7 @@ const MediaFilters = () => {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const {lock: lockScroll, unlock: unlockScroll} = useScrollLock({autoLock: false})
   const {refine: clearAll} = useClearRefinements()
+  const {items: currentRefinements} = useCurrentRefinements()
 
   const {
     value: trayOpen,
@@ -130,28 +132,52 @@ const MediaFilters = () => {
   const PRIMARY_ATTRIBUTES = ['media_series', 'media_type']
   const firstAttributes = width > 768 ? PRIMARY_ATTRIBUTES : []
 
+  const allActiveTags = currentRefinements.flatMap(refinement =>
+    refinement.refinements.map(item => ({
+      label: item.label,
+      refine: () => refinement.refine(item),
+    }))
+  )
+  const hasActive = allActiveTags.length > 0
+
   return (
     <Filters className="media-filters-wrapper">
-      <p className="results-counter" aria-live="polite" aria-atomic>{nbHits} results</p>
-      <div className="filters">
-        <SearchBox/>
-        {firstAttributes.length > 0 &&
-          <div className="primary-filters">
-            {firstAttributes.map(attribute =>
-              <Refinement key={attribute} attribute={attribute}/>
-            )}
+      <div className="filter-top-row">
+        <p className="results-counter" aria-live="polite" aria-atomic>{nbHits} results</p>
+        <div className="filters">
+          <SearchBox/>
+          {firstAttributes.length > 0 &&
+            <div className="primary-filters">
+              {firstAttributes.map(attribute =>
+                <Refinement key={attribute} attribute={attribute}/>
+              )}
+            </div>
+          }
+          <div className="additional-filters">
+            <button ref={buttonRef} onClick={toggleTray} className="all-filters-btn">
+              {width <= 991 ? (
+                <>Filters <span aria-hidden="true">›</span></>
+              ) : (
+                <>All Filters <i class="fa-solid fa-sliders"></i></>
+              )}
+            </button>
           </div>
-        }
-        <div className="additional-filters">
-          <button ref={buttonRef} onClick={toggleTray} className="all-filters-btn">
-            {width <= 991 ? (
-              <>Filters <span aria-hidden="true">›</span></>
-            ) : (
-              <>All Filters <i class="fa-solid fa-sliders"></i></>
-            )}
-          </button>
         </div>
       </div>
+
+      {width >= 1500 && hasActive && (
+        <div className="active-filters-bar">
+          {allActiveTags.map((tag, i) => (
+            <button key={i} className="active-filter-tag" onClick={tag.refine} type="button">
+              {tag.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                <path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          ))}
+          <button className="active-filters-clear" onClick={() => clearAll()} type="button">Clear All</button>
+        </div>
+      )}
 
       <FilterTray $open={trayOpen} ref={ref}>
         <div className="tray-header">
