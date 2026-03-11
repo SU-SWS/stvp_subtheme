@@ -87,14 +87,13 @@ const ComboBox = ({items, label, value, onChange, multiple, placeholder}: {
                       className="combo-item"
                     >
                       <div className="combo-item-indicator">
-                        <input
-                          type="checkbox"
-                          tabIndex={-1}
-                          aria-hidden="true"
-                          readOnly
-                          className="combo-checkbox"
-                          checked={selectedValues.has(item.value)}
-                        />
+                        <span className="combo-checkbox" aria-hidden="true">
+                          {selectedValues.has(item.value) && (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none">
+                              <path d="M1 3.5L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          )}
+                        </span>
                       </div>
                       <div className="combo-label">{item.label}</div>
                     </Menu.CheckboxItem>

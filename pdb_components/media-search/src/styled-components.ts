@@ -10,34 +10,68 @@ export const UnstyledList = styled.ul`
         justify-content: space-between;
         align-items: flex-start;
         flex-wrap: wrap;
+        row-gap: 32px;
 
         .media-search__card {
             width: calc((100% - 96px) / 3);
-            padding: 27px; /* add ms1 */
             border: 1px solid var(--primary-black-20, #D5D5D4);
             position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
 
             a {
-            color: var(--Primary-Black, #2E2D29);
-            /* Source Sans/Type 0 - bold */
-            font-family: var(--Family-Source-Sans, "Source Sans 3");
-            font-size: var(--Font-size-XXL-Type-0, 19px);
-            font-style: normal;
-            font-weight: 700;
-            line-height: 140%; /* 26.6px */}
+                color: var(--Primary-Black, #2E2D29);
+                /* Source Sans/Type 0 - bold */
+                font-family: var(--Family-Source-Sans, "Source Sans 3");
+                font-size: var(--Font-size-XXL-Type-0, 19px);
+                font-style: normal;
+                font-weight: 700;
+                line-height: 140%; /* 26.6px */
+            }
+
+            .media-search__card-image {
+                width: 100%;
+                height: 180px;
+                background: #F4F4F4;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .media-search__card-body {
+                padding: 20px 27px 27px;
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                gap: 8px;
+            }
+
+            .media-search__card-series {
+                display: inline-flex;
+                align-items: center;
+                font-size: 13px;
+                color: var(--Primary-Black, #2E2D29);
+            }
 
             .media-search__card-label {
                 display: inline-flex;
                 align-items: center;
                 gap: 6px;
-                margin-top: 10px;
-                bottom: 0;
-                left: 0;
                 border-radius: 2px;
                 background: var(--Primary-SU-Cool-Grey, #53565A);
                 color: #FFF;
                 padding: 4px 10px;
                 font-size: 13px;
+                align-self: flex-start;
             }
         }
 
@@ -203,20 +237,11 @@ export const ComboBoxPortalStyle = styled.div`
         display: flex;
         align-items: center;
         gap: 10px;
-        padding: var(--spacing-ms-1, 27px);
+        padding: 9px var(--spacing-ms-1, 27px);
         cursor: pointer;
 
         &:hover {
             background: #F4F4F4;
-        }
-
-        &[data-selected] input[type="checkbox"]:after {
-            content: "✓";
-            position: absolute;
-            background: #B1040E;
-            border-color: #B1040E;
-            color: white;
-            line-height: 16px;
         }
 
         .combo-item-indicator {
@@ -225,19 +250,25 @@ export const ComboBoxPortalStyle = styled.div`
         }
 
         .combo-checkbox {
-            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
             width: 16px;
             height: 16px;
             border-radius: 2px;
-            border: 1px solid #C0C0BF;
+            border: 2.5px solid #C0C0BF;
             background: #FFF;
-            cursor: pointer;
-            clip-path: unset;
+        }
 
-            &:checked {
-                background: #B1040E;
-                border-color: #B1040E;
-            }
+        &[data-checked] .combo-checkbox,
+        &[data-selected] .combo-checkbox {
+            background: #B1040E;
+            border-color: #B1040E;
+        }
+
+        &:hover .combo-checkbox {
+            border-color: #B1040E;
         }
     }
 
@@ -519,7 +550,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
             padding: 0 0 16px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         .tray-option-btn {
@@ -552,7 +583,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
             width: 16px;
             height: 16px;
             border-radius: 2px;
-            border: 1.5px solid #C0C0BF;
+            border: 2.5px solid #C0C0BF;
             background: #FFF;
         }
 
