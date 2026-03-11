@@ -403,7 +403,7 @@ export const Filters = styled.div`
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 4px 10px;
+        padding: 4px 8px;
         border: none;
         background: none;
         font-size: 15px;
@@ -420,11 +420,15 @@ export const Filters = styled.div`
         background: none;
         border: none;
         padding: 4px 4px;
-        font-size: 14px;
-        color: #B1040E;
+        font-size: 15px;
+        color: #2E2D29;
         cursor: pointer;
         text-decoration: underline;
         white-space: nowrap;
+
+        &:hover {
+            color: #B1040E;
+        }
     }
 
     .filters {

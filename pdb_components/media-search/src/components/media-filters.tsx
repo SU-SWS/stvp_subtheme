@@ -170,8 +170,8 @@ const MediaFilters = () => {
           {allActiveTags.map((tag, i) => (
             <button key={i} className="active-filter-tag" onClick={tag.refine} type="button">
               {tag.label}
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                <path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" aria-hidden="true">
+                <path d="M1 1L9 10M9 1L1 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
             </button>
           ))}
