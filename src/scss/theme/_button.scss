@@ -22,15 +22,15 @@ a.su-button {
             margin-right: 0;
         }
 
-        // external link on hover 
+        // external link on hover
         &:hover, &:focus {
             &:after {
                 margin-top: 8px;
             }
         }
     }
-    
-    &.mailto { 
+
+    &.mailto {
 
         svg { // size it larger than the default from Stanford Basic
             margin-top: -9px;
@@ -42,12 +42,12 @@ a.su-button {
                 height: 22px;
             }
         }
-        
+
 
         &:after { // hide arrow icon
             display: none;
         }
-        
+
         &:hover, &:focus {
             &.su-button--secondary {
                 svg {
@@ -74,7 +74,7 @@ a.su-button {
                 height: 9px;
             }
         }
-    }    
+    }
 }
 
 // Big Buttons
@@ -95,7 +95,7 @@ a.su-button--big {
     }
 
     &.su-link--external {
-        
+
         &:not(:hover):not(:focus) {
             text-decoration: none;
         }
@@ -122,7 +122,7 @@ a.su-button--big {
             height: 35px;
         }
     }
-    
+
 }
 
 /* --- Styles for Only Secondary Buttons --- */
@@ -130,17 +130,19 @@ a.su-button--big {
     @include rounded-button-general();
     @include secondary-button-style($su-color-digital-red, $su-color-digital-red-xlight);
     box-shadow: none;
-    
+
     &:hover, &:focus {
         box-shadow: none;
     }
-    
+
 }
 
 
 
 /* --- Page Theme Button Overrides --- */
  // so it doesn't affect the footer or other areas with buttons.
+ // Order of colors in mixin.
+ // set-button-color($backgroundGradient, $borderGradient, $textColor: white, $iconColor: white)
 .page-theme--palo-verde .page-content {
     .su-button--big,
     .su-button--secondary,
@@ -160,7 +162,7 @@ a.su-button--big {
     .su-button {
         @include set-button-color($gradient-plum, $gradient-plum-bright);
     }
-    
+
     .su-button--secondary {
         @include secondary-button-style($su-color-plum,$su-color-plum);
     }
@@ -174,7 +176,7 @@ a.su-button--big {
     }
 
     .su-button--secondary {
-        @include secondary-button-style($su-color-lagunita-dark,$su-color-lagunita-dark);        
+        @include secondary-button-style($su-color-lagunita-dark,$su-color-lagunita-dark);
     }
 }
 
@@ -193,7 +195,7 @@ a.su-button--big {
 
             &:after {
                 background-color: $stvp-color-brown;
-                
+
                 // should be straight brown arrow (mask-based)
                 &:not(.su-link--external)  {
                     margin-top: 1px;
