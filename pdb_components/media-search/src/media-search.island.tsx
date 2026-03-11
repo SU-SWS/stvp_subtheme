@@ -17,9 +17,9 @@ const key = window.drupalSettings?.stanfordAlgolia.searchKey || process.env.ALGO
 const searchClient = liteClient(appId, key);
 
 
-const Search = () => {
+const Search = ({index, filter}: { index?: string, filter?: string }) => {
   // @ts-ignore
-  const searchIndex = window.drupalSettings?.stanfordAlgolia.index || process.env.ALGOLIA_INDEX;
+  const searchIndex = index || window.drupalSettings?.stanfordAlgolia.index || process.env.ALGOLIA_INDEX;
 
   return (
     <InstantSearch
@@ -59,7 +59,7 @@ const Search = () => {
         },
       }}
     >
-      <Configure filters="type:Audio/Visual" hitsPerPage={18}/>
+      <Configure filters={filter || "type:Audio/Visual"}/>
       <AlgoliaSearchContainer className="media-search--container-wrapper">
         {/* <h2 className="media-search__title">Video, Podcasts, and Rich Media</h2> */}
         <div className="media-filters-area">
@@ -89,9 +89,23 @@ Array.from(allEls).slice(1).forEach(el => {
 
 if (!(window as any).__mediaSearchIslandMounted) {
   ;(window as any).__mediaSearchIslandMounted = true
+  type PDBConfig = Record<string, string>
+  type MediaConfig = {
+    media_search_index?: string,
+    media_search_filters?: string
+  }
+
+  // @ts-ignore
+  const pdbConfig: Record<string, PDBConfig> = window?.drupalSettings?.pdb?.configuration || {}
+  const mediaConfig: MediaConfig = Object.values(pdbConfig).find((config) => typeof config.media_search_index !== "undefined" || typeof config.media_search_filters !== "undefined") as MediaConfig
+
   // Use :first-of-type so preact-island only renders into the first element
   // even if multiple <media-search> elements exist in the DOM.
   island.render({
     selector: `${islandName}:first-of-type`,
+    initialProps: {
+      index: mediaConfig?.media_search_index || undefined,
+      filter: mediaConfig?.media_search_filters || undefined
+    }
   })
 }
