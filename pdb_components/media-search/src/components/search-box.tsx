@@ -43,7 +43,7 @@ const SearchBox = ({federatedSearch}: { federatedSearch?: boolean }) => {
             autoCapitalize="off"
             maxLength={128}
             type="search"
-            placeholder="Search video and podcasts"
+            placeholder="Search"
             defaultValue={query}
           />
           <div class="search-buttons">

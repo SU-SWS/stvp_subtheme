@@ -133,7 +133,7 @@ export const PaginationList = styled.ul`
         background: none !important;
         border: none !important;
         border-bottom: 2px solid transparent !important;
-        padding: 0 0 4px 0;
+        padding: 2px 0 4px 0;
         cursor: pointer;
         color: var(--Interactive-Digital-Red, #B1040E);
         text-align: center;
@@ -376,6 +376,11 @@ export const Filters = styled.div`
         align-items: center;
         justify-content: flex-start;
         width: 100%;
+
+        @media (max-width: 991px) {
+            flex-wrap: wrap;
+            gap: 12px;
+        }
     }
 
     .results-counter {
@@ -384,7 +389,16 @@ export const Filters = styled.div`
         flex-shrink: 0;
         margin: 0;
         align-self: center;
-        line-height: 1;
+        color: var(--primary-black-80, #585754);
+        font-family: var(--Family-Source-Sans, "Source Sans 3");
+        font-size: var(--Font-size-XXL-Type-0, 19px);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+
+        @media (max-width: 991px) {
+            width: 100%;
+        }
     }
 
     .active-filters-bar {
@@ -736,6 +750,11 @@ export const SearchInput = styled.div`
             font-weight: 400;
             line-height: 130%;
         }
+
+        &:focus, &:focus-visible {
+            outline: none !important;
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08) !important;
+        }
     }
 
     .search-buttons {
@@ -750,7 +769,7 @@ export const SearchInput = styled.div`
     }
 
     button {
-        background: none;
+        background: transparent !important;
         border: none;
         padding: 0;
         display: inline-flex;
@@ -763,12 +782,26 @@ export const SearchInput = styled.div`
             line-height: 1;
         }
 
-        &:hover {
-            background: none;
+        &[type="submit"] i {
+            font-size: 17px;
+        }
+
+        &[type="reset"] i {
+            color: #2E2D29;
+        }
+
+        &:hover, &:active, &:focus, &:focus-visible {
+            background: transparent !important;
 
             i {
                 color: #820000;
             }
+        }
+
+        &[type="reset"]:hover i,
+        &[type="reset"]:active i,
+        &[type="reset"]:focus i {
+            color: #6D6C69;
         }
     }
 `
