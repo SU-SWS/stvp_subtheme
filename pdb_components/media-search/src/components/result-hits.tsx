@@ -17,7 +17,7 @@ const ResultHits = ({...props}) => {
   )
 
   return (
-    <div>
+    <div style={{paddingBottom: '60px'}}>
       <h2 className="visually-hidden">Results</h2>
       <UnstyledList className="media-search__container">
         {hits.map(hit =>
