@@ -27,8 +27,8 @@ const ResultHits = ({...props}) => {
             </div>
             <div className="media-search__card-body">
               <h3><a href={hit.url}>{hit.title}</a></h3>
-              {(hit as any).media_series?.[0] && (
-                <span className="media-search__card-series">{(hit as any).media_series[0]}</span>
+              {(hit as any).media_series && (
+                <span className="media-search__card-series">{Array.isArray((hit as any).media_series) ? (hit as any).media_series[0] : (hit as any).media_series}</span>
               )}
               <span className="media-search__card-label">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">

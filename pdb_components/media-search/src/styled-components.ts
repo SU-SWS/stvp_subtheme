@@ -58,8 +58,9 @@ export const UnstyledList = styled.ul`
             .media-search__card-series {
                 display: inline-flex;
                 align-items: center;
-                font-size: 13px;
+                font-size: 15px;
                 color: var(--Primary-Black, #2E2D29);
+                margin-top: -2px;
             }
 
             .media-search__card-label {
