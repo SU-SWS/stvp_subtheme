@@ -10,3 +10,12 @@ path: /jsonapi/node/stanford_event
 add_js:
   footer:
     'dist/islands/media-search.island.js': {minified: true}
+configuration:
+  media_search_index:
+    type: textfield
+    title: Index
+    default_value: prod_STVP
+  media_search_filters:
+    type: textfield
+    title: Hidden Filter
+    default_value: 'type:Audio/Visual'
