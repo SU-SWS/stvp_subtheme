@@ -159,7 +159,7 @@ export const PaginationList = styled.ul`
     }
 
     /* Active / current page */
-    && li[aria-current="true"] button.page-number {
+    && button.page-number[aria-current="page"] {
         color: var(--Primary-Black, #2E2D29);
         border-bottom-color: var(--Primary-Black, #2E2D29) !important;
         cursor: default;

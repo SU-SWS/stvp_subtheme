@@ -76,13 +76,12 @@ const ResultHits = ({...props}) => {
             }
 
             {pages.map(pageNum => (
-              <li
-                key={`page-${pageNum}`}
-                aria-current={currentPage === pageNum}
-              >
+              <li key={`page-${pageNum}`}>
                 <button
                   className="page-number"
                   onClick={() => goToPage(pageNum)}
+                  aria-label={`Page ${pageNum + 1}${currentPage === pageNum ? ', current page' : ''}`}
+                  aria-current={currentPage === pageNum ? 'page' : undefined}
                 >
                   {pageNum + 1}
                 </button>
