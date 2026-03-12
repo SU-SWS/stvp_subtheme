@@ -53,44 +53,46 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
                 ? `${label}${selectedItems.length ? ` (${selectedItems.length})` : ''}`
                 : (selectedItems[0]?.label || placeholder || label)}
             </span>
-            <ChevronIcon className={`dropdown-chevron ${open ? "is-open" : ""}`} />
+            <ChevronIcon className={`dropdown-chevron ${open ? "is-open" : ""}`} aria-hidden="true" />
           </Menu.Trigger>
         </div>
       </DropDownListStyle>
 
-      <Menu.Portal className="dropdown-portal">
-        <DropDownListPortalStyle>
-          <Menu.Positioner align="start" className="dropdown-positioner">
-            <Menu.Popup className="dropdown-popup">
-              <ul className="dropdown-list">
-                {items.length === 0 && (
-                  <li className="dropdown-empty">No options found.</li>
-                )}
-                {items.map((item: DropDownListOption) => (
-                  <li key={item.value}>
-                    <Menu.CheckboxItem
-                      checked={selectedValues.has(item.value)}
-                      onCheckedChange={(checked: boolean) => handleToggle(item, checked)}
-                      className="dropdown-item"
-                    >
-                      <div className="dropdown-item-indicator">
-                        <span className="dropdown-checkbox" aria-hidden="true">
-                          {selectedValues.has(item.value) && (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none">
-                              <path d="M1 3.5L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                          )}
-                        </span>
-                      </div>
-                      <div className="dropdown-label">{item.label}</div>
-                    </Menu.CheckboxItem>
-                  </li>
-                ))}
-              </ul>
-            </Menu.Popup>
-          </Menu.Positioner>
-        </DropDownListPortalStyle>
-      </Menu.Portal>
+      {open && (
+        <Menu.Portal className="dropdown-portal">
+          <DropDownListPortalStyle>
+            <Menu.Positioner align="start" className="dropdown-positioner">
+              <Menu.Popup className="dropdown-popup">
+                <ul className="dropdown-list">
+                  {items.length === 0 && (
+                    <li className="dropdown-empty">No options found.</li>
+                  )}
+                  {items.map((item: DropDownListOption) => (
+                    <li key={item.value}>
+                      <Menu.CheckboxItem
+                        checked={selectedValues.has(item.value)}
+                        onCheckedChange={(checked: boolean) => handleToggle(item, checked)}
+                        className="dropdown-item"
+                      >
+                        <div className="dropdown-item-indicator">
+                          <span className="dropdown-checkbox" aria-hidden="true">
+                            {selectedValues.has(item.value) && (
+                              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none">
+                                <path d="M1 3.5L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                            )}
+                          </span>
+                        </div>
+                        <div className="dropdown-label">{item.label}</div>
+                      </Menu.CheckboxItem>
+                    </li>
+                  ))}
+                </ul>
+              </Menu.Popup>
+            </Menu.Positioner>
+          </DropDownListPortalStyle>
+        </Menu.Portal>
+      )}
     </Menu.Root>
   );
 }

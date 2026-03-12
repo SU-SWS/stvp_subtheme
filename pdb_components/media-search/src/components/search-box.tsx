@@ -64,14 +64,14 @@ const SearchBox = ({federatedSearch}: { federatedSearch?: boolean }) => {
               type="reset"
               hidden={query.length === 0}
             >
-              <i class="fa-solid fa-close"></i>
+              <i class="fa-solid fa-close" aria-hidden="true"></i>
               <span className="visually-hidden">Clear search</span>
             </button>
             <button type="submit">
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
               <span className="visually-hidden">Submit search</span>
             </button>
-            <span className="divider"/>
+            <span className="divider" aria-hidden="true"/>
           </div>
         </SearchInput>
 

@@ -164,10 +164,10 @@ const MediaFilters = () => {
   const hasActive = allActiveTags.length > 0
 
   return (
-    <Filters className="media-filters-wrapper">
+    <Filters className="media-filters-wrapper" role="region" aria-label="Media search filters">
       <div className="filter-top-row">
-        <p className="results-counter" aria-live="polite" aria-atomic>{nbHits} results</p>
-        <div className="filters">
+        <p className="results-counter" aria-live="polite" aria-atomic="true">{nbHits} results</p>
+        <div className="filters" role="group" aria-label="Filter controls">
           <SearchBox/>
           {firstAttributes.length > 0 &&
             <div className="primary-filters">
@@ -184,7 +184,7 @@ const MediaFilters = () => {
               aria-expanded={trayOpen}
               aria-controls="filter-tray"
               aria-haspopup="dialog"
-              aria-label={trayOpen ? 'Close filters panel' : 'Open filters panel'}
+              aria-label={`${trayOpen ? 'Close' : 'Open'} filters panel${allActiveTags.length > 0 ? `, ${allActiveTags.length} active` : ''}`}
             >
               {width <= 991 ? (
                 <>
@@ -196,7 +196,7 @@ const MediaFilters = () => {
                   </span>
                 </>
               ) : (
-                <>All Filters{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''} <i class="fa-solid fa-sliders"></i></>
+                <>All Filters{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''} <i class="fa-solid fa-sliders" aria-hidden="true"></i></>
               )}
             </button>
           </div>
@@ -204,7 +204,7 @@ const MediaFilters = () => {
       </div>
 
       {width >= 1500 && hasActive && (
-        <div className="active-filters-bar">
+        <div className="active-filters-bar" role="region" aria-label="Active filters">
           {allActiveTags.map((tag, i) => (
             <button key={i} className="active-filter-tag" onClick={tag.refine} type="button" aria-label={`Remove filter: ${tag.label}`}>
               {tag.label}
