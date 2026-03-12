@@ -734,6 +734,7 @@ export const SearchInput = styled.div`
         height: 40px;
         width: 100%;
         box-sizing: border-box;
+        font-size: 14px;
         line-height: normal;
         vertical-align: middle;
         -webkit-appearance: none;
@@ -741,11 +742,19 @@ export const SearchInput = styled.div`
         position: relative;
         z-index: 1;
 
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-decoration,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration {
+            -webkit-appearance: none;
+            display: none !important;
+        }
+
         &::placeholder {
             color: var(--Form-element-Text-Secondary, #6D6C69);
             text-align: left;
             font-family: var(--Family-Source-Sans, "Source Sans 3");
-            font-size: var(--Font-size-All-breakpoints-16, 16px);
+            font-size: 14px;
             font-style: normal;
             font-weight: 400;
             line-height: 130%;
@@ -792,10 +801,14 @@ export const SearchInput = styled.div`
 
         &:hover, &:active, &:focus, &:focus-visible {
             background: transparent !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
 
-            i {
-                color: #820000;
-            }
+        &[type="submit"]:hover i,
+        &[type="submit"]:active i,
+        &[type="submit"]:focus i {
+            color: #820000;
         }
 
         &[type="reset"]:hover i,

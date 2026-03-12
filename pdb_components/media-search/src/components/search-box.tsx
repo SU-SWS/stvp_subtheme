@@ -8,6 +8,7 @@ const SearchBox = ({federatedSearch}: { federatedSearch?: boolean }) => {
   const {query, refine} = useSearchBox();
   const id = useId()
   const inputRef = useRef<HTMLInputElement>(null);
+  const mouseDownRef = useRef(false);
   return (
     <SearchForm
       className={federatedSearch ? "federated-search" : ""}
@@ -38,13 +39,25 @@ const SearchBox = ({federatedSearch}: { federatedSearch?: boolean }) => {
           <input
             id={id}
             ref={inputRef}
-            autoComplete="on"
+            autoComplete="off"
             autoCorrect="on"
             autoCapitalize="off"
             maxLength={128}
             type="search"
             placeholder="Search"
             defaultValue={query}
+            onMouseDown={() => { mouseDownRef.current = true; }}
+            onFocus={() => {
+              if (!mouseDownRef.current && inputRef.current) {
+                inputRef.current.setAttribute('autocomplete', 'on');
+              }
+              mouseDownRef.current = false;
+            }}
+            onBlur={() => {
+              if (inputRef.current) {
+                inputRef.current.setAttribute('autocomplete', 'off');
+              }
+            }}
           />
           <div class="search-buttons">
             <button
