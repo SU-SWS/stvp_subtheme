@@ -817,6 +817,16 @@ export const SearchInput = styled.div`
         z-index: 2;
     }
 
+    .divider {
+        display: inline-block;
+        width: 1px;
+        height: 16px;
+        background: #C0C0BF;
+        margin: 0 4px;
+        flex-shrink: 0;
+        align-self: center;
+    }
+
     button {
         background: transparent !important;
         border: none;
@@ -835,8 +845,9 @@ export const SearchInput = styled.div`
             font-size: 17px;
         }
 
-        &[type="reset"] i {
-            color: #2E2D29;
+        &[type="reset"] .clear-icon {
+            color: #6D6C69;
+            font-weight: normal;
         }
 
         &:hover, &:active, &:focus, &:focus-visible {
@@ -851,10 +862,10 @@ export const SearchInput = styled.div`
             color: #F83535;
         }
 
-        &[type="reset"]:hover i,
-        &[type="reset"]:active i,
-        &[type="reset"]:focus i {
-            color: #6D6C69;
+        &[type="reset"]:hover .clear-icon,
+        &[type="reset"]:active .clear-icon,
+        &[type="reset"]:focus .clear-icon {
+            color: #F83535;
         }
     }
 `
