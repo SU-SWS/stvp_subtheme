@@ -246,6 +246,10 @@ export const DropDownListPortalStyle = styled.div`
         list-style: none;
         margin: 0;
         padding: 0;
+
+        &:focus, &:focus-visible {
+            outline: none !important;
+        }
     }
 
     .dropdown-item {
@@ -257,6 +261,10 @@ export const DropDownListPortalStyle = styled.div`
 
         &:hover {
             background: #F4F4F4;
+        }
+        
+        &:focus, &:focus-visible {
+            outline: 1px solid #C0C0BF;
         }
 
         .dropdown-item-indicator {
@@ -308,6 +316,10 @@ export const DropDownListStyle = styled.div`
         gap: 6px;
         cursor: pointer;
         box-sizing: border-box;
+        
+        &:focus-within {
+            box-shadow: 2px 0 4px rgba(0, 0, 0, 0.12);
+        }
     }
 
     .dropdown-input {

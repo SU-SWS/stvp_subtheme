@@ -73,6 +73,8 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
                         checked={selectedValues.has(item.value)}
                         onCheckedChange={(checked: boolean) => handleToggle(item, checked)}
                         className="dropdown-item"
+                        tabIndex={0}
+                        aria-label={item.label}
                       >
                         <div className="dropdown-item-indicator">
                           <span className="dropdown-checkbox" aria-hidden="true">
