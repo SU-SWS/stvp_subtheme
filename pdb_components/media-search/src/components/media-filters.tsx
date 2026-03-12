@@ -159,6 +159,19 @@ const MediaFilters = () => {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [trayOpen])
 
+  // Imperatively toggle inert so Tab can never reach tray contents when closed
+  useEffect(() => {
+    const trayEl = ref.current
+    if (!trayEl) return
+    if (trayOpen) {
+      trayEl.removeAttribute('inert')
+      trayEl.removeAttribute('aria-hidden')
+    } else {
+      trayEl.setAttribute('inert', '')
+      trayEl.setAttribute('aria-hidden', 'true')
+    }
+  }, [trayOpen])
+
   const firstAttributes = width > 992 ? attributesToRender.slice(0, 2) : []
   const trayAttributes = [...attributesToRender]
 
@@ -235,8 +248,8 @@ const MediaFilters = () => {
           role="dialog"
           aria-modal="true"
           aria-labelledby="tray-title-heading"
-          aria-hidden={!trayOpen}
-          {...(!trayOpen ? {inert: ''} : {})}
+          inert=""
+          aria-hidden="true"
         >
           <div className="tray-header">
             <span id="tray-title-heading" className="tray-title">Filters</span>
