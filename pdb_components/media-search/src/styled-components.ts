@@ -252,7 +252,7 @@ export const DropDownListPortalStyle = styled.div`
         display: flex;
         align-items: center;
         gap: 10px;
-        padding: 9px var(--spacing-ms-1, 27px);
+        padding: 1px var(--spacing-ms-1, 27px);
         cursor: pointer;
 
         &:hover {
@@ -330,6 +330,10 @@ export const DropDownListStyle = styled.div`
         padding: 0;
         height: auto;
         line-height: 1;
+
+        &:hover {
+            text-decoration: underline;
+        }
 
         &::placeholder {
             color: #2E2D29;
@@ -485,6 +489,10 @@ export const Filters = styled.div`
             cursor: pointer;
             color: #2E2D29;
             font-size: 16px;
+
+            &:hover {
+                text-decoration: underline;
+            }
 
             i {
                 color: #43423E;
