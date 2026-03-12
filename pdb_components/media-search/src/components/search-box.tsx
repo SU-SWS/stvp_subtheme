@@ -67,16 +67,15 @@ const SearchBox = ({federatedSearch}: { federatedSearch?: boolean }) => {
             <button
               type="reset"
               hidden={inputValue.length === 0}
-              aria-label="Clear search"
+              aria-label="Cancel my search"
             >
               <svg width="9.6" height="11.2" viewBox="0 0 9.6 11.2" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="clear-icon">
                 <path d="M0.8 1L8.8 10.2M8.8 1L0.8 10.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
               </svg>
             </button>
             <span className="divider" aria-hidden="true"/>
-            <button type="submit">
+            <button type="submit" aria-label="Submit my search">
               <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-              <span className="visually-hidden">Submit search</span>
             </button>
           </div>
         </SearchInput>
