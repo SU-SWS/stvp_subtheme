@@ -808,7 +808,7 @@ export const SearchInput = styled.div`
         &[type="submit"]:hover i,
         &[type="submit"]:active i,
         &[type="submit"]:focus i {
-            color: #820000;
+            color: #F83535;
         }
 
         &[type="reset"]:hover i,

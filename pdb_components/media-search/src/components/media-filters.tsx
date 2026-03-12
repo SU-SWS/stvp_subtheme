@@ -188,7 +188,7 @@ const MediaFilters = () => {
             >
               {width <= 991 ? (
                 <>
-                  Filter (3){' '}
+                  Filter{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''}{' '}
                   <span aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
                       <path d="M6.16687 5.03687C6.47937 5.34937 6.47937 5.85687 6.16687 6.16937L1.36687 10.9694C1.05437 11.2819 0.546875 11.2819 0.234375 10.9694C-0.078125 10.6569 -0.078125 10.1494 0.234375 9.83687L4.46937 5.60187L0.236875 1.36687C-0.0756252 1.05437 -0.0756252 0.546875 0.236875 0.234375C0.549375 -0.078125 1.05687 -0.078125 1.36937 0.234375L6.16937 5.03437L6.16687 5.03687Z" fill="#43423E"/>
@@ -196,7 +196,7 @@ const MediaFilters = () => {
                   </span>
                 </>
               ) : (
-                <>All Filters <i class="fa-solid fa-sliders"></i></>
+                <>All Filters{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''} <i class="fa-solid fa-sliders"></i></>
               )}
             </button>
           </div>
@@ -224,6 +224,8 @@ const MediaFilters = () => {
         role="dialog"
         aria-modal="true"
         aria-labelledby="tray-title-heading"
+        aria-hidden={!trayOpen}
+        {...(!trayOpen ? {inert: ''} : {})}
       >
         <div className="tray-header">
           <span id="tray-title-heading" className="tray-title">Filters</span>
