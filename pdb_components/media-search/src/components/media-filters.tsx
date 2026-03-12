@@ -52,12 +52,17 @@ const TrayRefinement = ({attribute, labelOverride}: { attribute: string, labelOv
     .replace("_", " ")
     .replace(/\b\w/g, (char) => char.toUpperCase())
 
+  const toggleId = `tray-toggle-${attribute}`
+  const listId = `tray-list-${attribute}`
+
   return (
     <div className={`tray-section${open ? ' tray-section--open' : ''}`}>
       <button
+        id={toggleId}
         className="tray-section-toggle"
         onClick={() => setOpen(o => !o)}
         aria-expanded={open}
+        aria-controls={listId}
       >
         <span className="tray-section-title">{label}</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none" aria-hidden="true" className="tray-section-chevron">
@@ -65,7 +70,7 @@ const TrayRefinement = ({attribute, labelOverride}: { attribute: string, labelOv
         </svg>
       </button>
       {open && (
-        <ul className="tray-option-list">
+        <ul id={listId} className="tray-option-list" role="group" aria-labelledby={toggleId}>
           {items.map(item => (
             <li key={item.value} className="tray-option-item">
               <button
@@ -73,6 +78,7 @@ const TrayRefinement = ({attribute, labelOverride}: { attribute: string, labelOv
                 aria-checked={item.isRefined}
                 className={`tray-option-btn${item.isRefined ? ' tray-option-btn--checked' : ''}`}
                 onClick={() => refine(item.value)}
+                aria-label={`${item.label}${item.isRefined ? ', selected' : ''}`}
               >
                 <span className="tray-checkbox" aria-hidden="true">
                   {item.isRefined && (
@@ -103,6 +109,7 @@ const TRAY_SECTIONS = [
 const MediaFilters = () => {
   const ref = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
+  const trayCloseRef = useRef<HTMLButtonElement>(null)
   const {lock: lockScroll, unlock: unlockScroll} = useScrollLock({autoLock: false})
   const {refine: clearAll} = useClearRefinements()
   const {items: currentRefinements} = useCurrentRefinements()
@@ -121,9 +128,25 @@ const MediaFilters = () => {
   })
 
   useEffect(() => {
-    if (trayOpen) lockScroll()
+    if (trayOpen) {
+      lockScroll()
+      // Move focus to close button when tray opens
+      trayCloseRef.current?.focus()
+    }
     if (!trayOpen) unlockScroll()
     return () => unlockScroll()
+  }, [trayOpen])
+
+  // Close tray on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && trayOpen) {
+        closeTray()
+        buttonRef.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
   }, [trayOpen])
 
   const {width = 0} = useWindowSize()
@@ -154,7 +177,15 @@ const MediaFilters = () => {
             </div>
           }
           <div className="additional-filters">
-            <button ref={buttonRef} onClick={toggleTray} className="all-filters-btn">
+            <button
+              ref={buttonRef}
+              onClick={toggleTray}
+              className="all-filters-btn"
+              aria-expanded={trayOpen}
+              aria-controls="filter-tray"
+              aria-haspopup="dialog"
+              aria-label={trayOpen ? 'Close filters panel' : 'Open filters panel'}
+            >
               {width <= 991 ? (
                 <>
                   Filter (3){' '}
@@ -175,23 +206,29 @@ const MediaFilters = () => {
       {width >= 1500 && hasActive && (
         <div className="active-filters-bar">
           {allActiveTags.map((tag, i) => (
-            <button key={i} className="active-filter-tag" onClick={tag.refine} type="button">
+            <button key={i} className="active-filter-tag" onClick={tag.refine} type="button" aria-label={`Remove filter: ${tag.label}`}>
               {tag.label}
               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" aria-hidden="true">
                 <path d="M1 1L9 10M9 1L1 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
             </button>
           ))}
-          <button className="active-filters-clear" onClick={() => clearAll()} type="button">Clear All</button>
+          <button className="active-filters-clear" onClick={() => clearAll()} type="button" aria-label="Clear all active filters">Clear All</button>
         </div>
       )}
 
-      <FilterTray $open={trayOpen} ref={ref}>
+      <FilterTray
+        $open={trayOpen}
+        ref={ref}
+        id="filter-tray"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="tray-title-heading"
+      >
         <div className="tray-header">
-          <span className="tray-title">Filters</span>
-          <button className="tray-close" onClick={closeTray}>
-            <i class="fa-solid fa-close"></i>
-            <span className="visually-hidden">Close Filters</span>
+          <span id="tray-title-heading" className="tray-title">Filters</span>
+          <button ref={trayCloseRef} className="tray-close" onClick={() => { closeTray(); buttonRef.current?.focus(); }} aria-label="Close filters panel">
+            <i class="fa-solid fa-close" aria-hidden="true"></i>
           </button>
         </div>
 
@@ -202,10 +239,10 @@ const MediaFilters = () => {
         </div>
 
         <div className="tray-footer">
-          <button className="tray-clear" onClick={() => { clearAll(); }}>
+          <button className="tray-clear" onClick={() => { clearAll(); }} aria-label="Clear all filters">
             Clear All
           </button>
-          <button className="tray-view-results" onClick={closeTray}>
+          <button className="tray-view-results" onClick={() => { closeTray(); buttonRef.current?.focus(); }} aria-label="Apply filters and close panel">
             View Results
           </button>
         </div>
