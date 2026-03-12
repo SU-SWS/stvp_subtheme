@@ -429,8 +429,23 @@ export const Filters = styled.div`
         cursor: pointer;
         white-space: nowrap;
 
-        &:hover {
-            color: #B1040E;
+        &:focus, &:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .active-filter-tag__icon {
+            color: #2E2D29;
+            flex-shrink: 0;
+        }
+
+        &:hover, &:focus-visible {
+            .active-filter-tag__text {
+                text-decoration: underline;
+            }
+            .active-filter-tag__icon {
+                color: #B1040E;
+            }
         }
     }
 
@@ -444,7 +459,12 @@ export const Filters = styled.div`
         text-decoration: underline;
         white-space: nowrap;
 
-        &:hover {
+        &:focus, &:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        &:hover, &:focus-visible {
             color: #B1040E;
         }
     }

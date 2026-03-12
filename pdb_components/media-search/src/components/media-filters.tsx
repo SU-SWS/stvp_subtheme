@@ -207,8 +207,8 @@ const MediaFilters = () => {
         <div className="active-filters-bar" role="region" aria-label="Active filters">
           {allActiveTags.map((tag, i) => (
             <button key={i} className="active-filter-tag" onClick={tag.refine} type="button" aria-label={`Remove filter: ${tag.label}`}>
-              {tag.label}
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" aria-hidden="true">
+              <span className="active-filter-tag__text">{tag.label}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" aria-hidden="true" className="active-filter-tag__icon">
                 <path d="M1 1L9 10M9 1L1 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
             </button>
