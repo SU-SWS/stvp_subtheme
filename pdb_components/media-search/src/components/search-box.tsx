@@ -39,7 +39,7 @@ const SearchBox = ({federatedSearch}: { federatedSearch?: boolean }) => {
           <input
             id={id}
             ref={inputRef}
-            autoComplete="off"
+            autoComplete="on"
             autoCorrect="on"
             autoCapitalize="off"
             maxLength={128}
