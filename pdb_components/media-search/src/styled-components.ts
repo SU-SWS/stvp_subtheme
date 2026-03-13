@@ -128,7 +128,7 @@ export const PaginationList = styled.ul`
         padding: 0;
     }
 
-    /* Page number buttons — default (not current) */
+    /* Page number buttons â€” default (not current) */
     && button.page-number {
         display: inline-flex !important;
         align-items: center !important;
@@ -538,14 +538,14 @@ export const Filters = styled.div`
             color: #2E2D29;
             font-size: 16px;
 
-            &:hover {
-                .all-filters-btn__text {
-                    text-decoration: underline;
-                }
+            &:focus,
+            &:focus-visible,
+            &:active,
+            &[aria-expanded="true"] {
+                outline: none !important;
+                box-shadow: none !important;
+            }
 
-                i::before {
-                    text-decoration: none;
-                }
             &:hover, &:focus {
                 text-decoration: none;
             }
