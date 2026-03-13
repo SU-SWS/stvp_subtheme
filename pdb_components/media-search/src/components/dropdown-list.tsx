@@ -42,12 +42,80 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     setOpen(false);
   };
 
+  const handleTriggerKeyDown = (event: KeyboardEvent) => {
+    if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
+      event.preventDefault();
+      event.stopPropagation();
+      setOpen((prev) => !prev);
+    }
+  };
+
+  const handleItemKeyDown = (event: KeyboardEvent) => {
+    if (
+      event.key === 'Tab' ||
+      event.key === 'ArrowDown' ||
+      event.key === 'ArrowUp' ||
+      event.key === 'Home' ||
+      event.key === 'End'
+    ) {
+      // Prevent Base UI Menu from handling these keys as "leave/close menu".
+      event.stopPropagation();
+    }
+
+    const current = event.currentTarget as HTMLElement;
+    const list = current.closest('.dropdown-list');
+    if (!list) return;
+
+    const focusableItems = Array.from(list.querySelectorAll<HTMLElement>('.dropdown-item'));
+    const currentIndex = focusableItems.indexOf(current);
+    if (currentIndex === -1) return;
+
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      const delta = event.key === 'ArrowDown' ? 1 : -1;
+      const nextIndex = currentIndex + delta;
+      if (nextIndex >= 0 && nextIndex < focusableItems.length) {
+        focusableItems[nextIndex].focus();
+      }
+      return;
+    }
+
+    if (event.key === 'Home') {
+      event.preventDefault();
+      focusableItems[0]?.focus();
+      return;
+    }
+
+    if (event.key === 'End') {
+      event.preventDefault();
+      focusableItems[focusableItems.length - 1]?.focus();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      event.preventDefault();
+
+      const nextIndex = event.shiftKey ? currentIndex - 1 : currentIndex + 1;
+      if (nextIndex >= 0 && nextIndex < focusableItems.length) {
+        focusableItems[nextIndex].focus();
+        return;
+      }
+
+      // If user tabs past the list bounds, return focus to trigger.
+      const trigger = document.querySelector<HTMLElement>('.dropdown-input[aria-expanded="true"]');
+      trigger?.focus();
+      if (event.shiftKey) {
+        setOpen(false);
+      }
+    }
+  };
+
   return (
     <Menu.Root open={open} onOpenChange={setOpen} modal={false}>
       <DropDownListStyle>
         <label className={multiple ? "visually-hidden" : ""}>{label}</label>
         <div className="input-wrapper">
-          <Menu.Trigger className="dropdown-input">
+          <Menu.Trigger className="dropdown-input" type="button" onKeyDown={handleTriggerKeyDown}>
             <span className="dropdown-input-label">
               {multiple
                 ? `${label}${selectedItems.length ? ` (${selectedItems.length})` : ''}`
@@ -75,6 +143,8 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
                         className="dropdown-item"
                         tabIndex={0}
                         aria-label={item.label}
+                        onKeyDownCapture={handleItemKeyDown}
+                        onKeyDown={handleItemKeyDown}
                       >
                         <div className="dropdown-item-indicator">
                           <span className="dropdown-checkbox" aria-hidden="true">

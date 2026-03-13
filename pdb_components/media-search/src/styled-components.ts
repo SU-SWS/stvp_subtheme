@@ -240,6 +240,10 @@ export const DropDownListPortalStyle = styled.div`
         border-radius: 8px;
         overflow: hidden;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+        &:focus, &:focus-visible {
+            outline: none !important;
+        }
     }
 
     .dropdown-list {
