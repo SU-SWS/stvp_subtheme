@@ -79,8 +79,7 @@ const TrayRefinement = ({attribute, labelOverride}: {
             fill="#43423E"/>
         </svg>
       </button>
-      {open && (
-        <ul id={listId} className="tray-option-list" role="group" aria-labelledby={toggleId}>
+      <ul id={listId} className="tray-option-list" role="group" aria-labelledby={toggleId} hidden={!open}>
           {items.map(item => (
             <li key={item.value} className="tray-option-item">
               <button
@@ -108,7 +107,6 @@ const TrayRefinement = ({attribute, labelOverride}: {
             <li className="tray-option-empty">No options available</li>
           )}
         </ul>
-      )}
     </div>
   )
 }
@@ -165,10 +163,8 @@ const MediaFilters = () => {
     if (!trayEl) return
     if (trayOpen) {
       trayEl.removeAttribute('inert')
-      trayEl.removeAttribute('aria-hidden')
     } else {
       trayEl.setAttribute('inert', '')
-      trayEl.setAttribute('aria-hidden', 'true')
     }
   }, [trayOpen])
 
@@ -256,7 +252,6 @@ const MediaFilters = () => {
           aria-modal="true"
           aria-labelledby="tray-title-heading"
           inert=""
-          aria-hidden="true"
         >
           <div className="tray-header">
             <span id="tray-title-heading" className="tray-title">Filters</span>
