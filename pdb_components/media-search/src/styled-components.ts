@@ -260,8 +260,8 @@ export const DropDownListPortalStyle = styled.div`
 
     .dropdown-list {
         list-style: none;
-        margin: var(--spacing-ms-0, 9px) 0;
-        padding: 27px 0;
+        margin: 0;
+        padding: 0;
 
         &:focus, &:focus-visible {
             outline: none !important;
