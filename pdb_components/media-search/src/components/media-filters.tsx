@@ -93,7 +93,7 @@ const TrayRefinement = ({attribute, labelOverride}: {
                 <span className="tray-checkbox" aria-hidden="true">
                   {item.isRefined && (
                     <svg xmlns="http://www.w3.org/2000/svg" width="10"
-                         height="8" viewBox="0 0 10 8" fill="none">
+                         height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
                       <path d="M1 3.5L3.5 6.5L9 1" stroke="white"
                             stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round"/>
