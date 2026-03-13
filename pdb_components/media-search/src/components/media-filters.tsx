@@ -218,7 +218,7 @@ const MediaFilters = () => {
                   </>
                 }
                 {width > 991 &&
-                  <>All Filters{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''} <i class="fa-solid fa-sliders" aria-hidden="true"></i></>
+                  <><span className="all-filters-btn__text">All Filters{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''}</span> <i class="fa-solid fa-sliders" aria-hidden="true"></i></>
                 }
               </button>
             </div>

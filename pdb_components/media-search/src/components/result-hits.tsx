@@ -106,7 +106,7 @@ const ResultHits = ({...props}) => {
 const MediaHit = ({hit}: { hit: Media }) => {
   return (
     <>
-      <div className="media-search__card-image">
+      <div className={`media-search__card-image${(hit as any).photo ? '' : ' media-search__card-image--no-image'}`}>
         {(hit as any).photo &&
           <img src={(hit as any).photo} alt="" aria-hidden="true"/>}
         {/* TODO: Add placeholder image

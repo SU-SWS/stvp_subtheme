@@ -32,12 +32,17 @@ export const UnstyledList = styled.ul`
             .media-search__card-image {
                 width: 100%;
                 height: 180px;
-                background: #F4F4F4;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 flex-shrink: 0;
                 overflow: hidden;
+                padding: var(--spacing-ms-1, 27px) var(--spacing-ms-1, 27px) 0;
+                box-sizing: border-box;
+
+                &.media-search__card-image--no-image {
+                    background: #F4F4F4;
+                }
 
                 img {
                     width: 100%;
@@ -81,6 +86,7 @@ export const UnstyledList = styled.ul`
                 padding: 4px 10px;
                 font-size: 13px;
                 align-self: flex-start;
+                margin-top: auto;
             }
         }
 
@@ -523,7 +529,13 @@ export const Filters = styled.div`
             font-size: 16px;
 
             &:hover {
-                text-decoration: underline;
+                .all-filters-btn__text {
+                    text-decoration: underline;
+                }
+
+                i::before {
+                    text-decoration: none;
+                }
             }
 
             i {
