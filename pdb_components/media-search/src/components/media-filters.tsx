@@ -209,8 +209,10 @@ const MediaFilters = () => {
               >
                 {width <= 991 &&
                   <>
-                    Filter{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''}{' '}
-                    <span aria-hidden="true">
+                    <span className="all-filters-label">
+                      Filter{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''}
+                    </span>{' '}
+                    <span className="all-filters-icon" aria-hidden="true">
                       <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
                         <path d="M6.16687 5.03687C6.47937 5.34937 6.47937 5.85687 6.16687 6.16937L1.36687 10.9694C1.05437 11.2819 0.546875 11.2819 0.234375 10.9694C-0.078125 10.6569 -0.078125 10.1494 0.234375 9.83687L4.46937 5.60187L0.236875 1.36687C-0.0756252 1.05437 -0.0756252 0.546875 0.236875 0.234375C0.549375 -0.078125 1.05687 -0.078125 1.36937 0.234375L6.16937 5.03437L6.16687 5.03687Z" fill="#43423E"/>
                       </svg>
@@ -218,7 +220,12 @@ const MediaFilters = () => {
                   </>
                 }
                 {width > 991 &&
-                  <><span className="all-filters-btn__text">All Filters{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''}</span> <i class="fa-solid fa-sliders" aria-hidden="true"></i></>
+                  <>
+                    <span className="all-filters-label all-filters-btn__text">
+                      All Filters{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''}
+                    </span>{' '}
+                    <i className="fa-solid fa-sliders all-filters-icon" aria-hidden="true"></i>
+                  </>
                 }
               </button>
             </div>

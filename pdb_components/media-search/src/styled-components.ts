@@ -246,6 +246,10 @@ export const DropDownListPortalStyle = styled.div`
         border-radius: 8px;
         overflow: hidden;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+        &:focus, &:focus-visible {
+            outline: none !important;
+        }
     }
 
     .dropdown-list {
@@ -536,10 +540,25 @@ export const Filters = styled.div`
                 i::before {
                     text-decoration: none;
                 }
+            &:hover, &:focus {
+                text-decoration: none;
             }
 
+            &:hover .all-filters-label, &:focus .all-filters-label {
+                text-decoration: underline;
+            }
+
+            .all-filters-icon,
             i {
                 color: #43423E;
+                text-decoration: none !important;
+                display: inline-flex;
+            }
+
+            &:hover .all-filters-icon,
+            &:focus .all-filters-icon,
+            &:hover i {
+                text-decoration: none !important;
             }
         }
     }
