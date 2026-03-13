@@ -526,12 +526,25 @@ export const Filters = styled.div`
             color: #2E2D29;
             font-size: 16px;
 
-            &:hover {
+            &:hover, &:focus {
+                text-decoration: none;
+            }
+
+            &:hover .all-filters-label, &:focus .all-filters-label {
                 text-decoration: underline;
             }
 
+            .all-filters-icon,
             i {
                 color: #43423E;
+                text-decoration: none !important;
+                display: inline-flex;
+            }
+
+            &:hover .all-filters-icon,
+            &:focus .all-filters-icon,
+            &:hover i {
+                text-decoration: none !important;
             }
         }
     }

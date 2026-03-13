@@ -93,19 +93,22 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     }
 
     if (event.key === 'Tab') {
-      event.preventDefault();
-
       const nextIndex = event.shiftKey ? currentIndex - 1 : currentIndex + 1;
       if (nextIndex >= 0 && nextIndex < focusableItems.length) {
+        event.preventDefault();
         focusableItems[nextIndex].focus();
         return;
       }
 
-      // If user tabs past the list bounds, return focus to trigger.
-      const trigger = document.querySelector<HTMLElement>('.dropdown-input[aria-expanded="true"]');
-      trigger?.focus();
+      // If user tabs past list bounds, close the dropdown and allow
+      // browser default tab navigation to continue naturally.
+      setOpen(false);
+
       if (event.shiftKey) {
-        setOpen(false);
+        // For reverse tab from first item, move focus back to trigger first.
+        event.preventDefault();
+        const trigger = document.querySelector<HTMLElement>('.dropdown-input[aria-expanded="true"]');
+        trigger?.focus();
       }
     }
   };
