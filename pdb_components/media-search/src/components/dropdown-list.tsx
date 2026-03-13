@@ -42,16 +42,19 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     setOpen(false);
   };
 
+  const isSpaceKey = (key: string) => key === ' ' || key === 'Space' || key === 'Spacebar';
+
   const handleTriggerKeyDown = (event: KeyboardEvent) => {
-    if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
+    if (isSpaceKey(event.key) || event.key === 'Enter') {
       event.preventDefault();
       event.stopPropagation();
       setOpen((prev) => !prev);
     }
   };
 
-  const handleItemKeyDown = (event: KeyboardEvent) => {
+  const handleItemKeyDown = (event: KeyboardEvent, item?: DropDownListOption) => {
     if (
+      isSpaceKey(event.key) ||
       event.key === 'Tab' ||
       event.key === 'ArrowDown' ||
       event.key === 'ArrowUp' ||
@@ -69,6 +72,15 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     const focusableItems = Array.from(list.querySelectorAll<HTMLElement>('.dropdown-item'));
     const currentIndex = focusableItems.indexOf(current);
     if (currentIndex === -1) return;
+
+    if (isSpaceKey(event.key)) {
+      event.preventDefault();
+      if (item) {
+        const nextChecked = !selectedValues.has(item.value);
+        handleToggle(item, nextChecked);
+      }
+      return;
+    }
 
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault();
@@ -146,8 +158,8 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
                         className="dropdown-item"
                         tabIndex={0}
                         aria-label={item.label}
-                        onKeyDownCapture={handleItemKeyDown}
-                        onKeyDown={handleItemKeyDown}
+                        onKeyDownCapture={(event: KeyboardEvent) => handleItemKeyDown(event, item)}
+                        onKeyDown={(event: KeyboardEvent) => handleItemKeyDown(event, item)}
                       >
                         <div className="dropdown-item-indicator">
                           <span className="dropdown-checkbox" aria-hidden="true">
