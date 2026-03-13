@@ -225,30 +225,36 @@ export const AlgoliaSearchContainer = styled.div`
 `
 export const DropDownListPortalStyle = styled.div`
     .dropdown-positioner {
-        position: absolute;
-        left: 576.333px;
-        top: 50px;
         z-index: 100;
+        /* Base UI Positioner sets inline transform; offset via margins. */
+        margin-left: -20px;
+        margin-top: 20px;
     }
 
     .dropdown-popup {
         display: flex;
         flex-direction: column;
         width: 300px;
+        max-height: 406px;
         background: #FFF;
         border: 1px solid #C0C0BF;
         border-radius: 8px;
-        overflow: hidden;
+        overflow-y: auto;
+        overflow-x: hidden;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 
         &:focus, &:focus-visible {
             outline: none !important;
         }
+
+        li {
+            margin: var(--spacing-ms-0, 9px) 0;
+        }
     }
 
     .dropdown-list {
         list-style: none;
-        margin: 0;
+        margin: var(--spacing-ms-0, 9px) 0;
         padding: 0;
 
         &:focus, &:focus-visible {
