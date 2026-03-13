@@ -61,7 +61,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
       {open && (
         <Menu.Portal className="dropdown-portal">
           <DropDownListPortalStyle>
-            <Menu.Positioner align="start" className="dropdown-positioner">
+            <Menu.Positioner side="bottom" align="start" sideOffset={25} alignOffset={0} className="dropdown-positioner">
               <Menu.Popup className="dropdown-popup">
                 <ul className="dropdown-list">
                   {items.length === 0 && (
