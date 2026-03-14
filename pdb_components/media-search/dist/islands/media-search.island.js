@@ -793,6 +793,7 @@
             &.tray-clear--active {
                 border: 1px solid var(--Accent-Lagunita-Light, #009AB4);
                 background: var(--Primary-White, #FFF);
+                color: var(--Accent-Lagunita, #007C92);
             }
         }
 
