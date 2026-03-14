@@ -423,8 +423,11 @@ export const Filters = styled.div`
         width: 100%;
 
         @media (max-width: 991px) {
-            flex-wrap: wrap;
             gap: 12px;
+        }
+
+        @media (max-width: 580px) {
+            flex-wrap: wrap;
         }
     }
 
@@ -441,7 +444,7 @@ export const Filters = styled.div`
         font-weight: 400;
         line-height: 140%;
 
-        @media (max-width: 991px) {
+        @media (max-width: 580px) {
             width: 100%;
         }
     }
