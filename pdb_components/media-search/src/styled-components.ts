@@ -337,32 +337,16 @@ export const DropDownListStyle = styled.div`
     display: inline-flex;
     align-items: center;
 
-    .input-wrapper {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        border-radius: 40px;
-        border: 1px solid #C0C0BF;
-        background: #FFF;
-        padding: 3px 20px;
-        height: 40px;
-        gap: 6px;
-        cursor: pointer;
-        box-sizing: border-box;
-        
-        &:focus-within {
-            box-shadow: 2px 0 4px rgba(0, 0, 0, 0.12);
-        }
-    }
-
     .dropdown-input {
         -webkit-appearance: none;
         appearance: none;
+        position: relative;
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        border: none;
-        background: none;
+        border-radius: 40px;
+        border: 1px solid #C0C0BF;
+        background: #FFF;
         outline: none;
         box-shadow: none;
         text-decoration: none;
@@ -372,13 +356,19 @@ export const DropDownListStyle = styled.div`
         width: auto;
         field-sizing: content;
         cursor: pointer;
-        padding: 0;
-        height: auto;
+        padding: 3px 20px;
+        height: 40px;
         line-height: 1;
+        box-sizing: border-box;
         white-space: nowrap;
 
         &:hover {
             text-decoration: underline;
+        }
+
+        &:focus,
+        &:focus-visible {
+            box-shadow: 3px 0 8px rgba(0, 0, 0, 0.12);
         }
 
         &::placeholder {
@@ -547,6 +537,10 @@ export const Filters = styled.div`
         align-items: center;
         z-index: 1;
 
+        &:focus-visible {
+            outline: none;
+        }
+
         > button, > .all-filters-btn {
             display: inline-flex;
             flex-direction: row;
@@ -572,14 +566,14 @@ export const Filters = styled.div`
             &:active,
             &[aria-expanded="true"] {
                 outline: none !important;
-                box-shadow: none !important;
+                box-shadow: 3px 0 8px rgba(0, 0, 0, 0.12) !important;
             }
 
             &:hover, &:focus {
                 text-decoration: none;
             }
 
-            &:hover .all-filters-label, &:focus .all-filters-label {
+            &:hover .all-filters-label {
                 text-decoration: underline;
             }
 

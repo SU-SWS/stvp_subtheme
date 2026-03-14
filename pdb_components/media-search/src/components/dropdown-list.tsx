@@ -125,20 +125,24 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     }
   };
 
+  const preventHoverFocus = (event: MouseEvent | PointerEvent) => {
+    // Prevent Base UI menu from moving keyboard focus on hover.
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
   return (
     <Menu.Root open={open} onOpenChange={setOpen} modal={false}>
       <DropDownListStyle>
         <label className={multiple ? "visually-hidden" : ""}>{label}</label>
-        <div className="input-wrapper">
-          <Menu.Trigger className="dropdown-input" type="button" onKeyDown={handleTriggerKeyDown}>
-            <span className="dropdown-input-label">
-              {multiple
-                ? `${label}${selectedItems.length ? ` (${selectedItems.length})` : ''}`
-                : (selectedItems[0]?.label || placeholder || label)}
-            </span>
-            <ChevronIcon className={`dropdown-chevron ${open ? "is-open" : ""}`} aria-hidden="true" />
-          </Menu.Trigger>
-        </div>
+        <Menu.Trigger className="dropdown-input" type="button" onKeyDown={handleTriggerKeyDown}>
+          <span className="dropdown-input-label">
+            {multiple
+              ? `${label}${selectedItems.length ? ` (${selectedItems.length})` : ''}`
+              : (selectedItems[0]?.label || placeholder || label)}
+          </span>
+          <ChevronIcon className={`dropdown-chevron ${open ? "is-open" : ""}`} aria-hidden="true" />
+        </Menu.Trigger>
       </DropDownListStyle>
 
       {open && (
@@ -158,6 +162,8 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
                         className="dropdown-item"
                         tabIndex={0}
                         aria-label={item.label}
+                        onPointerMoveCapture={preventHoverFocus}
+                        onMouseMoveCapture={preventHoverFocus}
                         onKeyDownCapture={(event: KeyboardEvent) => handleItemKeyDown(event, item)}
                         onKeyDown={(event: KeyboardEvent) => handleItemKeyDown(event, item)}
                       >

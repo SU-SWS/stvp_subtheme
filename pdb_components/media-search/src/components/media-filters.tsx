@@ -114,7 +114,8 @@ const TrayRefinement = ({attribute, labelOverride}: {
 }
 
 const MediaFilters = () => {
-  const ref = useRef<HTMLDivElement>(null)
+  const outsideRef = useRef<HTMLDivElement>(null)
+  const trayRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
   const trayCloseRef = useRef<HTMLButtonElement>(null)
   const {lock: lockScroll, unlock: unlockScroll} = useScrollLock({autoLock: false})
@@ -130,7 +131,7 @@ const MediaFilters = () => {
     toggle: toggleTray
   } = useBoolean(false)
 
-  useOutsideClick(ref, () => {
+  useOutsideClick(outsideRef, () => {
     if (trayOpen) {
       closeTray();
       buttonRef.current?.focus()
@@ -149,7 +150,7 @@ const MediaFilters = () => {
 
   // Synchronously enforce inert after every render so Preact reconciliation can't undo it
   useLayoutEffect(() => {
-    const trayEl = ref.current
+    const trayEl = trayRef.current
     if (!trayEl) return
     if (trayOpen) {
       trayEl.removeAttribute('inert')
@@ -195,40 +196,75 @@ const MediaFilters = () => {
             </div>
           }
           {!!trayAttributes.length &&
-            <div className="additional-filters">
-              <button
-                ref={buttonRef}
-                onClick={toggleTray}
-                className="all-filters-btn"
-                aria-expanded={trayOpen}
-                aria-controls="filter-tray"
-                aria-haspopup="dialog"
-                aria-label={width <= 991
-                  ? `Filter${allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''} — ${trayOpen ? 'close' : 'open'} panel`
-                  : `All Filters${allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''} — ${trayOpen ? 'close' : 'open'} panel`
-                }
+            <div ref={outsideRef}>
+              <div className="additional-filters">
+                <button
+                  ref={buttonRef}
+                  onClick={toggleTray}
+                  className="all-filters-btn"
+                  aria-expanded={trayOpen}
+                  aria-controls="filter-tray"
+                  aria-haspopup="dialog"
+                  aria-label={width <= 991
+                    ? `Filter${allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''} — ${trayOpen ? 'close' : 'open'} panel`
+                    : `All Filters${allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''} — ${trayOpen ? 'close' : 'open'} panel`
+                  }
+                >
+                  {width <= 991 &&
+                    <>
+                      <span className="all-filters-label">
+                        Filter{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''}
+                      </span>{' '}
+                      <span className="all-filters-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+                          <path d="M6.16687 5.03687C6.47937 5.34937 6.47937 5.85687 6.16687 6.16937L1.36687 10.9694C1.05437 11.2819 0.546875 11.2819 0.234375 10.9694C-0.078125 10.6569 -0.078125 10.1494 0.234375 9.83687L4.46937 5.60187L0.236875 1.36687C-0.0756252 1.05437 -0.0756252 0.546875 0.236875 0.234375C0.549375 -0.078125 1.05687 -0.078125 1.36937 0.234375L6.16937 5.03437L6.16687 5.03687Z" fill="#43423E"/>
+                        </svg>
+                      </span>
+                    </>
+                  }
+                  {width > 991 &&
+                    <>
+                      <span className="all-filters-label all-filters-btn__text">
+                        All Filters{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''}
+                      </span>{' '}
+                      <i className="fa-solid fa-sliders all-filters-icon" aria-hidden="true"></i>
+                    </>
+                  }
+                </button>
+              </div>
+              <FilterTray
+                $open={trayOpen}
+                ref={trayRef}
+                id="filter-tray"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="tray-title-heading"
               >
-                {width <= 991 &&
-                  <>
-                    <span className="all-filters-label">
-                      Filter{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''}
-                    </span>{' '}
-                    <span className="all-filters-icon" aria-hidden="true">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
-                        <path d="M6.16687 5.03687C6.47937 5.34937 6.47937 5.85687 6.16687 6.16937L1.36687 10.9694C1.05437 11.2819 0.546875 11.2819 0.234375 10.9694C-0.078125 10.6569 -0.078125 10.1494 0.234375 9.83687L4.46937 5.60187L0.236875 1.36687C-0.0756252 1.05437 -0.0756252 0.546875 0.236875 0.234375C0.549375 -0.078125 1.05687 -0.078125 1.36937 0.234375L6.16937 5.03437L6.16687 5.03687Z" fill="#43423E"/>
-                      </svg>
-                    </span>
-                  </>
-                }
-                {width > 991 &&
-                  <>
-                    <span className="all-filters-label all-filters-btn__text">
-                      All Filters{allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''}
-                    </span>{' '}
-                    <i className="fa-solid fa-sliders all-filters-icon" aria-hidden="true"></i>
-                  </>
-                }
-              </button>
+                <div className="tray-header">
+                  <span id="tray-title-heading" className="tray-title">Filters</span>
+                  <button ref={trayCloseRef} className="tray-close" onClick={() => { closeTray(); buttonRef.current?.focus(); }} aria-label="Close filters panel">
+                    <i class="fa-solid fa-close" aria-hidden="true"></i>
+                  </button>
+                </div>
+
+                  <div className="tray-body">
+                    {trayAttributes.map(attribute =>
+                      <TrayRefinement
+                        key={attribute}
+                        attribute={attribute}
+                      />
+                    )}
+                  </div>
+
+                <div className="tray-footer">
+                  <button className="tray-clear" onClick={() => { clearAll(); }} aria-label={allActiveTags.length > 0 ? `Clear all filters, ${allActiveTags.length} active` : 'Clear all filters'}>
+                    Clear All
+                  </button>
+                  <button className="tray-view-results" onClick={() => { closeTray(); buttonRef.current?.focus(); }} aria-label={`View Results — ${nbHits} match${nbHits !== 1 ? 'es' : ''}`}>
+                    View Results
+                  </button>
+                </div>
+              </FilterTray>
             </div>
           }
         </div>
@@ -248,41 +284,6 @@ const MediaFilters = () => {
         </div>
       )}
 
-      {!!trayAttributes.length &&
-        <FilterTray
-          $open={trayOpen}
-          ref={ref}
-          id="filter-tray"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="tray-title-heading"
-        >
-          <div className="tray-header">
-            <span id="tray-title-heading" className="tray-title">Filters</span>
-            <button ref={trayCloseRef} className="tray-close" onClick={() => { closeTray(); buttonRef.current?.focus(); }} aria-label="Close filters panel">
-              <i class="fa-solid fa-close" aria-hidden="true"></i>
-            </button>
-          </div>
-
-            <div className="tray-body">
-              {trayAttributes.map(attribute =>
-                <TrayRefinement
-                  key={attribute}
-                  attribute={attribute}
-                />
-              )}
-            </div>
-
-          <div className="tray-footer">
-            <button className="tray-clear" onClick={() => { clearAll(); }} aria-label={allActiveTags.length > 0 ? `Clear all filters, ${allActiveTags.length} active` : 'Clear all filters'}>
-              Clear All
-            </button>
-            <button className="tray-view-results" onClick={() => { closeTray(); buttonRef.current?.focus(); }} aria-label={`View Results — ${nbHits} match${nbHits !== 1 ? 'es' : ''}`}>
-              View Results
-            </button>
-          </div>
-        </FilterTray>
-      }
     </Filters>
   )
 }
