@@ -73,7 +73,7 @@ const SearchBox = ({federatedSearch}: { federatedSearch?: boolean }) => {
                 <path d="M0.8 1L8.8 10.2M8.8 1L0.8 10.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
               </svg>
             </button>
-            <span className="divider" aria-hidden="true"/>
+            {inputValue.length > 0 && <span className="divider" aria-hidden="true"/>}
             <button type="submit" aria-label="Submit my search">
               <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
             </button>

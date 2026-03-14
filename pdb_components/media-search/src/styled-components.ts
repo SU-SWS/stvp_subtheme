@@ -855,7 +855,7 @@ export const SearchInput = styled.div`
 
         &:focus, &:focus-visible {
             outline: none !important;
-            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08) !important;
+            box-shadow: none !important;
         }
     }
 
