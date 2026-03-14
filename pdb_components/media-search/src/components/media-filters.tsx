@@ -203,7 +203,10 @@ const MediaFilters = () => {
                 aria-expanded={trayOpen}
                 aria-controls="filter-tray"
                 aria-haspopup="dialog"
-                aria-label={`${trayOpen ? 'Close' : 'Open'} filters panel${allActiveTags.length > 0 ? `, ${allActiveTags.length} active` : ''}`}
+                aria-label={width <= 991
+                  ? `Filter${allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''} — ${trayOpen ? 'close' : 'open'} panel`
+                  : `All Filters${allActiveTags.length > 0 ? ` (${allActiveTags.length})` : ''} — ${trayOpen ? 'close' : 'open'} panel`
+                }
               >
                 {width <= 991 &&
                   <>
@@ -274,7 +277,7 @@ const MediaFilters = () => {
             <button className="tray-clear" onClick={() => { clearAll(); }} aria-label={allActiveTags.length > 0 ? `Clear all filters, ${allActiveTags.length} active` : 'Clear all filters'}>
               Clear All
             </button>
-            <button className="tray-view-results" onClick={() => { closeTray(); buttonRef.current?.focus(); }} aria-label={`View ${nbHits} result${nbHits !== 1 ? 's' : ''} and close panel`}>
+            <button className="tray-view-results" onClick={() => { closeTray(); buttonRef.current?.focus(); }} aria-label={`View Results — ${nbHits} match${nbHits !== 1 ? 'es' : ''}`}>
               View Results
             </button>
           </div>
