@@ -213,10 +213,15 @@
     }
 
     @media (max-width: 440px) {
-        gap: 6px;
+        gap: 5px;
+
+        && button.page-number {
+            font-size: 20.25px;
+            width: 30px;
+        }
 
         && button:not(.page-number) {
-            padding: 0 4px;
+            padding: 0 3px;
         }
     }
 `,ji=Ai.div`
