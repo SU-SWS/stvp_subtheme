@@ -77,13 +77,14 @@ export const UnstyledList = styled.ul`
             }
 
             .media-search__card-label {
-                display: inline-flex;
+                display: flex;
+                padding: 2px 7px 3px 7px;
+                justify-content: center;
                 align-items: center;
-                gap: 6px;
+                gap: 4px;
                 border-radius: 2px;
                 background: var(--Primary-SU-Cool-Grey, #53565A);
                 color: #FFF;
-                padding: 4px 10px;
                 font-size: 13px;
                 align-self: flex-start;
                 margin-top: auto;
