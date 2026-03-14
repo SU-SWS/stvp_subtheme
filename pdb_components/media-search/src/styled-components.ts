@@ -779,7 +779,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
 
         .tray-clear {
             display: flex;
-            padding: 9px 15px 11px 15px;
+            padding: 10px 15px;
             align-items: center;
             border-radius: 3px;
             border: 1px solid var(--primary-black-20, #D5D5D4);
@@ -791,7 +791,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
 
         .tray-view-results {
             display: flex;
-            padding: 9px 13px 11px 13px;
+            padding: 10px 13px;
             align-items: center;
             border-radius: 3px;
             border: 1px solid var(--Accent-Lagunita-Light, #009AB4);

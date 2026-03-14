@@ -8,7 +8,7 @@ import {
 } from "react-instantsearch";
 import {Filters, FilterTray} from "../styled-components";
 import useOutsideClick from "../hooks/useOutsideClick";
-import {useEffect, useRef, useState} from "preact/compat";
+import {useEffect, useLayoutEffect, useRef, useState} from "preact/compat";
 import {useBoolean, useScrollLock, useWindowSize} from "usehooks-ts";
 import DropDownList, {DropDownListOption} from "./dropdown-list";
 
@@ -60,6 +60,7 @@ const TrayRefinement = ({attribute, labelOverride}: {
 
   const toggleId = `tray-toggle-${attribute}`
   const listId = `tray-list-${attribute}`
+  const selectedCount = items.filter(i => i.isRefined).length
 
   return (
     <div className={`tray-section${open ? ' tray-section--open' : ''}`}>
@@ -69,6 +70,7 @@ const TrayRefinement = ({attribute, labelOverride}: {
         onClick={() => setOpen(o => !o)}
         aria-expanded={open}
         aria-controls={listId}
+        aria-label={`${label}${selectedCount > 0 ? `, ${selectedCount} selected` : ''}`}
       >
         <span className="tray-section-title">{label}</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8"
@@ -87,7 +89,7 @@ const TrayRefinement = ({attribute, labelOverride}: {
                 aria-checked={item.isRefined}
                 className={`tray-option-btn${item.isRefined ? ' tray-option-btn--checked' : ''}`}
                 onClick={() => refine(item.value)}
-                aria-label={`${item.label}${item.isRefined ? ', selected' : ''}`}
+                aria-label={item.label}
               >
                 <span className="tray-checkbox" aria-hidden="true">
                   {item.isRefined && (
@@ -145,6 +147,17 @@ const MediaFilters = () => {
     return () => unlockScroll()
   }, [trayOpen])
 
+  // Synchronously toggle inert after every DOM commit so Preact's VDOM never wins
+  useLayoutEffect(() => {
+    const trayEl = ref.current
+    if (!trayEl) return
+    if (trayOpen) {
+      trayEl.removeAttribute('inert')
+    } else {
+      trayEl.setAttribute('inert', '')
+    }
+  }, [trayOpen])
+
   // Close tray on Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -155,17 +168,6 @@ const MediaFilters = () => {
     }
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [trayOpen])
-
-  // Imperatively toggle inert so Tab can never reach tray contents when closed
-  useEffect(() => {
-    const trayEl = ref.current
-    if (!trayEl) return
-    if (trayOpen) {
-      trayEl.removeAttribute('inert')
-    } else {
-      trayEl.setAttribute('inert', '')
-    }
   }, [trayOpen])
 
   const firstAttributes = width > 992 ? attributesToRender.slice(0, 2) : []
@@ -251,7 +253,6 @@ const MediaFilters = () => {
           role="dialog"
           aria-modal="true"
           aria-labelledby="tray-title-heading"
-          inert=""
         >
           <div className="tray-header">
             <span id="tray-title-heading" className="tray-title">Filters</span>
@@ -270,10 +271,10 @@ const MediaFilters = () => {
             </div>
 
           <div className="tray-footer">
-            <button className="tray-clear" onClick={() => { clearAll(); }} aria-label="Clear all filters">
+            <button className="tray-clear" onClick={() => { clearAll(); }} aria-label={allActiveTags.length > 0 ? `Clear all filters, ${allActiveTags.length} active` : 'Clear all filters'}>
               Clear All
             </button>
-            <button className="tray-view-results" onClick={() => { closeTray(); buttonRef.current?.focus(); }} aria-label="Apply filters and close panel">
+            <button className="tray-view-results" onClick={() => { closeTray(); buttonRef.current?.focus(); }} aria-label={`View ${nbHits} result${nbHits !== 1 ? 's' : ''} and close panel`}>
               View Results
             </button>
           </div>
