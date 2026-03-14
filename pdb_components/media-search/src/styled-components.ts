@@ -468,7 +468,7 @@ export const Filters = styled.div`
         padding: 4px 8px;
         border: none;
         background: none;
-        font-size: 15px;
+        font-size: 16px;
         color: #2E2D29;
         cursor: pointer;
         white-space: nowrap;
