@@ -366,6 +366,7 @@
         padding: 0;
         height: auto;
         line-height: 1;
+        white-space: nowrap;
 
         &:hover {
             text-decoration: underline;
