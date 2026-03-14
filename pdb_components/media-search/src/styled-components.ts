@@ -491,7 +491,7 @@ export const Filters = styled.div`
         background: none;
         border: none;
         padding: 4px 4px;
-        font-size: 15px;
+        font-size: 16px !important;
         color: #2E2D29;
         cursor: pointer;
         text-decoration: underline;
@@ -708,11 +708,11 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
         }
 
         .tray-section-title {
-            font-size: 15px;
-            font-weight: 700;
+            font-size: 18px !important;
+            font-weight: 400 !important;
             color: #2E2D29;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
+            text-transform: none;
+            letter-spacing: normal;
         }
 
         .tray-section-chevron {
@@ -738,7 +738,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
             align-items: center;
             gap: 10px;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 16px !important;
             color: #2E2D29;
             background: none;
             border: none;
@@ -796,6 +796,12 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
             font-size: 16px;
             color: #53565A;
             cursor: pointer;
+
+            &.tray-clear--active {
+                border: 1px solid var(--Accent-Lagunita-Light, #009AB4);
+                background: var(--Primary-White, #FFF);
+                color: var(--Accent-Lagunita, #007C92);
+            }
         }
 
         .tray-view-results {

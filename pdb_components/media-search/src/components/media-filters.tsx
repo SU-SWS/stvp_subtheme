@@ -257,7 +257,7 @@ const MediaFilters = () => {
                   </div>
 
                 <div className="tray-footer">
-                  <button className="tray-clear" onClick={() => { clearAll(); }} aria-label={allActiveTags.length > 0 ? `Clear all filters, ${allActiveTags.length} active` : 'Clear all filters'}>
+                  <button className={`tray-clear${allActiveTags.length > 0 ? ' tray-clear--active' : ''}`} onClick={() => { clearAll(); }} aria-label={allActiveTags.length > 0 ? `Clear all filters, ${allActiveTags.length} active` : 'Clear all filters'}>
                     Clear All
                   </button>
                   <button className="tray-view-results" onClick={() => { closeTray(); buttonRef.current?.focus(); }} aria-label={`View Results — ${nbHits} match${nbHits !== 1 ? 'es' : ''}`}>
