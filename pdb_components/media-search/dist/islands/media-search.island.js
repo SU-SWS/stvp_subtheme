@@ -238,6 +238,10 @@
     @media (max-width: 460px) {
         padding: 0 10px;
     }
+
+    @media (max-width: 360px) {
+        padding: 0 6px;
+    }
 `,Ni=Ai.div`
     .dropdown-positioner {
         z-index: 100;
@@ -515,6 +519,10 @@
         align-items: center;
         width: 100%;
         gap: 17px;
+
+        @media (max-width: 360px) {
+            gap: 10px;
+        }
     }
 
     .primary-filters {
@@ -548,6 +556,10 @@
             cursor: pointer;
             color: #2E2D29;
             font-size: 16px;
+
+            @media (max-width: 360px) {
+                padding: 0 12px;
+            }
 
             &:focus,
             &:focus-visible,
@@ -815,7 +827,7 @@
         border-radius: 40px;
         border: 1px solid #C0C0BF;
         background: #FFF;
-        padding: 0 32px 0 26px;
+        padding: 0 62px 0 26px;
         height: 40px;
         width: 100%;
         box-sizing: border-box;
