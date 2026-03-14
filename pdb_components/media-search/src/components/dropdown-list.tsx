@@ -34,22 +34,8 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     return items.filter((item) => selectedValues.has(item.value));
   }, [items, selectedValues]);
 
-  const debugLog = (...args: unknown[]) => {
-    // Temporary diagnostics for Space-open scroll behavior.
-    console.log('[media-search dropdown]', ...args);
-  };
-
   const handleToggle = (item: DropDownListOption, checked: boolean) => {
-    if (Date.now() < suppressItemToggleUntilRef.current) {
-      debugLog('handleToggle blocked', {
-        item: item.value,
-        checked,
-        now: Date.now(),
-        suppressUntil: suppressItemToggleUntilRef.current,
-      });
-      return;
-    }
-    debugLog('handleToggle', {item: item.value, checked, open, scrollY: window.scrollY});
+    if (Date.now() < suppressItemToggleUntilRef.current) return;
     if (!onChange) return;
 
     if (multiple) {
@@ -108,7 +94,6 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   };
 
   const handleTriggerKeyDown = (event: KeyboardEvent) => {
-    debugLog('trigger keydown', {key: event.key, open, scrollY: window.scrollY});
     if (isSpaceKey(event.key)) {
       event.preventDefault();
       event.stopPropagation();
@@ -116,10 +101,6 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
         // Prevent Space-open flow from ending above the original viewport position.
         spaceOpenMinScrollYRef.current = window.scrollY;
       }
-      debugLog('space open requested', {
-        currentScrollY: window.scrollY,
-        minScrollY: spaceOpenMinScrollYRef.current,
-      });
       // Ignore synthetic/propagated item activation right after opening.
       suppressItemToggleUntilRef.current = Date.now() + 300;
       setOpen((prev) => {
@@ -160,7 +141,6 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   };
 
   const handleItemKeyDown = (event: KeyboardEvent, item?: DropDownListOption) => {
-    debugLog('item keydown', {key: event.key, item: item?.value, scrollY: window.scrollY});
     if (
       isSpaceKey(event.key) ||
       event.key === 'Tab' ||
@@ -183,13 +163,9 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
 
     if (isSpaceKey(event.key)) {
       event.preventDefault();
+      event.stopPropagation();
       // Ignore opening Space key replay on the first focused option.
       if (Date.now() < suppressItemToggleUntilRef.current) {
-        debugLog('item space ignored by suppress window', {
-          item: item?.value,
-          now: Date.now(),
-          suppressUntil: suppressItemToggleUntilRef.current,
-        });
         return;
       }
       if (item) {
@@ -273,7 +249,6 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
           const minScrollY = spaceOpenMinScrollYRef.current;
           if (minScrollY !== null && window.scrollY < minScrollY) {
             window.scrollTo({top: minScrollY, left: window.scrollX, behavior: 'auto'});
-            debugLog('clamped upward movement', {nextScrollY: minScrollY});
           }
 
           // Measure after clamp so neededScroll is based on current viewport.
@@ -288,20 +263,9 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
           const availableSpaceBelow = window.innerHeight - triggerRect.bottom;
           const neededScroll = Math.max(0, Math.ceil(requiredSpaceBelow - availableSpaceBelow));
 
-          debugLog('adjustScrollForDropdown', {
-            scrollY: window.scrollY,
-            minScrollY,
-            neededScroll,
-            requiredSpaceBelow,
-            availableSpaceBelow,
-            triggerBottom: triggerRect.bottom,
-            popupHeight: popupRect.height,
-          });
-
           // Scroll down only enough to keep the dropdown below its trigger.
           if (neededScroll > 0) {
             window.scrollBy({top: neededScroll, left: 0, behavior: 'auto'});
-            debugLog('scrolled down for fit', {neededScroll, nextScrollY: window.scrollY});
             return neededScroll;
           }
 
@@ -334,10 +298,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     }
   }, [open]);
 
-  const handleOpenChange = (nextOpen: boolean) => {
-    debugLog('onOpenChange', {nextOpen, scrollY: window.scrollY});
-    setOpen(nextOpen);
-  };
+  const handleOpenChange = (nextOpen: boolean) => setOpen(nextOpen);
 
   useEffect(() => {
     if (!open || activeIndex < 0) return;
@@ -415,28 +376,29 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
                   {items.length === 0 && (
                     <li className="dropdown-empty">No options found.</li>
                   )}
-                  {items.map((item: DropDownListOption, index: number) => (
+                  {items.map((item: DropDownListOption, index: number) => {
+                    const isSelected = selectedValues.has(item.value);
+                    return (
                     <li key={item.value}>
-                      <Menu.CheckboxItem
+                      <button
+                        type="button"
                         id={optionId(index)}
                         role="option"
-                        aria-selected={selectedValues.has(item.value) ? "true" : "false"}
-                        checked={selectedValues.has(item.value)}
-                        onCheckedChange={(checked: boolean) => {
-                          debugLog('onCheckedChange', {item: item.value, checked, scrollY: window.scrollY});
-                          handleToggle(item, checked);
-                        }}
+                        aria-selected={isSelected ? "true" : "false"}
+                        aria-checked={isSelected ? "true" : "false"}
+                        data-selected={isSelected ? "true" : undefined}
+                        onClick={() => handleToggle(item, !isSelected)}
                         className="dropdown-item"
-                        tabIndex={0}
                         aria-label={item.label}
+                        onPointerEnterCapture={preventHoverFocus}
                         onPointerMoveCapture={preventHoverFocus}
+                        onMouseEnterCapture={preventHoverFocus}
                         onMouseMoveCapture={preventHoverFocus}
-                        onKeyDownCapture={(event: KeyboardEvent) => handleItemKeyDown(event, item)}
                         onKeyDown={(event: KeyboardEvent) => handleItemKeyDown(event, item)}
                       >
                         <div className="dropdown-item-indicator">
                           <span className="dropdown-checkbox" aria-hidden="true">
-                            {selectedValues.has(item.value) && (
+                            {isSelected && (
                               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
                                 <path d="M1 3.5L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                               </svg>
@@ -444,9 +406,10 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
                           </span>
                         </div>
                         <div className="dropdown-label">{item.label}</div>
-                      </Menu.CheckboxItem>
+                      </button>
                     </li>
-                  ))}
+                    );
+                  })}
                 </ul>
               </Menu.Popup>
             </Menu.Positioner>

@@ -286,6 +286,17 @@ export const DropDownListPortalStyle = styled.div`
     }
 
     .dropdown-item {
+        -webkit-appearance: none;
+        appearance: none;
+        border: 0;
+        background: transparent;
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
+        font: inherit;
+        color: inherit;
+        text-align: left;
+        line-height: 1.3;
         display: flex;
         align-items: center;
         gap: 10px;
@@ -294,10 +305,13 @@ export const DropDownListPortalStyle = styled.div`
 
         &:hover {
             background: #F4F4F4;
+            text-decoration: none;
         }
         
         &:focus, &:focus-visible {
             outline: 1px solid #C0C0BF;
+            text-decoration: none;
+            box-shadow: none;   
         }
 
         .dropdown-item-indicator {
