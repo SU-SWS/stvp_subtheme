@@ -1,5 +1,5 @@
 import {Menu} from '@base-ui/react/menu';
-import {ReactElement, useMemo, useState} from "preact/compat";
+import {ReactElement, useEffect, useId, useMemo, useRef, useState} from "preact/compat";
 import {DropDownListPortalStyle, DropDownListStyle} from "../styled-components";
 
 export type DropDownListOption = {
@@ -16,6 +16,10 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   placeholder?: string
 }) => {
   const [open, setOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const listboxId = useId();
+  const typeaheadRef = useRef('');
+  const typeaheadTimerRef = useRef<number | null>(null);
 
   const selectedValues = useMemo(() => {
     if (!value) return new Set<string>();
@@ -43,12 +47,73 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   };
 
   const isSpaceKey = (key: string) => key === ' ' || key === 'Space' || key === 'Spacebar';
+  const isPrintableCharacter = (event: KeyboardEvent) =>
+    event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey;
+  const optionId = (index: number) => `${listboxId}-option-${index}`;
+
+  const getInitialActiveIndex = () => {
+    if (!items.length) return -1;
+    const firstSelected = items.findIndex((item) => selectedValues.has(item.value));
+    return firstSelected >= 0 ? firstSelected : 0;
+  };
+
+  const clearTypeahead = () => {
+    typeaheadRef.current = '';
+    if (typeaheadTimerRef.current !== null) {
+      window.clearTimeout(typeaheadTimerRef.current);
+      typeaheadTimerRef.current = null;
+    }
+  };
+
+  const updateTypeahead = (char: string) => {
+    typeaheadRef.current += char.toLowerCase();
+    if (typeaheadTimerRef.current !== null) {
+      window.clearTimeout(typeaheadTimerRef.current);
+    }
+    typeaheadTimerRef.current = window.setTimeout(() => {
+      typeaheadRef.current = '';
+      typeaheadTimerRef.current = null;
+    }, 700);
+    return typeaheadRef.current;
+  };
+
+  const findMatchingIndex = (search: string, startIndex = 0) => {
+    if (!items.length) return -1;
+    const query = search.toLowerCase();
+    for (let i = 0; i < items.length; i += 1) {
+      const idx = (startIndex + i) % items.length;
+      if (items[idx].label.toLowerCase().startsWith(query)) {
+        return idx;
+      }
+    }
+    return -1;
+  };
 
   const handleTriggerKeyDown = (event: KeyboardEvent) => {
+    if (isPrintableCharacter(event)) {
+      event.preventDefault();
+      const search = updateTypeahead(event.key);
+      const start = activeIndex >= 0 ? activeIndex + 1 : 0;
+      const match = findMatchingIndex(search, start);
+      const nextIndex = match >= 0 ? match : findMatchingIndex(search, 0);
+
+      if (!open) {
+        setOpen(true);
+      }
+      setActiveIndex(nextIndex >= 0 ? nextIndex : getInitialActiveIndex());
+      return;
+    }
+
     if (isSpaceKey(event.key) || event.key === 'Enter') {
       event.preventDefault();
       event.stopPropagation();
-      setOpen((prev) => !prev);
+      setOpen((prev) => {
+        const nextOpen = !prev;
+        if (nextOpen) {
+          setActiveIndex(getInitialActiveIndex());
+        }
+        return nextOpen;
+      });
     }
   };
 
@@ -131,11 +196,37 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     event.stopPropagation();
   };
 
+  useEffect(() => {
+    if (open && activeIndex < 0) {
+      setActiveIndex(getInitialActiveIndex());
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (!open || activeIndex < 0) return;
+    const activeEl = document.getElementById(optionId(activeIndex));
+    activeEl?.scrollIntoView({block: 'nearest'});
+  }, [open, activeIndex, listboxId]);
+
+  useEffect(() => {
+    return () => clearTypeahead();
+  }, []);
+
   return (
     <Menu.Root open={open} onOpenChange={setOpen} modal={false}>
       <DropDownListStyle>
         <label className={multiple ? "visually-hidden" : ""}>{label}</label>
-        <Menu.Trigger className="dropdown-input" type="button" onKeyDown={handleTriggerKeyDown}>
+        <Menu.Trigger
+          className="dropdown-input"
+          type="button"
+          role="combobox"
+          aria-multiselectable="true"
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          aria-controls={listboxId}
+          aria-activedescendant={open && activeIndex >= 0 ? optionId(activeIndex) : undefined}
+          onKeyDown={handleTriggerKeyDown}
+        >
           <span className="dropdown-input-label">
             {multiple
               ? `${label}${selectedItems.length ? ` (${selectedItems.length})` : ''}`
@@ -150,13 +241,21 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
           <DropDownListPortalStyle>
             <Menu.Positioner side="bottom" align="start" sideOffset={25} alignOffset={0} className="dropdown-positioner">
               <Menu.Popup className="dropdown-popup">
-                <ul className="dropdown-list">
+                <ul
+                  id={listboxId}
+                  className="dropdown-list"
+                  role="listbox"
+                  aria-multiselectable="true"
+                >
                   {items.length === 0 && (
                     <li className="dropdown-empty">No options found.</li>
                   )}
-                  {items.map((item: DropDownListOption) => (
+                  {items.map((item: DropDownListOption, index: number) => (
                     <li key={item.value}>
                       <Menu.CheckboxItem
+                        id={optionId(index)}
+                        role="option"
+                        aria-selected={selectedValues.has(item.value) ? "true" : "false"}
                         checked={selectedValues.has(item.value)}
                         onCheckedChange={(checked: boolean) => handleToggle(item, checked)}
                         className="dropdown-item"
