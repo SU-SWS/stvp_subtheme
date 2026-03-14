@@ -21,6 +21,8 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const typeaheadRef = useRef('');
   const typeaheadTimerRef = useRef<number | null>(null);
+  const suppressItemToggleUntilRef = useRef<number>(0);
+  const spaceOpenMinScrollYRef = useRef<number | null>(null);
 
   const selectedValues = useMemo(() => {
     if (!value) return new Set<string>();
@@ -32,7 +34,22 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     return items.filter((item) => selectedValues.has(item.value));
   }, [items, selectedValues]);
 
+  const debugLog = (...args: unknown[]) => {
+    // Temporary diagnostics for Space-open scroll behavior.
+    console.log('[media-search dropdown]', ...args);
+  };
+
   const handleToggle = (item: DropDownListOption, checked: boolean) => {
+    if (Date.now() < suppressItemToggleUntilRef.current) {
+      debugLog('handleToggle blocked', {
+        item: item.value,
+        checked,
+        now: Date.now(),
+        suppressUntil: suppressItemToggleUntilRef.current,
+      });
+      return;
+    }
+    debugLog('handleToggle', {item: item.value, checked, open, scrollY: window.scrollY});
     if (!onChange) return;
 
     if (multiple) {
@@ -49,7 +66,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
 
   const isSpaceKey = (key: string) => key === ' ' || key === 'Space' || key === 'Spacebar';
   const isPrintableCharacter = (event: KeyboardEvent) =>
-    event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey;
+    event.key.length === 1 && !isSpaceKey(event.key) && !event.ctrlKey && !event.metaKey && !event.altKey;
   const optionId = (index: number) => `${listboxId}-option-${index}`;
 
   const getInitialActiveIndex = () => {
@@ -91,6 +108,30 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   };
 
   const handleTriggerKeyDown = (event: KeyboardEvent) => {
+    debugLog('trigger keydown', {key: event.key, open, scrollY: window.scrollY});
+    if (isSpaceKey(event.key)) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (!open) {
+        // Prevent Space-open flow from ending above the original viewport position.
+        spaceOpenMinScrollYRef.current = window.scrollY;
+      }
+      debugLog('space open requested', {
+        currentScrollY: window.scrollY,
+        minScrollY: spaceOpenMinScrollYRef.current,
+      });
+      // Ignore synthetic/propagated item activation right after opening.
+      suppressItemToggleUntilRef.current = Date.now() + 300;
+      setOpen((prev) => {
+        const nextOpen = !prev;
+        if (nextOpen) {
+          setActiveIndex(getInitialActiveIndex());
+        }
+        return nextOpen;
+      });
+      return;
+    }
+
     if (isPrintableCharacter(event)) {
       event.preventDefault();
       const search = updateTypeahead(event.key);
@@ -105,7 +146,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
       return;
     }
 
-    if (isSpaceKey(event.key) || event.key === 'Enter') {
+    if (event.key === 'Enter') {
       event.preventDefault();
       event.stopPropagation();
       setOpen((prev) => {
@@ -119,6 +160,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   };
 
   const handleItemKeyDown = (event: KeyboardEvent, item?: DropDownListOption) => {
+    debugLog('item keydown', {key: event.key, item: item?.value, scrollY: window.scrollY});
     if (
       isSpaceKey(event.key) ||
       event.key === 'Tab' ||
@@ -141,6 +183,15 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
 
     if (isSpaceKey(event.key)) {
       event.preventDefault();
+      // Ignore opening Space key replay on the first focused option.
+      if (Date.now() < suppressItemToggleUntilRef.current) {
+        debugLog('item space ignored by suppress window', {
+          item: item?.value,
+          now: Date.now(),
+          suppressUntil: suppressItemToggleUntilRef.current,
+        });
+        return;
+      }
       if (item) {
         const nextChecked = !selectedValues.has(item.value);
         handleToggle(item, nextChecked);
@@ -202,17 +253,6 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     event.preventDefault();
   };
 
-  const focusTriggerWithoutScroll = () => {
-    const trigger = triggerRef.current;
-    if (!trigger) return;
-
-    try {
-      trigger.focus({preventScroll: true});
-    } catch {
-      trigger.focus();
-    }
-  };
-
   useEffect(() => {
     if (!open) return;
 
@@ -230,6 +270,13 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
           const positionerEl = listboxEl.closest('.dropdown-positioner') as HTMLElement | null;
           if (!popupEl) return 0;
 
+          const minScrollY = spaceOpenMinScrollYRef.current;
+          if (minScrollY !== null && window.scrollY < minScrollY) {
+            window.scrollTo({top: minScrollY, left: window.scrollX, behavior: 'auto'});
+            debugLog('clamped upward movement', {nextScrollY: minScrollY});
+          }
+
+          // Measure after clamp so neededScroll is based on current viewport.
           const triggerRect = triggerEl.getBoundingClientRect();
           const popupRect = popupEl.getBoundingClientRect();
           const positionerMarginTop = positionerEl
@@ -239,11 +286,22 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
           const fitBuffer = 12;
           const requiredSpaceBelow = popupRect.height + sideOffset + Math.max(0, positionerMarginTop) + fitBuffer;
           const availableSpaceBelow = window.innerHeight - triggerRect.bottom;
-          const neededScroll = Math.ceil(requiredSpaceBelow - availableSpaceBelow);
+          const neededScroll = Math.max(0, Math.ceil(requiredSpaceBelow - availableSpaceBelow));
+
+          debugLog('adjustScrollForDropdown', {
+            scrollY: window.scrollY,
+            minScrollY,
+            neededScroll,
+            requiredSpaceBelow,
+            availableSpaceBelow,
+            triggerBottom: triggerRect.bottom,
+            popupHeight: popupRect.height,
+          });
 
           // Scroll down only enough to keep the dropdown below its trigger.
           if (neededScroll > 0) {
             window.scrollBy({top: neededScroll, left: 0, behavior: 'auto'});
+            debugLog('scrolled down for fit', {neededScroll, nextScrollY: window.scrollY});
             return neededScroll;
           }
 
@@ -257,6 +315,9 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
             adjustScrollForDropdown();
           });
         }
+
+        // Only guard this for the immediate Space-open cycle.
+        spaceOpenMinScrollYRef.current = null;
       });
     });
 
@@ -268,18 +329,15 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   }, [open, listboxId]);
 
   useEffect(() => {
-    if (!open) return;
-    const rafId = window.requestAnimationFrame(() => {
-      focusTriggerWithoutScroll();
-    });
-    return () => window.cancelAnimationFrame(rafId);
-  }, [open]);
-
-  useEffect(() => {
     if (open && activeIndex < 0) {
       setActiveIndex(getInitialActiveIndex());
     }
   }, [open]);
+
+  const handleOpenChange = (nextOpen: boolean) => {
+    debugLog('onOpenChange', {nextOpen, scrollY: window.scrollY});
+    setOpen(nextOpen);
+  };
 
   useEffect(() => {
     if (!open || activeIndex < 0) return;
@@ -308,7 +366,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   }, []);
 
   return (
-    <Menu.Root open={open} onOpenChange={setOpen} modal={false}>
+    <Menu.Root open={open} onOpenChange={handleOpenChange} modal={false}>
       <DropDownListStyle>
         <label className={multiple ? "visually-hidden" : ""}>{label}</label>
         <Menu.Trigger
@@ -335,7 +393,18 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
       {open && (
         <Menu.Portal className="dropdown-portal">
           <DropDownListPortalStyle>
-            <Menu.Positioner side="bottom" align="start" sideOffset={25} alignOffset={0} className="dropdown-positioner">
+            <Menu.Positioner
+              side="bottom"
+              align="start"
+              sideOffset={25}
+              alignOffset={0}
+              collisionAvoidance={{
+                side: 'none',
+                align: 'shift',
+                fallbackAxisSide: 'none',
+              }}
+              className="dropdown-positioner"
+            >
               <Menu.Popup className="dropdown-popup" onOpenAutoFocus={preventOpenAutoFocus}>
                 <ul
                   id={listboxId}
@@ -353,7 +422,10 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
                         role="option"
                         aria-selected={selectedValues.has(item.value) ? "true" : "false"}
                         checked={selectedValues.has(item.value)}
-                        onCheckedChange={(checked: boolean) => handleToggle(item, checked)}
+                        onCheckedChange={(checked: boolean) => {
+                          debugLog('onCheckedChange', {item: item.value, checked, scrollY: window.scrollY});
+                          handleToggle(item, checked);
+                        }}
                         className="dropdown-item"
                         tabIndex={0}
                         aria-label={item.label}

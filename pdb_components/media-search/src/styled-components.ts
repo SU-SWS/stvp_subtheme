@@ -250,8 +250,7 @@ export const DropDownListPortalStyle = styled.div`
     .dropdown-positioner {
         z-index: 100;
         /* Base UI Positioner sets inline transform; offset via margins. */
-        margin-left: -20px;
-        margin-top: 20px;
+        margin-top: -10px;
     }
 
     .dropdown-popup {
