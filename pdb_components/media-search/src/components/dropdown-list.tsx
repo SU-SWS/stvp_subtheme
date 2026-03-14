@@ -161,6 +161,19 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     const currentIndex = focusableItems.indexOf(current);
     if (currentIndex === -1) return;
 
+    if (isPrintableCharacter(event)) {
+      event.preventDefault();
+      event.stopPropagation();
+      const search = updateTypeahead(event.key);
+      const start = currentIndex >= 0 ? currentIndex + 1 : 0;
+      const match = findMatchingIndex(search, start);
+      const nextIndex = match >= 0 ? match : findMatchingIndex(search, 0);
+      if (nextIndex >= 0) {
+        setActiveIndex(nextIndex);
+      }
+      return;
+    }
+
     if (isSpaceKey(event.key)) {
       event.preventDefault();
       event.stopPropagation();
@@ -319,6 +332,16 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
 
     if (activeBottom > visibleBottom) {
       (listboxEl as HTMLElement).scrollTop = activeBottom - (listboxEl as HTMLElement).clientHeight;
+    }
+
+    // Keep typeahead/keyboard navigation on the matched option.
+    const focusTarget = activeEl as HTMLElement;
+    if (document.activeElement !== focusTarget) {
+      try {
+        focusTarget.focus({preventScroll: true});
+      } catch {
+        focusTarget.focus();
+      }
     }
   }, [open, activeIndex, listboxId]);
 
