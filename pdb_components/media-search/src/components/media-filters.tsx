@@ -170,7 +170,7 @@ const MediaFilters = () => {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [trayOpen])
 
-  const firstAttributes = width > 992 ? attributesToRender.slice(0, 2) : []
+  const firstAttributes = attributesToRender.slice(0, 2)
   const trayAttributes = [...attributesToRender]
 
   const allActiveTags = currentRefinements.flatMap(refinement =>
