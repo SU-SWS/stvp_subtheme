@@ -18,6 +18,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const listboxId = useId();
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const typeaheadRef = useRef('');
   const typeaheadTimerRef = useRef<number | null>(null);
 
@@ -196,6 +197,84 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     event.stopPropagation();
   };
 
+  const preventOpenAutoFocus = (event: Event) => {
+    // Base UI auto-focus can scroll the document when popup is portaled.
+    event.preventDefault();
+  };
+
+  const focusTriggerWithoutScroll = () => {
+    const trigger = triggerRef.current;
+    if (!trigger) return;
+
+    try {
+      trigger.focus({preventScroll: true});
+    } catch {
+      trigger.focus();
+    }
+  };
+
+  useEffect(() => {
+    if (!open) return;
+
+    let raf1 = 0;
+    let raf2 = 0;
+    let raf3 = 0;
+    raf1 = window.requestAnimationFrame(() => {
+      raf2 = window.requestAnimationFrame(() => {
+        const adjustScrollForDropdown = () => {
+          const listboxEl = document.getElementById(listboxId);
+          const triggerEl = triggerRef.current;
+          if (!listboxEl || !triggerEl) return 0;
+
+          const popupEl = listboxEl.closest('.dropdown-popup') as HTMLElement | null;
+          const positionerEl = listboxEl.closest('.dropdown-positioner') as HTMLElement | null;
+          if (!popupEl) return 0;
+
+          const triggerRect = triggerEl.getBoundingClientRect();
+          const popupRect = popupEl.getBoundingClientRect();
+          const positionerMarginTop = positionerEl
+            ? Number.parseFloat(window.getComputedStyle(positionerEl).marginTop) || 0
+            : 0;
+          const sideOffset = 25;
+          const fitBuffer = 12;
+          const requiredSpaceBelow = popupRect.height + sideOffset + Math.max(0, positionerMarginTop) + fitBuffer;
+          const availableSpaceBelow = window.innerHeight - triggerRect.bottom;
+          const neededScroll = Math.ceil(requiredSpaceBelow - availableSpaceBelow);
+
+          // Scroll down only enough to keep the dropdown below its trigger.
+          if (neededScroll > 0) {
+            window.scrollBy({top: neededScroll, left: 0, behavior: 'auto'});
+            return neededScroll;
+          }
+
+          return 0;
+        };
+
+        const didScroll = adjustScrollForDropdown();
+        if (didScroll > 0) {
+          // One extra pass after layout settles to handle late collision recalculation.
+          raf3 = window.requestAnimationFrame(() => {
+            adjustScrollForDropdown();
+          });
+        }
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(raf1);
+      window.cancelAnimationFrame(raf2);
+      window.cancelAnimationFrame(raf3);
+    };
+  }, [open, listboxId]);
+
+  useEffect(() => {
+    if (!open) return;
+    const rafId = window.requestAnimationFrame(() => {
+      focusTriggerWithoutScroll();
+    });
+    return () => window.cancelAnimationFrame(rafId);
+  }, [open]);
+
   useEffect(() => {
     if (open && activeIndex < 0) {
       setActiveIndex(getInitialActiveIndex());
@@ -205,7 +284,23 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   useEffect(() => {
     if (!open || activeIndex < 0) return;
     const activeEl = document.getElementById(optionId(activeIndex));
-    activeEl?.scrollIntoView({block: 'nearest'});
+    const listboxEl = document.getElementById(listboxId);
+    if (!activeEl || !listboxEl) return;
+
+    const activeTop = (activeEl as HTMLElement).offsetTop;
+    const activeBottom = activeTop + (activeEl as HTMLElement).offsetHeight;
+    const visibleTop = (listboxEl as HTMLElement).scrollTop;
+    const visibleBottom = visibleTop + (listboxEl as HTMLElement).clientHeight;
+
+    // Keep keyboard-active option visible without scrolling the page.
+    if (activeTop < visibleTop) {
+      (listboxEl as HTMLElement).scrollTop = activeTop;
+      return;
+    }
+
+    if (activeBottom > visibleBottom) {
+      (listboxEl as HTMLElement).scrollTop = activeBottom - (listboxEl as HTMLElement).clientHeight;
+    }
   }, [open, activeIndex, listboxId]);
 
   useEffect(() => {
@@ -217,6 +312,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
       <DropDownListStyle>
         <label className={multiple ? "visually-hidden" : ""}>{label}</label>
         <Menu.Trigger
+          ref={triggerRef}
           className="dropdown-input"
           type="button"
           role="combobox"
@@ -240,7 +336,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
         <Menu.Portal className="dropdown-portal">
           <DropDownListPortalStyle>
             <Menu.Positioner side="bottom" align="start" sideOffset={25} alignOffset={0} className="dropdown-positioner">
-              <Menu.Popup className="dropdown-popup">
+              <Menu.Popup className="dropdown-popup" onOpenAutoFocus={preventOpenAutoFocus}>
                 <ul
                   id={listboxId}
                   className="dropdown-list"
