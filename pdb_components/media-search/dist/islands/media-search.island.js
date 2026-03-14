@@ -462,7 +462,7 @@
         padding: 4px 8px;
         border: none;
         background: none;
-        font-size: 16px;
+        font-size: 16px !important;
         color: #2E2D29;
         cursor: pointer;
         white-space: nowrap;
@@ -780,7 +780,7 @@
             border-radius: 3px;
             border: 1px solid var(--primary-black-20, #D5D5D4);
             background: var(--Primary-White, #FFF);
-            font-size: 14px;
+            font-size: 16px;
             color: #53565A;
             cursor: pointer;
         }
@@ -794,7 +794,7 @@
             background: var(--Accent-Lagunita, #007C92);
             box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.10);
             color: #FFF;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
             cursor: pointer;
 
