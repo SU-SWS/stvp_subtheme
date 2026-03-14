@@ -147,7 +147,7 @@ const MediaFilters = () => {
     return () => unlockScroll()
   }, [trayOpen])
 
-  // Synchronously toggle inert after every DOM commit so Preact's VDOM never wins
+  // Synchronously enforce inert after every render so Preact reconciliation can't undo it
   useLayoutEffect(() => {
     const trayEl = ref.current
     if (!trayEl) return
@@ -156,7 +156,7 @@ const MediaFilters = () => {
     } else {
       trayEl.setAttribute('inert', '')
     }
-  }, [trayOpen])
+  })
 
   // Close tray on Escape key
   useEffect(() => {
