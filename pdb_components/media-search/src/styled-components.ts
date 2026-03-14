@@ -213,6 +213,19 @@ export const PaginationList = styled.ul`
             border: none !important;
         }
     }
+
+    @media (max-width: 440px) {
+        gap: 5px;
+
+        && button.page-number {
+            font-size: 20.25px;
+            width: 30px;
+        }
+
+        && button:not(.page-number) {
+            padding: 0 3px;
+        }
+    }
 `
 export const AlgoliaSearchContainer = styled.div`
     padding: 0 50px;

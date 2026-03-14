@@ -211,6 +211,14 @@
             border: none !important;
         }
     }
+
+    @media (max-width: 440px) {
+        gap: 6px;
+
+        && button:not(.page-number) {
+            padding: 0 4px;
+        }
+    }
 `,ji=Ai.div`
     padding: 0 50px;
 
