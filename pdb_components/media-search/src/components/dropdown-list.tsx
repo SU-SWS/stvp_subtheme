@@ -18,6 +18,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const listboxId = useId();
+  const triggerLabelId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const typeaheadRef = useRef('');
   const typeaheadTimerRef = useRef<number | null>(null);
@@ -352,12 +353,13 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   return (
     <Menu.Root open={open} onOpenChange={handleOpenChange} modal={false}>
       <DropDownListStyle>
-        <label className={multiple ? "visually-hidden" : ""}>{label}</label>
+        <label id={triggerLabelId} className={multiple ? "visually-hidden" : ""}>{label}</label>
         <Menu.Trigger
           ref={triggerRef}
           className="dropdown-input"
           type="button"
           role="combobox"
+          aria-labelledby={triggerLabelId}
           aria-multiselectable="true"
           aria-haspopup="listbox"
           aria-expanded={open}

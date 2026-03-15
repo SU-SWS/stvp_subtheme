@@ -309,7 +309,7 @@ export const DropDownListPortalStyle = styled.div`
         }
         
         &:focus, &:focus-visible {
-            outline: 1px solid #C0C0BF;
+            outline: 2px solid #C0C0BF;
             text-decoration: none;
             box-shadow: none;   
         }
