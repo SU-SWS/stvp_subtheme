@@ -720,6 +720,10 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
             padding: 16px 0;
             cursor: pointer;
             text-align: left;
+
+            &:focus {
+                box-shadow: 1px 1px 0px 3px rgba(0, 0, 0, 0.12);
+            }
         }
 
         .tray-section-title {
@@ -757,12 +761,17 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
             color: #2E2D29;
             background: none;
             border: none;
-            padding: 0;
+            padding: 5px 0;
             width: 100%;
             text-align: left;
 
             &:hover .tray-checkbox {
                 border-color: #B1040E;
+            }
+            
+            &:focus {
+                box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.12);
+                text-decoration: none;
             }
         }
 
