@@ -20,6 +20,8 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   const listboxId = useId();
   const triggerLabelId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const typeaheadRef = useRef('');
   const typeaheadTimerRef = useRef<number | null>(null);
   const suppressItemToggleUntilRef = useRef<number>(0);
@@ -94,6 +96,16 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     return -1;
   };
 
+  const focusItemAt = (index: number) => {
+    const nextItem = itemRefs.current[index];
+    if (!nextItem) return;
+    try {
+      nextItem.focus({preventScroll: true});
+    } catch {
+      nextItem.focus();
+    }
+  };
+
   const handleTriggerKeyDown = (event: KeyboardEvent) => {
     if (isSpaceKey(event.key)) {
       event.preventDefault();
@@ -141,7 +153,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     }
   };
 
-  const handleItemKeyDown = (event: KeyboardEvent, item?: DropDownListOption) => {
+  const handleItemKeyDown = (event: KeyboardEvent, item: DropDownListOption, currentIndex: number) => {
     if (
       isSpaceKey(event.key) ||
       event.key === 'Tab' ||
@@ -154,19 +166,11 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
       event.stopPropagation();
     }
 
-    const current = event.currentTarget as HTMLElement;
-    const list = current.closest('.dropdown-list');
-    if (!list) return;
-
-    const focusableItems = Array.from(list.querySelectorAll<HTMLElement>('.dropdown-item'));
-    const currentIndex = focusableItems.indexOf(current);
-    if (currentIndex === -1) return;
-
     if (isPrintableCharacter(event)) {
       event.preventDefault();
       event.stopPropagation();
       const search = updateTypeahead(event.key);
-      const start = currentIndex >= 0 ? currentIndex + 1 : 0;
+      const start = currentIndex + 1;
       const match = findMatchingIndex(search, start);
       const nextIndex = match >= 0 ? match : findMatchingIndex(search, 0);
       if (nextIndex >= 0) {
@@ -193,29 +197,34 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
       event.preventDefault();
       const delta = event.key === 'ArrowDown' ? 1 : -1;
       const nextIndex = currentIndex + delta;
-      if (nextIndex >= 0 && nextIndex < focusableItems.length) {
-        focusableItems[nextIndex].focus();
+      if (nextIndex >= 0 && nextIndex < items.length) {
+        setActiveIndex(nextIndex);
+        focusItemAt(nextIndex);
       }
       return;
     }
 
     if (event.key === 'Home') {
       event.preventDefault();
-      focusableItems[0]?.focus();
+      setActiveIndex(0);
+      focusItemAt(0);
       return;
     }
 
     if (event.key === 'End') {
       event.preventDefault();
-      focusableItems[focusableItems.length - 1]?.focus();
+      const lastIndex = Math.max(0, items.length - 1);
+      setActiveIndex(lastIndex);
+      focusItemAt(lastIndex);
       return;
     }
 
     if (event.key === 'Tab') {
       const nextIndex = event.shiftKey ? currentIndex - 1 : currentIndex + 1;
-      if (nextIndex >= 0 && nextIndex < focusableItems.length) {
+      if (nextIndex >= 0 && nextIndex < items.length) {
         event.preventDefault();
-        focusableItems[nextIndex].focus();
+        setActiveIndex(nextIndex);
+        focusItemAt(nextIndex);
         return;
       }
 
@@ -226,8 +235,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
       if (event.shiftKey) {
         // For reverse tab from first item, move focus back to trigger first.
         event.preventDefault();
-        const trigger = document.querySelector<HTMLElement>('.dropdown-input[aria-expanded="true"]');
-        trigger?.focus();
+        triggerRef.current?.focus();
       }
     }
   };
@@ -252,7 +260,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
     raf1 = window.requestAnimationFrame(() => {
       raf2 = window.requestAnimationFrame(() => {
         const adjustScrollForDropdown = () => {
-          const listboxEl = document.getElementById(listboxId);
+          const listboxEl = listRef.current;
           const triggerEl = triggerRef.current;
           if (!listboxEl || !triggerEl) return 0;
 
@@ -304,7 +312,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
       window.cancelAnimationFrame(raf2);
       window.cancelAnimationFrame(raf3);
     };
-  }, [open, listboxId]);
+  }, [open]);
 
   useEffect(() => {
     if (open && activeIndex < 0) {
@@ -315,36 +323,36 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
   const handleOpenChange = (nextOpen: boolean) => setOpen(nextOpen);
 
   useEffect(() => {
+    itemRefs.current = itemRefs.current.slice(0, items.length);
+  }, [items.length]);
+
+  useEffect(() => {
     if (!open || activeIndex < 0) return;
-    const activeEl = document.getElementById(optionId(activeIndex));
-    const listboxEl = document.getElementById(listboxId);
+    const activeEl = itemRefs.current[activeIndex];
+    const listboxEl = listRef.current;
     if (!activeEl || !listboxEl) return;
 
-    const activeTop = (activeEl as HTMLElement).offsetTop;
-    const activeBottom = activeTop + (activeEl as HTMLElement).offsetHeight;
-    const visibleTop = (listboxEl as HTMLElement).scrollTop;
-    const visibleBottom = visibleTop + (listboxEl as HTMLElement).clientHeight;
+    const activeTop = activeEl.offsetTop;
+    const activeBottom = activeTop + activeEl.offsetHeight;
+    const visibleTop = listboxEl.scrollTop;
+    const visibleBottom = visibleTop + listboxEl.clientHeight;
 
     // Keep keyboard-active option visible without scrolling the page.
     if (activeTop < visibleTop) {
-      (listboxEl as HTMLElement).scrollTop = activeTop;
-      return;
-    }
-
-    if (activeBottom > visibleBottom) {
-      (listboxEl as HTMLElement).scrollTop = activeBottom - (listboxEl as HTMLElement).clientHeight;
+      listboxEl.scrollTop = activeTop;
+    } else if (activeBottom > visibleBottom) {
+      listboxEl.scrollTop = activeBottom - listboxEl.clientHeight;
     }
 
     // Keep typeahead/keyboard navigation on the matched option.
-    const focusTarget = activeEl as HTMLElement;
-    if (document.activeElement !== focusTarget) {
+    if (document.activeElement !== activeEl) {
       try {
-        focusTarget.focus({preventScroll: true});
+        activeEl.focus({preventScroll: true});
       } catch {
-        focusTarget.focus();
+        activeEl.focus();
       }
     }
-  }, [open, activeIndex, listboxId]);
+  }, [open, activeIndex, items.length]);
 
   useEffect(() => {
     return () => clearTypeahead();
@@ -394,6 +402,7 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
               <Menu.Popup className="dropdown-popup" onOpenAutoFocus={preventOpenAutoFocus}>
                 <ul
                   id={listboxId}
+                  ref={listRef}
                   className="dropdown-list"
                   role="listbox"
                   aria-multiselectable="true"
@@ -404,35 +413,38 @@ const DropDownList = ({items, label, value, onChange, multiple, placeholder}: {
                   {items.map((item: DropDownListOption, index: number) => {
                     const isSelected = selectedValues.has(item.value);
                     return (
-                    <li key={item.value}>
-                      <button
-                        type="button"
-                        id={optionId(index)}
-                        role="option"
-                        aria-selected={isSelected ? "true" : "false"}
-                        aria-checked={isSelected ? "true" : "false"}
-                        data-selected={isSelected ? "true" : undefined}
-                        onClick={() => handleToggle(item, !isSelected)}
-                        className="dropdown-item"
-                        aria-label={item.label}
-                        onPointerEnterCapture={preventHoverFocus}
-                        onPointerMoveCapture={preventHoverFocus}
-                        onMouseEnterCapture={preventHoverFocus}
-                        onMouseMoveCapture={preventHoverFocus}
-                        onKeyDown={(event: KeyboardEvent) => handleItemKeyDown(event, item)}
-                      >
-                        <div className="dropdown-item-indicator">
-                          <span className="dropdown-checkbox" aria-hidden="true">
-                            {isSelected && (
-                              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
-                                <path d="M1 3.5L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                              </svg>
-                            )}
-                          </span>
-                        </div>
-                        <div className="dropdown-label">{item.label}</div>
-                      </button>
-                    </li>
+                      <li key={item.value}>
+                        <button
+                          type="button"
+                          id={optionId(index)}
+                          ref={(el) => {
+                            itemRefs.current[index] = el;
+                          }}
+                          role="option"
+                          aria-selected={isSelected ? "true" : "false"}
+                          aria-checked={isSelected ? "true" : "false"}
+                          data-selected={isSelected ? "true" : undefined}
+                          onClick={() => handleToggle(item, !isSelected)}
+                          className="dropdown-item"
+                          aria-label={item.label}
+                          onPointerEnterCapture={preventHoverFocus}
+                          onPointerMoveCapture={preventHoverFocus}
+                          onMouseEnterCapture={preventHoverFocus}
+                          onMouseMoveCapture={preventHoverFocus}
+                          onKeyDown={(event: KeyboardEvent) => handleItemKeyDown(event, item, index)}
+                        >
+                          <div className="dropdown-item-indicator">
+                            <span className="dropdown-checkbox" aria-hidden="true">
+                              {isSelected && (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                                  <path d="M1 3.5L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                              )}
+                            </span>
+                          </div>
+                          <div className="dropdown-label">{item.label}</div>
+                        </button>
+                      </li>
                     );
                   })}
                 </ul>
@@ -453,15 +465,4 @@ const ChevronIcon = (props: React.ComponentProps<'svg'>) => {
 
   );
 }
-
-
-const CheckIcon = (props: React.ComponentProps<'svg'>) => {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true" {...props}>
-      <path d="M1 3.5L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-
-  );
-}
-
 export default DropDownList

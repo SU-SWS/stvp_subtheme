@@ -765,12 +765,17 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
             width: 100%;
             text-align: left;
 
+            &:hover {
+                background: #F4F4F4;
+                text-decoration: none;
+            }
+
             &:hover .tray-checkbox {
                 border-color: #B1040E;
             }
             
             &:focus {
-                box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.12);
+                outline: rgb(192, 192, 191) solid 2px;
                 text-decoration: none;
             }
         }
