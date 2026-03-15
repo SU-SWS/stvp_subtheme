@@ -13,6 +13,7 @@ export const UnstyledList = styled.ul`
 
         .media-search__card {
             width: 100%;
+            max-width: 440px;
             border: 1px solid var(--primary-black-20, #D5D5D4);
             position: relative;
             display: flex;
@@ -31,7 +32,7 @@ export const UnstyledList = styled.ul`
 
             .media-search__card-image {
                 width: 100%;
-                height: 180px;
+                // height: 180px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -46,7 +47,7 @@ export const UnstyledList = styled.ul`
 
                 img {
                     width: 100%;
-                    height: 100%;
+                    height: 232px;
                     object-fit: cover;
                 }
             }
@@ -91,12 +92,24 @@ export const UnstyledList = styled.ul`
             }
         }
 
+        @media (min-width: 1530px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
         @media (max-width: 991px) {
             grid-template-columns: repeat(2, 1fr);
             column-gap: 24px;
 
             .media-search__card {
                 width: 100%;
+            }
+
+            .media-search__card-image {
+                height: 180px;
+
+                img {
+                    height: 100%;
+                }
             }
         }
 
@@ -465,7 +478,7 @@ export const Filters = styled.div`
         align-items: center;
         padding-left: 0;
 
-        @media (min-width: 1500px) {
+        @media (min-width: 1080px) {
             display: flex;
         }
     }

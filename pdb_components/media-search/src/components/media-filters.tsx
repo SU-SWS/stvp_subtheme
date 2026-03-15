@@ -89,7 +89,7 @@ const TrayRefinement = ({attribute, labelOverride}: {
                 aria-checked={item.isRefined}
                 className={`tray-option-btn${item.isRefined ? ' tray-option-btn--checked' : ''}`}
                 onClick={() => refine(item.value)}
-                aria-label={item.label}
+                aria-label={capitalizeFirstLetter(item.label)}
               >
                 <span className="tray-checkbox" aria-hidden="true">
                   {item.isRefined && (
@@ -101,7 +101,7 @@ const TrayRefinement = ({attribute, labelOverride}: {
                     </svg>
                   )}
                 </span>
-                <span className="tray-option-text">{item.label}</span>
+                <span className="tray-option-text">{capitalizeFirstLetter(item.label)}</span>
               </button>
             </li>
           ))}
@@ -111,6 +111,10 @@ const TrayRefinement = ({attribute, labelOverride}: {
         </ul>
     </div>
   )
+}
+
+function capitalizeFirstLetter(phrase: string) {
+  return phrase.charAt(0).toUpperCase() + phrase.slice(1);
 }
 
 const MediaFilters = () => {
@@ -270,7 +274,7 @@ const MediaFilters = () => {
         </div>
       </div>
 
-      {width >= 1500 && hasActive && (
+      {hasActive && (
         <div className="active-filters-bar" role="region" aria-label="Active filters">
           {allActiveTags.map((tag, i) => (
             <button key={i} className="active-filter-tag" onClick={tag.refine} type="button" aria-label={`Remove filter: ${tag.label}`}>

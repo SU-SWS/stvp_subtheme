@@ -61,7 +61,6 @@ const Search = ({index, filter}: { index?: string, filter?: string }) => {
     >
       <Configure filters={filter || "type:Audio/Visual"}/>
       <AlgoliaSearchContainer className="media-search--container-wrapper">
-        {/* <h2 className="media-search__title">Video, Podcasts, and Rich Media</h2> */}
         <div className="media-filters-area">
           <MediaFilters/>
         </div>
