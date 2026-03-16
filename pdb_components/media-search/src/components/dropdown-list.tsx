@@ -26,6 +26,7 @@ const DropDownList = ({items, label, value, onChange, multiple}: {
         value={value}
         multiple={multiple}
         inputRef={ref}
+        className="select-dropdown"
       >
         <Select.Label className="label">
           {label}{!!value?.length && ` (${value.length})`}

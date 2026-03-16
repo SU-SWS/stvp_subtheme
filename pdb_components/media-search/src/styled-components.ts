@@ -518,6 +518,14 @@ export const Filters = styled.div`
         @media (max-width: 991px) {
             display: none;
         }
+
+        .select-dropdown {
+            
+
+            button {
+                background: none;
+            }
+        }
     }
 
     .additional-filters {
@@ -554,7 +562,6 @@ export const Filters = styled.div`
             &:active,
             &[aria-expanded="true"] {
                 outline: none !important;
-                box-shadow: 3px 0 8px rgba(0, 0, 0, 0.12) !important;
             }
 
             &:hover, &:focus {
@@ -733,7 +740,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
       text-align: left;
 
       &:focus {
-        box-shadow: 1px 1px 0px 3px rgba(0, 0, 0, 0.12);
+        text-decoration: underline;
       }
     }
 
