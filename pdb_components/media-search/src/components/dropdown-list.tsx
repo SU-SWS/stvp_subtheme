@@ -20,14 +20,14 @@ const DropDownList = ({items, label, value, onChange, multiple}: {
 
   return (
     <DropDownListStyle>
-      <Select.Root
-        items={items}
-        onValueChange={onChange}
-        value={value}
-        multiple={multiple}
-        inputRef={ref}
-        className="select-dropdown"
-      >
+      <div className="select-dropdown">
+        <Select.Root
+          items={items}
+          onValueChange={onChange}
+          value={value}
+          multiple={multiple}
+          inputRef={ref}
+        >
         <Select.Label className="label">
           {label}{!!value?.length && ` (${value.length})`}
         </Select.Label>
@@ -62,6 +62,7 @@ const DropDownList = ({items, label, value, onChange, multiple}: {
           </Select.Positioner>
         </Select.Portal>
       </Select.Root>
+      </div>
     </DropDownListStyle>
   );
 }

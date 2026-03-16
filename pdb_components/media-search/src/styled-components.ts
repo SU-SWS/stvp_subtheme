@@ -520,10 +520,11 @@ export const Filters = styled.div`
         }
 
         .select-dropdown {
-            
+
 
             button {
                 background: none;
+                padding: 11px;
             }
         }
     }
@@ -742,7 +743,17 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
       &:focus {
         text-decoration: underline;
       }
+
+     
     }
+
+      label {
+        margin-top: 10px;
+      }
+
+      .block {
+        padding-bottom: 30px;
+      }
 
     .tray-section-title {
       font-size: 18px !important;
@@ -927,6 +938,10 @@ export const SearchInput = styled.div`
         align-items: center;
         gap: 4px;
         z-index: 2;
+
+        [type=submit] {
+            padding-right: 7px;
+        }
     }
 
     .divider {
