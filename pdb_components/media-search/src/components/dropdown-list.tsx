@@ -28,40 +28,41 @@ const DropDownList = ({items, label, value, onChange, multiple}: {
           multiple={multiple}
           inputRef={ref}
         >
-        <Select.Label className="label">
-          {label}{!!value?.length && ` (${value.length})`}
-        </Select.Label>
-        <Select.Trigger className="trigger">
-          <Select.Icon>
-            <ChevronIcon/>
-          </Select.Icon>
-        </Select.Trigger>
-        <Select.Portal className="portal">
-          <Select.Positioner align="start">
-            <DropDownPortalStyle>
-              <Select.Popup className="popup">
-                <Select.List className="list">
-                  {items.map(item => (
-                    <Select.Item
-                      key={item.label}
-                      value={item.value}
-                      className="item"
-                    >
-                      <Select.ItemIndicator keepMounted>
-                        {value?.includes(item.label) &&
-                          <i class="fa-regular fa-square-check"></i>}
-                        {!value?.includes(item.label) &&
-                          <i class="fa-regular fa-square"></i>}
-                      </Select.ItemIndicator>
-                      <Select.ItemText>{item.label}</Select.ItemText>
-                    </Select.Item>
-                  ))}
-                </Select.List>
-              </Select.Popup>
-            </DropDownPortalStyle>
-          </Select.Positioner>
-        </Select.Portal>
-      </Select.Root>
+          <Select.Label className="label hidden">
+            {label}{!!value?.length && ` (${value.length})`}
+          </Select.Label>
+          <Select.Trigger className="trigger">
+            {label} {!!value?.length && ` (${value.length})`}
+            <Select.Icon className="icon-span">
+              <ChevronIcon/>
+            </Select.Icon>
+          </Select.Trigger>
+          <Select.Portal className="portal">
+            <Select.Positioner align="start">
+              <DropDownPortalStyle>
+                <Select.Popup className="popup">
+                  <Select.List className="list">
+                    {items.map(item => (
+                      <Select.Item
+                        key={item.label}
+                        value={item.value}
+                        className="item"
+                      >
+                        <Select.ItemIndicator keepMounted>
+                          {value?.includes(item.label) &&
+                            <i class="fa-regular fa-square-check"></i>}
+                          {!value?.includes(item.label) &&
+                            <i class="fa-regular fa-square"></i>}
+                        </Select.ItemIndicator>
+                        <Select.ItemText>{item.label}</Select.ItemText>
+                      </Select.Item>
+                    ))}
+                  </Select.List>
+                </Select.Popup>
+              </DropDownPortalStyle>
+            </Select.Positioner>
+          </Select.Portal>
+        </Select.Root>
       </div>
     </DropDownListStyle>
   );

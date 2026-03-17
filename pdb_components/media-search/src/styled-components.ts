@@ -361,10 +361,35 @@ export const DropDownListPortalStyle = styled.div`
     }
 `
 export const DropDownListStyle = styled.div`
-  .label {
+  .select-dropdown {
 
-  }
-  .trigger {
+
+    .label {
+
+    }
+
+    .trigger {
+        border: 1px solid rgb(192, 192, 191);
+        padding: 0px 22px;
+        height: 40px;
+        box-sizing: border-box;
+        border-radius: 40px;
+        white-space: nowrap;
+        display: flex;  
+        align-items: center;
+        gap: 5px;
+        color: var(--Primary-Black, #2E2D29);
+        font-size: 16px;
+
+        span.icon-span {
+            align-items: center;
+            display: flex;
+        }
+    }
+
+    .portal {
+        
+    }
 
   }
 `
@@ -376,16 +401,22 @@ export const DropDownPortalStyle = styled.div`
   padding: 20px;
   box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
 
-  .item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
-    margin: 2px;
+  .popup {
+  
+    .list {
+    
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            margin: 2px;
 
-    &[data-higlighted], &:hover, &:focus {
-      text-decoration: underline;
-    }
+            &[data-higlighted], &:hover, &:focus {
+                text-decoration: underline;
+            }
+        }
+    }  
   }
 `
 
