@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+// Change the banner aspect ratio for only image banners.
+.ds-entity--stanford-banner:not([class*="banner-wave"]) {
+  .su-hero__media {
+    aspect-ratio: 2.33333;
+    max-height: none;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+}
+

@@ -65,10 +65,17 @@ var webpackConfig = {
         ]
       },
       {
-        test: /\.(png|jpg|gif|svg)$/i,
+        test: /\.(png|jpg|gif)$/i,
         type: "asset",
         generator: {
           filename: '../assets/images/[name][ext][query]'
+        }
+      },
+      {
+        test: /\.(svg)$/i,
+        type: "asset",
+        generator: {
+          filename: '../assets/svg/[name][ext][query]'
         }
       },
     ]

@@ -260,6 +260,11 @@
     #}
     <div class="su-local-footer__cell3">
       {# Twig block for you to extend with #}
+      {% block contentcell4 %}
+        {{ cell3 }}
+      {% endblock %}
+
+      {# Twig block for you to extend with #}
       {% block contentcell3 %}
       {#
         The signup form is optional. If it doesn't meet your content needs
@@ -273,7 +278,6 @@
       {% endif %}
       {% endblock %}
       {# If you want to provide all of our own markup use the cell3 var. #}
-
     </div>
   </div>
 </div>
