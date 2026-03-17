@@ -431,6 +431,7 @@ export const DropDownPortalStyle = styled.div`
             gap: 4px;
             cursor: pointer;
             margin: 2px;
+            padding-left: 9px;
 
             &[data-higlighted], &:hover, &:focus {
                 text-decoration: underline;
