@@ -517,11 +517,28 @@ export const DropDownPortalStyle = styled.div`
     
         .item {
             display: flex;
-            align-items: center;
-            gap: 4px;
+            align-items: flex-start;
+            gap: 9px;
             cursor: pointer;
             margin: 2px;
             padding-left: 9px;
+            padding-bottom: 12px;
+
+            span {
+                padding-top: 2px; // checkbox wrapper
+                justify-content: flex-start;
+                display: flex;
+            }
+
+            div { // checkbox item text label
+                color: var(--su-color-black);
+                font-family: var(--Family-Source-Sans, "Source Sans 3");
+                // font-family: "Source Sans 3", "Source Sans Pro", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+                font-size: 17px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 125%; /* 21.25px */
+            }
 
             &[data-higlighted], &:hover, &:focus {
                 text-decoration: underline;
@@ -533,6 +550,7 @@ export const DropDownPortalStyle = styled.div`
 
             i.fa-square-check {
                 color: var(--Primary-Red, #B1040E);
+                font-size: 15px;
             }
         }
     }  
@@ -705,6 +723,7 @@ export const Filters = styled.div`
             &:active,
             &[aria-expanded="true"] {
                 outline: none !important;
+                box-shadow: none !important;
             }
 
             &:hover, &:focus {
@@ -747,16 +766,18 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
   label {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 9px;
     cursor: pointer;
   }
 
   .fa-square-check {
     display: none;
+    font-size: 15px;
   }
 
   i.fa-regular.fa-square:hover {
     color: var(--su-color-digital-red);
+    font-size: 15px;
     }
 
   input[type="checkbox"] {
