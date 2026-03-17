@@ -312,6 +312,10 @@ export const PaginationList = styled.ul`
 export const AlgoliaSearchContainer = styled.div`
     padding: 0 50px;
 
+    .media-search__wrapper {
+        padding-bottom: 60px;
+    }
+
     @media (max-width: 991px) {
         padding: 0 30px;
     }

@@ -48,7 +48,7 @@ const ResultHits = ({...props}) => {
   )
 
   return (
-    <div style={{paddingBottom: '60px'}}>
+    <div className="media-search__wrapper">
       <h2 className="visually-hidden">Results</h2>
       <UnstyledList className="media-search__container">
         {hits.map(hit =>
