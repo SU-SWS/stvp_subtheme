@@ -61,7 +61,7 @@ const ResultHits = ({...props}) => {
       </UnstyledList>
 
       {pages.length > 1 && (
-        <nav aria-label="Search results pager">
+        <nav aria-label="Search results pager" className="media-search__pager">
           <PaginationList>
 
             {currentPage > 0 &&

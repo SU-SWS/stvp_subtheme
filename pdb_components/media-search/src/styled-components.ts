@@ -301,6 +301,10 @@ export const PaginationList = styled.ul`
             text-decoration: none !important;
             border: none !important;
         }
+
+        &:hover {
+            text-decoration: underline !important;
+        }
     }
 
     @media (max-width: 440px) {
