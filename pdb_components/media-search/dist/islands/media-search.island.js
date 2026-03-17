@@ -185,6 +185,12 @@
             }
         }
 
+        @media (max-width: 768px) {
+            .media-search__card-image {
+                padding-top: 0;
+            }
+        }
+
         @media (max-width: 550px) {
             grid-template-columns: 1fr;
             column-gap: 0;
@@ -712,6 +718,7 @@
             &:active,
             &[aria-expanded="true"] {
                 outline: none !important;
+                box-shadow: none !important;
             }
 
             &:hover, &:focus {
@@ -758,8 +765,7 @@
   }
 
   .fa-square-check {
-    display: none;
-    font-size: 15px;
+    display: none; // applies to both dropdowns and tray
   }
 
   i.fa-regular.fa-square:hover {

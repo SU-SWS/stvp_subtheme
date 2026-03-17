@@ -771,13 +771,11 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
   }
 
   .fa-square-check {
-    display: none;
-    font-size: 15px;
+    display: none; // applies to both dropdowns and tray
   }
 
   i.fa-regular.fa-square:hover {
     color: var(--su-color-digital-red);
-    font-size: 15px;
     }
 
   input[type="checkbox"] {
