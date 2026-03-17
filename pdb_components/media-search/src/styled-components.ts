@@ -842,22 +842,6 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
         }
     }
 
-    // :after {
-    //     content: '.';
-    //     // color: transparent;
-    //     display: inline-block;
-    //     position: absolute;
-    //     right: 30px;
-    //     top: -36px;
-    //     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" fill="none"><path d="M1 1L8 8L0.999999 15" stroke="%236D6C69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
-    //     background-repeat: no-repeat;
-    //     width: 10px;
-    //     height: 25px;
-    //     transform: rotate(90deg);
-    // }
-
-    
-
     .tray-section-title {
       font-size: 18px !important;
       font-weight: 400 !important;
