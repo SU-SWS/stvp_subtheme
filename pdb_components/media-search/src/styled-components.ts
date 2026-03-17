@@ -649,11 +649,16 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
     display: none;
   }
 
+  i.fa-regular.fa-square:hover {
+    color: #B1040E;
+    }
+
   input[type="checkbox"] {
     &:hover, &:focus {
       & ~ span {
         text-decoration: underline;
       }
+
     }
 
     &:checked {
@@ -780,15 +785,6 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
       &:focus {
         text-decoration: underline;
       }
-
-      &:hover {
-        :after {
-                // transform: rotate(270deg);
-                // color: black;
-                // put something here for hover state
-                transition: transform 0.25s ease;
-            }
-        }
         
         &[expanded="true"] {
             :before {
