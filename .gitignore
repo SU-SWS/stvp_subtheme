@@ -2,7 +2,10 @@
 *.sassc
 .sass-cache
 *.map
+.yarn
 node_modules
 .DS_Store
 *.log
 *.sql
+.github/instructions
+.cursor

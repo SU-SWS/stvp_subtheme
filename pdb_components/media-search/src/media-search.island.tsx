@@ -1,12 +1,12 @@
 import {liteClient} from 'algoliasearch/lite';
 import {createIsland} from 'preact-island'
 import {InstantSearch, Configure} from 'react-instantsearch';
-import {AlgoliaSearchContainer} from "./styled-components";
+import {AlgoliaSearchContainer, GlobalStyles} from "./styled-components";
 import ResultHits from "./components/result-hits";
 import MediaFilters from "./components/media-filters";
 import {IndexUiState} from "instantsearch.js/es/types/ui-state";
 
-const islandName = 'media-search'
+const islandName = 'media-search';
 
 /* global window */
 // @ts-ignore
@@ -17,9 +17,9 @@ const key = window.drupalSettings?.stanfordAlgolia.searchKey || process.env.ALGO
 const searchClient = liteClient(appId, key);
 
 
-const Search = () => {
+const Search = ({index, filter}: { index?: string, filter?: string }) => {
   // @ts-ignore
-  const searchIndex = window.drupalSettings?.stanfordAlgolia.index || process.env.ALGOLIA_INDEX;
+  const searchIndex = index || window.drupalSettings?.stanfordAlgolia.index || process.env.ALGOLIA_INDEX;
 
   return (
     <InstantSearch
@@ -59,9 +59,12 @@ const Search = () => {
         },
       }}
     >
-      <Configure filters="type:Audio/Visual"/>
-      <AlgoliaSearchContainer>
-        <MediaFilters/>
+      <Configure filters={filter || "type:Audio/Visual"}/>
+      <GlobalStyles />
+      <AlgoliaSearchContainer className="media-search--container-wrapper">
+        <div className="media-filters-area">
+          <MediaFilters/>
+        </div>
         <ResultHits/>
       </AlgoliaSearchContainer>
     </InstantSearch>
@@ -70,6 +73,26 @@ const Search = () => {
 }
 
 const island = createIsland(Search)
-island.render({
-  selector: `${islandName}, #${islandName}`,
-})
+
+if (!(window as any).__mediaSearchIslandMounted) {
+  ;(window as any).__mediaSearchIslandMounted = true
+  type PDBConfig = Record<string, string>
+  type MediaConfig = {
+    media_search_index?: string,
+    media_search_filters?: string
+  }
+
+  // @ts-ignore
+  const pdbConfig: Record<string, PDBConfig> = window?.drupalSettings?.pdb?.configuration || {}
+  const mediaConfig: MediaConfig = Object.values(pdbConfig).find((config) => typeof config.media_search_index !== "undefined" || typeof config.media_search_filters !== "undefined") as MediaConfig
+
+  // Use :first-of-type so preact-island only renders into the first element
+  // even if multiple <media-search> elements exist in the DOM.
+  island.render({
+    selector: `${islandName}:first-of-type`,
+    initialProps: {
+      index: mediaConfig?.media_search_index || undefined,
+      filter: mediaConfig?.media_search_filters || undefined
+    }
+  })
+}
