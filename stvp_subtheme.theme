@@ -5,6 +5,49 @@
  * Preprocess functions for Stanford STVP Subtheme.
  */
 
+use Drupal\node\NodeInterface;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Checks if a news node is tagged with the "Learning Paths" taxonomy term.
+ *
+ * When true, the stvp_subtheme overrides spotlight branding (no "Spotlight"
+ * label at top, and "More Learning Paths" instead of "More Spotlights" at bottom).
+ *
+ * @param \Drupal\node\NodeInterface|null $node
+ *   The node to check, or NULL to use the current route node.
+ *
+ * @return bool
+ *   TRUE if the node is stanford_news with layout_spotlight and has the
+ *   "Learning Paths" term in su_news_topics.
+ */
+function stvp_subtheme_news_is_learning_path(NodeInterface $node = NULL) {
+  if ($node === NULL) {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (!$node instanceof NodeInterface) {
+      return FALSE;
+    }
+  }
+
+  if (
+    $node->bundle() !== 'stanford_news' ||
+    !$node->hasField('su_news_topics') ||
+    !$node->hasField('layout_selection') ||
+    $node->get('layout_selection')->getString() !== 'news_spotlight'
+  ) {
+    return FALSE;
+  }
+
+  $terms = $node->get('su_news_topics')->referencedEntities();
+  foreach ($terms as $term) {
+    if ($term && $term->getName() === 'Learning Paths') {
+      return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
 /**
  * Prepares variables for the html.html.twig template.
  */
@@ -13,7 +56,7 @@ function stvp_subtheme_preprocess_html(&$variables) {
 
   // Add page theme class to body if page title banner present
   $node = \Drupal::routeMatch()->getParameter('node');
-  if (!$node || !$node->hasField('su_page_banner')) {
+  if (!$node instanceof NodeInterface || !$node->hasField('su_page_banner')) {
     return;
   }
 
@@ -44,6 +87,69 @@ function stvp_subtheme_preprocess_html(&$variables) {
 function stvp_subtheme_theme_suggestions_block_alter(array &$suggestions, array $variables) {
   if (!empty($variables['elements']['#id']) && $variables['elements']['#id'] == 'stvp_subtheme_search') {
     $suggestions[] = 'block__stanford_basic_search';
+  }
+}
+
+/**
+ * Implements hook_preprocess_block().
+ *
+ * Overrides spotlight branding for news tagged with "Learning Paths":
+ * - Hides the "Spotlight" label at the top of the page.
+ * - Replaces "More Spotlights" with "More Learning Paths" in the related block.
+ */
+function stvp_subtheme_preprocess_block(&$variables) {
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (!$node instanceof NodeInterface || !stvp_subtheme_news_is_learning_path($node)) {
+    return;
+  }
+
+  $elements = $variables['elements'];
+
+  // Hide the "Spotlight" label block at the top of spotlight news layout.
+  $block_id = $elements['#id'] ?? $elements['#plugin_id'] ?? '';
+  $config_id = $elements['#configuration']['id'] ?? '';
+  $is_spotlight_label = in_array($config_id, ['su_spotlight_label', 'simple_block:su_spotlight_label'], TRUE)
+    || $block_id === 'su_spotlight_label';
+  if ($is_spotlight_label) {
+    $variables['content'] = [];
+    $variables['attributes']['class'][] = 'visually-hidden';
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_node().
+ *
+ * Adds a class for news tagged with "Learning Paths" so layout/section labels
+ * can be targeted (e.g. to hide or replace "Related Spotlights" via CSS).
+ */
+function stvp_subtheme_preprocess_node(&$variables) {
+  $node = $variables['node'] ?? NULL;
+  if ($node instanceof NodeInterface && stvp_subtheme_news_is_learning_path($node)) {
+    $variables['attributes']['class'][] = 'news-learning-path';
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * For news tagged with "Learning Paths", changes the related spotlights block
+ * header from "More Spotlights" to "More Learning Paths".
+ */
+function stvp_subtheme_views_pre_render(ViewExecutable $view) {
+  if ($view->id() !== 'stanford_news' || $view->current_display !== 'related_spotlights_filtered') {
+    return;
+  }
+
+  if (!stvp_subtheme_news_is_learning_path(NULL)) {
+    return;
+  }
+
+  $display = $view->getDisplay();
+  $header = $display->getOption('header') ?: [];
+  if (!empty($header['area_text_custom']['content'])) {
+    $header['area_text_custom']['content'] = '<h2>More Learning Paths</h2>';
+    $display->setOption('header', $header);
   }
 }
 
