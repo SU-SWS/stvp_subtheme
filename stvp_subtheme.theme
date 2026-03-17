@@ -47,7 +47,6 @@ function stvp_subtheme_theme_suggestions_block_alter(array &$suggestions, array 
   }
 }
 
-
 function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
   // if not running on a paragraph, exit out.
   if (!isset($variables['content']['#paragraph'])) {
@@ -69,8 +68,8 @@ function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
       }
     }
 
-  } 
-  
+  }
+
   // Process Cards
   // if ($paragraph->bundle() == 'stanford_card') {
   //   stvp_subtheme_preprocess_card($variables);
@@ -146,4 +145,41 @@ function stvp_subtheme_preprocess_paragraph(&$variables) {
 
 
   }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function stvp_subtheme_preprocess_block__pdb_component__media_search(&$variables) {
+  $algolia_settings = _stvp_algolia_settings();
+  if (!$algolia_settings) {
+    return;
+  }
+  $variables['#attached']['drupalSettings']['stanfordAlgolia'] = $algolia_settings;
+}
+
+function _stvp_algolia_settings() {
+  $settings = &drupal_static(__FUNCTION__);
+  if ($settings != NULL) {
+    return $settings;
+  }
+
+  if (!\Drupal::hasService('config_pages.loader')) {
+    return $settings = FALSE;
+  }
+
+  /** @var \Drupal\config_pages\ConfigPagesLoaderServiceInterface $config_page */
+  $config_page = \Drupal::service('config_pages.loader');
+
+  $algolia_app = $config_page->getValue('stanford_basic_site_settings', 'su_site_algolia_id', 0, 'value');
+  $algolia_search_key = $config_page->getValue('stanford_basic_site_settings', 'su_site_algolia_search', 0, 'value');
+  $search_index = $config_page->getValue('stanford_basic_site_settings', 'su_site_algolia_index', 0, 'value');
+  $federated = (bool) $config_page->getValue('stanford_basic_site_settings', 'su_site_algolia_fed', 0, 'value');
+  $settings = [
+    'appId' => $algolia_app,
+    'searchKey' => $algolia_search_key,
+    'index' => $search_index,
+    'federatedSearch' => $federated,
+  ];
+  return $settings;
 }
