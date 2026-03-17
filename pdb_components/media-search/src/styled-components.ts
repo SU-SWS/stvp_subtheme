@@ -167,10 +167,6 @@ export const UnstyledList = styled.ul`
             }
         }
 
-        @media (min-width: 1530px) {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
         @media (max-width: 1199px) {
             grid-template-columns: repeat(2, 1fr);
             column-gap: 24px;
