@@ -29,10 +29,10 @@ const DropDownList = ({items, label, value, onChange, multiple}: {
           inputRef={ref}
         >
           <Select.Label className="label hidden">
-            {label}{!!value?.length && ` (${value.length})`}
+            {label}
           </Select.Label>
           <Select.Trigger className="trigger">
-            {label} {!!value?.length && ` (${value.length})`}
+            {label}
             <Select.Icon className="icon-span">
               <ChevronIcon/>
             </Select.Icon>

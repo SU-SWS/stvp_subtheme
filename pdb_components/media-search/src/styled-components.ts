@@ -379,6 +379,7 @@ export const DropDownListStyle = styled.div`
         align-items: center;
         gap: 5px;
         color: var(--Primary-Black, #2E2D29);
+        background: none;
         font-size: 16px;
 
         span.icon-span {
@@ -388,7 +389,11 @@ export const DropDownListStyle = styled.div`
     }
 
     .portal {
-        
+        // Base UI Select positioner is marked with data-open when shown.
+        // Force popup 20px lower than the default 10px offset.
+        > div[data-open] {
+            margin-top: 30px !important;
+        }
     }
 
   }
@@ -414,6 +419,14 @@ export const DropDownPortalStyle = styled.div`
 
             &[data-higlighted], &:hover, &:focus {
                 text-decoration: underline;
+
+                i {
+                    color: var(--Primary-Red, #B1040E);
+                }
+            }
+
+            i.fa-square-check {
+                color: var(--Primary-Red, #B1040E);
             }
         }
     }  
@@ -470,7 +483,7 @@ export const Filters = styled.div`
         align-items: center;
         padding-left: 0;
 
-        @media (min-width: 1080px) {
+        @media (min-width: 991px) {
             display: flex;
         }
     }
@@ -550,14 +563,6 @@ export const Filters = styled.div`
             display: none;
         }
 
-        .select-dropdown {
-
-
-            button {
-                background: none;
-                padding: 11px;
-            }
-        }
     }
 
     .additional-filters {
@@ -802,6 +807,10 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
 
     .block {
         padding-bottom: 30px;
+
+        i.fa-square-check {
+            color: var(--Primary-Red, #B1040E);
+        }
     }
 
     // :after {
