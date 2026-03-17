@@ -67,6 +67,7 @@ const TrayRefinement = ({attribute, labelOverride}: {
           {...buttonProps}
         >
           {label}
+          <i class="fa-solid fa-chevron-down"></i>
         </button>
       </legend>
 
