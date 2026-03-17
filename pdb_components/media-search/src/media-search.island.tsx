@@ -1,7 +1,7 @@
 import {liteClient} from 'algoliasearch/lite';
 import {createIsland} from 'preact-island'
 import {InstantSearch, Configure} from 'react-instantsearch';
-import {AlgoliaSearchContainer} from "./styled-components";
+import {AlgoliaSearchContainer, GlobalStyles} from "./styled-components";
 import ResultHits from "./components/result-hits";
 import MediaFilters from "./components/media-filters";
 import {IndexUiState} from "instantsearch.js/es/types/ui-state";
@@ -60,6 +60,7 @@ const Search = ({index, filter}: { index?: string, filter?: string }) => {
       }}
     >
       <Configure filters={filter || "type:Audio/Visual"}/>
+      <GlobalStyles />
       <AlgoliaSearchContainer className="media-search--container-wrapper">
         <div className="media-filters-area">
           <MediaFilters/>

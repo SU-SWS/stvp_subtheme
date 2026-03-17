@@ -39,7 +39,7 @@ const DropDownList = ({items, label, value, onChange, multiple}: {
           </Select.Trigger>
           <Select.Portal className="portal">
             <Select.Positioner align="start">
-              <DropDownPortalStyle>
+              <DropDownPortalStyle className="select-dropdown-options-container">
                 <Select.Popup className="popup">
                   <Select.List className="list">
                     {items.map(item => (

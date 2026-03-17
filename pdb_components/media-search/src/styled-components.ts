@@ -1,4 +1,79 @@
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+
+export const GlobalStyles = createGlobalStyle`
+  :root {
+    /* --- Red / Digital Red --- */
+    --su-color-digital-red-xlight: #f83535;
+    --su-color-digital-red-light: #E50808;
+    --su-color-digital-red: #B1040E;
+    --su-color-digital-red-xdark: #820000;
+    --su-color-digital-red-dark: #7A0000;
+    --su-color-primary-cardinal-red: #8C1515;
+    --stvp-color-red: #CD0E0E;
+    --stvp-color-red-medium: #AD030D;
+
+    /* --- Palo Verde Teal --- */
+    --su-color-palo-alto-20: #DCEFEC;
+    --stvp-color-palo-verde-xlight: #CEE1DE;
+    --stvp-color-palo-verde-medium: #19A596;
+    --su-color-palo-verde-dark: #017E7C;
+    --stvp-color-palo-verde-xdark: #028771;
+    --stvp-color-palo-verde-darkest: #006463;
+    --stvp-color-palo-verde: #279989;
+    --stvp-color-palo-verde-bright: #3DD3C3;
+
+    /* --- Plum --- */
+    --su-color-plum-xxlight: #F0E5EF;
+    --su-color-plum-xlight: #EAD6E9;
+    --stvp-color-plum-medium: #77267A;
+    --su-color-plum: #620059;
+    --su-color-plum-dark: #350D36;
+    --stvp-color-plum-xdark: #32002E;
+    --stvp-color-plum-bright: #9C008E;
+
+    /* --- Illuminating --- */
+    --stvp-color-illuminating-xxlight: #F7EFD5;
+    --stvp-color-illuminating-xlight: #F5E5B7;
+    --su-color-illuminating: #FEDD5C;
+    --su-color-illuminating-light: #FFE781;
+    --su-color-illuminating-dark: #FEC51D;
+    --stvp-color-illuminating-xdark: #DB9A47;
+    --stvp-color-illuminating-xxdark: #D58B2D;
+    --stvp-color-brown: #5C3200;
+
+    /* --- Lagunita --- */
+    --stvp-color-lagunita-xxlight: #DDF1F4;
+    --stvp-color-lagunita-xlight: #C5E6EB;
+    --stvp-color-lagunita-light: #009AB4;
+    --su-color-lagunita: #007C92;
+    --su-color-lagunita-dark: #006B81;
+    --stvp-color-lagunita-xdark: #006071;
+    --stvp-color-lagunita-xxdark: #005f6e;
+    --stvp-color-lagunita-bright: #3EBFD5;
+
+    /* --- Archway --- */
+    --stvp-color-archway-10: #EFEDEB;
+    --stvp-color-archway-20: #DFDBD8;
+    --su-color-archway-light: #766253;
+    --su-color-archway: #5D4B3C;
+
+    /* --- Foggy / Grays --- */
+    --su-color-foggy-light: #F4F4F4;
+    --stvp-color-foggy-xlight: #EAEAEA;
+    --stvp-color-foggy-light: #BAB5AD;
+    --stvp-color-foggy: #8F8C89;
+    --su-color-foggy-dark: #B6B1A9;
+    --stvp-color-light-gray: #C0C0BF;
+    --stvp-color-border-light: #D5D5D4;
+    --stvp-color-warm-gray: #6D6C69;
+    --stvp-color-near-black-warm: #43423E;
+
+    /* --- Core / Blacks & White --- */
+    --su-color-cool-gray: #53565A;
+    --su-color-black: #2E2D29;
+    --su-color-primary-white: #FFFFFF;
+  }
+`
 
 export const UnstyledList = styled.ul`
     list-style: none;
@@ -42,7 +117,7 @@ export const UnstyledList = styled.ul`
                 box-sizing: border-box;
 
                 &.media-search__card-image--no-image {
-                    background: #F4F4F4;
+                    background: var(--su-color-foggy-light);
                 }
 
                 img {
@@ -85,7 +160,7 @@ export const UnstyledList = styled.ul`
                 gap: 4px;
                 border-radius: 2px;
                 background: var(--Primary-SU-Cool-Grey, #53565A);
-                color: #FFF;
+                color: var(--su-color-primary-white);
                 font-size: 13px;
                 align-self: flex-start;
                 margin-top: auto;
@@ -272,8 +347,8 @@ export const DropDownListPortalStyle = styled.div`
         flex-direction: column;
         width: 300px;
         max-height: 406px;
-        background: #FFF;
-        border: 1px solid #C0C0BF;
+        background: var(--su-color-primary-white);
+        border: 1px solid var(--stvp-color-light-gray);
         border-radius: 8px;
         overflow-y: auto;
         overflow-x: hidden;
@@ -317,12 +392,12 @@ export const DropDownListPortalStyle = styled.div`
         cursor: pointer;
 
         &:hover {
-            background: #F4F4F4;
+            background: var(--su-color-foggy-light);
             text-decoration: none;
         }
 
         &:focus, &:focus-visible {
-            outline: 2px solid #C0C0BF;
+            outline: 2px solid var(--stvp-color-light-gray);
             text-decoration: none;
             box-shadow: none;
         }
@@ -340,51 +415,43 @@ export const DropDownListPortalStyle = styled.div`
             width: 16px;
             height: 16px;
             border-radius: 2px;
-            border: 2.5px solid #C0C0BF;
-            background: #FFF;
+            border: 2.5px solid var(--stvp-color-light-gray);
+            background: var(--su-color-primary-white);
         }
 
         &[data-checked] .dropdown-checkbox,
         &[data-selected] .dropdown-checkbox {
-            background: #B1040E;
-            border-color: #B1040E;
+            background: var(--su-color-digital-red);
+            border-color: var(--su-color-digital-red);
         }
 
         &:hover .dropdown-checkbox {
-            border-color: #B1040E;
+            border-color: var(--su-color-digital-red);
         }
     }
 
     .dropdown-empty {
         padding: 12px var(--spacing-ms-1, 27px);
-        color: #8F8C89;
+        color: var(--stvp-color-foggy);
     }
 `
 export const DropDownListStyle = styled.div`
   .select-dropdown-container {
-        display: flex;
-        flex-direction: column;
-        width: 300px;
-        max-height: 406px;
-        background: #FFF;
-        border: 1px solid #C0C0BF;
-        border-radius: 8px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-        position: relative;
-        top: 50px;
+        // border: 1px solid #C0C0BF;
+        // border-radius: 8px;
 
         &:focus, &:focus-visible {
             outline: none !important;
         }
+
+        
 
     .label {
 
     }
 
     .trigger {
-        border: 1px solid rgb(192, 192, 191);
+        border: 1px solid var(--stvp-color-light-gray);
         padding: 0px 22px;
         height: 40px;
         box-sizing: border-box;
@@ -403,7 +470,7 @@ export const DropDownListStyle = styled.div`
         }
 
         &:hover svg path {
-            fill: #B1040E;
+            fill: var(--su-color-digital-red);
         }
 
         &:focus, &:focus-visible {
@@ -424,11 +491,25 @@ export const DropDownListStyle = styled.div`
 `
 
 export const DropDownPortalStyle = styled.div`
-  background: white;
+  background: var(--su-color-primary-white);
   max-height: 300px;
   overflow-y: auto;
   padding: 20px;
   box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+
+  .select-dropdown-options-container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    max-height: 406px;
+    background: var(--su-color-primary-white);
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    top: 50px;
+    border: 1px solid var(--stvp-color-light-gray);
+    border-radius: 8px;
+  }
 
   .popup {
   
@@ -521,7 +602,7 @@ export const Filters = styled.div`
         border: none;
         background: none;
         font-size: 16px !important;
-        color: #2E2D29;
+        color: var(--su-color-black);
         cursor: pointer;
         white-space: nowrap;
 
@@ -531,7 +612,7 @@ export const Filters = styled.div`
         }
 
         .active-filter-tag__icon {
-            color: #2E2D29;
+            color: var(--su-color-black);
             flex-shrink: 0;
         }
 
@@ -540,7 +621,7 @@ export const Filters = styled.div`
                 text-decoration: underline;
             }
             .active-filter-tag__icon {
-                color: #B1040E;
+                color: var(--su-color-digital-red);
             }
         }
     }
@@ -550,7 +631,7 @@ export const Filters = styled.div`
         border: none;
         padding: 4px 4px;
         font-size: 16px !important;
-        color: #2E2D29;
+        color: var(--su-color-black);
         cursor: pointer;
         text-decoration: underline;
         white-space: nowrap;
@@ -561,7 +642,7 @@ export const Filters = styled.div`
         }
 
         &:hover, &:focus-visible {
-            color: #B1040E;
+            color: var(--su-color-digital-red);
         }
     }
 
@@ -604,15 +685,15 @@ export const Filters = styled.div`
             flex-direction: row;
             align-items: center;
             gap: 8px;
-            background: #FFF;
-            border: 1px solid #C0C0BF;
+            background: var(--su-color-primary-white);
+            border: 1px solid var(--stvp-color-light-gray);
             padding: 0 22px;
             height: 40px;
             box-sizing: border-box;
             border-radius: 40px;
             white-space: nowrap;
             cursor: pointer;
-            color: #2E2D29;
+            color: var(--su-color-black);
             font-size: 16px;
 
             @media (max-width: 360px) {
@@ -636,7 +717,7 @@ export const Filters = styled.div`
 
             .all-filters-icon,
             i {
-                color: #43423E;
+                color: var(--stvp-color-near-black-warm);
                 text-decoration: none !important;
                 display: inline-flex;
             }
@@ -655,7 +736,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
   right: 0;
   height: 100vh;
   width: 380px;
-  background: #fff;
+  background: var(--su-color-primary-white);
   box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
   z-index: 1000;
   display: flex;
@@ -675,7 +756,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
   }
 
   i.fa-regular.fa-square:hover {
-    color: #B1040E;
+    color: var(--su-color-digital-red);
     }
 
   input[type="checkbox"] {
@@ -763,12 +844,12 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
     align-items: center;
     justify-content: space-between;
     padding: 24px 27px;
-    border-bottom: 1px solid #d5d5d4;
+    border-bottom: 1px solid var(--stvp-color-border-light);
 
     .tray-title {
       font-size: 18px;
       font-weight: 700;
-      color: #2e2d29;
+      color: var(--su-color-black);
     }
 
     .tray-close {
@@ -777,7 +858,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
       padding: 4px;
       cursor: pointer;
       font-size: 18px;
-      color: #2e2d29;
+      color: var(--su-color-black);
     }
   }
 
@@ -792,7 +873,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
   .tray-section {
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid #d5d5d4;
+    border-bottom: 1px solid var(--stvp-color-border-light);
     padding-bottom: 0;
 
     .tray-section-toggle {
@@ -853,7 +934,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
     .tray-section-title {
       font-size: 18px !important;
       font-weight: 400 !important;
-      color: #2e2d29;
+      color: var(--su-color-black);
       text-transform: none;
       letter-spacing: normal;
     }
@@ -882,7 +963,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
       gap: 10px;
       cursor: pointer;
       font-size: 16px !important;
-      color: #2e2d29;
+      color: var(--su-color-black);
       background: none;
       border: none;
       padding: 5px 0;
@@ -890,16 +971,16 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
       text-align: left;
 
       &:hover {
-        background: #f4f4f4;
+        background: var(--su-color-foggy-light);
         text-decoration: none;
       }
 
       &:hover .tray-checkbox {
-        border-color: #b1040e;
+        border-color: var(--su-color-digital-red);
       }
 
       &:focus {
-        outline: rgb(192, 192, 191) solid 2px;
+        outline: var(--stvp-color-light-gray) solid 2px;
         text-decoration: none;
       }
     }
@@ -916,18 +997,18 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
       width: 16px;
       height: 16px;
       border-radius: 2px;
-      border: 2.5px solid #c0c0bf;
-      background: #fff;
+      border: 2.5px solid var(--stvp-color-light-gray);
+      background: var(--su-color-primary-white);
     }
 
     .tray-option-btn--checked .tray-checkbox {
-      background: #b1040e;
-      border-color: #b1040e;
+      background: var(--su-color-digital-red);
+      border-color: var(--su-color-digital-red);
     }
 
     .tray-option-empty {
       font-size: 14px;
-      color: #8f8c89;
+      color: var(--stvp-color-foggy);
       padding-bottom: 8px;
     }
   }
@@ -937,7 +1018,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
     align-items: center;
     justify-content: space-between;
     padding: 20px 27px;
-    border-top: 1px solid #d5d5d4;
+    border-top: 1px solid var(--stvp-color-border-light);
 
     .tray-clear {
       display: flex;
@@ -947,7 +1028,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
       border: 1px solid var(--primary-black-20, #d5d5d4);
       background: var(--Primary-White, #fff);
       font-size: 16px;
-      color: #53565a;
+      color: var(--su-color-cool-gray);
       cursor: pointer;
 
       &.tray-clear--active {
@@ -965,13 +1046,13 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
       border: 1px solid var(--Accent-Lagunita-Light, #009ab4);
       background: var(--Accent-Lagunita, #007c92);
       box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.10);
-      color: #fff;
+      color: var(--su-color-primary-white);
       font-size: 16px;
       font-weight: 700;
       cursor: pointer;
 
       &:hover {
-        background: #005f6e;
+        background: var(--stvp-color-lagunita-xxdark);
       }
     }
   }
@@ -986,8 +1067,8 @@ export const SearchInput = styled.div`
 
     input {
         border-radius: 40px;
-        border: 1px solid #C0C0BF;
-        background: #FFF;
+        border: 1px solid var(--stvp-color-light-gray);
+        background: var(--su-color-primary-white);
         padding: 0 62px 0 26px;
         height: 40px;
         width: 100%;
@@ -1043,7 +1124,7 @@ export const SearchInput = styled.div`
         display: inline-block;
         width: 1px;
         height: 16px;
-        background: #C0C0BF;
+        background: var(--stvp-color-light-gray);
         margin: 0 4px;
         flex-shrink: 0;
         align-self: center;
@@ -1059,7 +1140,7 @@ export const SearchInput = styled.div`
         cursor: pointer;
 
         i {
-            color: #B1040E;
+            color: var(--su-color-digital-red);
             line-height: 1;
         }
 
@@ -1068,7 +1149,7 @@ export const SearchInput = styled.div`
         }
 
         &[type="reset"] .clear-icon {
-            color: #6D6C69;
+            color: var(--stvp-color-warm-gray);
             font-weight: normal;
         }
 
@@ -1081,13 +1162,13 @@ export const SearchInput = styled.div`
         &[type="submit"]:hover i,
         &[type="submit"]:active i,
         &[type="submit"]:focus i {
-            color: #F83535;
+            color: var(--su-color-digital-red-xlight);
         }
 
         &[type="reset"]:hover .clear-icon,
         &[type="reset"]:active .clear-icon,
         &[type="reset"]:focus .clear-icon {
-            color: #F83535;
+            color: var(--su-color-digital-red-xlight);
         }
     }
 `
