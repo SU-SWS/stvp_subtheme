@@ -401,6 +401,11 @@ export const DropDownListStyle = styled.div`
             align-items: center;
             display: flex;
         }
+
+        &:focus, &:focus-visible {
+            box-shadow: none;
+            outline: none;
+        }
     }
 
     .portal {

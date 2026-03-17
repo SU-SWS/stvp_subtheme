@@ -95,7 +95,7 @@
             grid-template-columns: repeat(4, 1fr);
         }
 
-        @media (max-width: 991px) {
+        @media (max-width: 1199px) {
             grid-template-columns: repeat(2, 1fr);
             column-gap: 24px;
 
@@ -424,6 +424,7 @@
             gap: 4px;
             cursor: pointer;
             margin: 2px;
+            padding-left: 9px;
 
             &[data-higlighted], &:hover, &:focus {
                 text-decoration: underline;
