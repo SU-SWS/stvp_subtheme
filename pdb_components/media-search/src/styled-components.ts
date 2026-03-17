@@ -361,8 +361,23 @@ export const DropDownListPortalStyle = styled.div`
     }
 `
 export const DropDownListStyle = styled.div`
-  .select-dropdown {
+  .select-dropdown-container {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        max-height: 406px;
+        background: #FFF;
+        border: 1px solid #C0C0BF;
+        border-radius: 8px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        position: relative;
+        top: 50px;
 
+        &:focus, &:focus-visible {
+            outline: none !important;
+        }
 
     .label {
 

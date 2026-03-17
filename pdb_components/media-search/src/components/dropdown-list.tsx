@@ -20,7 +20,7 @@ const DropDownList = ({items, label, value, onChange, multiple}: {
 
   return (
     <DropDownListStyle>
-      <div className="select-dropdown">
+      <div className="select-dropdown select-dropdown-container">
         <Select.Root
           items={items}
           onValueChange={onChange}
