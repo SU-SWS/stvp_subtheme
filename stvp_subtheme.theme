@@ -6,6 +6,7 @@
  */
 
 use Drupal\node\NodeInterface;
+use Drupal\views\Plugin\views\cache\CachePluginBase;
 use Drupal\views\ViewExecutable;
 
 /**
@@ -135,11 +136,47 @@ function stvp_subtheme_views_pre_render(ViewExecutable $view) {
     return;
   }
 
-  $display = $view->getDisplay();
-  $header = $display->getOption('header') ?: [];
-  if (!empty($header['area_text_custom']['content'])) {
-    $header['area_text_custom']['content'] = '<h2>More Learning Paths</h2>';
-    $display->setOption('header', $header);
+  // Alter the header handler's content option so the rendered view uses the
+  // new text. setOption() on the display does not affect already-instantiated
+  // handlers; we must set the option on the handler.
+  $view->setHandlerOption('related_spotlights_filtered', 'header', 'area_text_custom', 'content', '<h2>More Learning Paths</h2>');
+}
+
+/**
+ * Recursively replaces "More Spotlights" with "More Learning Paths" in a
+ * render array (for #markup and #plain_text).
+ */
+function _stvp_subtheme_replace_spotlights_in_render_array(array &$element) {
+  if (isset($element['#markup']) && is_string($element['#markup'])) {
+    $element['#markup'] = str_replace('More Spotlights', 'More Learning Paths', $element['#markup']);
+  }
+  if (isset($element['#plain_text']) && is_string($element['#plain_text'])) {
+    $element['#plain_text'] = str_replace('More Spotlights', 'More Learning Paths', $element['#plain_text']);
+  }
+  foreach (element_children($element) as $key) {
+    _stvp_subtheme_replace_spotlights_in_render_array($element[$key]);
+  }
+}
+
+/**
+ * Implements hook_views_post_render().
+ *
+ * Ensures "More Spotlights" is replaced with "More Learning Paths" in the
+ * related spotlights view output when viewing a Learning Paths news node.
+ * This runs after render so it works even if the header was cached or built
+ * before pre_render.
+ */
+function stvp_subtheme_views_post_render(ViewExecutable $view, &$output, CachePluginBase $cache) {
+  if ($view->id() !== 'stanford_news' || $view->current_display !== 'related_spotlights_filtered') {
+    return;
+  }
+
+  if (!stvp_subtheme_news_is_learning_path(NULL)) {
+    return;
+  }
+
+  if (is_array($output)) {
+    _stvp_subtheme_replace_spotlights_in_render_array($output);
   }
 }
 
