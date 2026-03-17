@@ -402,6 +402,10 @@ export const DropDownListStyle = styled.div`
             display: flex;
         }
 
+        &:hover svg path {
+            fill: #B1040E;
+        }
+
         &:focus, &:focus-visible {
             box-shadow: none;
             outline: none;
