@@ -127,9 +127,11 @@
         }
 
         .su-site-search__submit {
-          padding: 20px;
+          padding: 14px;
           top: 5px;
           right: -20px;
+          transform: scaleX(-1);
+          background-size: 16px;
         }
       }
     }
