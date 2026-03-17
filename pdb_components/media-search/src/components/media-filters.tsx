@@ -66,7 +66,7 @@ const TrayRefinement = ({attribute, labelOverride}: {
           className="tray-section-toggle"
           {...buttonProps}
         >
-          {label}
+          <span class="tray-toggle-label">{label}</span>
           <i class="fa-solid fa-chevron-down"></i>
         </button>
       </legend>
@@ -80,7 +80,7 @@ const TrayRefinement = ({attribute, labelOverride}: {
         {items.map(item => (
           <div key={item.value}>
             <label>
-              <input type="checkbox" onChange={() => refine(item.value)}/>
+              <input type="checkbox" checked={item.isRefined} onChange={() => refine(item.value)}/>
               <i class="fa-regular fa-square-check"></i>
               <i class="fa-regular fa-square"></i>
 

@@ -376,7 +376,6 @@ export const DropDownListStyle = styled.div`
         }
     }
 
-
   }
 `
 
@@ -387,7 +386,6 @@ export const DropDownPortalStyle = styled.div`
     padding: 20px;
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.12);
 
-  
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -415,7 +413,6 @@ export const DropDownPortalStyle = styled.div`
             padding-bottom: 12px;
 
             span {
-                padding-top: 2px; // checkbox wrapper
                 justify-content: flex-start;
                 display: flex;
             }
@@ -696,14 +693,6 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
     }
   }
 
-  button.tray-section-toggle {
-    color: black;
-
-    &:hover, &:focus {
-      text-decoration: underline;
-    }
-  }
-
   button, [role="checkbox"], input {
     &:focus {
       outline: none;
@@ -795,7 +784,7 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
     padding-bottom: 0;
 
     .tray-section-toggle {
-
+      color: var(--Primary-Black, #2E2D29);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -806,9 +795,13 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
       cursor: pointer;
       text-align: left;
 
-      &:focus {
-        text-decoration: underline;
-      }
+        &:hover, &:focus {
+            text-decoration: none;
+
+            span.tray-toggle-label {
+                text-decoration: underline;
+            }
+        }
         
         &[expanded="true"] {
             :before {
@@ -833,8 +826,12 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
             font-style: normal;
             font-weight: 400;
             line-height: 125%; /* 21.25px */
-            text-underline-offset: 15%; /* 2.55px */
-            text-underline-position: from-font;
+
+            &:hover {
+                text-decoration-line: underline;
+                text-decoration-skip-ink: none;
+                text-underline-offset: 15%; /* 2.55px */
+            }           
         }
         i {
             font-size: 20px;
