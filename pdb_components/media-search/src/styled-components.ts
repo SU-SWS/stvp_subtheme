@@ -628,7 +628,8 @@ export const Filters = styled.div`
                 text-decoration: none;
             }
 
-            &:hover .all-filters-label {
+            &:hover .all-filters-label,
+            &:focus .all-filters-label {
                 text-decoration: underline;
             }
 
@@ -832,10 +833,6 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
             font-style: normal;
             font-weight: 400;
             line-height: 125%; /* 21.25px */
-            text-decoration-line: underline;
-            text-decoration-style: solid;
-            text-decoration-skip-ink: none;
-            text-decoration-thickness: auto;
             text-underline-offset: 15%; /* 2.55px */
             text-underline-position: from-font;
         }
