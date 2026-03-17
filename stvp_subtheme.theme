@@ -93,28 +93,18 @@ function stvp_subtheme_theme_suggestions_block_alter(array &$suggestions, array 
 /**
  * Implements hook_preprocess_block().
  *
- * Overrides spotlight branding for news tagged with "Learning Paths":
- * - Hides the "Spotlight" label at the top of the page.
- * - Replaces "More Spotlights" with "More Learning Paths" in the related block.
+ * Adds a class to the Spotlight label block so it can be hidden via CSS
+ * when .news-learning-path is present (see theme SCSS).
  */
 function stvp_subtheme_preprocess_block(&$variables) {
-  $node = \Drupal::routeMatch()->getParameter('node');
-  if (!$node instanceof NodeInterface || !stvp_subtheme_news_is_learning_path($node)) {
-    return;
-  }
-
   $elements = $variables['elements'];
-
-  // Hide the "Spotlight" label block at the top of spotlight news layout.
   $block_id = $elements['#id'] ?? $elements['#plugin_id'] ?? '';
   $config_id = $elements['#configuration']['id'] ?? '';
   $is_spotlight_label = in_array($config_id, ['su_spotlight_label', 'simple_block:su_spotlight_label'], TRUE)
     || $block_id === 'su_spotlight_label';
   if ($is_spotlight_label) {
-    $variables['content'] = [];
-    $variables['attributes']['class'][] = 'visually-hidden';
+    $variables['attributes']['class'][] = 'spotlight-label-block';
   }
-
 }
 
 /**

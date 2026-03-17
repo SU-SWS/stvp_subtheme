@@ -1,0 +1,5 @@
+// Hide the "Spotlight" label at the top of the page only when the node
+// is tagged with Learning Paths (has .news-learning-path).
+.news-learning-path .spotlight-label-block {
+  display: none;
+}
