@@ -328,106 +328,7 @@ export const AlgoliaSearchContainer = styled.div`
         padding: 0 6px;
     }
 `
-export const DropDownListPortalStyle = styled.div`
-    .dropdown-positioner {
-        z-index: 100;
-        /* Base UI Positioner sets inline transform; offset via margins. */
-        margin-top: -10px;
-    }
 
-    .dropdown-popup {
-        display: flex;
-        flex-direction: column;
-        width: 300px;
-        max-height: 406px;
-        background: var(--su-color-primary-white);
-        border: 1px solid var(--stvp-color-light-gray);
-        border-radius: 8px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-
-        &:focus, &:focus-visible {
-            outline: none !important;
-        }
-
-        li {
-            margin: var(--spacing-ms-0, 9px) 0;
-        }
-    }
-
-    .dropdown-list {
-        list-style: none;
-        margin: var(--spacing-ms-0, 9px) 0;
-        padding: 0;
-
-        &:focus, &:focus-visible {
-            outline: none !important;
-        }
-    }
-
-    .dropdown-item {
-        -webkit-appearance: none;
-        appearance: none;
-        border: 0;
-        background: transparent;
-        margin: 0;
-        width: 100%;
-        box-sizing: border-box;
-        font: inherit;
-        color: inherit;
-        text-align: left;
-        line-height: 1.3;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 1px var(--spacing-ms-1, 27px);
-        cursor: pointer;
-
-        &:hover {
-            background: var(--su-color-foggy-light);
-            text-decoration: none;
-        }
-
-        &:focus, &:focus-visible {
-            outline: 2px solid var(--stvp-color-light-gray);
-            text-decoration: none;
-            box-shadow: none;
-        }
-
-        .dropdown-item-indicator {
-            display: flex;
-            align-items: center;
-        }
-
-        .dropdown-checkbox {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            width: 16px;
-            height: 16px;
-            border-radius: 2px;
-            border: 2.5px solid var(--stvp-color-light-gray);
-            background: var(--su-color-primary-white);
-        }
-
-        &[data-checked] .dropdown-checkbox,
-        &[data-selected] .dropdown-checkbox {
-            background: var(--su-color-digital-red);
-            border-color: var(--su-color-digital-red);
-        }
-
-        &:hover .dropdown-checkbox {
-            border-color: var(--su-color-digital-red);
-        }
-    }
-
-    .dropdown-empty {
-        padding: 12px var(--spacing-ms-1, 27px);
-        color: var(--stvp-color-foggy);
-    }
-`
 export const DropDownListStyle = styled.div`
   .select-dropdown-container {
         // border: 1px solid #C0C0BF;
@@ -438,7 +339,6 @@ export const DropDownListStyle = styled.div`
         }
 
         
-
     .label {
 
     }
@@ -472,13 +372,6 @@ export const DropDownListStyle = styled.div`
         }
     }
 
-    .portal {
-        // Base UI Select positioner is marked with data-open when shown.
-        // Force popup 20px lower than the default 10px offset.
-        > div[data-open] {
-            margin-top: 30px !important;
-        }
-    }
 
   }
 `
@@ -534,16 +427,24 @@ export const DropDownPortalStyle = styled.div`
             }
 
             &[data-higlighted], &:hover, &:focus {
-                text-decoration: underline;
+
+                div {
+                    text-decoration: underline;
+                    text-decoration-skip-ink: none;
+                    text-underline-offset: 15%; /* 2.55px */
+                }
 
                 i {
                     color: var(--Primary-Red, #B1040E);
                 }
             }
 
+            i {
+                font-size: 20px;
+            }
+            
             i.fa-square-check {
                 color: var(--Primary-Red, #B1040E);
-                font-size: 15px;
             }
         }
     }  
@@ -600,7 +501,7 @@ export const Filters = styled.div`
         align-items: center;
         padding-left: 0;
 
-        @media (min-width: 991px) {
+        @media (min-width: 992px) {
             display: flex;
         }
     }
@@ -922,6 +823,22 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
     .block {
         padding-bottom: 30px;
 
+        span {
+            font-size: 17px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 125%; /* 21.25px */
+            text-decoration-line: underline;
+            text-decoration-style: solid;
+            text-decoration-skip-ink: none;
+            text-decoration-thickness: auto;
+            text-underline-offset: 15%; /* 2.55px */
+            text-underline-position: from-font;
+        }
+        i {
+            font-size: 20px;
+        }
+        
         i.fa-square-check {
             color: var(--Primary-Red, #B1040E);
         }

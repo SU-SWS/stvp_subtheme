@@ -28,19 +28,18 @@ const DropDownList = ({items, label, value, onChange, multiple}: {
           multiple={multiple}
           inputRef={ref}
         >
-          <Select.Label className="label hidden">
-            {label}
-          </Select.Label>
           <Select.Trigger className="trigger">
-            {label}
+            <Select.Label className="label">
+              {label}
+            </Select.Label>
             <Select.Icon className="icon-span">
               <ChevronIcon/>
             </Select.Icon>
           </Select.Trigger>
           <Select.Portal className="portal">
-            <Select.Positioner align="start">
-              <DropDownPortalStyle className="select-dropdown-options-container">
-                <Select.Popup className="popup">
+            <Select.Positioner align="start" sideOffset={50}>
+              <DropDownPortalStyle>
+              <Select.Popup className="popup">
                   <Select.List className="list">
                     {items.map(item => (
                       <Select.Item
