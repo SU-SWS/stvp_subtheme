@@ -26,19 +26,21 @@ const DropDownList = ({items, label, value, onChange, multiple}: {
           onValueChange={onChange}
           value={value}
           multiple={multiple}
+          modal={false}
           inputRef={ref}
         >
           <Select.Trigger className="trigger">
-            <Select.Label className="label">
+            <Select.Label className="label hidden">
               {label}
             </Select.Label>
+            {label}
             <Select.Icon className="icon-span">
               <ChevronIcon/>
             </Select.Icon>
           </Select.Trigger>
           <Select.Portal className="portal">
-            <Select.Positioner align="start" sideOffset={50}>
-              <DropDownPortalStyle>
+            <Select.Positioner align="start" sideOffset={50} style={{pointerEvents: 'none'}}>
+              <DropDownPortalStyle style={{pointerEvents: 'auto'}}>
               <Select.Popup className="popup">
                   <Select.List className="list">
                     {items.map(item => (

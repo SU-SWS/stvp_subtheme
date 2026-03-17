@@ -66,7 +66,7 @@ const TrayRefinement = ({attribute, labelOverride}: {
           className="tray-section-toggle"
           {...buttonProps}
         >
-          {label}
+          <span class="tray-toggle-label">{label}</span>
           <i class="fa-solid fa-chevron-down"></i>
         </button>
       </legend>
