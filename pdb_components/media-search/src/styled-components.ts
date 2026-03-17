@@ -96,7 +96,7 @@ export const UnstyledList = styled.ul`
             grid-template-columns: repeat(4, 1fr);
         }
 
-        @media (max-width: 991px) {
+        @media (max-width: 1199px) {
             grid-template-columns: repeat(2, 1fr);
             column-gap: 24px;
 
