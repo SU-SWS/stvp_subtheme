@@ -482,13 +482,13 @@
 
   }
 `),Hi=Ii.div`
-  background: var(--su-color-primary-white);
-  max-height: 300px;
-  overflow-y: auto;
-  padding: 20px;
-  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+    background: var(--su-color-primary-white);
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 20px;
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.12);
 
-  .select-dropdown-options-container {
+  
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -500,7 +500,7 @@
     top: 50px;
     border: 1px solid var(--stvp-color-light-gray);
     border-radius: 8px;
-  }
+
 
   .popup {
   
