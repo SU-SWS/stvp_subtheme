@@ -122,7 +122,8 @@ export const UnstyledList = styled.ul`
 
                 img {
                     width: 100%;
-                    height: 232px;
+                    height: auto;
+                    aspect-ratio: 16 / 9;
                     object-fit: cover;
                 }
             }
@@ -173,14 +174,6 @@ export const UnstyledList = styled.ul`
 
             .media-search__card {
                 width: 100%;
-            }
-
-            .media-search__card-image {
-                height: 180px;
-
-                img {
-                    height: 100%;
-                }
             }
         }
 
