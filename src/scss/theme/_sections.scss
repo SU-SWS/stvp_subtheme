@@ -138,3 +138,8 @@
         }
     }
 }
+
+// Learning Paths news (see stvp_subtheme.theme): hide Spotlight label when node has .news-learning-path.
+.news-learning-path .spotlight-label-block {
+    display: none;
+}
