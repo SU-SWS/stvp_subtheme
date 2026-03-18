@@ -6,14 +6,11 @@
  */
 
 use Drupal\node\NodeInterface;
-use Drupal\views\Plugin\views\cache\CachePluginBase;
-use Drupal\views\ViewExecutable;
 
 /**
  * Checks if a news node is tagged with the "Learning Paths" taxonomy term.
  *
- * When true, the stvp_subtheme overrides spotlight branding (no "Spotlight"
- * label at top, and "More Learning Paths" instead of "More Spotlights" at bottom).
+ * Used to add the news-learning-path class and hide the Spotlight label (CSS).
  *
  * @param \Drupal\node\NodeInterface|null $node
  *   The node to check, or NULL to use the current route node.
@@ -111,8 +108,7 @@ function stvp_subtheme_preprocess_block(&$variables) {
 /**
  * Implements hook_preprocess_node().
  *
- * Adds a class for news tagged with "Learning Paths" so layout/section labels
- * can be targeted (e.g. to hide or replace "Related Spotlights" via CSS).
+ * Adds news-learning-path for Learning Paths spotlight news (see theme SCSS).
  */
 function stvp_subtheme_preprocess_node(&$variables) {
   $node = $variables['node'] ?? NULL;
@@ -120,66 +116,6 @@ function stvp_subtheme_preprocess_node(&$variables) {
     $variables['attributes']['class'][] = 'news-learning-path';
   }
 }
-
-/**
- * Implements hook_views_pre_render().
- *
- * For news tagged with "Learning Paths", changes the related spotlights block
- * header from "More Spotlights" to "More Learning Paths".
- */
-function stvp_subtheme_views_pre_render(ViewExecutable $view) {
-  if ($view->id() !== 'stanford_news' || $view->current_display !== 'related_spotlights_filtered') {
-    return;
-  }
-
-  if (!stvp_subtheme_news_is_learning_path(NULL)) {
-    return;
-  }
-
-  // Alter the header handler's content option so the rendered view uses the
-  // new text. setOption() on the display does not affect already-instantiated
-  // handlers; we must set the option on the handler.
-  $view->setHandlerOption('related_spotlights_filtered', 'header', 'area_text_custom', 'content', '<h2>More Learning Paths</h2>');
-}
-
-/**
- * Recursively replaces "More Spotlights" with "More Learning Paths" in a
- * render array (for #markup and #plain_text).
- */
-function _stvp_subtheme_replace_spotlights_in_render_array(array &$element) {
-  if (isset($element['#markup']) && is_string($element['#markup'])) {
-    $element['#markup'] = str_replace('More Spotlights', 'More Learning Paths', $element['#markup']);
-  }
-  if (isset($element['#plain_text']) && is_string($element['#plain_text'])) {
-    $element['#plain_text'] = str_replace('More Spotlights', 'More Learning Paths', $element['#plain_text']);
-  }
-  foreach (element_children($element) as $key) {
-    _stvp_subtheme_replace_spotlights_in_render_array($element[$key]);
-  }
-}
-
-/**
- * Implements hook_views_post_render().
- *
- * Ensures "More Spotlights" is replaced with "More Learning Paths" in the
- * related spotlights view output when viewing a Learning Paths news node.
- * This runs after render so it works even if the header was cached or built
- * before pre_render.
- */
-function stvp_subtheme_views_post_render(ViewExecutable $view, &$output, CachePluginBase $cache) {
-  if ($view->id() !== 'stanford_news' || $view->current_display !== 'related_spotlights_filtered') {
-    return;
-  }
-
-  if (!stvp_subtheme_news_is_learning_path(NULL)) {
-    return;
-  }
-
-  if (is_array($output)) {
-    _stvp_subtheme_replace_spotlights_in_render_array($output);
-  }
-}
-
 
 function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
   // if not running on a paragraph, exit out.
