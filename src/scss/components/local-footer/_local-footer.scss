@@ -1,19 +1,35 @@
 @charset "UTF-8";
 
 div.su-local-footer__columns {
+  grid-template-areas: "A B C D";
+
   @include grid-media-max('md') {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
     "A B"
-    "A C";
+    "C D";
   }
 
   @include grid-media('xl') {
     grid-template-columns: 1fr 1fr 1fr minmax(330px, 1fr);
   }
 
-}
+  .su-local-footer__cell2 {
+    grid-area: B;
+  }
 
+  .su-local-footer__cell3 {
+    grid-area: C;
+
+    .flex-container {
+      flex-direction: column;
+    }
+  }
+
+  .su-local-footer__cell4 {
+    grid-area: D;
+  }
+}
 
 .su-local-footer  {
   background-color: $su-color-cool-gray;
@@ -92,7 +108,8 @@ div.su-local-footer__columns {
     }
   }
 
-  .su-local-footer__cell3 {
+  .su-local-footer__cell3,
+  .su-local-footer__cell2 {
     display: flex;
     flex-direction: column;
 
