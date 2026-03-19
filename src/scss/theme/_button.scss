@@ -135,9 +135,18 @@ a.su-button--big {
         box-shadow: none;
     }
 
+    // Expand button fixup
+    &.expand-collapse-button {
+        &:not(:hover):not(:focus):after {
+            background: linear-gradient(45deg, #fff, #fff);
+            color: $su-color-digital-red;
+        }
+
+        &:after {
+            color: $su-color-digital-red;
+        }
+    }
 }
-
-
 
 /* --- Page Theme Button Overrides --- */
  // so it doesn't affect the footer or other areas with buttons.
