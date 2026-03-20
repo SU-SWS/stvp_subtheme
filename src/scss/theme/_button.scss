@@ -135,9 +135,18 @@ a.su-button--big {
         box-shadow: none;
     }
 
+    // Expand button fixup
+    &.expand-collapse-button {
+        &:not(:hover):not(:focus):after {
+            background: linear-gradient(45deg, #fff, #fff);
+            color: $su-color-digital-red;
+        }
+
+        &:after {
+            color: $su-color-digital-red;
+        }
+    }
 }
-
-
 
 /* --- Page Theme Button Overrides --- */
  // so it doesn't affect the footer or other areas with buttons.
@@ -153,6 +162,16 @@ a.su-button--big {
     .su-button--secondary {
         @include secondary-button-style($su-color-palo-verde-dark, $su-color-palo-verde-dark);
 
+        // Expand button fixup
+        &.expand-collapse-button {
+            &:not(:hover):not(:focus):after {
+                background: linear-gradient(45deg, #fff, #fff);
+                color: $stvp-color-palo-verde;
+            }
+            &:after {
+                color: $stvp-color-palo-verde;
+            }
+        }
     }
 }
 
@@ -165,6 +184,17 @@ a.su-button--big {
 
     .su-button--secondary {
         @include secondary-button-style($su-color-plum,$su-color-plum);
+
+        // Expand button fixup
+        &.expand-collapse-button {
+            &:not(:hover):not(:focus):after {
+                background: linear-gradient(45deg, #fff, #fff);
+                color: $su-color-plum;
+            }
+            &:after {
+                color: $su-color-plum;
+            }
+        }
     }
 }
 
@@ -177,6 +207,17 @@ a.su-button--big {
 
     .su-button--secondary {
         @include secondary-button-style($su-color-lagunita-dark,$su-color-lagunita-dark);
+
+        // Expand button fixup
+        &.expand-collapse-button {
+            &:not(:hover):not(:focus):after {
+                background: linear-gradient(45deg, #fff, #fff);
+                color: $su-color-lagunita;
+            }
+            &:after {
+                color: $su-color-lagunita;
+            }
+        }
     }
 }
 
@@ -215,5 +256,47 @@ a.su-button--big {
 
     .su-button--secondary {
         @include secondary-button-style($stvp-color-brown, $stvp-color-brown);
+
+        // Expand button fixup
+        &.expand-collapse-button {
+            &:not(:hover):not(:focus):after {
+                background: linear-gradient(45deg, #fff, #fff);
+                color: $stvp-color-brown;
+            }
+            &:after {
+                color: $stvp-color-brown;
+            }
+        }
     }
 }
+
+// Override for the expand button on the accordion.
+.page-theme--red .page-content {
+    .su-button--secondary {
+
+        // Expand button fixup
+        &.expand-collapse-button {
+            &:not(:hover):not(:focus):after {
+                background: linear-gradient(45deg, #fff, #fff);
+                color: $su-color-digital-red;
+                 background-color: transparent;
+            }
+
+            &:after {
+                color: $su-color-digital-red;
+            }
+        }
+    }
+}
+
+// Overide for accordion expand/collapse
+.expand-collapse-button {
+    span.expand-collapse {
+        padding-right: 5px;
+    }
+
+    &.su-button--secondary:after {
+        mask: none;
+    }
+}
+
