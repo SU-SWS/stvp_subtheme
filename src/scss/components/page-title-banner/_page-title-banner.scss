@@ -18,23 +18,21 @@ $page-title-banner-height: 214px; // this is the height of the banner image, we 
     }
 
 
-    // ../../assets/svg/ecorner-large-banner.svg
-
     // solid red background behind graphic:
-    &:before {
-        background: $su-color-digital-red;
-        content: '';
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        z-index: -1;
-        display: inline-block;
-        top: 0;
-    }
+    // &:before {
+    //     // background: $su-color-digital-red;
+    //     content: '';
+    //     width: 100%;
+    //     height: 100%;
+    //     position: absolute;
+    //     z-index: -1;
+    //     display: inline-block;
+    //     top: 0;
+    // }
 
 
     &:after {
-        content: '';            
+        content: '';
         background-image: url('../../assets/svg/ecorner-banner-text-white.svg');
         background-position: center;
         content: "";
@@ -46,14 +44,14 @@ $page-title-banner-height: 214px; // this is the height of the banner image, we 
         top: 50%;
         left: 50%;
         // transform: translate(-50%, -50%);
-        transform: translate(-50%, -36%); // centees it vertically better.
+        transform: translate(-50%, -36%); // centers it vertically better.
         align-items: center;
 
         @media screen and (max-width: 566px) {
             background-size: 280px auto;
         }
     }
-} 
+}
 // Banner wave variant
 
     /* --- general for this subtheme --- */
@@ -147,3 +145,9 @@ $page-title-banner-height: 214px; // this is the height of the banner image, we 
         @include ecorner-banner();
     }
 }
+
+.ptype-stanford-page-title-banner:has(.ecorner) {
+    background: $su-color-digital-red;
+}
+
+
