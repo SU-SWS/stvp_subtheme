@@ -135,6 +135,10 @@
  {%- set lockup_options = { "modifier_class": 'su-lockup--option-a', "line1": lockup_title, "attributes": attributes|without('id') } -%}
 {%- endif -%}
 
+{%- if template_path_link is empty -%}
+  {%- set template_path_link = "@decanter/components/link/link.twig" -%}
+{%- endif %}
+
 {%- if template_path_signup_form is empty -%}
   {%- set template_path_signup_form = "@stvp_subtheme/components/signup-form/signup-form.html.twig" -%}
 {%- endif %}
@@ -211,7 +215,6 @@
       </ul>
       {% endif %}
       {% endblock %}
-
     </div>
     {# Content Cell 2 - For primary and secondary link lists. #}
     <div class="su-local-footer__cell2">
@@ -223,6 +226,7 @@
       {% if primary_links is not empty%}
       <nav aria-label="footer primary nav">
         {% if primary_links_header is not empty %}
+        <h2 class="su-local-footer__list-heading">{{ primary_links_header|default("Primary Links") }}</h2>
         {% endif %}
         <ul class="su-local-footer__primary-links">
           {# Stylized links. See local-footer.json for structure for macro. #}
@@ -240,6 +244,7 @@
       {% if secondary_links is not empty%}
       <nav aria-label="footer secondary nav">
         {% if secondary_links_header is not empty %}
+        <h2 class="su-local-footer__list-heading">{{ secondary_links_header|default("Secondary Links") }}</h2>
         {% endif %}
         <ul class="su-local-footer__secondary-links">
           {# Stylized links. See local-footer.json for structure for macro. #}
@@ -259,11 +264,9 @@
       Cell 3 - For the signup form.
     #}
     <div class="su-local-footer__cell3">
-      {# Twig block for you to extend with #}
-      {% block contentcell4 %}
-        {{ cell3 }}
-      {% endblock %}
-
+      {{ cell2 }}
+    </div>
+    <div class="su-local-footer__cell4">
       {# Twig block for you to extend with #}
       {% block contentcell3 %}
       {#
@@ -278,7 +281,7 @@
       {% endif %}
       {% endblock %}
       {# If you want to provide all of our own markup use the cell3 var. #}
+      {{ cell3 }}
     </div>
   </div>
 </div>
-
