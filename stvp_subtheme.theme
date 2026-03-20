@@ -1,28 +1,125 @@
 <?php
 
+use Drupal\node\NodeInterface;
+
 /**
  * @file
  * Preprocess functions for Stanford STVP Subtheme.
  */
 
 /**
- * Prepares variables for the html.html.twig template.
+ * Get the current route's node from the page if one is available.
+ *
+ * @param string $bundle
+ *   Only return the desired node type.
+ * @param string $field
+ *   Only return the desired node type with a field that is populated.
+ *
+ * @return \Drupal\node\NodeInterface|null
  */
-function stvp_subtheme_preprocess_html(&$variables) {
-  $variables['stanford_basic_path'] = \Drupal::service('extension.list.theme')->getPath('stanford_basic');
+function _stvp_subtheme_get_route_node(string $bundle = '', string $field = ''): ?NodeInterface {
+  $node = &drupal_static(__FUNCTION__ . $bundle . $field);
+  if ($node) {
+    return $node;
+  }
 
-  // Add page theme class to body if page title banner present
   $node = \Drupal::routeMatch()->getParameter('node');
-  if (!$node || !$node->hasField('su_page_banner')) {
+  if (!$node instanceof NodeInterface) {
+    return NULL;
+  }
+  if ($bundle && $node->bundle() != $bundle) {
+    return NULL;
+  }
+  if ($field && (!$node->hasField($field) || !$node->get($field)->count())) {
+    return NULL;
+  }
+  return $node;
+}
+
+function _stvp_subtheme_get_learning_path_tid(): ?int {
+  $tid = &drupal_static(__FUNCTION__, NULL);
+  if ($tid) {
+    return $tid;
+  }
+
+  $learningPathTerm = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadByProperties([
+      'vid' => 'stanford_news_topics',
+      'name' => 'Learning Paths',
+    ]);
+  if (!$learningPathTerm) {
+    return NULL;
+  }
+  return key($learningPathTerm) ?? NULL;
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function stvp_subtheme_preprocess_views_view(&$variables) {
+  if ($variables['id'] == 'stanford_news' && $variables['display_id'] == 'related_spotlights') {
+    $node = _stvp_subtheme_get_route_node('stanford_news', 'su_news_topics');
+    if (!$node) {
+      return;
+    }
+
+    $tid = _stvp_subtheme_get_learning_path_tid();
+    if (!$tid) {
+      return;
+    }
+
+    $topics = $node->get('su_news_topics')->getValue();
+    foreach ($topics as $topic) {
+      if ($topic['target_id'] == $tid) {
+        $variables['header']['area_text_custom']['#markup'] = '<h2>More Learning Path</h2>';
+        return;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function stvp_subtheme_preprocess_block__simple_block__su_spotlight_label(&$variables) {
+  $node = _stvp_subtheme_get_route_node('stanford_news', 'su_news_topics');
+  if (!$node) {
     return;
   }
 
+  $tid = _stvp_subtheme_get_learning_path_tid();
+  if (!$tid) {
+    return;
+  }
+
+  $topics = $node->get('su_news_topics')->getValue();
+  foreach ($topics as $topic) {
+    if ($topic['target_id'] == $tid) {
+      $variables['content']['#text'] = '<p>Learning Path</p>';
+      return;
+    }
+  }
+}
+
+/**
+ * Prepares variables for the html.html.twig template.
+ */
+function stvp_subtheme_preprocess_html(&$variables) {
+  $variables['stanford_basic_path'] = \Drupal::service('extension.list.theme')
+    ->getPath('stanford_basic');
+
+  // Add page theme class to body if page title banner present
+  $node = _stvp_subtheme_get_route_node('stanford_page', 'su_page_banner');
+  if (!$node) {
+    return;
+  }
   $paragraphs = $node->get('su_page_banner')->referencedEntities();
 
   foreach ($paragraphs as $paragraph) {
     if ($paragraph && $paragraph->bundle() == 'stanford_page_title_banner') {
       $title_class = $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_style');
-      if($title_class) {
+      if ($title_class) {
         $existing_classes = $variables['attributes']['class'] ?? [];
         $variables['attributes']['class'] = array_merge($existing_classes, [$title_class]);
 
@@ -67,7 +164,6 @@ function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
         $variables['#attached']['library'][] = 'stvp_subtheme/ecorner';
       }
     }
-
   }
 
   // Process Cards
@@ -81,44 +177,38 @@ function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
   }
 }
 
-
-
 /**
  * Implements hook_preprocess_banner().
  */
 function stvp_subtheme_preprocess_banner(&$variables) {
-
   $paragraph = $variables['content']['#paragraph'];
 
   $existing_classes = $variables['attributes']['class'] ?? [];
   $extra_classes = [
     $paragraph->getBehaviorSetting('react_paragraphs:banner_variant_info', 'banner_style'),
-    $paragraph->getBehaviorSetting('react_paragraphs:banner_variant_info', 'banner_wave')
+    $paragraph->getBehaviorSetting('react_paragraphs:banner_variant_info', 'banner_wave'),
   ];
   // Add variant classes to banner
   $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
 }
-
 
 /**
  * Implements hook_preprocess_title_banner().
  */
 function stvp_subtheme_preprocess_title_banner(&$variables) {
-
   $paragraph = $variables['content']['#paragraph'];
 
   $existing_classes = $variables['attributes']['class'] ?? [];
   $extra_classes = [
     $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_style'),
-    $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_wave')
+    $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_wave'),
   ];
-  if($paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'ecorner_option')) {
+  if ($paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'ecorner_option')) {
     array_push($extra_classes, 'ecorner');
   }
   // Add variant classes to banner
   $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
 }
-
 
 function stvp_subtheme_preprocess_paragraph__stanford_layout(array &$variables): void {
   /** @var \Drupal\paragraphs\Layout\Paragraph $paragraph */
@@ -128,7 +218,6 @@ function stvp_subtheme_preprocess_paragraph__stanford_layout(array &$variables):
     $paragraph->getBehaviorSetting('react_paragraphs:layout_variant_info', 'section_wave'),
   ];
   $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
-
 }
 
 function stvp_subtheme_preprocess_paragraph(&$variables) {
@@ -142,8 +231,6 @@ function stvp_subtheme_preprocess_paragraph(&$variables) {
     $tinted_text_section['text_background'] = $paragraph->getBehaviorSetting('react_paragraphs:tinted_background', 'tinted_background', 'stvp-text-background--none');
     // $variables['#attached']['html_head'][] = [['#type' => 'html_tag', '#tag' => 'script', '#value' => 'console.log(' . json_encode($tinted_text_section) . ');'], 'debug_tinted_text_section'];
     $variables['attributes']['class'][] = $tinted_text_section['text_background'];
-
-
   }
 }
 
