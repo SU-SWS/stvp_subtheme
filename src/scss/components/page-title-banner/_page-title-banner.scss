@@ -20,7 +20,6 @@ $page-title-banner-height: 214px; // this is the height of the banner image, we 
         @include responsive-spacing('padding-top', 6);
         @include responsive-spacing('padding-bottom', 2);
         max-height: $page-title-banner-height;
-
     }
 
     .su-hero {
@@ -81,7 +80,6 @@ $page-title-banner-height: 214px; // this is the height of the banner image, we 
     }
 
     /* --- wave options --- */
-
     .page-theme--wave-grey:not(.ecorner) {
         // @TODO: adjust on mobile if we do a different cropped svg..
         background-image: $wave1-background-large;
@@ -99,12 +97,7 @@ $page-title-banner-height: 214px; // this is the height of the banner image, we 
     }
 
     .ecorner {
-        @include ecorner-banner();
+         @include ecorner-banner();
     }
 }
-
-.ptype-stanford-page-title-banner:has(.ecorner) {
-    background: $su-color-digital-red;
-}
-
 
