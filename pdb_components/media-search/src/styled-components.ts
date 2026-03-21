@@ -166,7 +166,39 @@ export const UnstyledList = styled.ul`
                 align-self: flex-start;
                 margin-top: auto;
             }
+
+            &.media-search__card--person {
+
+                .media-search__card-title-group {
+                    align-items: center;
+                }
+
+                .media-search__card-label {
+                    display: none;
+                }
+
+                .media-search__card-image {
+                    img {
+                        aspect-ratio: 1 / 1;
+                        border-radius: 50%;
+                    }
+                }
+
+                h3 {
+                    a {
+                    color: var(--black);
+                        &:after {
+                            content: '';
+                            background-color: transparent;
+                            position: absolute;
+                            inset: 0;
+                            z-index: 1;
+                        }
+                    }
+                }
+            }
         }
+
 
         @media (max-width: 1199px) {
             grid-template-columns: repeat(2, 1fr);
@@ -342,7 +374,7 @@ export const DropDownListStyle = styled.div`
             outline: none !important;
         }
 
-        
+
     .label {
 
     }
@@ -354,7 +386,7 @@ export const DropDownListStyle = styled.div`
         box-sizing: border-box;
         border-radius: 40px;
         white-space: nowrap;
-        display: flex;  
+        display: flex;
         align-items: center;
         gap: 5px;
         color: var(--Primary-Black, #2E2D29);
@@ -400,9 +432,9 @@ export const DropDownPortalStyle = styled.div`
 
 
   .popup {
-  
+
     .list {
-    
+
         .item {
             display: flex;
             align-items: flex-start;
@@ -443,12 +475,12 @@ export const DropDownPortalStyle = styled.div`
             i {
                 font-size: 20px;
             }
-            
+
             i.fa-square-check {
                 color: var(--Primary-Red, #B1040E);
             }
         }
-    }  
+    }
   }
 `
 
@@ -802,13 +834,13 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
                 text-decoration: underline;
             }
         }
-        
+
         &[expanded="true"] {
             :before {
                 transform: rotate(180deg);
                 transition: transform 0.25s ease;
             }
-        }   
+        }
     }
 
     legend {
@@ -831,12 +863,12 @@ export const FilterTray = styled.div<{ $open?: boolean }>`
                 text-decoration-line: underline;
                 text-decoration-skip-ink: none;
                 text-underline-offset: 15%; /* 2.55px */
-            }           
+            }
         }
         i {
             font-size: 20px;
         }
-        
+
         i.fa-square-check {
             color: var(--Primary-Red, #B1040E);
         }

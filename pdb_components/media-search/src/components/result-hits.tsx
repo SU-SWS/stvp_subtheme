@@ -47,12 +47,22 @@ const ResultHits = ({...props}) => {
     </p>
   )
 
+  const getCardTypeClass = (type: string): string => {
+  const typeMap: Record<string, string> = {
+    'Audio/Visual': 'media',
+    'News': 'news',
+    'Person': 'person'
+  };
+  return typeMap[type] || 'default';
+};
+
   return (
     <div className="media-search__wrapper">
       <h2 className="visually-hidden">Results</h2>
       <UnstyledList className="media-search__container">
         {hits.map(hit =>
-          <li className="media-search__card" key={hit.objectID}>
+          <li className={`media-search__card media-search__card--${getCardTypeClass(hit.type)}`}
+            key={hit.objectID}>
             {hit.type === "Audio/Visual" && <MediaHit hit={hit}/>}
             {hit.type === "News" && <NewsHit hit={hit}/>}
             {hit.type === "Person" && <PersonHit hit={hit}/>}
