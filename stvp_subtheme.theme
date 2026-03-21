@@ -72,7 +72,7 @@ function stvp_subtheme_preprocess_views_view(&$variables) {
     $topics = $node->get('su_news_topics')->getValue();
     foreach ($topics as $topic) {
       if ($topic['target_id'] == $tid) {
-        $variables['header']['area_text_custom']['#markup'] = '<h2>More Learning Path</h2>';
+        $variables['header']['area_text_custom']['#markup'] = '<h2>More Learning Paths</h2>';
         return;
       }
     }
