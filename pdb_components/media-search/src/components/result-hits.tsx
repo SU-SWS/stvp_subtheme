@@ -25,7 +25,6 @@ type Media = DrupalBaseHit & {
 type News = DrupalBaseHit & {
   type: "News"
   news_type?: string | Array<string>
-  summary?: string
 }
 type Person = DrupalBaseHit & {
   type: "Person"
