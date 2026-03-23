@@ -168,8 +168,9 @@ export const UnstyledList = styled.ul`
             }
 
             &.media-search__card--person {
+                border: none;
 
-                .media-search__card-title-group {
+                .media-search__card-body {
                     align-items: center;
                 }
 
@@ -199,6 +200,7 @@ export const UnstyledList = styled.ul`
             }
 
             &.media-search__card--news {
+                box-shadow: 0 3px 6px rgba(0,0,0,.13),0 3px 6px rgba(0,0,0,.1);
 
                 .media-search__card-label {
                     display: none;

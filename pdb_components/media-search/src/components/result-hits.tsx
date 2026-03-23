@@ -120,9 +120,6 @@ const MediaHit = ({hit}: { hit: Media }) => {
       <div className={`media-search__card-image${(hit as any).photo ? '' : ' media-search__card-image--no-image'}`}>
         {(hit as any).photo &&
           <img src={(hit as any).photo} alt="" aria-hidden="true"/>}
-        {/* TODO: Add placeholder image
-                {!(hit as any).photo && <img src="" alt="" aria-hidden="true" />}
-              */}
       </div>
       <div className="media-search__card-body">
         <div className="media-search__card-title-group">
@@ -136,6 +133,12 @@ const MediaHit = ({hit}: { hit: Media }) => {
             const label = Array.isArray(tag) ? tag[0] : tag;
             return <span className="media-search__card-series">{label}</span>;
           })()}
+        </div>
+        <div className="media-search__card-short-title">
+          {(hit as { person_short_title?: string }).person_short_title}
+        </div>
+        <div className="media-search__card-date">
+          {hit.type === 'News' && hit.created ? new Date(hit.created * 1000).toLocaleDateString() : ''}
         </div>
         {(hit as any).media_icon === 'podcast' ? (
           <span className="media-search__card-label">
