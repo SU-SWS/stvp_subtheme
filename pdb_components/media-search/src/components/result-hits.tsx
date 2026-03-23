@@ -25,11 +25,12 @@ type Media = DrupalBaseHit & {
 type News = DrupalBaseHit & {
   type: "News"
   news_type?: string | Array<string>
+  created: number
 }
 type Person = DrupalBaseHit & {
   type: "Person"
   person_type?: string | Array<string>
-  person_full_title?: string
+  person_short_title?: string
 }
 
 const ResultHits = ({...props}) => {
