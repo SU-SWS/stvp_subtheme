@@ -194,6 +194,26 @@
                     }
                 }
             }
+
+            &.media-search__card--news {
+
+                .media-search__card-label {
+                    display: none;
+                }
+
+                h3 {
+                    a {
+                    color: var(--black);
+                        &:after {
+                            content: '';
+                            background-color: transparent;
+                            position: absolute;
+                            inset: 0;
+                            z-index: 1;
+                        }
+                    }
+                }
+            }
         }
 
 
