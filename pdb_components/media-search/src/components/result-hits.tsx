@@ -1,5 +1,5 @@
 import {useHits, usePagination} from 'react-instantsearch';
-import {PaginationList, UnstyledList} from "../styled-components";
+import { PaginationList, UnstyledList, PersonWrapper, NewsWrapper } from "../styled-components";
 import type {BaseHit} from "instantsearch.js";
 
 type DrupalBaseHit = BaseHit & {
@@ -48,21 +48,12 @@ const ResultHits = ({...props}) => {
     </p>
   )
 
-  const getCardTypeClass = (type: string): string => {
-  const typeMap: Record<string, string> = {
-    'Audio/Visual': 'media',
-    'News': 'news',
-    'Person': 'person'
-  };
-  return typeMap[type] || 'default';
-};
-
   return (
     <div className="media-search__wrapper">
       <h2 className="visually-hidden">Results</h2>
       <UnstyledList className="media-search__container">
         {hits.map(hit =>
-          <li className={`media-search__card media-search__card--${getCardTypeClass(hit.type)}`}
+          <li className={`media-search__card`}
             key={hit.objectID}>
             {hit.type === "Audio/Visual" && <MediaHit hit={hit}/>}
             {hit.type === "News" && <NewsHit hit={hit}/>}
@@ -134,12 +125,6 @@ const MediaHit = ({hit}: { hit: Media }) => {
             return <span className="media-search__card-series">{label}</span>;
           })()}
         </div>
-        <div className="media-search__card-short-title">
-          {(hit as { person_short_title?: string }).person_short_title}
-        </div>
-        <div className="media-search__card-date">
-          {hit.type === 'News' && hit.created ? new Date(hit.created * 1000).toLocaleDateString() : ''}
-        </div>
         {(hit as any).media_icon === 'podcast' ? (
           <span className="media-search__card-label">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
@@ -164,11 +149,60 @@ const MediaHit = ({hit}: { hit: Media }) => {
     </>
   )
 }
-const PersonHit = ({hit}: { hit: Person }) => {
-  return <MediaHit hit={hit}/>
+const PersonHit = ({ hit }: { hit: Person }) => {
+  return (
+    <PersonWrapper>
+      <div className={`media-search__card-image${(hit as any).photo ? '' : ' media-search__card-image--no-image'}`}>
+        {(hit as any).photo &&
+          <img src={(hit as any).photo} alt="" aria-hidden="true" />}
+      </div>
+      <div className="media-search__card-body">
+        <div className="media-search__card-title-group">
+          <h3 style={{ lineHeight: '120%', margin: 0 }}><a
+            href={hit.url}>{hit.title}</a></h3>
+          {(() => {
+            const series = (hit as any).media_series;
+            const type = (hit as any).media_type;
+            const tag = series || type;
+            if (!tag) return null;
+            const label = Array.isArray(tag) ? tag[0] : tag;
+            return <span className="media-search__card-series">{label}</span>;
+          })()}
+        </div>
+        <div className="media-search__card-short-title">
+          {(hit as { person_short_title?: string }).person_short_title}
+        </div>
+      </div>
+    </PersonWrapper>
+  )
 }
-const NewsHit = ({hit}: { hit: News }) => {
-  return <MediaHit hit={hit}/>
+const NewsHit = ({ hit }: { hit: News }) => {
+  return (
+    <NewsWrapper>
+      <div className={`media-search__card-image${(hit as any).photo ? '' : ' media-search__card-image--no-image'}`}>
+        {(hit as any).photo &&
+          <img src={(hit as any).photo} alt="" aria-hidden="true" />}
+      </div>
+      <div className="media-search__card-body">
+        <div className="media-search__card-title-group">
+          <h3 style={{ lineHeight: '120%', margin: 0 }}><a
+            href={hit.url}>{hit.title}</a></h3>
+          {(() => {
+            const series = (hit as any).media_series;
+            const type = (hit as any).media_type;
+            const tag = series || type;
+            if (!tag) return null;
+            const label = Array.isArray(tag) ? tag[0] : tag;
+            return <span className="media-search__card-series">{label}</span>;
+          })()}
+        </div>
+       <div className="media-search__card-date">
+          {hit.created ? new Date(hit.created * 1000).toLocaleDateString() : ''}
+        </div>
+
+      </div>
+    </NewsWrapper>
+  )
 }
 
 export default ResultHits

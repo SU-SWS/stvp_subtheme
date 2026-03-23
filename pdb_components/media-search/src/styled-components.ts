@@ -241,6 +241,24 @@ export const UnstyledList = styled.ul`
         }
     }
 `
+export const PersonWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    .media-search__card-image {
+        img {
+            aspect-ratio: 1 / 1 !important;
+            border-radius: 50%;
+        }
+    }
+
+`
+export const NewsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+
+`
 export const PaginationList = styled.ul`
     list-style: none;
     padding: 0;
