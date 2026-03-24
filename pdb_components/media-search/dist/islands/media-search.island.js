@@ -92,14 +92,24 @@
             flex-direction: column;
             overflow: hidden;
 
-            a {
-                color: var(--Primary-Black, #2E2D29);
-                /* Source Sans/Type 0 - bold */
-                font-family: var(--Family-Source-Sans, "Source Sans 3");
-                font-size: var(--Font-size-XXL-Type-0, 19px);
-                font-style: normal;
-                font-weight: 700;
-                line-height: 120%;
+            h3 {
+                a {
+                    color: var(--Primary-Black, #2E2D29);
+                    /* Source Sans/Type 0 - bold */
+                    font-family: var(--Family-Source-Sans, "Source Sans 3");
+                    font-size: var(--Font-size-XXL-Type-0, 19px);
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 120%;
+
+                    &:after {
+                        content: '';
+                        background-color: transparent;
+                        position: absolute;
+                        inset: 0;
+                        z-index: 1;
+                    }
+                }
             }
 
             .media-search__card-image {
@@ -199,19 +209,6 @@
     .media-search__card-body {
         align-items: center;
     }
-
-    h3 {
-        a {
-        color: var(--black);
-            &:after {
-                content: '';
-                background-color: transparent;
-                position: absolute;
-                inset: 0;
-                z-index: 1;
-            }
-        }
-    }
 `,Mi=Ii.div`
     display: flex;
     flex-direction: column;
@@ -219,19 +216,6 @@
     .media-search__card-date {
         color: #6d6c69;
         font-size: var(--Font-size-XXL-Type-0, 18px);
-    }
-
-    h3 {
-        a {
-        color: var(--black);
-            &:after {
-                content: '';
-                background-color: transparent;
-                position: absolute;
-                inset: 0;
-                z-index: 1;
-            }
-        }
     }
 `,Li=Ii.ul`
     list-style: none;

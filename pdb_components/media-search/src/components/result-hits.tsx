@@ -196,10 +196,9 @@ const NewsHit = ({ hit }: { hit: News }) => {
             return <span className="media-search__card-series">{label}</span>;
           })()}
         </div>
-       <div className="media-search__card-date">
+        <div className="media-search__card-date">
           {hit.created ? new Date(hit.created * 1000).toLocaleDateString() : ''}
         </div>
-
       </div>
     </NewsWrapper>
   )
