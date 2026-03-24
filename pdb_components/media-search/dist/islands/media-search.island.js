@@ -163,59 +163,6 @@
                 align-self: flex-start;
                 margin-top: auto;
             }
-
-            &.media-search__card--person {
-                border: none;
-
-                .media-search__card-body {
-                    align-items: center;
-                }
-
-                .media-search__card-label {
-                    display: none;
-                }
-
-                .media-search__card-image {
-                    img {
-                        aspect-ratio: 1 / 1;
-                        border-radius: 50%;
-                    }
-                }
-
-                h3 {
-                    a {
-                    color: var(--black);
-                        &:after {
-                            content: '';
-                            background-color: transparent;
-                            position: absolute;
-                            inset: 0;
-                            z-index: 1;
-                        }
-                    }
-                }
-            }
-
-            &.media-search__card--news {
-                box-shadow: 0 3px 6px rgba(0,0,0,.13),0 3px 6px rgba(0,0,0,.1);
-
-                .media-search__card-label {
-                    display: none;
-                }
-
-                h3 {
-                    a {
-                    color: var(--black);
-                        &:after {
-                            content: '';
-                            background-color: transparent;
-                            position: absolute;
-                            inset: 0;
-                            z-index: 1;
-                        }
-                    }
-                }
-            }
         }
 
 
@@ -249,10 +196,43 @@
         }
     }
 
+    .media-search__card-body {
+        align-items: center;
+    }
+
+    h3 {
+        a {
+        color: var(--black);
+            &:after {
+                content: '';
+                background-color: transparent;
+                position: absolute;
+                inset: 0;
+                z-index: 1;
+            }
+        }
+    }
 `,Mi=Ii.div`
     display: flex;
     flex-direction: column;
 
+    .media-search__card-date {
+        color: #6d6c69;
+        font-size: var(--Font-size-XXL-Type-0, 18px);
+    }
+
+    h3 {
+        a {
+        color: var(--black);
+            &:after {
+                content: '';
+                background-color: transparent;
+                position: absolute;
+                inset: 0;
+                z-index: 1;
+            }
+        }
+    }
 `,Li=Ii.ul`
     list-style: none;
     padding: 0;
