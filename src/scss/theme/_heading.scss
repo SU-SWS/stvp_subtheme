@@ -60,9 +60,7 @@
 
 // Stanford News full node body field only: skip the decorative h2 bar.
 .page-content .node-stanford-news-body {
-  .su-wysiwyg-text,
-  .su-list-headline,
-  .su-entity-headline {
+  .su-wysiwyg-text {
     h2::after {
       content: none;
       display: none;
