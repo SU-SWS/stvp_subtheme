@@ -133,7 +133,7 @@ const MediaHit = ({hit}: { hit: Media }) => {
             <h3 style={{lineHeight: '120%', margin: 0}}><a
               href={hit.url}>{hit.title}</a></h3>
             {tagLabel &&
-              <span className="media-search__card-series">{label}</span>
+              <span className="media-search__card-series">{tagLabel}</span>
             }
           </div>
           {hit.media_icon === 'podcast' && (
