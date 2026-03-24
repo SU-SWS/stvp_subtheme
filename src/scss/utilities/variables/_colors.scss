@@ -39,7 +39,7 @@ $gradient-red-medium: linear-gradient(90deg, $stvp-color-red 0%, $su-color-digit
 // Shades of the Main color:
 $su-color-palo-alto-20: #DCEFEC; // used in variables
 $su-color-primary-white: #FFFFFF; // used in variables
-$stvp-color-palo-verde-xlight: #CEE1DE;  // used in variables
+$stvp-color-palo-verde-xlight: #CEE1DE;  // used in variables Wave
 $stvp-color-palo-verde-medium: #14857A;  // used in button
 $su-color-palo-verde-dark: #017E7C; // used in primary button icon + text
 $stvp-color-palo-verde-xdark: #006765; // used in variables
@@ -103,6 +103,36 @@ $stvp-color-lagunita-bright: #3EBFD5;
 $gradient-lagunita-bright: linear-gradient(270deg, $stvp-color-lagunita-xdark 0%, $stvp-color-lagunita-bright 100%);
 $gradient-lagunita: linear-gradient(270deg, $su-color-lagunita 0%, $stvp-color-lagunita-light 100%);
 
+/* --- Sky Colors - Replacing the Lagunita Colors -- */
+// Shades of the Main color:
+$stvp-color-sky-xxlight: #D9EEF5; // Section fill
+$stvp-color-sky-xlight: #C6E3ED; // Wave color
+$stvp-color-sky-light: #009AB4;
+$stvp-color-sky: #4298B5;
+$stvp-color-sky-dark: #005B83;
+$stvp-color-sky-xdark: #003C56;
+$stvp-color-sky-xxdark: #016895;
+
+//bright shade of the Main Color, used for buttons border
+$stvp-color-sky-bright: #67AFD2;
+// note that the 2 gradients are used in several places.
+$gradient-sky-bright: linear-gradient(270deg, $stvp-color-sky-xdark 0%, $stvp-color-sky-bright 100%);
+$gradient-sky: linear-gradient(270deg, $stvp-color-sky 0%, $stvp-color-sky-dark 100%);
+
+/* --- Poppy Color - New color -- */
+// Shades of the Main color:
+$stvp-color-poppy-xxlight: #FCECD9; // Section fill
+$stvp-color-poppy-xlight: #F9E4C9; // Wave color
+$stvp-color-poppy-light: #009AB4;
+$stvp-color-poppy: #F6CD99;
+$stvp-color-poppy-dark: #F2B566;
+$stvp-color-poppy-xdark: #B17323; // Border darker color
+
+//bright shade of the Main Color, used for buttons border
+$stvp-color-poppy-bright: #FFD39C; // Border brighter color
+// note that the 2 gradients are used in several places.
+$gradient-poppy-bright: linear-gradient(270deg, $stvp-color-poppy-xdark 0%, $stvp-color-poppy-bright 100%);
+$gradient-poppy: linear-gradient(270deg, $stvp-color-poppy 0%, $stvp-color-poppy-dark 100%);
 
 
 /* --- Additional Accent Light Colors --- */
