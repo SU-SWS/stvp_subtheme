@@ -1,81 +1,125 @@
 <?php
 
+use Drupal\node\NodeInterface;
+
 /**
  * @file
  * Preprocess functions for Stanford STVP Subtheme.
  */
 
-use Drupal\node\NodeInterface;
+/**
+ * Get the current route's node from the page if one is available.
+ *
+ * @param string $bundle
+ *   Only return the desired node type.
+ * @param string $field
+ *   Only return the desired node type with a field that is populated.
+ *
+ * @return \Drupal\node\NodeInterface|null
+ */
+function _stvp_subtheme_get_route_node(string $bundle = '', string $field = ''): ?NodeInterface {
+  $node = &drupal_static(__FUNCTION__ . $bundle . $field);
+  if ($node) {
+    return $node;
+  }
 
-use Drupal\node\NodeInterface;
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (!$node instanceof NodeInterface) {
+    return NULL;
+  }
+  if ($bundle && $node->bundle() != $bundle) {
+    return NULL;
+  }
+  if ($field && (!$node->hasField($field) || !$node->get($field)->count())) {
+    return NULL;
+  }
+  return $node;
+}
 
-use Drupal\node\NodeInterface;
+function _stvp_subtheme_get_learning_path_tid(): ?int {
+  $tid = &drupal_static(__FUNCTION__, NULL);
+  if ($tid) {
+    return $tid;
+  }
 
-use Drupal\node\NodeInterface;
-
-use Drupal\node\NodeInterface;
-
-use Drupal\node\NodeInterface;
-
-use Drupal\node\NodeInterface;
+  $learningPathTerm = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadByProperties([
+      'vid' => 'stanford_news_topics',
+      'name' => 'Learning Paths',
+    ]);
+  if (!$learningPathTerm) {
+    return NULL;
+  }
+  return key($learningPathTerm) ?? NULL;
+}
 
 /**
- * Checks if a news node is tagged with the "Learning Paths" taxonomy term.
- *
- * Used to add the news-learning-path class and hide the Spotlight label (CSS).
- *
- * @param \Drupal\node\NodeInterface|null $node
- *   The node to check, or NULL to use the current route node.
- *
- * @return bool
- *   TRUE if the node is stanford_news with layout_spotlight and has the
- *   "Learning Paths" term in su_news_topics.
+ * Implements hook_preprocess_views_view().
  */
-function stvp_subtheme_news_is_learning_path(NodeInterface $node = NULL) {
-  if ($node === NULL) {
-    $node = \Drupal::routeMatch()->getParameter('node');
-    if (!$node instanceof NodeInterface) {
-      return FALSE;
+function stvp_subtheme_preprocess_views_view(&$variables) {
+  if ($variables['id'] == 'stanford_news' && $variables['display_id'] == 'related_spotlights') {
+    $node = _stvp_subtheme_get_route_node('stanford_news', 'su_news_topics');
+    if (!$node) {
+      return;
+    }
+
+    $tid = _stvp_subtheme_get_learning_path_tid();
+    if (!$tid) {
+      return;
+    }
+
+    $topics = $node->get('su_news_topics')->getValue();
+    foreach ($topics as $topic) {
+      if ($topic['target_id'] == $tid) {
+        $variables['header']['area_text_custom']['#markup'] = '<h2>More Learning Paths</h2>';
+        return;
+      }
     }
   }
+}
 
-  if (
-    $node->bundle() !== 'stanford_news' ||
-    !$node->hasField('su_news_topics') ||
-    !$node->hasField('layout_selection') ||
-    $node->get('layout_selection')->getString() !== 'news_spotlight'
-  ) {
-    return FALSE;
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function stvp_subtheme_preprocess_block__simple_block__su_spotlight_label(&$variables) {
+  $node = _stvp_subtheme_get_route_node('stanford_news', 'su_news_topics');
+  if (!$node) {
+    return;
   }
 
-  $terms = $node->get('su_news_topics')->referencedEntities();
-  foreach ($terms as $term) {
-    if ($term && $term->getName() === 'Learning Paths') {
-      return TRUE;
+  $tid = _stvp_subtheme_get_learning_path_tid();
+  if (!$tid) {
+    return;
+  }
+
+  $topics = $node->get('su_news_topics')->getValue();
+  foreach ($topics as $topic) {
+    if ($topic['target_id'] == $tid) {
+      $variables['content']['#text'] = '<p>Learning Path</p>';
+      return;
     }
   }
-
-  return FALSE;
 }
 
 /**
  * Prepares variables for the html.html.twig template.
  */
 function stvp_subtheme_preprocess_html(&$variables) {
-  $variables['stanford_basic_path'] = \Drupal::service('extension.list.theme')->getPath('stanford_basic');
+  $variables['stanford_basic_path'] = \Drupal::service('extension.list.theme')
+    ->getPath('stanford_basic');
 
   // Add page theme class to body if page title banner present
-  $node = \Drupal::routeMatch()->getParameter('node');
-  if (!$node instanceof NodeInterface || !$node->hasField('su_page_banner')) {
+  $node = _stvp_subtheme_get_route_node('stanford_page', 'su_page_banner');
+  if (!$node) {
     return;
   }
-
   $paragraphs = $node->get('su_page_banner')->referencedEntities();
 
   foreach ($paragraphs as $paragraph) {
     if ($paragraph && $paragraph->bundle() == 'stanford_page_title_banner') {
       $title_class = $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_style');
-      if($title_class) {
+      if ($title_class) {
         $existing_classes = $variables['attributes']['class'] ?? [];
         $variables['attributes']['class'] = array_merge($existing_classes, [$title_class]);
 
@@ -100,35 +144,6 @@ function stvp_subtheme_theme_suggestions_block_alter(array &$suggestions, array 
   }
 }
 
-/**
- * Implements hook_preprocess_block().
- *
- * Adds a class to the Spotlight label block so it can be hidden via CSS
- * when .news-learning-path is present (see theme SCSS).
- */
-function stvp_subtheme_preprocess_block(&$variables) {
-  $elements = $variables['elements'];
-  $block_id = $elements['#id'] ?? $elements['#plugin_id'] ?? '';
-  $config_id = $elements['#configuration']['id'] ?? '';
-  $is_spotlight_label = in_array($config_id, ['su_spotlight_label', 'simple_block:su_spotlight_label'], TRUE)
-    || $block_id === 'su_spotlight_label';
-  if ($is_spotlight_label) {
-    $variables['attributes']['class'][] = 'spotlight-label-block';
-  }
-}
-
-/**
- * Implements hook_preprocess_node().
- *
- * Adds news-learning-path for Learning Paths spotlight news (see theme SCSS).
- */
-function stvp_subtheme_preprocess_node(&$variables) {
-  $node = $variables['node'] ?? NULL;
-  if ($node instanceof NodeInterface && stvp_subtheme_news_is_learning_path($node)) {
-    $variables['attributes']['class'][] = 'news-learning-path';
-  }
-}
-
 function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
   // if not running on a paragraph, exit out.
   if (!isset($variables['content']['#paragraph'])) {
@@ -149,9 +164,8 @@ function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
         $variables['#attached']['library'][] = 'stvp_subtheme/ecorner';
       }
     }
+  }
 
-  } 
-  
   // Process Cards
   // if ($paragraph->bundle() == 'stanford_card') {
   //   stvp_subtheme_preprocess_card($variables);
@@ -163,44 +177,38 @@ function stvp_subtheme_preprocess_ds_entity_view(&$variables) {
   }
 }
 
-
-
 /**
  * Implements hook_preprocess_banner().
  */
 function stvp_subtheme_preprocess_banner(&$variables) {
-
   $paragraph = $variables['content']['#paragraph'];
 
   $existing_classes = $variables['attributes']['class'] ?? [];
   $extra_classes = [
     $paragraph->getBehaviorSetting('react_paragraphs:banner_variant_info', 'banner_style'),
-    $paragraph->getBehaviorSetting('react_paragraphs:banner_variant_info', 'banner_wave')
+    $paragraph->getBehaviorSetting('react_paragraphs:banner_variant_info', 'banner_wave'),
   ];
   // Add variant classes to banner
   $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
 }
-
 
 /**
  * Implements hook_preprocess_title_banner().
  */
 function stvp_subtheme_preprocess_title_banner(&$variables) {
-
   $paragraph = $variables['content']['#paragraph'];
 
   $existing_classes = $variables['attributes']['class'] ?? [];
   $extra_classes = [
     $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_style'),
-    $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_wave')
+    $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_wave'),
   ];
-  if($paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'ecorner_option')) {
+  if ($paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'ecorner_option')) {
     array_push($extra_classes, 'ecorner');
   }
   // Add variant classes to banner
   $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
 }
-
 
 function stvp_subtheme_preprocess_paragraph__stanford_layout(array &$variables): void {
   /** @var \Drupal\paragraphs\Layout\Paragraph $paragraph */
@@ -210,7 +218,6 @@ function stvp_subtheme_preprocess_paragraph__stanford_layout(array &$variables):
     $paragraph->getBehaviorSetting('react_paragraphs:layout_variant_info', 'section_wave'),
   ];
   $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
-
 }
 
 function stvp_subtheme_preprocess_paragraph(&$variables) {
@@ -224,7 +231,42 @@ function stvp_subtheme_preprocess_paragraph(&$variables) {
     $tinted_text_section['text_background'] = $paragraph->getBehaviorSetting('react_paragraphs:tinted_background', 'tinted_background', 'stvp-text-background--none');
     // $variables['#attached']['html_head'][] = [['#type' => 'html_tag', '#tag' => 'script', '#value' => 'console.log(' . json_encode($tinted_text_section) . ');'], 'debug_tinted_text_section'];
     $variables['attributes']['class'][] = $tinted_text_section['text_background'];
-
-
   }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function stvp_subtheme_preprocess_block__pdb_component__media_search(&$variables) {
+  $algolia_settings = _stvp_algolia_settings();
+  if (!$algolia_settings) {
+    return;
+  }
+  $variables['#attached']['drupalSettings']['stanfordAlgolia'] = $algolia_settings;
+}
+
+function _stvp_algolia_settings() {
+  $settings = &drupal_static(__FUNCTION__);
+  if ($settings != NULL) {
+    return $settings;
+  }
+
+  if (!\Drupal::hasService('config_pages.loader')) {
+    return $settings = FALSE;
+  }
+
+  /** @var \Drupal\config_pages\ConfigPagesLoaderServiceInterface $config_page */
+  $config_page = \Drupal::service('config_pages.loader');
+
+  $algolia_app = $config_page->getValue('stanford_basic_site_settings', 'su_site_algolia_id', 0, 'value');
+  $algolia_search_key = $config_page->getValue('stanford_basic_site_settings', 'su_site_algolia_search', 0, 'value');
+  $search_index = $config_page->getValue('stanford_basic_site_settings', 'su_site_algolia_index', 0, 'value');
+  $federated = (bool) $config_page->getValue('stanford_basic_site_settings', 'su_site_algolia_fed', 0, 'value');
+  $settings = [
+    'appId' => $algolia_app,
+    'searchKey' => $algolia_search_key,
+    'index' => $search_index,
+    'federatedSearch' => $federated,
+  ];
+  return $settings;
 }
