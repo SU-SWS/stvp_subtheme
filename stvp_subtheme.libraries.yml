@@ -103,4 +103,3 @@ allpages:
 ecorner:
   js:
     dist/js/ecorner.js: { minified: true }
-
