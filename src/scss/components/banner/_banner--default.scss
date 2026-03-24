@@ -203,18 +203,18 @@
     }
     // Poppy Color Card Styles
     .stvp-wrapper--banner-poppy {
-        @include set-card-color($stvp-color-poppy, $stvp-color-poppy-dark, white, 'none');
+        @include set-card-color($stvp-color-poppy, $stvp-color-poppy-dark, $stvp-color-brown, 'none');
 
         &.stvp-banner-wave-1 {
-            @include set-card-color($stvp-color-poppy, $stvp-color-poppy-dark, white, 'wave1');
+            @include set-card-color($stvp-color-poppy, $stvp-color-poppy-dark, $stvp-color-brown, 'wave1');
         }
 
         &.stvp-banner-wave-2 {
-            @include set-card-color($stvp-color-poppy, $stvp-color-poppy-dark, white, 'wave2');
+            @include set-card-color($stvp-color-poppy, $stvp-color-poppy-dark, $stvp-color-brown, 'wave2');
         }
 
         &.stvp-banner-wave-3 {
-            @include set-card-color($stvp-color-poppy, $stvp-color-poppy-dark, white, 'wave3');
+            @include set-card-color($stvp-color-poppy, $stvp-color-poppy-dark, $stvp-color-brown, 'wave3');
         }
 
         .su-button {
