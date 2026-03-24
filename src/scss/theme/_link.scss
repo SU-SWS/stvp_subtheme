@@ -78,6 +78,11 @@ a.mailto {
   @include stvp-link-mask-icon;
 }
 
+// Stanford Person: stanford_person.node.scss uses link-icon() here (digital blue by default).
+.content .right-region .su-person-links a {
+  @include stvp-link-mask-icon;
+}
+
 // Override for the icon on the secondary nav
 .su-secondary-nav {
   a {
