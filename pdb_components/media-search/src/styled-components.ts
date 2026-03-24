@@ -194,7 +194,7 @@ export const MediaWrapper = styled.div`
             align-items: center;
             gap: 4px;
             border-radius: 2px;
-            background: var(--Primary-SU-Cool-Grey, #53565A);
+            background: var(--Primary-Black, #2E2D29);
             color: var(--su-color-primary-white);
             font-size: 13px;
             align-self: flex-start;
@@ -282,8 +282,7 @@ export const NewsWrapper = styled.div`
             img {
                 width: 100%;
                 height: auto;
-                aspect-ratio: 1 / 1;
-                border-radius: 50%;
+                aspect-ratio: 16 / 9;
                 object-fit: cover;
             }
         }
