@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
-// Change the banner aspect ratio for only image banners.
+// Image banners: match hero art at 3000×1100 (width ÷ height ≈ 2.727).
 .ds-entity--stanford-banner:not([class*="banner-wave"]) {
   .su-hero__media {
-    aspect-ratio: 2.33333;
+    aspect-ratio: #{3000} / #{1100};
     max-height: none;
     min-height: 0;
     overflow: hidden;

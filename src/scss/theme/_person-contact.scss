@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+// FA phone icon is position:absolute; clip alone leaves it visible when the
+// heading uses .visually-hidden (Drupal core / Claro pattern).
+.content .right-region .node-stanford-person-su-person-contact .block__title.visually-hidden::before {
+  content: none;
+  display: none;
+}
