@@ -7,8 +7,8 @@
 
 .page-content {  //limit to only page content area; there is an h2 in the footer that we don't want to affect.
   .su-wysiwyg-text,   // make sure to test in the body AND the text paragraph inside the layout
-  .su-entity-headline, 
-  .su-list-headline {  
+  .su-entity-headline,
+  .su-list-headline {
     h2 {
       // left-aligned default
       // Decorative underline for h2 headings
@@ -44,19 +44,25 @@
   }
 
   .page-content .bg-f2e8f1, // we are overridding this color, but this is the pink/purple background option.
-  .page-theme--plum .page-content {  
+  .page-theme--plum .page-content {
     @include h2-decoration--colored($gradient-plum-bright);
   }
 
   .page-content .bg-dcecef,
-  .page-theme--lagunita .page-content { 
-    @include h2-decoration--colored($gradient-lagunita);
+  .page-theme--sky .page-content {
+    @include h2-decoration--colored($gradient-sky);
   }
 
   .page-content .bg-f7ecde, // we are overridding this color, but this is the light yellow background option.
-  .page-theme--illuminating .page-content { 
+  .page-theme--illuminating .page-content {
     @include h2-decoration--colored($gradient-illuminating-bright);
   }
+
+    .page-content .bg-ebeae5,
+    // we are overridding this color, but this is the second greyish background option.
+    .page-theme--poppy .page-content {
+      @include h2-decoration--colored($gradient-poppy-bright);
+    }
 
 // Stanford News full node body field only: skip the decorative h2 bar.
 .page-content .node-stanford-news-body {
