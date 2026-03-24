@@ -1,53 +1,13 @@
 @charset "UTF-8";
 
 $wave1: url("../../assets/images/wave1.svg") no-repeat;
-$wave2: url("../../assets/images/wave2.svg") no-repeat; 
-$wave3: url("../../assets/images/wave3.svg") no-repeat; 
+$wave2: url("../../assets/images/wave2.svg") no-repeat;
+$wave3: url("../../assets/images/wave3.svg") no-repeat;
 
 
 @mixin set-card-color($backgroundColor, $waveColor, $waveOption: $wave1) {
   .su-card {
     background-color: $backgroundColor;
-
-    // set wave image in a way that we can override the color of the svg, css mask?
-    // if wave1...
-
-    // if wave2...
-
-    // ifwave3...
   }
 }
 
-// Banner default variant
-.ptype-stanford-page-title-banner {
-  .page-theme--red { // red default
-    // @include set-card-color($su-color-digital-red, $su-color-cardinal-red, $wave1);
-  }
-
-  .page-theme--plum {
-    // @include set-card-color($stvp-color-plum-medium, $su-color-plum, $wave1);
-
-  }
-  .page-theme--lagunita {
-    // @include set-card-color($su-color-lagunita, $su-color-lagunita-dark, $wave1);
-
-  }
-  .page-theme--palo-verde {
-    // @include set-card-color($stvp-color-palo-verde, $stvp-color-palo-verde-xdark, $wave1);
-  }
-  .page-theme--illuminating {
-    // @include set-card-color($su-color-illuminating, $su-color-illuminating-dark, $wave1);
-
-  }
-
-
-  .page-theme--wave-grey {
-    
-  }
-  
-  // eCorner styles
-  .ecorner {
-    // @include set-card-color($su-color-foggy-light, $stvp-color-foggy-xlight, $wave1);
-  }
-
-}

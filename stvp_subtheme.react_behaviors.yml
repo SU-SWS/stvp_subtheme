@@ -14,10 +14,11 @@ banner_variant_info:  # part of the key after the :
       options:
         stvp-wrapper--banner-default: Red (Default)
         stvp-wrapper--banner-palo-verde: Palo Verde
-        stvp-wrapper--banner-lagunita: Lagunita
+        stvp-wrapper--banner-sky: Sky
         stvp-wrapper--banner-plum: Plum
         stvp-wrapper--banner-illuminating: Illuminating
         stvp-wrapper--banner-grey: Light Grey
+        stvp-wrapper--banner-poppy: Poppy
     banner_wave:
       type: select
       title: Banner Wave Decoration
@@ -42,9 +43,10 @@ page_title_banner_info:
       options:
         page-theme--red: Red (Default)
         page-theme--palo-verde: Palo Verde
-        page-theme--lagunita: Lagunita
+        page-theme--sky: Sky
         page-theme--plum: Plum
         page-theme--illuminating: Illuminating
+        page-theme--poppy: Poppy
     title_wave:
       type: select
       title: Title Wave Decoration
@@ -87,9 +89,10 @@ tinted_background:
       description: 'Select the background color for displaying this text.'
       options:
         stvp-text-background--none: None
-        stvp-text-background--lagunita: Lagunita
+        stvp-text-background--sky: Sky
         stvp-text-background--palo-verde: Palo Verde
         stvp-text-background--plum: Plum
         stvp-text-background--illuminating: Illuminating
         stvp-text-background--grey: Grey
         stvp-text-background--light-grey: Light Grey
+        stvp-text-background--poppy: Poppy
