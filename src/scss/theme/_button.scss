@@ -221,6 +221,54 @@ a.su-button--big {
     }
 }
 
+.page-theme--sky .page-content {
+    .su-button--big,
+    .su-button--secondary,
+    .su-button {
+        @include set-button-color($gradient-sky, $gradient-sky-bright);
+    }
+
+    .su-button--secondary {
+        @include secondary-button-style($su-color-sky-dark, $su-color-sky-dark);
+
+        // Expand button fixup
+        &.expand-collapse-button {
+            &:not(:hover):not(:focus):after {
+                background: linear-gradient(45deg, #fff, #fff);
+                color: $su-color-sky;
+            }
+
+            &:after {
+                color: $su-color-sky;
+            }
+        }
+    }
+}
+
+.page-theme--poppy .page-content {
+    .su-button--big,
+    .su-button--secondary,
+    .su-button {
+        @include set-button-color($gradient-poppy, $gradient-poppy-bright);
+    }
+
+    .su-button--secondary {
+        @include secondary-button-style($su-color-poppy-dark, $su-color-poppy-dark);
+
+        // Expand button fixup
+        &.expand-collapse-button {
+            &:not(:hover):not(:focus):after {
+                background: linear-gradient(45deg, #fff, #fff);
+                color: $su-color-poppy;
+            }
+
+            &:after {
+                color: $su-color-poppy;
+            }
+        }
+    }
+}
+
 .page-theme--illuminating .page-content {
     .su-button--big,
     .su-button--secondary,

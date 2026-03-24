@@ -21,9 +21,14 @@
     }
 
 
-    // usually a tint of orange but we want to set it for illuminating.
+    // Usually a tint of orange but we want to set it for illuminating.
     &.bg-f7ecde {
         background: $stvp-color-illuminating-xxlight;
+    }
+
+    // Usually a brown/grey but we want to set it for poppy. It is the second grey in the choices.
+    &.bg-ebeae5 {
+        background: $stvp-color-poppy-xxlight;
     }
 }
 
@@ -66,19 +71,24 @@
             background-color: $su-color-plum-xlight;
         }
 
-        // Poppy background for Illuminating?
+        // Illuminating
         &.bg-f7ecde:before {
             background-color: $stvp-color-illuminating-xlight;
         }
 
         // Lagunita
+        // &.bg-dcecef:before {
+        //     background-color: $stvp-color-lagunita-xlight;
+        // }
+
+        // Sky
         &.bg-dcecef:before {
-            background-color: $stvp-color-lagunita-xlight;
+            background-color: $stvp-color-sky-xlight;
         }
 
-        // Light Gray Background
+        // Poppy
         &.bg-ebeae5:before {
-            background-color: $stvp-color-archway-20;
+            background-color: $stvp-color-poppy-xlight;
         }
 
         // Off-White background
