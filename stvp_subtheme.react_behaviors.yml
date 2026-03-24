@@ -89,8 +89,8 @@ tinted_background:
       description: 'Select the background color for displaying this text.'
       options:
         stvp-text-background--none: None
-        stvp-text-background--sky: Sky
         stvp-text-background--palo-verde: Palo Verde
+        stvp-text-background--sky: Sky
         stvp-text-background--plum: Plum
         stvp-text-background--illuminating: Illuminating
         stvp-text-background--grey: Grey
