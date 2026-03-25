@@ -12,9 +12,11 @@
     padding: 1rem 0 0;
   }
 
-  .su-person-photo img,
-  .su-person-photo picture {
-    max-width: 300px;
+  .su-person-photo {
+    img,
+    picture {
+      max-width: 300px;
+    }
   }
 
   .su-card__contents {
