@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+// Stanford profile uses type-b for .su-quote-text; match WYSIWYG / editor body copy instead.
+@mixin stvp-quote-text-body-copy {
+  .su-quote-text,
+  p.su-quote-text {
+    letter-spacing: normal;
+    font-style: normal;
+    font-size: inherit;
+    line-height: $su-base-line-height;
+
+    @include grid-media('md') {
+      @include big-paragraph;
+    }
+  }
+}
