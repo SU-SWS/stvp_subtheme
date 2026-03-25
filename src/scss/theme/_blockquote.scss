@@ -1,5 +1,10 @@
 @charset "UTF-8";
 @import "../utilities/variables/index.scss";
+@import "wysiwyg-quote-body";
+
+.su-wysiwyg-text {
+  @include stvp-quote-text-body-copy;
+}
 
 .page-theme--lagunita {
     p.su-quote-text {
