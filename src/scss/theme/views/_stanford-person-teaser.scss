@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+// Stanford Basic caps view/teaser person photos at 140px.
+// `.view.stanford-people-grid` uses a more specific rule (300px) in _stanford-people-grid.scss.
+.view .su-person-photo img,
+.view .su-person-photo picture {
+  max-width: 300px;
+}
