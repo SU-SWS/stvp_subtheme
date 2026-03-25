@@ -58,13 +58,27 @@
             }
           }
 
+          @include grid-media-min('lg') {
+            >.su-nav-toggle {
+              left: -4px; // figma shows 15px space so it was too much.
+            }
+          }
+
           >.su-nav-toggle {
                 border: 1px solid transparent;
                 border-radius: 30px;
                 background-position-x: center;
                 background-position-y: center;
                 transition: none!important;
-                right: 14px;
+                padding: 10px 10px 10px;
+                margin-top: -6px;
+
+                @include grid-media-max('md') {
+                  right: 14px;
+                  padding: unset;
+                  margin-top: unset;
+                  left: unset;
+                }
 
               &:before {
                 //change caret to be gray.
@@ -72,29 +86,35 @@
                 margin-top: 0;
               }
 
-              &:hover, &:focus {
-                // &:before {
-                border: 1px solid $su-color-black-30;
-                transition: none!important;
+              @include grid-media-min('lg') {
+                &:hover, &:focus {
+                  // &:before {
+                  border: 1px solid $su-color-black-30;
+                  transition: none!important;
 
-                &:before {
-                  // red caret
-                  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none"><path d="M5.66648 6.93773C6.01805 7.2893 6.58898 7.2893 6.94055 6.93773L12.3405 1.53773C12.6921 1.18617 12.6921 0.615234 12.3405 0.263672C11.989 -0.0878906 11.418 -0.0878906 11.0665 0.263672L6.30211 5.02805L1.53773 0.266484C1.18617 -0.0850784 0.615234 -0.0850784 0.263672 0.266484C-0.0878906 0.618047 -0.0878906 1.18898 0.263672 1.54055L5.66367 6.94055L5.66648 6.93773Z" fill="%23B1040E"/></svg>');
-                  margin: 0;
+                  &:before {
+                    // red caret
+                    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none"><path d="M5.66648 6.93773C6.01805 7.2893 6.58898 7.2893 6.94055 6.93773L12.3405 1.53773C12.6921 1.18617 12.6921 0.615234 12.3405 0.263672C11.989 -0.0878906 11.418 -0.0878906 11.0665 0.263672L6.30211 5.02805L1.53773 0.266484C1.18617 -0.0850784 0.615234 -0.0850784 0.263672 0.266484C-0.0878906 0.618047 -0.0878906 1.18898 0.263672 1.54055L5.66367 6.94055L5.66648 6.93773Z" fill="%23B1040E"/></svg>');
+                    margin: 0;
+                  }
                 }
               }
           }
         }
       }
-      .su-multi-menu__menu-lv2 {
-        >.su-multi-menu__item--parent {
+
+      @include grid-media-max('md') {
+        .su-multi-menu__menu-lv2 {
+          >.su-multi-menu__item--parent {
 
 
-          >.su-nav-toggle {
-            right: 14px;
+            >.su-nav-toggle {
+              right: 14px;
+            }
           }
         }
       }
+
     }
   }
 
