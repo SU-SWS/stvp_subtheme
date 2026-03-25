@@ -4,7 +4,8 @@
 
 
 // override default button styles here and add additional button classes as needed.
-a.su-button {
+a.su-button,
+.js-pager__items .button {
     /* --- Styles for Both Primary and Secondary Buttons --- */
     @include type-e;
     @include rounded-button-general();
