@@ -1,9 +1,24 @@
 @charset "UTF-8";
 @import "../utilities/variables/index.scss";
+@import "wysiwyg-quote-body";
+
+.su-wysiwyg-text {
+  @include stvp-quote-text-body-copy;
+}
 
 .page-theme--lagunita {
     p.su-quote-text {
         border-color: $su-color-lagunita;
+    }
+}
+.page-theme--sky {
+    p.su-quote-text {
+        border-color: $stvp-color-sky;
+    }
+}
+.page-theme--poppy {
+    p.su-quote-text {
+        border-color: $su-color-poppy;
     }
 }
 .page-theme--palo-verde {

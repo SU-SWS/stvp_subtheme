@@ -58,6 +58,22 @@ $page-title-banner-height: 214px; // this is the height of the banner image, we 
         }
     }
 
+    .page-theme--sky:not(.ecorner) {
+
+        // set sky decoration
+        h1 {
+            @include decoration-underline-basic($gradient-sky);
+        }
+    }
+
+    .page-theme--poppy:not(.ecorner) {
+
+        // set poppy decoration
+        h1 {
+            @include decoration-underline-basic($gradient-poppy);
+        }
+    }
+
     .page-theme--palo-verde:not(.ecorner) {
         // set lagunita decoration
         h1 {

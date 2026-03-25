@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+// Center person cards and allow larger photos than default view teasers.
+.view.stanford-people-grid {
+  .ds-entity--stanford-person {
+    text-align: center;
+  }
+
+  .su-person-photo {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem 0 0;
+  }
+
+  .su-person-photo {
+    img,
+    picture {
+      max-width: 300px;
+    }
+  }
+
+  .su-card__contents {
+    text-align: center;
+  }
+}

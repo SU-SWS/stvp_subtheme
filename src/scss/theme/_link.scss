@@ -1,19 +1,86 @@
 @charset "UTF-8";
 
+@mixin stvp-link-mask-icon {
+  &::after {
+    background-color: $su-color-digital-red;
+  }
+
+  &:hover::after,
+  &:focus::after,
+  &:active::after {
+    background-color: $su-color-black;
+  }
+}
+
 // Override default link styles here.
 .su-link,
 .su-link--action,
 .su-link--external,
+.su-link--download,
+.su-link--video,
+.su-link--jump,
+.su-link--internal,
 a {
   color: $su-color-digital-red;
 
-  &:after {
-    background-color: $su-color-digital-red;
+  &:hover,
+  &:focus,
+  &:active {
+    color: $su-color-black;
+  }
+}
+
+// Mask-based link icons (Decanter uses .class:after + background-color; needs ≥ specificity
+// than .su-link--external:after in base.css, and must match hover/focus like link text).
+.su-link,
+.su-link--action,
+.su-link--external,
+.su-link--download,
+.su-link--video,
+.su-link--jump,
+.su-link--internal,
+a.su-link,
+a.su-link--action,
+a.su-link--external,
+a.su-link--download,
+a.su-link--video,
+a.su-link--jump,
+a.su-link--internal {
+  @include stvp-link-mask-icon;
+}
+
+a.mailto {
+  svg {
+    fill: $su-color-digital-red;
+
+    path {
+      stroke: $su-color-digital-red;
+      stroke-width: 0;
+    }
   }
 
-  &.mailto svg {
-    fill: $su-color-digital-red;
+  &:hover,
+  &:focus,
+  &:active {
+    svg {
+      fill: $su-color-black;
+
+      path {
+        stroke: $su-color-black;
+      }
+    }
   }
+}
+
+// WYSIWYG headings: stanford_profile_styles uses high-specificity selectors
+// (.su-wysiwyg-text h2 a.su-link--external:after) that can leave icons blue; match body links.
+.su-wysiwyg-text :is(h2, h3, h4, h5, h6) a {
+  @include stvp-link-mask-icon;
+}
+
+// Stanford Person: stanford_person.node.scss uses link-icon() here (digital blue by default).
+.content .right-region .su-person-links a {
+  @include stvp-link-mask-icon;
 }
 
 // Override for the icon on the secondary nav
