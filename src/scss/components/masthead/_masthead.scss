@@ -84,6 +84,10 @@
                 //change caret to be gray.
                 background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none"><path d="M5.66648 6.93773C6.01805 7.2893 6.58898 7.2893 6.94055 6.93773L12.3405 1.53773C12.6921 1.18617 12.6921 0.615234 12.3405 0.263672C11.989 -0.0878906 11.418 -0.0878906 11.0665 0.263672L6.30211 5.02805L1.53773 0.266484C1.18617 -0.0850784 0.615234 -0.0850784 0.263672 0.266484C-0.0878906 0.618047 -0.0878906 1.18898 0.263672 1.54055L5.66367 6.94055L5.66648 6.93773Z" fill="%23767674"/></svg>');
                 margin-top: 0;
+
+                @include grid-media-max('md') {
+                  background: #b1040e url('data:image/svg+xml,<svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M23.489 5.416c.647.584.685 1.568.084 2.198l-10.4 10.889A1.622 1.622 0 0 1 12 19c-.445 0-.87-.18-1.172-.497L.428 7.614A1.525 1.525 0 0 1 .51 5.416a1.632 1.632 0 0 1 2.261.081L12 15.158l9.227-9.66a1.632 1.632 0 0 1 2.262-.082Z" fill="%23fff"/></svg>') no-repeat 50% / 50%;
+                }
               }
 
               @include grid-media-min('lg') {
@@ -106,8 +110,6 @@
       @include grid-media-max('md') {
         .su-multi-menu__menu-lv2 {
           >.su-multi-menu__item--parent {
-
-
             >.su-nav-toggle {
               right: 14px;
             }
@@ -156,4 +158,3 @@
     }
   }
 }
-
