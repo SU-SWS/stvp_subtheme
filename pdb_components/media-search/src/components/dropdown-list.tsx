@@ -39,7 +39,11 @@ const DropDownList = ({items, label, value, onChange, multiple}: {
             </Select.Icon>
           </Select.Trigger>
           <Select.Portal className="portal">
-            <Select.Positioner align="start" sideOffset={50} style={{pointerEvents: 'none'}}>
+            <Select.Positioner
+              align="start"
+              sideOffset={50}
+              style={{pointerEvents: 'none', zIndex: 1300}}
+            >
               <DropDownPortalStyle style={{pointerEvents: 'auto'}}>
               <Select.Popup className="popup">
                   <Select.List className="list">
