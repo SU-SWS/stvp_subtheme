@@ -495,8 +495,6 @@ export const DropDownListStyle = styled.div`
 
 export const DropDownPortalStyle = styled.div`
     background: var(--su-color-primary-white);
-    max-height: 300px;
-    overflow-y: auto;
     padding: 20px;
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.12);
 
@@ -581,6 +579,7 @@ export const Filters = styled.div`
         align-items: center;
         justify-content: flex-start;
         width: 100%;
+        min-width: 0;
 
         @media (max-width: 991px) {
             gap: 12px;
@@ -678,11 +677,17 @@ export const Filters = styled.div`
         display: flex;
         flex-direction: row;
         align-items: center;
-        width: 100%;
+        flex: 1;
+        min-width: 0;
         gap: 17px;
 
         @media (max-width: 360px) {
             gap: 10px;
+        }
+
+        > form {
+            flex: 1 1 auto;
+            min-width: 0;
         }
     }
 
@@ -691,6 +696,9 @@ export const Filters = styled.div`
         gap: 17px;
         height: 56px;
         align-items: center;
+        position: relative;
+        z-index: 2;
+        flex-shrink: 0;
 
         @media (max-width: 991px) {
             display: none;
@@ -701,6 +709,7 @@ export const Filters = styled.div`
     .additional-filters {
         display: inline-flex;
         align-items: center;
+        flex-shrink: 0;
         z-index: 1;
 
         &:focus-visible {
