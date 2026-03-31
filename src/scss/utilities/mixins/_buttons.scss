@@ -93,6 +93,12 @@
     &:hover, &:focus {
         &:not(.su-button--secondary) {
             background: $su-color-black;
+            background-image: none;
+            color: $textColor;
+
+            &:after {
+                background-color: $iconColor;
+            }
         }
 
         &:before {
@@ -179,6 +185,7 @@
 @mixin primary-button-hover {
     // Hover styles for primary buttons
     &:hover, &:focus {
+        color: $su-color-primary-white;
         background: $su-color-black;
         border-color: $su-color-black;
         background-image: none;
@@ -189,7 +196,7 @@
         }
 
         &:after {
-            background-color: white;
+            background-color: $su-color-primary-white;
         }
     }
 }
