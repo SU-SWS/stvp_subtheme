@@ -42,9 +42,9 @@ const DropDownList = ({items, label, value, onChange, multiple}: {
             <Select.Positioner
               align="start"
               sideOffset={50}
-              style={{pointerEvents: 'none', zIndex: 1300}}
+              style={{zIndex: 1300}}
             >
-              <DropDownPortalStyle style={{pointerEvents: 'auto'}}>
+              <DropDownPortalStyle>
               <Select.Popup className="popup">
                   <Select.List className="list">
                     {items.map(item => (

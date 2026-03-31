@@ -495,8 +495,6 @@ export const DropDownListStyle = styled.div`
 
 export const DropDownPortalStyle = styled.div`
     background: var(--su-color-primary-white);
-    max-height: 300px;
-    overflow-y: auto;
     padding: 20px;
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.12);
 
