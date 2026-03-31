@@ -2,8 +2,8 @@ name: Stanford STVP Subtheme
 type: theme
 description: 'Theme created by SWS for STVP. Designed by Kerri Augenstein and coded up by Jen Breese-Kauth and Katria Lesser.'
 package: Stanford
-version: 1.0.0
-core_version_requirement: ^9 || ^10 || ^11
+version: 1.0.1
+core_version_requirement: ^11
 base theme: stanford_basic
 libraries:
   - stvp_subtheme/allpages
