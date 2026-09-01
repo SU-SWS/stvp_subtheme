@@ -92,14 +92,41 @@
       {% endif %}
       {# Stylized links. See local-footer.json for structure for macro. #}
 
-      {{ action_links }}
+      {% if action_links %}
+        <ul class="su-local-footer__action-links">
+          {% for link in action_links %}
+            <li>
+              {% if link.url %}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              {% else %}
+                <span>{{ link.title }}</span>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
 
-      {# Stylized links. See local-footer.json for structure for macro. #}
-      {{ social_links }}
+      {% if social_links %}
+        <ul class="su-local-footer__social-links">
+          {% for link in social_links %}
+
+            {% set host = link.url|replace({'https://': '', 'http://': ''})|split('/')|first|split('.') %}
+            {% set host = host|length == 2 ? host[0] : host[1] %}
+
+            <li>
+              <a class="su-local-footer__social-{{ host }}"
+                 href="{{ link.url }}">
+                <i></i>
+                <span>{{ link.title }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
     </div>
     {# Content Cell 2 - For primary and secondary link lists. #}
     <div class="su-local-footer__cell2">
-      {% if primary_links is not empty %}
+      {% if primary_links %}
         <nav aria-label="footer primary nav">
           {% if primary_links_header %}
             <h2 class="su-local-footer__list-heading">
@@ -107,7 +134,17 @@
             </h2>
           {% endif %}
 
-          {{ primary_links }}
+          <ul class="su-local-footer__primary-links">
+            {% for link in primary_links %}
+              <li>
+                {% if link.url %}
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                {% else %}
+                  <span>{{ link.title }}</span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
         </nav>
       {% endif %}
 
@@ -119,7 +156,17 @@
             </h2>
           {% endif %}
 
-          {{ secondary_links }}
+          <ul class="su-local-footer__secondary-links">
+            {% for link in secondary_links %}
+              <li>
+                {% if link.url %}
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                {% else %}
+                  <span>{{ link.title }}</span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
         </nav>
       {% endif %}
     </div>
