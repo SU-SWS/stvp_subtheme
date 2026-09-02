@@ -112,7 +112,11 @@ $page-title-banner-height: 214px; // this is the height of the banner image, we 
     }
 
     &.ecorner {
-         @include ecorner-banner();
+        @include ecorner-banner();
+
+        h1 {
+            @include sr-only();
+        }
     }
 }
 
