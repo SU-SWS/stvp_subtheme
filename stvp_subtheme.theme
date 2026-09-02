@@ -123,12 +123,6 @@ function stvp_subtheme_preprocess_html(&$variables) {
         $existing_classes = $variables['attributes']['class'] ?? [];
         $variables['attributes']['class'] = array_merge($existing_classes, [$title_class]);
 
-        // If the title style contains 'ecorner', hide the page h1 visually.
-        if (str_contains($title_class, 'ecorner')) {
-          // Attach the ecorner library to add the JS for hiding the h1.
-          $variables['#attached']['library'][] = 'stvp_subtheme/ecorner';
-        }
-
         break;
       }
     }
@@ -145,43 +139,111 @@ function stvp_subtheme_theme_suggestions_block_alter(array &$suggestions, array 
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_paragraph().
  */
-function stvp_subtheme_preprocess_paragraph__stanford_page_title_banner(&$variables) {
+function stvp_subtheme_preprocess_paragraph(array &$variables): void {
+  /** @var \Drupal\paragraphs\ParagraphInterface $paragraph */
   $paragraph = $variables['paragraph'];
 
-  // Add variant classes to banner
-  $variables['attributes']['class'][] = $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_style');
-  $variables['attributes']['class'][] = $paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'title_wave');
+  switch ($paragraph->bundle()) {
+    case 'stanford_page_title_banner':
+      _stvp_subtheme_preprocess_page_title_banner($variables);
+      break;
 
-  if ($paragraph->getBehaviorSetting('react_paragraphs:page_title_banner_info', 'ecorner_option')) {
-    $variables['attributes']['class'][] = 'ecorner';
+    case 'stanford_banner':
+      _stvp_subtheme_preprocess_banner($variables);
+      break;
+
+    case 'stanford_layout':
+      _stvp_subtheme_preprocess_layout($variables);
+      break;
+
+    case 'stanford_wysiwyg':
+      _stvp_subtheme_preprocess_wysiwyg($variables);
+      break;
   }
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Adds variant classes to page-title banners.
  */
-function stvp_subtheme_preprocess_paragraph__stanford_banner(&$variables) {
+function _stvp_subtheme_preprocess_page_title_banner(array &$variables): void {
   $paragraph = $variables['paragraph'];
-  // Add variant classes to banner
-  $variables['attributes']['class'][] = $paragraph->getBehaviorSetting('react_paragraphs:banner_variant_info', 'banner_style');
-  $variables['attributes']['class'][] = $paragraph->getBehaviorSetting('react_paragraphs:banner_variant_info', 'banner_wave');
+
+  $variables['attributes']['class'][] = $paragraph->getBehaviorSetting(
+    'react_paragraphs:page_title_banner_info',
+    'title_style',
+    'page-theme--red',
+  );
+
+  $title_wave = $paragraph->getBehaviorSetting(
+    'react_paragraphs:page_title_banner_info',
+    'title_wave',
+  );
+
+  if ($title_wave) {
+    $variables['attributes']['class'][] = $title_wave;
+  }
+
+  if ($paragraph->getBehaviorSetting(
+    'react_paragraphs:page_title_banner_info',
+    'ecorner_option',
+    FALSE,
+  )) {
+    $variables['attributes']['class'][] = 'ecorner';
+    $variables['#attached']['library'][] = 'stvp_subtheme/ecorner';
+  }
 }
 
-function stvp_subtheme_preprocess_paragraph__stanford_layout(array &$variables): void {
-  /** @var \Drupal\paragraphs\Layout\Paragraph $paragraph */
-  $paragraph = &$variables['paragraph'];
-  $existing_classes = $variables['attributes']['class'] ?? [];
-  $extra_classes = [
-    $paragraph->getBehaviorSetting('react_paragraphs:layout_variant_info', 'section_wave'),
-  ];
-  $variables['attributes']['class'] = array_merge($existing_classes, $extra_classes);
+/**
+ * Adds variant classes to banners.
+ */
+function _stvp_subtheme_preprocess_banner(array &$variables): void {
+  $paragraph = $variables['paragraph'];
+
+  $variables['attributes']['class'][] = $paragraph->getBehaviorSetting(
+    'react_paragraphs:banner_variant_info',
+    'banner_style',
+    'stvp-wrapper--banner-default',
+  );
+
+  $banner_wave = $paragraph->getBehaviorSetting(
+    'react_paragraphs:banner_variant_info',
+    'banner_wave',
+  );
+
+  if ($banner_wave) {
+    $variables['attributes']['class'][] = $banner_wave;
+  }
 }
 
-function stvp_subtheme_preprocess_paragraph__stanford_wysiwyg(&$variables) {
+/**
+ * Adds variant classes to layout paragraphs.
+ */
+function _stvp_subtheme_preprocess_layout(array &$variables): void {
   $paragraph = $variables['paragraph'];
-  $variables['attributes']['class'][] = $paragraph->getBehaviorSetting('react_paragraphs:tinted_background', 'tinted_background', 'stvp-text-background--none');
+
+  $section_wave = $paragraph->getBehaviorSetting(
+    'react_paragraphs:layout_variant_info',
+    'section_wave',
+  );
+
+  if ($section_wave) {
+    $variables['attributes']['class'][] = $section_wave;
+  }
+}
+
+/**
+ * Adds background classes to WYSIWYG paragraphs.
+ */
+function _stvp_subtheme_preprocess_wysiwyg(array &$variables): void {
+  $paragraph = $variables['paragraph'];
+
+  $variables['attributes']['class'][] = $paragraph->getBehaviorSetting(
+    'react_paragraphs:tinted_background',
+    'tinted_background',
+    'stvp-text-background--none',
+  );
 }
 
 /**
