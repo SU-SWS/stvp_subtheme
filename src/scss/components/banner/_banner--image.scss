@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 // Change the banner aspect ratio for only image banners.
-.ds-entity--stanford-banner:not([class*="banner-wave"]) {
+.ptype-stanford-banner:not([class*='banner-wave']) {
   .su-hero__media {
     aspect-ratio: 2.33333;
     max-height: none;
@@ -12,10 +12,7 @@
   }
 }
 
-.ptype-stanford-banner {
-  .su-hero__media {
-    img {
-      object-position: top;
-    }
-  }
+// Position every banner image at the top, including wave banners.
+.ptype-stanford-banner .su-hero__media img {
+  object-position: top;
 }

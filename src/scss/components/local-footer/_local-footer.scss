@@ -46,6 +46,10 @@ div.su-local-footer__columns {
   color: $su-color-white;
   background: $su-color-cool-gray url("../../assets/svg/STVP_footer_waves.svg") no-repeat bottom right 100%/100%;
 
+  &.su-lockup {
+    background: none;
+  }
+
   a {
     color: $su-color-white;
     text-decoration: none;

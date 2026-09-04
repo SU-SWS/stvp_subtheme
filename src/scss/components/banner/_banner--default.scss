@@ -87,22 +87,21 @@
 }
 
 // Banner default variant
+.ptype-stanford-banner:not(.stvp-wrapper--banner-grey) {
+  .su-button {
+    transition: none;
+
+    &:hover, &:focus {
+      // note that these buttons use a white border on hover, different than other secondary buttons.
+      background: white !important; // because they don't have the secondary button class, button styles will override
+    }
+  }
+}
+
 .ptype-stanford-banner {
   .su-button {
     @include secondary-button-base;
     display: inline-flex;
-
-  }
-
-  .ds-entity--stanford-banner:not(.stvp-wrapper--banner-grey) {
-    .su-button {
-      transition: none;
-
-      &:hover, &:focus {
-        // note that these buttons use a white border on hover, different than other secondary buttons.
-        background: white !important; // because they don't have the secondary button class, button styles will override
-      }
-    }
   }
 
   .su-card {
@@ -303,7 +302,7 @@
 
 .page-theme--plum {
   .ptype-stanford-banner {
-    .stvp-wrapper--banner-plum {
+    &.stvp-wrapper--banner-plum {
       .su-button {
         @include set-button-border-color($gradient-plum-bright);
         @include secondary-button-style($su-color-plum, $su-color-plum);
@@ -315,7 +314,7 @@
 
 .page-theme--lagunita {
   .ptype-stanford-banner {
-    .stvp-wrapper--banner-lagunita {
+    &.stvp-wrapper--banner-lagunita {
       .su-button {
         @include set-button-border-color($gradient-lagunita-bright);
         @include secondary-button-style($su-color-lagunita-dark, $su-color-lagunita-dark);
@@ -327,7 +326,7 @@
 
 .page-theme--sky {
   .ptype-stanford-banner {
-    .stvp-wrapper--banner-sky {
+    &.stvp-wrapper--banner-sky {
       .su-button {
         @include set-button-border-color($gradient-sky-bright);
         @include secondary-button-style($su-color-sky-dark, $su-color-sky-dark);
@@ -339,7 +338,7 @@
 
 .page-theme--poppy {
   .ptype-stanford-banner {
-    .stvp-wrapper--banner-poppy {
+    &.stvp-wrapper--banner-poppy {
       .su-button {
         @include set-button-border-color($gradient-poppy-bright);
         @include secondary-button-style($su-color-poppy-dark, $su-color-poppy-dark);
@@ -350,7 +349,7 @@
 
 .page-theme--palo-verde {
   .ptype-stanford-banner {
-    .stvp-wrapper--banner-palo-verde {
+    &.stvp-wrapper--banner-palo-verde {
       .su-button {
         @include set-button-border-color($gradient-palo-verde-bright);
         @include secondary-button-style($su-color-palo-verde-dark, $su-color-palo-verde-dark);
@@ -362,7 +361,7 @@
 /* -- Lighter Backgruonds with Gray text -- */
 .page-theme--illuminating {
   .ptype-stanford-banner {
-    .stvp-wrapper--banner-illuminating {
+    &.stvp-wrapper--banner-illuminating {
       .su-button {
         @include set-button-border-color($gradient-illuminating-bright);
         @include secondary-button-style($stvp-color-brown, $stvp-color-brown);
@@ -373,7 +372,7 @@
 
 .page-theme--grey {
   .ptype-stanford-banner {
-    .stvp-wrapper--banner-grey {
+    &.stvp-wrapper--banner-grey {
       .su-button {
         @include set-button-color($gradient-red-medium, $gradient-red-bright, white, white);
         color: white !important; // if this is in the components folder it gets overridden
