@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+// News content type (stanford_news) headings.
+//
+// On News nodes, h2s in the Body field and in Text Area (stanford_wysiwyg)
+// paragraphs are smaller and drop the decorative gradient bar that
+// theme/_heading.scss adds to h2s elsewhere. h3s step down too, so they stay
+// visibly subordinate to the smaller h2. Other paragraph types on News pages
+// (cards, banners, lists, etc.) keep the default heading styles.
+//
+// `.node.news` comes from node.html.twig (`node.type.entity.label|clean_class`).
+// `.node-stanford-news-body` is the Body field wrapper; `.ptype-stanford-wysiwyg`
+// is added to Text Area paragraphs by stanford_basic.
+
+.node.news {
+  .node-stanford-news-body,
+  .ptype-stanford-wysiwyg {
+    .su-wysiwyg-text {
+      h2 {
+        @include type-d;
+
+        // Remove the decorative underline (and any color-variant gradient).
+        &::after {
+          content: none;
+          display: none;
+        }
+      }
+
+      h3 {
+        @include type-e;
+      }
+    }
+  }
+}
