@@ -64,12 +64,4 @@
       @include h2-decoration--colored($gradient-poppy-bright);
     }
 
-// Stanford News full node body field only: skip the decorative h2 bar.
-.page-content .node-stanford-news-body {
-  .su-wysiwyg-text {
-    h2::after {
-      content: none;
-      display: none;
-    }
-  }
-}
+// News nodes: h2 decoration is removed in components/news/_headings.scss.
